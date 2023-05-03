@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace
+  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
 }
 
 html {
@@ -55,25 +55,47 @@ html {
 
 .links {
   display: none;
-  font-size: 21px;
+  font-size: 18px;
   margin-top: 10px;
+}
+
+.link {
+  font-size: 25px;
 }
 
 .images {
   height: auto;
-  width: 80px;
+  width: 75px;
 }
 
 .game-link {
-  display: flex;
+  align-content: center;
   align-items: center;
-  list-style: none;
-  margin-top: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  font-size: clamp(0.2em, 4vw, 1rem);
+  gap: 0.2pc;
+  justify-content: flex-start;
+  min-height: 30px;
+  overflow: hidden;
+  padding: clamp(0px, 2vw, 10px) 0 clamp(0px, 2vw, 10px) clamp(0px, 2vw, 10px);
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  width: 100%;
 }
 
-.home-link {
+.home-link,
+.bottom-links {
   display: flex;
   align-items: center;
   list-style: none;
-  margin-top: 3rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

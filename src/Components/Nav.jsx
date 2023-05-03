@@ -3,49 +3,108 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {
-    const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
-    const toggleMenu = () => {
+  const toggleMenu = () => {
     setShowMenu(!showMenu);
-};
-return (
-    <div className="app">
-      <button className="hamburger" onClick={toggleMenu}>
-        {showMenu ? (
-          "X"
-        ) : (
-          <svg viewBox="0 0 100 80" width="40" height="40">
-            <rect width="90" height="10"></rect>
-            <rect y="30" width="90" height="10"></rect>
-            <rect y="60" width="90" height="10"></rect>
-          </svg>
-        )}
-      </button>
-      <div className={showMenu ? "sidebar active" : "sidebar"}>
-        <ul>
-        <li class="home-link">
-            <img
+  };
+
+  return (
+    <>
+      <div className="app">
+        <button className="hamburger" onClick={toggleMenu}>
+          {showMenu ? (
+            "X"
+          ) : (
+            <svg viewBox="0 0 100 80" width="40" height="40">
+              <rect width="90" height="10"></rect>
+              <rect y="30" width="90" height="10"></rect>
+              <rect y="60" width="90" height="10"></rect>
+            </svg>
+          )}
+        </button>
+        <div className={showMenu ? "sidebar active" : "sidebar"}>
+          <ul>
+            <li className="home-link">
+              <img
                 className="images"
                 src="https://o.remove.bg/downloads/55e7cd5b-8e1a-465c-a6ba-1b4b75da9224/png-clipart-joystick-computer-icons-game-controllers-gamepad-joystick-electronics-emulator-removebg-preview.png"
                 alt="gamepad"
-            />
-            <NavLink className="links" to="/">
-              Home
-            </NavLink>
-        </li>
-        <li class="game-link">
-          <img
-            className="images"
-            src="https://o.remove.bg/downloads/2c32db8a-9cdb-47c2-b9a7-32014f40b567/-416031338016ay54imofx-removebg-preview.png"
-            alt="gamepad"
-          />
-          <NavLink className="links" to="/valorant">
-            Valorant
-          </NavLink>
-        </li>
-        </ul>
+              />
+              <a className="link" href="/">
+                Games
+              </a>
+            </li>
+            <li className="game-link">
+              <img
+                className="images"
+                src="https://o.remove.bg/downloads/2c32db8a-9cdb-47c2-b9a7-32014f40b567/-416031338016ay54imofx-removebg-preview.png"
+                alt="Valorant"
+              />
+              <NavLink className="links" to="/valorant">
+                Valorant
+              </NavLink>
+            </li>
+            <li className="game-link">
+              <img
+                className="images"
+                src="https://o.remove.bg/downloads/206772c1-ba26-43c9-a4ca-5900d8134839/png-transparent-league-of-legends-computer-icons-ongamenet-starleague-video-game-electronic-sports-voice-actor-video-game-desktop-wallpaper-online-game-removebg-preview.png"
+                alt="league"
+              />
+              <NavLink className="links" to="/league">
+                League
+              </NavLink>
+            </li>
+            <li className="game-link">
+              <img
+                className="images"
+                src="https://o.remove.bg/downloads/3b29d849-d5fc-4084-9c39-70388df5db60/3271363-middle-removebg-preview.png"
+                alt="CSGO"
+              />
+              <NavLink className="links" to="/csgo">
+                CSGO
+              </NavLink>
+            </li>
+          </ul>
+          <ul>
+            <li className="bottom-links">
+              <img
+                className="images"
+                src="https://o.remove.bg/downloads/c6e88537-dc8a-45d5-9868-4b7909db911a/stock-vector-film-roll-old-movie-strip-icon-cinema-logo-white-icon-with-shadow-on-transparent-background-1247058151-removebg-preview.png"
+                alt="movie-logo"
+              />
+              <NavLink className="links" to="/submit">
+                Submit
+              </NavLink>
+            </li>
+            <li className="bottom-links">
+              <img
+                className="images"
+                src="https://o.remove.bg/downloads/87e74fef-94db-495b-bcca-e60cc88493b4/vector-podium-icon-symbol-sign-removebg-preview.png"
+                alt="movie-logo"
+              />
+              <NavLink className="links" to="/leaderboard">
+                Leaderboard
+              </NavLink>
+            </li>
+          </ul>
+          <hr />
+          <ul>
+            <li className="bottom-links">
+              <a href="/tos">Terms Of Services</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+      <div className="logo">
+        <a href="/">
+          <img
+            src="https://o.remove.bg/downloads/00ec1dbf-5109-46a0-a333-2d8928ca5c8e/0a31c7157168ce6493d1a39eae970bc3-removebg-preview.png"
+            alt="logo"
+          />
+        </a>
+      </div>
+    </>
   );
 };
 
