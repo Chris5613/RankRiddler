@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -22,16 +23,26 @@ return (
       </button>
       <div className={showMenu ? "sidebar active" : "sidebar"}>
         <ul>
-          <li class="gamepad-link">
+        <li class="home-link">
             <img
                 className="images"
-                src="https://o.remove.bg/downloads/2c32db8a-9cdb-47c2-b9a7-32014f40b567/-416031338016ay54imofx-removebg-preview.png"
+                src="https://o.remove.bg/downloads/55e7cd5b-8e1a-465c-a6ba-1b4b75da9224/png-clipart-joystick-computer-icons-game-controllers-gamepad-joystick-electronics-emulator-removebg-preview.png"
                 alt="gamepad"
             />
-            <a className="links" href="/">
-                Valorant
-            </a>
-          </li>
+            <NavLink className="links" to="/">
+              Home
+            </NavLink>
+        </li>
+        <li class="game-link">
+          <img
+            className="images"
+            src="https://o.remove.bg/downloads/2c32db8a-9cdb-47c2-b9a7-32014f40b567/-416031338016ay54imofx-removebg-preview.png"
+            alt="gamepad"
+          />
+          <NavLink className="links" to="/valorant">
+            Valorant
+          </NavLink>
+        </li>
         </ul>
       </div>
     </div>
