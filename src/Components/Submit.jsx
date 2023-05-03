@@ -2,7 +2,9 @@ import React from 'react'
 
 const Submit = () => {
   return (
-    <div>Submit</div>
+    <div>
+        <h1>Coming Soon!</h1>
+    </div>
   )
 }
 

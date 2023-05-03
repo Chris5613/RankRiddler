@@ -28,7 +28,7 @@ const Nav = () => {
             <li className="home-link">
               <img
                 className="images"
-                src="https://o.remove.bg/downloads/55e7cd5b-8e1a-465c-a6ba-1b4b75da9224/png-clipart-joystick-computer-icons-game-controllers-gamepad-joystick-electronics-emulator-removebg-preview.png"
+                src="https://o.remove.bg/downloads/1b371a08-1ca0-4dd4-9a18-b2fff736cdae/26-269473_game-controller-logo-transparent-hd-png-download-removebg-preview.png"
                 alt="gamepad"
               />
               <a className="link" href="/">
@@ -38,7 +38,7 @@ const Nav = () => {
             <li className="game-link">
               <img
                 className="images"
-                src="https://o.remove.bg/downloads/2c32db8a-9cdb-47c2-b9a7-32014f40b567/-416031338016ay54imofx-removebg-preview.png"
+                src="https://o.remove.bg/downloads/7dc0e98c-0e3f-44f2-9799-2157abe9b7f2/-41603132788rzosdsitdt-removebg-preview.png"
                 alt="Valorant"
               />
               <NavLink className="links" to="/valorant">
