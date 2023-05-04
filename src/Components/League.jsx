@@ -1,4 +1,3 @@
-import React from 'react';
 import Iron from '../Assets/League-Icons/Iron.png';
 import Bronze from '../Assets/League-Icons/bronze.png';
 import Silver from '../Assets/League-Icons/silver.png';
@@ -58,7 +57,7 @@ const League = () => {
           className="video"
           width="1000"
           height="550"
-          src="https://www.youtube.com/embed/04z2QXTbFMU"
+          src="https://www.youtube.com/embed/5HXUV5DMGxU"
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; 
         encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -141,7 +140,7 @@ const League = () => {
           }}
         />
         <img
-          className={`Grandmaster ${
+          className={`Grandmaster asc ${
             selectedRank === 'Grandmaster' ? 'selected' : ''
           }`}
           width={100}

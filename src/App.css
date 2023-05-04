@@ -31,7 +31,7 @@ html {
   left: -300px;
   height: 100%;
   width: 260px;
-  background-color: teal;
+  background-color: rgb(224, 123, 64);
   overflow-x: hidden;
   padding-top: 20px;
 }
