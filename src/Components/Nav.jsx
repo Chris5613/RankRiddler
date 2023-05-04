@@ -65,7 +65,7 @@ const Nav = () => {
             <li className="bottom-links">
               <img src={submit} alt="movie-logo" width={50} />
               <NavLink className="links nav-text" to="/submit">
-                Submit
+                Submit a Clip
               </NavLink>
             </li>
             <li className="bottom-links">
