@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 import { NavLink } from "react-router-dom";
 import logo  from "../Assets/logo.png";
 import lol from "../Assets/LoL.png";
@@ -16,6 +15,19 @@ const Nav = () => {
     setShowMenu(!showMenu);
   };
 
+  let menuRef = useRef(null);
+
+  useEffect (() => {
+    let handler = (e) => {
+      if(!menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handler);
+  })
+
+
   return (
     <>
       <div className="app">
@@ -30,7 +42,7 @@ const Nav = () => {
             </svg>
           )}
         </button>
-        <div className={showMenu ? "sidebar active" : "sidebar"}>
+        <div className={showMenu ? "sidebar active" : "sidebar"} ref={menuRef}>
           <ul>
             <li className="home-link">
               <img
