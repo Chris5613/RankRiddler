@@ -5,7 +5,6 @@ import lol from '../Assets/Nav-Icons/LoL.png';
 import val from '../Assets/Nav-Icons/valorant.png';
 import csgo from '../Assets/Nav-Icons/csgo.png';
 import submit from '../Assets/Nav-Icons/submit.png';
-import gamepad from '../Assets/Nav-Icons/gamepad.png';
 import leader from '../Assets/Nav-Icons/leaderboard.png';
 
 const Nav = () => {
@@ -43,12 +42,6 @@ const Nav = () => {
         </button>
         <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
           <ul>
-            <li className="home-link">
-              <img src={gamepad} alt="gamepad" width={50} />
-              <a className="link" href="/">
-                Games
-              </a>
-            </li>
             <li className="game-link">
               <img className="images" src={val} alt="Valorant" />
               <NavLink className="links" to="/valorant">

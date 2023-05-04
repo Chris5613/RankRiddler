@@ -8,9 +8,46 @@ import Diamond from '../Assets/Val-Ranks/Diamond.png';
 import Ascendant from '../Assets/Val-Ranks/Ascendant.png';
 import Immortal from '../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../Assets/Val-Ranks/Radiant.png';
-
+import { useState, useEffect } from 'react';
 
 const Valorant = () => {
+  const [selectedRank, setSelectedRank] = useState(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    setIsButtonDisabled(selectedRank === null);
+  }, [selectedRank]);
+
+  const handleRankClick = (rank) => {
+    setSelectedRank(rank);
+    console.log(selectedRank)
+  };
+
+  const handleButtonClick = () => {
+    console.log('clicked');
+  };
+
+  useEffect(() => {
+    const modal = document.getElementById('myModal');
+    const closeBtn = document.querySelector('.close');
+
+    modal.style.display = 'block';
+
+    closeBtn.onclick = function() {
+      modal.style.display = 'none';
+    };
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    return () => {
+      window.removeEventListener('click', onclick);
+    };
+  }, []);
+
   return (
     <>
       <div>
@@ -20,23 +57,124 @@ const Valorant = () => {
           height="550"
           src="https://www.youtube.com/embed/04z2QXTbFMU"
           title="YouTube video player"
-          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; 
         encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </div>
-      <div className='ranks'>
-        <img className='rank iron' src={Iron} alt="Iron"/>
-        <img className='rank bronze ' src={Bronze} alt="Bronze" />
-        <img className='silver' width={100} src={Silver} alt="Silver" />
-        <img width={60} src={Gold} alt="Gold" className='gold' />
-        <img className='rank plat' src={Platinum} alt="Platinum" />
-        <img className='rank diamond' src={Diamond} alt="Diamond" />
-        <img className='rank asc' src={Ascendant} alt="Ascendant" />
-        <img className="immortal" width={60} src={Immortal} alt="Immortal" />
-        <img width={80} src={Radiant} alt="Radiant"  className="radiant"/>
+      <div className="ranks">
+        <img
+          className="rank iron"
+          onClick={() => handleRankClick('Iron')}
+          style={{
+            boxShadow:
+              selectedRank === 'Iron'
+                ? '0 0 10px 5px rgba(255, 215, 0, 0.5)'
+                : 'none',
+          }}
+          src={Iron}
+          alt="Iron"
+        />
+        <img
+          className={`rank bronze ${
+            selectedRank === 'Bronze' ? 'selected' : ''
+          }`}
+          src={Bronze}
+          alt="Bronze"
+          onClick={() => handleRankClick('Bronze')}
+          style={{
+            boxShadow: selectedRank === 'Bronze' ? '0 0 10px gold' : '',
+          }}
+        />
+        <img
+          className={`silver ${selectedRank === 'Silver' ? 'selected' : ''}`}
+          width={100}
+          src={Silver}
+          alt="Silver"
+          onClick={() => handleRankClick('Silver')}
+          style={{
+            boxShadow: selectedRank === 'Silver' ? '0 0 10px gold' : '',
+          }}
+        />
+        <img
+          width={60}
+          src={Gold}
+          alt="Gold"
+          className={`gold ${selectedRank === 'Gold' ? 'selected' : ''}`}
+          onClick={() => handleRankClick('Gold')}
+          style={{ boxShadow: selectedRank === 'Gold' ? '0 0 10px gold' : '' }}
+        />
+        <img
+          className={`rank plat ${
+            selectedRank === 'Platinum' ? 'selected' : ''
+          }`}
+          src={Platinum}
+          alt="Platinum"
+          onClick={() => handleRankClick('Platinum')}
+          style={{
+            boxShadow: selectedRank === 'Platinum' ? '0 0 10px gold' : '',
+          }}
+        />
+        <img
+          className={`rank diamond ${
+            selectedRank === 'Diamond' ? 'selected' : ''
+          }`}
+          src={Diamond}
+          alt="Diamond"
+          onClick={() => handleRankClick('Diamond')}
+          style={{
+            boxShadow: selectedRank === 'Diamond' ? '0 0 10px gold' : '',
+          }}
+        />
+        <img
+          className={`rank asc ${
+            selectedRank === 'Ascendant' ? 'selected' : ''
+          }`}
+          src={Ascendant}
+          alt="Ascendant"
+          onClick={() => handleRankClick('Ascendant')}
+          style={{
+            boxShadow: selectedRank === 'Ascendant' ? '0 0 10px gold' : '',
+          }}
+        />
+        <img
+          className={`immortal ${
+            selectedRank === 'Immortal' ? 'selected' : ''
+          }`}
+          width={60}
+          src={Immortal}
+          alt="Immortal"
+          onClick={() => handleRankClick('Immortal')}
+          style={{
+            boxShadow: selectedRank === 'Immortal' ? '0 0 10px gold' : '',
+          }}
+        />
+        <img
+          width={80}
+          src={Radiant}
+          alt="Radiant"
+          className={`radiant ${selectedRank === 'Radiant' ? 'selected' : ''}`}
+          onClick={() => handleRankClick('Radiant')}
+          style={{
+            boxShadow: selectedRank === 'Radiant' ? '0 0 10px gold' : '',
+          }}
+        />
       </div>
+      <div>
+        <button
+          className="submit"
+          onClick={handleButtonClick}
+          disabled={isButtonDisabled}
+        >
+          {selectedRank ? `Selected Rank: ${selectedRank}` : 'Select a Rank'}
+        </button>
+      </div>
+      <div id="myModal" className="modal">
+      <div className="modal-content">
+        <span className="close">&times;</span>
+        <h2 className='modal-title'>How to Play</h2>
+      </div>
+    </div>
     </>
   );
 };
