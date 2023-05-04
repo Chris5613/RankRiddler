@@ -229,7 +229,7 @@ h1 {
 }
 
 .modal-content {
-  margin: 15% auto;
+  margin: 9% auto;
   padding: 20px;
   border: 1px solid #888;
   background-color: rgb(39, 36, 36);
@@ -274,4 +274,8 @@ h1 {
 
 .result-title {
   margin-bottom: 1rem;
+}
+
+.modal-a-tag {
+  color: #01ccff;
 }
