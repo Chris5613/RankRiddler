@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => {
-  return (
+	return (
     <>
 			<div className="gamecard">
 				<div>
@@ -11,7 +11,7 @@ const Home = () => {
 				</div>
 			</div>
     </>
-  );
+	);
 };
 
 export default Home;

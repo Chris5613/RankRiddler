@@ -61,6 +61,7 @@ html {
 
 .link {
   font-size: 25px;
+  margin-left: 10px;
 }
 
 .images {
@@ -92,6 +93,10 @@ html {
   display: flex;
   align-items: center;
   list-style: none;
+}
+
+.nav-text {
+  margin-left: 10px;
 }
 
 .logo {
