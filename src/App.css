@@ -202,17 +202,16 @@ h1 {
   margin-top: 2rem;
 }
 
-
 .modal {
-  display: block; 
-  position: fixed; 
+  display: block;
+  position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0, 0, 0, 0.4); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .close {
@@ -230,7 +229,7 @@ h1 {
 }
 
 .modal-content {
-  margin: 15% auto; 
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   background-color: rgb(39, 36, 36);
@@ -241,4 +240,38 @@ h1 {
 
 .modal-title {
   text-align: center;
+}
+
+.modal-example {
+  border-width: 90%;
+  display: grid;
+  font-size: clamp(0.7rem, 4vw, 1.1rem);
+  font-weight: 300;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5px;
+  padding: 5px;
+  width: 100%;
+  margin-left: 1.5rem;
+}
+
+.modal-example-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-example-rad {
+  margin-left: 1rem;
+}
+
+.modal-example-iron {
+  margin-left: 2rem;
+}
+
+.modal-example-wrong {
+  margin-top: 0.7rem;
+}
+
+.result-title {
+  margin-bottom: 1rem;
 }

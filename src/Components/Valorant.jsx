@@ -9,6 +9,8 @@ import Ascendant from '../Assets/Val-Ranks/Ascendant.png';
 import Immortal from '../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../Assets/Val-Ranks/Radiant.png';
 import { useState, useEffect } from 'react';
+import check from '../Assets/Modal-Icons/Check.png';
+import wrong from '../Assets/Modal-Icons/Wrong.png';
 
 const Valorant = () => {
   const [selectedRank, setSelectedRank] = useState(null);
@@ -20,7 +22,7 @@ const Valorant = () => {
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
-    console.log(selectedRank)
+    console.log(selectedRank);
   };
 
   const handleButtonClick = () => {
@@ -33,11 +35,11 @@ const Valorant = () => {
 
     modal.style.display = 'block';
 
-    closeBtn.onclick = function() {
+    closeBtn.onclick = function () {
       modal.style.display = 'none';
     };
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       if (event.target === modal) {
         modal.style.display = 'none';
       }
@@ -170,11 +172,58 @@ const Valorant = () => {
         </button>
       </div>
       <div id="myModal" className="modal">
-      <div className="modal-content">
-        <span className="close">&times;</span>
-        <h2 className='modal-title'>How to Play</h2>
+        <div className="modal-content">
+          <span className="close">&times;</span>
+          <h2 className="modal-title">How to Play</h2>
+          <br />
+          <p>
+            Watch the clip and decide what rank the player is
+            <br />
+            <br />
+            Correct guesses are worth 1 point{' '}
+            <img src={check} alt="check" width={30} />
+            <br /> Incorrect guesses will deduct 1 point{' '}
+            <img src={wrong} width={40} alt="wrong icon" />
+          </p>
+          <br />
+          <h3 className="modal-title">Example</h3>
+          <br />
+          <div className="modal-example">
+            <div>
+              <div className="modal-example-heading">Correct Rank</div>
+              <img
+                className="modal-example-image"
+                src={Radiant}
+                alt="Radiant"
+                width={100}
+              />
+              <p className="modal-example-rad">Radiant</p>
+            </div>
+
+            <div>
+              <div className="modal-example-heading">Your Guess</div>
+              <img
+                className="modal-example-image"
+                src={Iron}
+                alt="Iron"
+                width={100}
+              />
+              <p className="modal-example-iron">Iron</p>
+            </div>
+
+            <div>
+              <div className="modal-example-heading result-title">Result</div>
+              <img
+                className="modal-example-image wrong"
+                src={wrong}
+                alt="wrong"
+                width={70}
+              />
+              <p className="modal-example-wrong">-1 Point</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 };
