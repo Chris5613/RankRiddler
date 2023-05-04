@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Submit = () => {
   return (
     <div>
-        <h1>Coming Soon!</h1>
+      <h1>Coming Soon!</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Submit
+export default Submit;
