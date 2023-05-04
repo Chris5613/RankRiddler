@@ -170,6 +170,7 @@ h1 {
 .asc {
   margin: 0;
   cursor: pointer;
+  border-radius: 3rem;
 }
 
 .silver,
