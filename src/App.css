@@ -138,8 +138,53 @@ h1 {
 }
 
 .video {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  z-index: 1;
+  width: 1000px;
+  height: 550px;
+  left: 25%;
+}
+
+.ranks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.rank {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  
+}
+
+.immortal,
+.iron,
+.gold,
+.silver,
+.plat,
+.diamond,
+.bronze,
+.radiant, 
+.asc {
+  margin: 0;
+  cursor: pointer;
+}
+
+.silver,
+.plat {
+  margin-right: 10px;
+}
+
+.diamond,
+.gold,
+.asc,
+.immortal {
+  margin-right: 15px;
+}
+
+.radiant {
+  margin-left: 15px;
 }

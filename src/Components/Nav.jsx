@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../Assets/logo.png';
-import lol from '../Assets/LoL.png';
-import val from '../Assets/valorant.png';
-import csgo from '../Assets/csgo.png';
-import submit from '../Assets/submit.png';
-import gamepad from '../Assets/gamepad.png';
-import leader from '../Assets/leaderboard.png';
+import logo from '../Assets/Nav-Icons/logo.png';
+import lol from '../Assets/Nav-Icons/LoL.png';
+import val from '../Assets/Nav-Icons/valorant.png';
+import csgo from '../Assets/Nav-Icons/csgo.png';
+import submit from '../Assets/Nav-Icons/submit.png';
+import gamepad from '../Assets/Nav-Icons/gamepad.png';
+import leader from '../Assets/Nav-Icons/leaderboard.png';
 
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
