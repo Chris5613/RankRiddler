@@ -49,7 +49,7 @@ const Nav = () => {
             <li className="bottom-links">
               <img src={profile} alt="movie-logo" width={45} />
               <NavLink className="links" to="/login">
-                Login
+                Login/Signup
               </NavLink>
             </li>
           </ul>

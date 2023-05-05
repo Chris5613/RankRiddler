@@ -10,6 +10,7 @@ import Submit from './Components/Submit';
 import Leaderboard from './Components/Leaderboard';
 import PrivacyPolicy from './Components/Privacy';
 import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );

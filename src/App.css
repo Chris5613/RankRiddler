@@ -428,7 +428,20 @@ th {
   background-color: #f2f2f2;
 }
 
-td {
+td,
+.login-text {
   color: white;
   text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+}
+
+.signup-atag {
+  color: #01ccff;
 }
