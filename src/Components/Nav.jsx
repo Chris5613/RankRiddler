@@ -8,11 +8,10 @@ import leader from '../Assets/Nav-Icons/leaderboard.png';
 import profile from '../Assets/Nav-Icons/Profile.png';
 
 const Nav = () => {
-  
   return (
     <>
       <div className="app">
-        <div className="sidebar active" >
+        <div className="sidebar active">
           <ul>
             <li className="game-link">
               <img className="images" src={val} alt="Valorant" />
