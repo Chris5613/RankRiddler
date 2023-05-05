@@ -247,7 +247,6 @@ function CSGOForm() {
   const [userName, setUserName] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
-  const [discordLink, setDiscordLink] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
   const handleYoutubeLinkChange = (event) => {
@@ -264,10 +263,6 @@ function CSGOForm() {
 
   const handleRankChange = (event) => {
     setSelectedRank(event.target.value);
-  };
-
-  const handleDiscordLinkChange = (event) => {
-    setDiscordLink(event.target.value);
   };
 
   const handleCheckboxChange = (event) => {
@@ -317,17 +312,6 @@ function CSGOForm() {
             <option value="Supreme">Supreme</option>
             <option value="Global Elite">Global Elite</option>
           </select>
-        <br />
-
-        <label className='form-label'>
-          Tracker.gg Link: <span style={{color: "#e34234"}}>*</span>
-        </label>
-          <input
-            className="form-input"
-            type="text"
-            value={discordLink}
-            onChange={handleDiscordLinkChange}
-          />
         <br />
 
           <input
