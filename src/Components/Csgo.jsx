@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import check from '../Assets/Modal-Icons/Check.png';
 import wrong from '../Assets/Modal-Icons/Wrong.png';
-import leader from '../Assets/Modal-Icons/leader.png';
+import leader from '../Assets/Nav-Icons/leaderboard.png';
 import silver from '../Assets/Csgo-Icons/Silver.png';
 import se from '../Assets/Csgo-Icons/SE.png';
 import nova from '../Assets/Csgo-Icons/Nova.png';
@@ -102,9 +102,14 @@ const Csgo = () => {
           width={100}
           src={mg}
           alt="Master Guardian"
-          className={`rank ${selectedRank === 'Master Guardian' ? 'selected' : ''}`}
+          className={`rank ${
+            selectedRank === 'Master Guardian' ? 'selected' : ''
+          }`}
           onClick={() => handleRankClick('Master Guardian')}
-          style={{ boxShadow: selectedRank === 'Master Guardian' ? '0 0 10px gold' : '' }}
+          style={{
+            boxShadow:
+              selectedRank === 'Master Guardian' ? '0 0 10px gold' : '',
+          }}
         />
         <img
           className={`rank ${
@@ -114,7 +119,8 @@ const Csgo = () => {
           alt="Master Guardian Elite"
           onClick={() => handleRankClick('Master Guardian Elite')}
           style={{
-            boxShadow: selectedRank === 'Master Guardian Elite' ? '0 0 10px gold' : '',
+            boxShadow:
+              selectedRank === 'Master Guardian Elite' ? '0 0 10px gold' : '',
           }}
         />
         <img
@@ -125,7 +131,10 @@ const Csgo = () => {
           alt="Distinguished Master Guardian"
           onClick={() => handleRankClick('Distinguished Master Guardian')}
           style={{
-            boxShadow: selectedRank === 'Distinguished Master Guardian' ? '0 0 10px gold' : '',
+            boxShadow:
+              selectedRank === 'Distinguished Master Guardian'
+                ? '0 0 10px gold'
+                : '',
           }}
         />
         <img
@@ -136,13 +145,12 @@ const Csgo = () => {
           alt="Legendary Eagle"
           onClick={() => handleRankClick('Legendary Eagle')}
           style={{
-            boxShadow: selectedRank === 'Legendary Eagle' ? '0 0 10px gold' : '',
+            boxShadow:
+              selectedRank === 'Legendary Eagle' ? '0 0 10px gold' : '',
           }}
         />
         <img
-          className={`rank  ${
-            selectedRank === 'Supreme' ? 'selected' : ''
-          }`}
+          className={`rank  ${selectedRank === 'Supreme' ? 'selected' : ''}`}
           width={100}
           src={smfc}
           alt="Supreme"
@@ -155,7 +163,9 @@ const Csgo = () => {
           width={100}
           src={ge}
           alt="Global Elite"
-          className={`rank ${selectedRank === 'Global Elite' ? 'selected' : ''}`}
+          className={`rank ${
+            selectedRank === 'Global Elite' ? 'selected' : ''
+          }`}
           onClick={() => handleRankClick('Global Elite')}
           style={{
             boxShadow: selectedRank === 'Global Elite' ? '0 0 10px gold' : '',
@@ -184,8 +194,11 @@ const Csgo = () => {
             <img src={check} alt="check" width={30} />
             <br /> Incorrect guesses will deduct 1 point{' '}
             <img src={wrong} width={40} alt="wrong icon" />
-            <br/>
-            <p>Get enough points to top the leaderboard <img src={leader} width={50} alt="board" /></p>
+            <br />
+            <p>
+              Get enough points to top the leaderboard{' '}
+              <img src={leader} width={50} alt="board" />
+            </p>
           </p>
           <br />
           <h3 className="modal-title">Example</h3>
@@ -224,9 +237,12 @@ const Csgo = () => {
               <p className="modal-example-wrong">-1 Point</p>
             </div>
           </div>
-          <br/>
+          <br />
           <div>
-            Want your clips featured? Submit your clips <a className="modal-a-tag" href="/submit">here!</a>
+            Want your clips featured? Submit your clips{' '}
+            <a className="modal-a-tag" href="/submit">
+              here!
+            </a>
           </div>
         </div>
       </div>

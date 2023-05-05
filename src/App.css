@@ -31,7 +31,7 @@ html {
   left: -300px;
   height: 100%;
   width: 260px;
-  background-color: rgb(224, 123, 64);
+  background-color: rgb(31, 29, 29);
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -281,3 +281,110 @@ h1 {
 .modal-a-tag {
   color: #01ccff;
 }
+
+.form-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin-top: clamp(10px,4vw,30px);
+  width: clamp(220px,95%,1000px);
+  
+  
+}
+
+.form {
+  width: 400px;
+  padding: 20px;
+}
+
+.select-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-direction: column;
+}
+
+.select {
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    font-size: clamp(.9rem,3vw,1.3rem);
+    font-weight: 400;
+    height: clamp(30px,4vw,45px);
+    justify-content: flex-start;
+    max-width: 600px;
+    padding: clamp(1px,1vw,6px) clamp(3px,2vw,15px);
+    position: relative;
+    width: 100%
+}
+
+.form-input,
+option {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: var(--input-text-color);
+  font-size: clamp(.8rem,3vw,1.1rem);
+  font-weight: 400;
+  height: clamp(30px,4vw,45px);
+  margin: initial;
+  outline: none;
+  padding: clamp(1px,1vw,6px) clamp(3px,2vw,15px);
+  width: 100%;
+  margin-top: 1rem;
+}
+
+select,
+textarea {
+  appearance: none;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: var(--input-text-color);
+  font-size: clamp(.8rem,3vw,1.1rem);
+  font-weight: 400;
+  height: clamp(30px,4vw,45px);
+  margin: initial;
+  outline: none;
+  padding: clamp(1px,1vw,6px) clamp(3px,2vw,15px);
+  width: 100%;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.form-label {
+  color: white;
+  margin-left: 5px;
+  margin-top: 1rem;
+}
+
+.text {
+  color: white;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;;
+}
+
+.submission-list {
+  margin-top : 1rem;
+}
+
+.form-checkbox {
+  margin-top: 1rem;
+}
+
+.other-links {
+  margin-top: 1rem;
+}
+
