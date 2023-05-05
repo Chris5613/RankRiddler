@@ -10,6 +10,7 @@ function Submit() {
   return (
     <>
     <div className='select-game'>
+      <h2>Choose a game to submit a clip</h2>
       <select className ="select" value={game} onChange={handleGameChange}>
         <option value="">-- Select a game --</option>
         <option value="lol">League of Legends</option>
