@@ -364,6 +364,7 @@ textarea {
 .form-label {
   color: white;
   margin-left: 5px;
+  margin-top: 1rem;
 }
 
 .text {
@@ -386,3 +387,4 @@ textarea {
 .other-links {
   margin-top: 1rem;
 }
+
