@@ -9,6 +9,9 @@ import Csgo from './Components/Csgo';
 import Submit from './Components/Submit';
 import Leaderboard from './Components/Leaderboard';
 import PrivacyPolicy from './Components/Privacy';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import Bug from './Components/Bug';
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/submit" element={<Submit />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/bug" element={<Bug />} />
       </Routes>
     </BrowserRouter>
   );

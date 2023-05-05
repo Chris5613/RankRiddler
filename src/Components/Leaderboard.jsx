@@ -9,27 +9,30 @@ const Leaderboard = () => {
 
   return (
     <>
-    <div className="leaderboard-container select-game">
-      <h2>Choose a Leaderboard to view top players</h2>
-      <select className ="select" value={selection} onChange={handleGameChange}>
-        <option value="">-- Select a board --</option>
-        <option value="alltime">All Time</option>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-      </select>
-      {selection === 'alltime' && <AllTime />}
-      {selection === 'weekly' && <Weekly />}
-      {selection === 'monthly' && <Monthly />}
-    </div>
-    <div className='text'>
-      Leaderboard refreshes every 10 minutes. Only shows top 10 players.
-    </div>
+      <div className="leaderboard-container select-game">
+        <h2>Choose a Leaderboard to view top players</h2>
+        <select
+          className="select"
+          value={selection}
+          onChange={handleGameChange}
+        >
+          <option value="">-- Select a board --</option>
+          <option value="alltime">All Time</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+        {selection === 'alltime' && <AllTime />}
+        {selection === 'weekly' && <Weekly />}
+        {selection === 'monthly' && <Monthly />}
+      </div>
+      <div className="text">
+        Leaderboard refreshes every 10 minutes. Only shows top 10 players.
+      </div>
     </>
   );
 };
 
 function AllTime() {
-
   const mockData = [
     { username: 'John', score: 23 },
     { username: 'Jane', score: 4 },
@@ -45,7 +48,7 @@ function AllTime() {
 
   mockData.sort((a, b) => b.score - a.score);
   return (
-    <div className='form-container'>
+    <div className="form-container">
       <table>
         <thead>
           <tr>
@@ -78,7 +81,7 @@ function Weekly() {
 
   mockData.sort((a, b) => b.score - a.score);
   return (
-    <div className='form-container'>
+    <div className="form-container">
       <table>
         <thead>
           <tr>
@@ -111,7 +114,7 @@ function Monthly() {
 
   mockData.sort((a, b) => b.score - a.score);
   return (
-    <div className='form-container'>
+    <div className="form-container">
       <table>
         <thead>
           <tr>

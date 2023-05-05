@@ -5,14 +5,24 @@ import val from '../Assets/Nav-Icons/valorant.png';
 import csgo from '../Assets/Nav-Icons/csgo.png';
 import submit from '../Assets/Nav-Icons/submit.png';
 import leader from '../Assets/Nav-Icons/leaderboard.png';
-import profile from '../Assets/Nav-Icons/Profile.png';
 
 const Nav = () => {
-  
+
+  // const logout = async () => {
+  //   const url = `${process.env.REACT_APP_POSTS_API_HOST}/token`;
+  //   const response = await fetch(url, {
+  //     method: "DELETE",
+  //     credentials: "include",
+  //   });
+  //   if (response.ok) {
+  //     navigate("/");
+  //     setLoggedIn(false);
+  //   }
+  // };
   return (
     <>
       <div className="app">
-        <div className="sidebar active" >
+        <div className="sidebar active">
           <ul>
             <li className="game-link">
               <img className="images" src={val} alt="Valorant" />
@@ -47,9 +57,16 @@ const Nav = () => {
               </NavLink>
             </li>
             <li className="bottom-links">
-              <img src={profile} alt="movie-logo" width={45} />
               <NavLink className="links" to="/login">
-                Login
+                Login/Signup
+              </NavLink>
+            </li>
+            <li className="bottom-links">
+              <NavLink
+                to="/"
+                className="links"
+              >
+                Logout
               </NavLink>
             </li>
           </ul>
@@ -62,7 +79,7 @@ const Nav = () => {
               <a href="/privacy">Privacy Policy</a>
             </li>
             <li className="bottom-links other-links">
-              <a href="/contact">Report a Bug</a>
+              <a href="/bug">Report a Bug</a>
             </li>
           </ul>
         </div>
