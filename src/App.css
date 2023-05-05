@@ -42,7 +42,7 @@ h2 {
 
 
 .sidebar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: -300px;
   height: 100%;
@@ -404,3 +404,31 @@ textarea {
   margin-top: 1rem;
 }
 
+.leaderboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-direction: column;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  height: 5vh;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td {
+  color: white;
+  text-align: center;
+}

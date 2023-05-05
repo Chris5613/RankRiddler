@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../Assets/Nav-Icons/logo.png';
 import lol from '../Assets/Nav-Icons/LoL.png';
@@ -9,39 +8,11 @@ import leader from '../Assets/Nav-Icons/leaderboard.png';
 import profile from '../Assets/Nav-Icons/Profile.png';
 
 const Nav = () => {
-  const [showMenu, setShowMenu] = useState(false);
-
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
-
-  let menuRef = useRef(null);
-
-  useEffect(() => {
-    let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handler);
-  });
-
+  
   return (
     <>
       <div className="app">
-        <button className="hamburger" onClick={toggleMenu}>
-          {showMenu ? (
-            'X'
-          ) : (
-            <svg viewBox="0 0 100 80" width="40" height="40">
-              <rect width="90" height="10"></rect>
-              <rect y="30" width="90" height="10"></rect>
-              <rect y="60" width="90" height="10"></rect>
-            </svg>
-          )}
-        </button>
-        <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
+        <div className="sidebar active" >
           <ul>
             <li className="game-link">
               <img className="images" src={val} alt="Valorant" />
