@@ -6,6 +6,7 @@ import val from '../Assets/Nav-Icons/valorant.png';
 import csgo from '../Assets/Nav-Icons/csgo.png';
 import submit from '../Assets/Nav-Icons/submit.png';
 import leader from '../Assets/Nav-Icons/leaderboard.png';
+import profile from '../Assets/Nav-Icons/Profile.png';
 
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -74,11 +75,23 @@ const Nav = () => {
                 Leaderboard
               </NavLink>
             </li>
+            <li className="bottom-links">
+              <img src={profile} alt="movie-logo" width={45} />
+              <NavLink className="links" to="/login">
+                Login
+              </NavLink>
+            </li>
           </ul>
           <hr />
           <ul>
-            <li className="bottom-links">
+            <li className="bottom-links other-links">
               <a href="/tos">Terms Of Services</a>
+            </li>
+            <li className="bottom-links other-links">
+              <a href="/privacy">Privacy Policy</a>
+            </li>
+            <li className="bottom-links other-links">
+              <a href="/contact">Report a Bug</a>
             </li>
           </ul>
         </div>
