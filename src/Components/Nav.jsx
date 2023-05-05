@@ -61,7 +61,7 @@ const Nav = () => {
               <a href="/privacy">Privacy Policy</a>
             </li>
             <li className="bottom-links other-links">
-              <a href="/contact">Report a Bug</a>
+              <a href="/bug">Report a Bug</a>
             </li>
           </ul>
         </div>

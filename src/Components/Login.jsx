@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 function Login() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
@@ -60,7 +60,7 @@ function Login() {
           onChange={handlePasswordChange}
         />
         <br />
-        {error && <div className="error">{error}</div>}
+        {/* {error && <div className="error">{error}</div>} */}
         <p className="login-text">
           Don't have an account?{' '}
           <a className="signup-atag" href="/signup">
