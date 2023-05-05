@@ -8,6 +8,7 @@ const Leaderboard = () => {
   };
 
   return (
+    <>
     <div className="leaderboard-container select-game">
       <h2>Choose a Leaderboard to view top players</h2>
       <select className ="select" value={selection} onChange={handleGameChange}>
@@ -20,17 +21,29 @@ const Leaderboard = () => {
       {selection === 'weekly' && <Weekly />}
       {selection === 'monthly' && <Monthly />}
     </div>
+    <div className='text'>
+      Leaderboard refreshes every 10 minutes. Only shows top 10 players.
+    </div>
+    </>
   );
 };
 
 function AllTime() {
+
   const mockData = [
-    { username: 'John', score: 200 },
-    { username: 'Jane', score: 150 },
-    { username: 'Bob', score: 100 },
-    { username: 'Alice', score: 50 },
-    { username: 'Alice', score: 50 },
+    { username: 'John', score: 23 },
+    { username: 'Jane', score: 4 },
+    { username: 'Bob', score: 5 },
+    { username: 'Alice', score: 66 },
+    { username: 'Alice', score: 77 },
+    { username: 'John', score: 23 },
+    { username: 'Jane', score: 4 },
+    { username: 'Bob', score: 5 },
+    { username: 'Alice', score: 66 },
+    { username: 'Alice', score: 77 },
   ];
+
+  mockData.sort((a, b) => b.score - a.score);
   return (
     <div className='form-container'>
       <table>
@@ -62,6 +75,8 @@ function Weekly() {
     { username: 'Bob', score: 100 },
     { username: 'Alice', score: 50 },
   ];
+
+  mockData.sort((a, b) => b.score - a.score);
   return (
     <div className='form-container'>
       <table>
@@ -88,11 +103,13 @@ function Weekly() {
 
 function Monthly() {
   const mockData = [
-    { username: 'John', score: 200 },
+    { username: 'John', score: 1 },
     { username: 'Jane', score: 150 },
     { username: 'Bob', score: 100 },
     { username: 'Alice', score: 50 },
   ];
+
+  mockData.sort((a, b) => b.score - a.score);
   return (
     <div className='form-container'>
       <table>
