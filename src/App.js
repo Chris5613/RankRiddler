@@ -8,6 +8,7 @@ import League from './Components/League';
 import Csgo from './Components/Csgo';
 import Submit from './Components/Submit';
 import Leaderboard from './Components/Leaderboard';
+import PrivacyPolicy from './Components/Privacy';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/csgo" element={<Csgo />} />
         <Route path="/submit" element={<Submit />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>
     </BrowserRouter>
   );

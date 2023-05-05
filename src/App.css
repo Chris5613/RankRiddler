@@ -25,6 +25,22 @@ html {
   z-index: 1;
 }
 
+h2 {
+  color: white;
+  margin-top: 2rem;
+}
+
+.tos {
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
 .sidebar {
   position: fixed;
   top: 0;
