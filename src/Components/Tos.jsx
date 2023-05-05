@@ -15,20 +15,20 @@ const Tos = () => {
       <p>
         You are solely responsible for any content you post or upload on the
         service. <br /> You agree not to use the service to post or upload any
-        content that is defamatory, offensive, or illegal.
+        content that is defamatory, <br /> offensive, or illegal.
       </p>
 
       <h2>Intellectual Property Rights</h2>
       <p>
         All content and materials available on the service, including but not
-        limited to trademarks, logos, and service marks, <br /> are the property
+        limited to trademarks,  <br />logos, and service marks,are the property
         of our company or our licensors.
       </p>
 
       <h2>Confidentiality and Privacy</h2>
       <p>
         We take your privacy seriously. Please refer to our{' '}
-        <a href="/privacy">Privacy Policy</a> for more information.
+        <a style={{color: "white" }} href="/privacy">Privacy Policy</a> for more information.
       </p>
 
       <h2>Termination and Suspension of Account</h2>
