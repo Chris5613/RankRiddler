@@ -5,7 +5,7 @@ import Valorant from './Components/Valorant';
 import Home from './Components/Home';
 import Tos from './Components/Tos';
 import League from './Components/League';
-import { Csgo } from './Components/Csgo';
+import Csgo from './Components/Csgo';
 import Submit from './Components/Submit';
 import Leaderboard from './Components/Leaderboard';
 
