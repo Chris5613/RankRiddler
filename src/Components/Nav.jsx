@@ -5,7 +5,6 @@ import val from '../Assets/Nav-Icons/valorant.png';
 import csgo from '../Assets/Nav-Icons/csgo.png';
 import submit from '../Assets/Nav-Icons/submit.png';
 import leader from '../Assets/Nav-Icons/leaderboard.png';
-import profile from '../Assets/Nav-Icons/Profile.png';
 
 const Nav = () => {
 
@@ -58,18 +57,17 @@ const Nav = () => {
               </NavLink>
             </li>
             <li className="bottom-links">
-              <img src={profile} alt="movie-logo" width={45} />
               <NavLink className="links" to="/login">
                 Login/Signup
               </NavLink>
             </li>
-            <li>
-              {/* <NavLink
+            <li className="bottom-links">
+              <NavLink
                 to="/"
-                onClick={logout}
+                className="links"
               >
                 Logout
-              </NavLink> */}
+              </NavLink>
             </li>
           </ul>
           <hr />
