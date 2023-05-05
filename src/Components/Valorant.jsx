@@ -185,8 +185,11 @@ const Valorant = () => {
             <img src={check} alt="check" width={30} />
             <br /> Incorrect guesses will deduct 1 point{' '}
             <img src={wrong} width={40} alt="wrong icon" />
-            <br/>
-            <p>Get enough points to top the leaderboard <img src={leader} width={50} alt="board" /></p>
+            <br />
+            <p>
+              Get enough points to top the leaderboard{' '}
+              <img src={leader} width={50} alt="board" />
+            </p>
           </p>
           <br />
           <h3 className="modal-title">Example</h3>
@@ -225,9 +228,12 @@ const Valorant = () => {
               <p className="modal-example-wrong">-1 Point</p>
             </div>
           </div>
-          <br/>
+          <br />
           <div>
-            Want your clips featured? Submit your clips <a className="modal-a-tag" href="/submit">here!</a>
+            Want your clips featured? Submit your clips{' '}
+            <a className="modal-a-tag" href="/submit">
+              here!
+            </a>
           </div>
         </div>
       </div>
