@@ -1,4 +1,3 @@
-import React from 'react';
 import Iron from '../Assets/Val-Ranks/Iron.png';
 import Bronze from '../Assets/Val-Ranks/Bronze.png';
 import Silver from '../Assets/Val-Ranks/Sliver.png';
@@ -11,7 +10,7 @@ import Radiant from '../Assets/Val-Ranks/Radiant.png';
 import { useState, useEffect } from 'react';
 import check from '../Assets/Modal-Icons/Check.png';
 import wrong from '../Assets/Modal-Icons/Wrong.png';
-import leader from '../Assets/Modal-Icons/leader.png';
+import leader from '../Assets/Nav-Icons/leaderboard.png';
 
 const Valorant = () => {
   const [selectedRank, setSelectedRank] = useState(null);
@@ -186,10 +185,10 @@ const Valorant = () => {
             <br /> Incorrect guesses will deduct 1 point{' '}
             <img src={wrong} width={40} alt="wrong icon" />
             <br />
-            <p>
-              Get enough points to top the leaderboard{' '}
-              <img src={leader} width={50} alt="board" />
-            </p>
+          </p>
+          <p>
+            Get enough points to top the leaderboard{' '}
+            <img src={leader} width={50} alt="board" />
           </p>
           <br />
           <h3 className="modal-title">Example</h3>

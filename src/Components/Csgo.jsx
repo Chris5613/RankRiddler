@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import check from '../Assets/Modal-Icons/Check.png';
 import wrong from '../Assets/Modal-Icons/Wrong.png';
-import leader from '../Assets/Modal-Icons/leader.png';
+import leader from '../Assets/Nav-Icons/leaderboard.png';
 import silver from '../Assets/Csgo-Icons/Silver.png';
 import se from '../Assets/Csgo-Icons/SE.png';
 import nova from '../Assets/Csgo-Icons/Nova.png';

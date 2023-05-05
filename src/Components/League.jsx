@@ -10,7 +10,7 @@ import Challenger from '../Assets/League-Icons/Challenger.png';
 import { useState, useEffect } from 'react';
 import check from '../Assets/Modal-Icons/Check.png';
 import wrong from '../Assets/Modal-Icons/Wrong.png';
-import leader from '../Assets/Modal-Icons/leader.png';
+import leader from '../Assets/Nav-Icons/leaderboard.png';
 
 const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
