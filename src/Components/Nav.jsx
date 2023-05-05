@@ -8,6 +8,18 @@ import leader from '../Assets/Nav-Icons/leaderboard.png';
 import profile from '../Assets/Nav-Icons/Profile.png';
 
 const Nav = () => {
+
+  // const logout = async () => {
+  //   const url = `${process.env.REACT_APP_POSTS_API_HOST}/token`;
+  //   const response = await fetch(url, {
+  //     method: "DELETE",
+  //     credentials: "include",
+  //   });
+  //   if (response.ok) {
+  //     navigate("/");
+  //     setLoggedIn(false);
+  //   }
+  // };
   return (
     <>
       <div className="app">
@@ -50,6 +62,14 @@ const Nav = () => {
               <NavLink className="links" to="/login">
                 Login/Signup
               </NavLink>
+            </li>
+            <li>
+              {/* <NavLink
+                to="/"
+                onClick={logout}
+              >
+                Logout
+              </NavLink> */}
             </li>
           </ul>
           <hr />
