@@ -9,6 +9,8 @@ const {
 const User = require("../models/User");
 const router = express.Router();
 
+const auth = require("../controllers/auth");
+
 router.get("/token", token);
 router.post("/register", register);
 router.post("/login", userLogin);

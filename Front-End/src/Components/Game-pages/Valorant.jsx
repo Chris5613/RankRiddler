@@ -25,15 +25,19 @@ const Valorant = () => {
   useEffect(() => {
     const modal = document.getElementById('myModal');
     const closeBtn = document.querySelector('.close');
-    modal.style.display = 'block';
-    closeBtn.onclick = function () {
-      modal.style.display = 'none';
-    };
-    window.onclick = function (event) {
-      if (event.target === modal) {
+    if (modal !== null) {
+      modal.style.display = 'block';
+
+      closeBtn.onclick = function () {
         modal.style.display = 'none';
-      }
-    };
+      };
+  
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
+    }
     return () => {
       window.removeEventListener('click', onclick);
     };

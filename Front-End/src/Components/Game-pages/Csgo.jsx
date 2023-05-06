@@ -12,11 +12,21 @@ import mge from '../../Assets/Csgo-Icons/MGE.png';
 import smfc from '../../Assets/Csgo-Icons/SMFC.png';
 import ge from '../../Assets/Csgo-Icons/GE.png';
 import VideoPlayer from '../Youtube';
+import Cookies from 'js-cookie';
 
 const Csgo = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [url, setUrl] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const token = Cookies.get('token');
+
+
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, [token]);
 
   useEffect(() => {
     setIsButtonDisabled(selectedRank === null);
@@ -35,17 +45,19 @@ const Csgo = () => {
     const modal = document.getElementById('myModal');
     const closeBtn = document.querySelector('.close');
 
-    modal.style.display = 'block';
+    if (modal !== null) {
+      modal.style.display = 'block';
 
-    closeBtn.onclick = function () {
-      modal.style.display = 'none';
-    };
-
-    window.onclick = function (event) {
-      if (event.target === modal) {
+      closeBtn.onclick = function () {
         modal.style.display = 'none';
-      }
-    };
+      };
+  
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
+    }
 
     return () => {
       window.removeEventListener('click', onclick);
@@ -69,6 +81,8 @@ const Csgo = () => {
 
   return (
     <>
+      {loggedIn ? (
+      <>
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>
@@ -254,6 +268,12 @@ const Csgo = () => {
           </div>
         </div>
       </div>
+        </>
+        ) : (
+          <div >
+            <h1>Please Login to play</h1>
+          </div>
+        )}
     </>
   );
 };

@@ -12,11 +12,22 @@ import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import VideoPlayer from '../Youtube';
+import Cookies from 'js-cookie';
 
 const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [url, setUrl] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const token = Cookies.get('token');
+
+
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, [token]);
+
 
   useEffect(() => {
     setIsButtonDisabled(selectedRank === null);
@@ -35,17 +46,19 @@ const League = () => {
     const modal = document.getElementById('myModal');
     const closeBtn = document.querySelector('.close');
 
-    modal.style.display = 'block';
+    if (modal !== null) {
+      modal.style.display = 'block';
 
-    closeBtn.onclick = function () {
-      modal.style.display = 'none';
-    };
-
-    window.onclick = function (event) {
-      if (event.target === modal) {
+      closeBtn.onclick = function () {
         modal.style.display = 'none';
-      }
-    };
+      };
+  
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
+    }
 
     return () => {
       window.removeEventListener('click', onclick);
@@ -69,6 +82,8 @@ const League = () => {
 
   return (
     <>
+    {loggedIn ? (
+      <>
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>
@@ -244,6 +259,11 @@ const League = () => {
           </div>
         </div>
       </div>
+      </>
+      ) : (
+        <p>Please Login to play</p>
+      )
+      }
     </>
   );
 };
