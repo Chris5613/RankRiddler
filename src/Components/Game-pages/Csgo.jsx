@@ -11,6 +11,8 @@ import le from '../../Assets/Csgo-Icons/LE.png';
 import mge from '../../Assets/Csgo-Icons/MGE.png';
 import smfc from '../../Assets/Csgo-Icons/SMFC.png';
 import ge from '../../Assets/Csgo-Icons/GE.png';
+import VideoPlayer from '../Youtube';
+
 
 const Csgo = () => {
   const [selectedRank, setSelectedRank] = useState(null);
@@ -50,19 +52,13 @@ const Csgo = () => {
     };
   }, []);
 
+    // THIS WILL GET REPLACED BY THE YOUTUBE LINKS IN THE DATABASE
+    const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
   return (
     <>
       <div>
-        <iframe
-          className="video"
-          width="1000"
-          height="550"
-          src="https://www.youtube.com/embed/p_HLyWB5bOo"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; 
-        encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+        <VideoPlayer url={youtubeUrl} />
       </div>
       <div className="ranks">
         <img

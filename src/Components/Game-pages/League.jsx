@@ -11,6 +11,8 @@ import { useState, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
+import VideoPlayer from '../Youtube';
+
 
 const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
@@ -50,19 +52,13 @@ const League = () => {
     };
   }, []);
 
+    // THIS WILL GET REPLACED BY THE YOUTUBE LINKS IN THE DATABASE
+    const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
   return (
     <>
       <div>
-        <iframe
-          className="video"
-          width="1000"
-          height="550"
-          src="https://www.youtube.com/embed/5HXUV5DMGxU"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; 
-        encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+        <VideoPlayer url={youtubeUrl} />
       </div>
       <div className="ranks">
         <img
