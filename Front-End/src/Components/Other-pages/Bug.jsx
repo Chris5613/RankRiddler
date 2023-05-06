@@ -18,7 +18,7 @@ function BugReportForm() {
     const data = {};
     data.email = title;
     data.description = description;
-    
+
     const response = fetch('http://localhost:3001/form/bug', {
       method: 'POST',
       headers: {
@@ -26,14 +26,19 @@ function BugReportForm() {
       },
       body: JSON.stringify(data),
     });
-    console.log(response)
+    console.log(response);
     alert('Thank you for your feedback!');
   };
 
   return (
     <div className="container">
-			<h2>See a bug? Please use this form to report it</h2>
-      <form onSubmit={submit} className="form" action="https://formsubmit.co/christianwu58@email.com" method='POST'>
+      <h2>See a bug? Please use this form to report it</h2>
+      <form
+        onSubmit={submit}
+        className="form"
+        action="https://formsubmit.co/christianwu58@email.com"
+        method="POST"
+      >
         <label className="form-label">
           Your Email: <span style={{ color: '#e34234' }}>*</span>
         </label>

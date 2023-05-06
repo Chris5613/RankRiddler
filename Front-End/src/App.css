@@ -110,7 +110,6 @@ h2 {
   list-style: none;
 }
 
-
 .logo {
   display: flex;
   align-items: center;
@@ -445,4 +444,3 @@ td,
 .error-message {
   color: red;
 }
-

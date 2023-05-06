@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 function Signup() {
@@ -33,21 +33,20 @@ function Signup() {
     const data = {};
     data.username = userName;
     data.password = password;
-    const res = await fetch("http://localhost:3001/register", {
-      method: "POST",
+    const res = await fetch('http://localhost:3001/register', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    if(res.ok) {
+    if (res.ok) {
       const data = await res.json();
       Cookies.set('token', data.token, { expires: 1 });
-      alert("Signed up successfully!");
-      navigate('/login')
-    }
-    else {
-      alert("Username already exists");
+      alert('Signed up successfully!');
+      navigate('/login');
+    } else {
+      alert('Username already exists');
     }
   };
 
@@ -63,20 +62,28 @@ function Signup() {
           type="text"
           value={userName}
           onChange={handleUserNameChange}
-
         />
         <br />
 
-				<label className='form-label'>
-					Password <span style={{color: "#e34234"}}>*</span>
-				</label>
-				<input className="form-input" type="password" value={password} onChange={handlePasswordChange} />
+        <label className="form-label">
+          Password <span style={{ color: '#e34234' }}>*</span>
+        </label>
+        <input
+          className="form-input"
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
 
-
-				<label className='form-label'>
-					Confirm Password <span style={{color: "#e34234"}}>*</span>
-				</label>
-				<input className="form-input" type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
+        <label className="form-label">
+          Confirm Password <span style={{ color: '#e34234' }}>*</span>
+        </label>
+        <input
+          className="form-input"
+          type="password"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+        />
 
         <br />
         <p className="login-text">
@@ -85,7 +92,7 @@ function Signup() {
             Login
           </a>
         </p>
-        <br />		
+        <br />
         {!passwordsMatch && (
           <p className="error-message">Passwords do not match!</p>
         )}

@@ -13,7 +13,6 @@ import smfc from '../../Assets/Csgo-Icons/SMFC.png';
 import ge from '../../Assets/Csgo-Icons/GE.png';
 import VideoPlayer from '../Youtube';
 
-
 const Csgo = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -60,13 +59,13 @@ const Csgo = () => {
     console.log(data);
     setUrl(data.form[randomIndex].youtubeLink);
   };
-  
+
   useEffect(() => {
     getYoutubeUrl();
   }, []);
 
-  console.log(url)
-  const youtubeUrl = url
+  console.log(url);
+  const youtubeUrl = url;
 
   return (
     <>

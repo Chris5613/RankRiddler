@@ -13,7 +13,6 @@ import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import VideoPlayer from '../Youtube';
 
-
 const Valorant = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -49,7 +48,6 @@ const Valorant = () => {
     console.log('clicked');
   };
 
-  
   const getYoutubeUrl = async () => {
     const response = await fetch('http://localhost:3001/form/valdata');
     const data = await response.json();
@@ -57,13 +55,13 @@ const Valorant = () => {
     console.log(data);
     setUrl(data.form[randomIndex].youtubeLink);
   };
-  
+
   useEffect(() => {
     getYoutubeUrl();
   }, []);
 
-  console.log(url)
-  const youtubeUrl = url
+  console.log(url);
+  const youtubeUrl = url;
 
   return (
     <>

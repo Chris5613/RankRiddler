@@ -21,14 +21,18 @@ const Tos = () => {
       <h2>Intellectual Property Rights</h2>
       <p>
         All content and materials available on the service, including but not
-        limited to trademarks,  <br />logos, and service marks,are the property
-        of our company or our licensors.
+        limited to trademarks, <br />
+        logos, and service marks,are the property of our company or our
+        licensors.
       </p>
 
       <h2>Confidentiality and Privacy</h2>
       <p>
         We take your privacy seriously. Please refer to our{' '}
-        <a style={{color: "white" }} href="/privacy">Privacy Policy</a> for more information.
+        <a style={{ color: 'white' }} href="/privacy">
+          Privacy Policy
+        </a>{' '}
+        for more information.
       </p>
 
       <h2>Termination and Suspension of Account</h2>

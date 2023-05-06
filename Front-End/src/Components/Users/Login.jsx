@@ -14,27 +14,25 @@ function Login() {
     setPassword(event.target.value);
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:3001/login', {
         username: userName,
         password: password,
       });
-  
+
       if (response.status === 200) {
         const token = response.data.token;
         Cookies.set('token', token); // Store the token in a cookie
-        alert("Logged in successfully!");
+        alert('Logged in successfully!');
         window.location.href = '/';
-      } 
+      }
     } catch (error) {
       alert('Username or Password is incorrect.');
     }
   };
-  
 
   return (
     <div className="container">

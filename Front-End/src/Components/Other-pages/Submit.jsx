@@ -70,7 +70,7 @@ function LeagueOfLegendsForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const formData = {
       youtubeLink: youtubeLink,
       username: userName,
@@ -78,23 +78,23 @@ function LeagueOfLegendsForm() {
       rank: selectedRank,
       trackerLink: discordLink,
     };
-  
+
     try {
       const response = await fetch('http://localhost:3001/form/league', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
-      console.log(formData)
-  
+      console.log(formData);
+
       if (response.ok) {
-        alert("Form submitted successfully!");
-      } 
+        alert('Form submitted successfully!');
+      }
     } catch (error) {
-      alert("Error submitting form. Please try again later.");
+      alert('Error submitting form. Please try again later.');
     }
   };
 
@@ -211,7 +211,7 @@ function ValorantForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const formData = {
       youtubeLink: youtubeLink,
       username: userName,
@@ -219,27 +219,26 @@ function ValorantForm() {
       rank: selectedRank,
       trackerLink: discordLink,
     };
-  
+
     try {
       const response = await fetch('http://localhost:3001/form/val', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
-      console.log(formData)
-  
+      console.log(formData);
+
       if (response.ok) {
-        alert("Form submitted successfully!");
-      } 
+        alert('Form submitted successfully!');
+      }
     } catch (error) {
-      alert("Error submitting form. Please try again later.");
+      alert('Error submitting form. Please try again later.');
     }
   };
-  
-  
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
@@ -351,30 +350,30 @@ function CSGOForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const formData = {
       youtubeLink: youtubeLink,
       username: userName,
       playerInfo: playerInfo,
       rank: selectedRank,
     };
-  
+
     try {
       const response = await fetch('http://localhost:3001/form/csgo', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
-      console.log(formData)
-  
+      console.log(formData);
+
       if (response.ok) {
-        alert("Form submitted successfully!");
-      } 
+        alert('Form submitted successfully!');
+      }
     } catch (error) {
-      alert("Error submitting form. Please try again later.");
+      alert('Error submitting form. Please try again later.');
     }
   };
 

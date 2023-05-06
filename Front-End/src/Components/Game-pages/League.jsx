@@ -13,7 +13,6 @@ import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import VideoPlayer from '../Youtube';
 
-
 const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -60,13 +59,13 @@ const League = () => {
     console.log(data);
     setUrl(data.form[randomIndex].youtubeLink);
   };
-  
+
   useEffect(() => {
     getYoutubeUrl();
   }, []);
 
-  console.log(url)
-  const youtubeUrl = url
+  console.log(url);
+  const youtubeUrl = url;
 
   return (
     <>
