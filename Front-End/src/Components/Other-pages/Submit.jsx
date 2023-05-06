@@ -92,12 +92,10 @@ function LeagueOfLegendsForm() {
       console.log(formData)
   
       if (response.ok) {
-        console.log('Form submitted successfully!');
-        // perform any additional actions upon successful form submission
+        alert("Form submitted successfully!");
       } 
     } catch (error) {
-      console.log('Error submitting form', error);
-      // handle error case
+      alert("Error submitting form. Please try again later.");
     }
   };
 
@@ -109,7 +107,7 @@ function LeagueOfLegendsForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
         />
@@ -155,7 +153,7 @@ function LeagueOfLegendsForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={discordLink}
           onChange={handleDiscordLinkChange}
         />
@@ -235,11 +233,10 @@ function ValorantForm() {
       console.log(formData)
   
       if (response.ok) {
-        console.log('Form submitted successfully!');  
+        alert("Form submitted successfully!");
       } 
     } catch (error) {
-      console.log('Error submitting form', error);
-      // handle error case
+      alert("Error submitting form. Please try again later.");
     }
   };
   
@@ -252,7 +249,7 @@ function ValorantForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
           required
@@ -299,7 +296,7 @@ function ValorantForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={discordLink}
           onChange={handleDiscordLinkChange}
           required
@@ -375,12 +372,10 @@ function CSGOForm() {
       console.log(formData)
   
       if (response.ok) {
-        console.log('Form submitted successfully!');
-        // perform any additional actions upon successful form submission
+        alert("Form submitted successfully!");
       } 
     } catch (error) {
-      console.log('Error submitting form', error);
-      // handle error case
+      alert("Error submitting form. Please try again later.");
     }
   };
 
@@ -392,7 +387,7 @@ function CSGOForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
         />
