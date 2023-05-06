@@ -1,18 +1,18 @@
-import Iron from '../Assets/Val-Ranks/Iron.png';
-import Bronze from '../Assets/Val-Ranks/Bronze.png';
-import Silver from '../Assets/Val-Ranks/Sliver.png';
-import Gold from '../Assets/Val-Ranks/Gold.png';
-import Platinum from '../Assets/Val-Ranks/Plat.png';
-import Diamond from '../Assets/Val-Ranks/Diamond.png';
-import Ascendant from '../Assets/Val-Ranks/Ascendant.png';
-import Immortal from '../Assets/Val-Ranks/Immortal.png';
-import Radiant from '../Assets/Val-Ranks/Radiant.png';
+import Iron from '../../Assets/League-Icons/Iron.png';
+import Bronze from '../../Assets/League-Icons/bronze.png';
+import Silver from '../../Assets/League-Icons/silver.png';
+import Gold from '../../Assets/League-Icons/Gold.png';
+import Platinum from '../../Assets/League-Icons/Plat.png';
+import Diamond from '../../Assets/League-Icons/Diamond.png';
+import Master from '../../Assets/League-Icons/Master.png';
+import Grandmaster from '../../Assets/League-Icons/GrandMaster.png';
+import Challenger from '../../Assets/League-Icons/Challenger.png';
 import { useState, useEffect } from 'react';
-import check from '../Assets/Modal-Icons/Check.png';
-import wrong from '../Assets/Modal-Icons/Wrong.png';
-import leader from '../Assets/Nav-Icons/leaderboard.png';
+import check from '../../Assets/Modal-Icons/Check.png';
+import wrong from '../../Assets/Modal-Icons/Wrong.png';
+import leader from '../../Assets/Nav-Icons/leaderboard.png';
 
-const Valorant = () => {
+const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -57,7 +57,7 @@ const Valorant = () => {
           className="video"
           width="1000"
           height="550"
-          src="https://www.youtube.com/embed/04z2QXTbFMU"
+          src="https://www.youtube.com/embed/5HXUV5DMGxU"
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; 
         encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -99,7 +99,7 @@ const Valorant = () => {
           }}
         />
         <img
-          width={60}
+          width={100}
           src={Gold}
           alt="Gold"
           className={`gold ${selectedRank === 'Gold' ? 'selected' : ''}`}
@@ -129,36 +129,36 @@ const Valorant = () => {
           }}
         />
         <img
-          className={`rank asc ${
-            selectedRank === 'Ascendant' ? 'selected' : ''
-          }`}
-          src={Ascendant}
-          alt="Ascendant"
-          onClick={() => handleRankClick('Ascendant')}
+          className={`rank asc ${selectedRank === 'Master' ? 'selected' : ''}`}
+          src={Master}
+          alt="Master"
+          onClick={() => handleRankClick('Master')}
           style={{
-            boxShadow: selectedRank === 'Ascendant' ? '0 0 10px gold' : '',
+            boxShadow: selectedRank === 'Master' ? '0 0 10px gold' : '',
           }}
         />
         <img
-          className={`immortal ${
-            selectedRank === 'Immortal' ? 'selected' : ''
+          className={`Grandmaster asc ${
+            selectedRank === 'Grandmaster' ? 'selected' : ''
           }`}
-          width={60}
-          src={Immortal}
-          alt="Immortal"
-          onClick={() => handleRankClick('Immortal')}
+          width={100}
+          src={Grandmaster}
+          alt="Grandmaster"
+          onClick={() => handleRankClick('Grandmaster')}
           style={{
-            boxShadow: selectedRank === 'Immortal' ? '0 0 10px gold' : '',
+            boxShadow: selectedRank === 'Grandmaster' ? '0 0 10px gold' : '',
           }}
         />
         <img
-          width={80}
-          src={Radiant}
-          alt="Radiant"
-          className={`radiant ${selectedRank === 'Radiant' ? 'selected' : ''}`}
-          onClick={() => handleRankClick('Radiant')}
+          width={100}
+          src={Challenger}
+          alt="Challenger"
+          className={`radiant ${
+            selectedRank === 'Challenger' ? 'selected' : ''
+          }`}
+          onClick={() => handleRankClick('Challenger')}
           style={{
-            boxShadow: selectedRank === 'Radiant' ? '0 0 10px gold' : '',
+            boxShadow: selectedRank === 'Challenger' ? '0 0 10px gold' : '',
           }}
         />
       </div>
@@ -185,10 +185,10 @@ const Valorant = () => {
             <br /> Incorrect guesses will deduct 1 point{' '}
             <img src={wrong} width={40} alt="wrong icon" />
             <br />
-          </p>
-          <p>
-            Get enough points to top the leaderboard{' '}
-            <img src={leader} width={50} alt="board" />
+            <p>
+              Get enough points to top the leaderboard{' '}
+              <img src={leader} width={50} alt="board" />
+            </p>
           </p>
           <br />
           <h3 className="modal-title">Example</h3>
@@ -198,22 +198,22 @@ const Valorant = () => {
               <div className="modal-example-heading">Correct Rank</div>
               <img
                 className="modal-example-image"
-                src={Radiant}
+                src={Grandmaster}
                 alt="Radiant"
                 width={100}
               />
-              <p className="modal-example-rad">Radiant</p>
+              <p className="modal-example-rad">GrandMaster</p>
             </div>
 
             <div>
               <div className="modal-example-heading">Your Guess</div>
               <img
                 className="modal-example-image"
-                src={Iron}
+                src={Diamond}
                 alt="Iron"
                 width={100}
               />
-              <p className="modal-example-iron">Iron</p>
+              <p className="modal-example-iron">Diamond</p>
             </div>
 
             <div>
@@ -240,4 +240,4 @@ const Valorant = () => {
   );
 };
 
-export default Valorant;
+export default League;

@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import check from '../Assets/Modal-Icons/Check.png';
-import wrong from '../Assets/Modal-Icons/Wrong.png';
-import leader from '../Assets/Nav-Icons/leaderboard.png';
-import silver from '../Assets/Csgo-Icons/Silver.png';
-import se from '../Assets/Csgo-Icons/SE.png';
-import nova from '../Assets/Csgo-Icons/Nova.png';
-import mg from '../Assets/Csgo-Icons/MG.png';
-import dmg from '../Assets/Csgo-Icons/DMG.png';
-import le from '../Assets/Csgo-Icons/LE.png';
-import mge from '../Assets/Csgo-Icons/MGE.png';
-import smfc from '../Assets/Csgo-Icons/SMFC.png';
-import ge from '../Assets/Csgo-Icons/GE.png';
+import check from '../../Assets/Modal-Icons/Check.png';
+import wrong from '../../Assets/Modal-Icons/Wrong.png';
+import leader from '../../Assets/Nav-Icons/leaderboard.png';
+import silver from '../../Assets/Csgo-Icons/Silver.png';
+import se from '../../Assets/Csgo-Icons/SE.png';
+import nova from '../../Assets/Csgo-Icons/Nova.png';
+import mg from '../../Assets/Csgo-Icons/MG.png';
+import dmg from '../../Assets/Csgo-Icons/DMG.png';
+import le from '../../Assets/Csgo-Icons/LE.png';
+import mge from '../../Assets/Csgo-Icons/MGE.png';
+import smfc from '../../Assets/Csgo-Icons/SMFC.png';
+import ge from '../../Assets/Csgo-Icons/GE.png';
 
 const Csgo = () => {
   const [selectedRank, setSelectedRank] = useState(null);
