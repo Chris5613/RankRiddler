@@ -8,6 +8,7 @@ import leader from '../Assets/Nav-Icons/leaderboard.png';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import Logout from '../Assets/Nav-Icons/Logout.png';
 
 
 const Nav = () => {
@@ -28,7 +29,7 @@ const Nav = () => {
       });
       if (response.ok) {
           setLoggedIn(false);
-          localStorage.clear()
+          Cookies.remove('token');
           navigate('/login')
       }
   }
@@ -72,13 +73,13 @@ const Nav = () => {
             </li>
             {loggedIn ? (
               <li className="bottom-links">
-                  <NavLink to="/" onClick={logout}>Logout</NavLink>
+                  <img src={Logout} alt="logout-logo" width={50} /><NavLink to="/" onClick={logout}>Logout</NavLink>
               </li>
           ) : (
             <>
               <div>
                 <li className="bottom-links">
-                  <NavLink to="/login">Login/Signup</NavLink>
+                <img src={Logout} alt="logout-logo" width={50} /><NavLink to="/login">Login/Signup</NavLink>
                 </li>
               </div>
             </>
