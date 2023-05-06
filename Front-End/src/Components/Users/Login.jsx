@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Login() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState(null);
 
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
@@ -13,26 +14,28 @@ function Login() {
     setPassword(event.target.value);
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // try {
-    //   const response = await fetch('/api/login', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ userName, password }),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   });
-    //   if (response.ok) {
-    //     // TODO: handle successful login
-    //   } else {
-    //     const { message } = await response.json();
-    //     setError(message);
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  
+    try {
+      const response = await axios.post('http://localhost:3001/login', {
+        username: userName,
+        password: password,
+      });
+  
+      if (response.status === 200) {
+        const token = response.data.token;
+        Cookies.set('token', token); // Store the token in a cookie
+        window.location.href = '/';
+      } else {
+        console.log('Login failed');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+  
 
   return (
     <div className="container">
@@ -60,7 +63,6 @@ function Login() {
           onChange={handlePasswordChange}
         />
         <br />
-        {/* {error && <div className="error">{error}</div>} */}
         <p className="login-text">
           Don't have an account?{' '}
           <a className="signup-atag" href="/signup">

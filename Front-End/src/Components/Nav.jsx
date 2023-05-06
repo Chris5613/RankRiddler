@@ -5,20 +5,34 @@ import val from '../Assets/Nav-Icons/valorant.png';
 import csgo from '../Assets/Nav-Icons/csgo.png';
 import submit from '../Assets/Nav-Icons/submit.png';
 import leader from '../Assets/Nav-Icons/leaderboard.png';
+import { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 
 const Nav = () => {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const token = Cookies.get('token');
+  const navigate = useNavigate();
 
-  // const logout = async () => {
-  //   const url = `${process.env.REACT_APP_POSTS_API_HOST}/token`;
-  //   const response = await fetch(url, {
-  //     method: "DELETE",
-  //     credentials: "include",
-  //   });
-  //   if (response.ok) {
-  //     navigate("/");
-  //     setLoggedIn(false);
-  //   }
-  // };
+  useEffect(() => {
+      if (token) {
+        setLoggedIn(true)
+      }
+  }, [token])
+
+  const logout = async () => {
+      const url = "http://localhost:3001/signout";
+      const response = await fetch(url, {
+          method: "PUT",
+      });
+      if (response.ok) {
+          setLoggedIn(false);
+          localStorage.clear()
+          navigate('/login')
+      }
+  }
+
   return (
     <>
       <div className="app">
@@ -56,19 +70,19 @@ const Nav = () => {
                 Leaderboard
               </NavLink>
             </li>
-            <li className="bottom-links">
-              <NavLink className="links" to="/login">
-                Login/Signup
-              </NavLink>
-            </li>
-            <li className="bottom-links">
-              <NavLink
-                to="/"
-                className="links"
-              >
-                Logout
-              </NavLink>
-            </li>
+            {loggedIn ? (
+              <li className="bottom-links">
+                  <NavLink to="/" onClick={logout}>Logout</NavLink>
+              </li>
+          ) : (
+            <>
+              <div>
+                <li className="bottom-links">
+                  <NavLink to="/login">Login/Signup</NavLink>
+                </li>
+              </div>
+            </>
+          )}
           </ul>
           <hr />
           <ul>

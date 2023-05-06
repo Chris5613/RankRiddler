@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom"
+import Cookies from 'js-cookie';
 
 function Signup() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleUserNameChange = (event) => {
     setUserName(event.target.value);
@@ -18,13 +22,29 @@ function Signup() {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setPasswordsMatch(false);
     } else {
       setPasswordsMatch(true);
-      // Submit form data here
+    }
+
+    const data = {};
+    data.username = userName;
+    data.password = password;
+    const res = await fetch("http://localhost:3001/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if(res.ok) {
+      const data = await res.json();
+      console.log(data);
+      Cookies.set('token', data.token, { expires: 1 });
+      navigate('/login')
     }
   };
 
