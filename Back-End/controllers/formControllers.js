@@ -31,8 +31,39 @@ const csgoForm = async (req, res) => {
     }
 }
 
+const getForm  = async (req, res) => {
+    try {
+        const form = await val.find();
+        res.status(200).json({ form });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const getLeagueForm = async (req, res) => {
+    try {
+        const form = await league.find();
+        res.status(200).json({ form });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const getCsgoForm = async (req, res) => {
+    try {
+        const form = await csgo.find();
+        res.status(200).json({ form });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 module.exports = {
     valForm,
     leagueForm,
-    csgoForm
+    csgoForm,
+    getForm,
+    getLeagueForm,
+    getCsgoForm
+
 }

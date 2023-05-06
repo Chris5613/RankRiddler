@@ -88,7 +88,7 @@ const Nav = () => {
           <hr />
           <ul>
             <li className="bottom-links other-links">
-              <a href="/tos">Terms Of Services</a>
+              <a href="/tos">Terms of Services</a>
             </li>
             <li className="bottom-links other-links">
               <a href="/privacy">Privacy Policy</a>

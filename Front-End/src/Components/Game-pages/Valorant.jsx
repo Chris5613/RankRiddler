@@ -17,6 +17,7 @@ import VideoPlayer from '../Youtube';
 const Valorant = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     setIsButtonDisabled(selectedRank === null);
@@ -48,8 +49,21 @@ const Valorant = () => {
     console.log('clicked');
   };
 
-  // THIS WILL GET REPLACED BY THE YOUTUBE LINKS IN THE DATABASE
-  const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  
+  const getYoutubeUrl = async () => {
+    const response = await fetch('http://localhost:3001/form/valdata');
+    const data = await response.json();
+    const randomIndex = Math.floor(Math.random() * data.form.length);
+    console.log(data);
+    setUrl(data.form[randomIndex].youtubeLink);
+  };
+  
+  useEffect(() => {
+    getYoutubeUrl();
+  }, []);
+
+  console.log(url)
+  const youtubeUrl = url
 
   return (
     <>
