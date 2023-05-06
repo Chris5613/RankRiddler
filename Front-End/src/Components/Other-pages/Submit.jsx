@@ -182,10 +182,37 @@ function ValorantForm() {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can handle the form submission logic
+  
+    const formData = {
+      youtubeLink: youtubeLink,
+      userName: userName,
+      playerInfo: playerInfo,
+      rank: selectedRank,
+      trackerLink: discordLink,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:3001/form/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+  
+      if (response.ok) {
+        console.log('Form submitted successfully!');
+        // perform any additional actions upon successful form submission
+      } 
+    } catch (error) {
+      console.log('Error submitting form', error);
+      // handle error case
+    }
   };
+  
+  
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
