@@ -9,6 +9,11 @@ const {
 }
 = require('../controllers/formControllers')
 
+const {
+    bugForm
+}
+= require('../controllers/bugController')
+
 const router = express.Router()
 
 router.post('/val', valForm)
@@ -18,6 +23,8 @@ router.post('/csgo', csgoForm)
 router.get('/valdata', getForm)
 router.get('/leaguedata', getLeagueForm)
 router.get('/csgodata', getCsgoForm)
+
+router.post('/bug', bugForm)
 
 
 module.exports = router

@@ -27,12 +27,11 @@ function Login() {
       if (response.status === 200) {
         const token = response.data.token;
         Cookies.set('token', token); // Store the token in a cookie
+        alert("Logged in successfully!");
         window.location.href = '/';
-      } else {
-        console.log('Login failed');
-      }
+      } 
     } catch (error) {
-      console.log(error);
+      alert('Username or Password is incorrect.');
     }
   };
   
