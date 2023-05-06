@@ -1,11 +1,15 @@
 const express = require('express')
 const {
-    submitForm
+    valForm,
+    leagueForm,
+    csgoForm
 }
 = require('../controllers/formControllers')
 
 const router = express.Router()
 
-router.post('/val', submitForm)
+router.post('/val', valForm)
+router.post('/league', leagueForm)
+router.post('/csgo', csgoForm)
 
 module.exports = router

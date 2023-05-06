@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose')
 const userRoutes = require('./routers/users'); 
-const formRoutes = require('./routers/valorant');
+const formRoutes = require('./routers/form');
 const cors = require('cors')
 
 // server file

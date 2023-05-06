@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 function Submit() {
   const [game, setGame] = useState('');
@@ -68,10 +69,38 @@ function LeagueOfLegendsForm() {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can handle the form submission logic
+  
+    const formData = {
+      youtubeLink: youtubeLink,
+      username: userName,
+      playerInfo: playerInfo,
+      rank: selectedRank,
+      trackerLink: discordLink,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:3001/form/league', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      console.log(formData)
+  
+      if (response.ok) {
+        console.log('Form submitted successfully!');
+        // perform any additional actions upon successful form submission
+      } 
+    } catch (error) {
+      console.log('Error submitting form', error);
+      // handle error case
+    }
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
@@ -206,8 +235,7 @@ function ValorantForm() {
       console.log(formData)
   
       if (response.ok) {
-        console.log('Form submitted successfully!');
-        // perform any additional actions upon successful form submission
+        console.log('Form submitted successfully!');  
       } 
     } catch (error) {
       console.log('Error submitting form', error);
@@ -227,6 +255,7 @@ function ValorantForm() {
           type="text"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
+          required
         />
         <br />
 
@@ -237,6 +266,7 @@ function ValorantForm() {
           className="form-input"
           type="text"
           value={userName}
+          required
           onChange={handleUserNameChange}
         />
         <br />
@@ -251,7 +281,7 @@ function ValorantForm() {
           {' '}
           Select a rank: <span style={{ color: '#e34234' }}>*</span>
         </label>
-        <select value={selectedRank} onChange={handleRankChange}>
+        <select value={selectedRank} required onChange={handleRankChange}>
           <option value="">Select a rank</option>
           <option value="Iron">Iron</option>
           <option value="Bronze">Bronze</option>
@@ -272,6 +302,7 @@ function ValorantForm() {
           type="text"
           value={discordLink}
           onChange={handleDiscordLinkChange}
+          required
         />
         <br />
 
@@ -280,6 +311,7 @@ function ValorantForm() {
           className="form-checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
+          required
         />
         <label className="form-label">
           I agree to the terms and conditions
@@ -321,10 +353,37 @@ function CSGOForm() {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can handle the form submission logic
+  
+    const formData = {
+      youtubeLink: youtubeLink,
+      username: userName,
+      playerInfo: playerInfo,
+      rank: selectedRank,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:3001/form/csgo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      console.log(formData)
+  
+      if (response.ok) {
+        console.log('Form submitted successfully!');
+        // perform any additional actions upon successful form submission
+      } 
+    } catch (error) {
+      console.log('Error submitting form', error);
+      // handle error case
+    }
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
