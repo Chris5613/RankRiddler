@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
+import VideoPlayer from '../Youtube';
 
 
 const Valorant = () => {
@@ -21,6 +22,23 @@ const Valorant = () => {
     setIsButtonDisabled(selectedRank === null);
   }, [selectedRank]);
 
+  useEffect(() => {
+    const modal = document.getElementById('myModal');
+    const closeBtn = document.querySelector('.close');
+    modal.style.display = 'block';
+    closeBtn.onclick = function () {
+      modal.style.display = 'none';
+    };
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+    return () => {
+      window.removeEventListener('click', onclick);
+    };
+  }, []);
+
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
     console.log(selectedRank);
@@ -30,40 +48,13 @@ const Valorant = () => {
     console.log('clicked');
   };
 
-  useEffect(() => {
-    const modal = document.getElementById('myModal');
-    const closeBtn = document.querySelector('.close');
-
-    modal.style.display = 'block';
-
-    closeBtn.onclick = function () {
-      modal.style.display = 'none';
-    };
-
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    };
-
-    return () => {
-      window.removeEventListener('click', onclick);
-    };
-  }, []);
+  // THIS WILL GET REPLACED BY THE YOUTUBE LINKS IN THE DATABASE
+  const youtubeUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
   return (
     <>
       <div>
-        <iframe
-          className="video"
-          width="1000"
-          height="550"
-          src="https://www.youtube.com/embed/04z2QXTbFMU"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; 
-        encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+        <VideoPlayer url={youtubeUrl} />
       </div>
       <div className="ranks">
         <img
