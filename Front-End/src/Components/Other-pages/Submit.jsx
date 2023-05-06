@@ -27,6 +27,7 @@ function Submit() {
         <ul className="submission-list">
           <li>Must be from a ranked match</li>
           <li>Must be from 30 seconds to 1 min long</li>
+          <li>Must Submit Clips from Youtube Only</li>
           <li>No Smurfing</li>
           <li>At least be 720p</li>
         </ul>
@@ -187,20 +188,22 @@ function ValorantForm() {
   
     const formData = {
       youtubeLink: youtubeLink,
-      userName: userName,
+      username: userName,
       playerInfo: playerInfo,
       rank: selectedRank,
       trackerLink: discordLink,
     };
   
     try {
-      const response = await fetch('http://localhost:3001/form/create', {
+      const response = await fetch('http://localhost:3001/form/val', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
       });
+
+      console.log(formData)
   
       if (response.ok) {
         console.log('Form submitted successfully!');

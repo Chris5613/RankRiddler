@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose')
 const userRoutes = require('./routers/users'); 
+const formRoutes = require('./routers/valorant');
 const cors = require('cors')
 
 // server file
@@ -29,3 +30,4 @@ mongoose.connection.on('error', err => {
 
 
 app.use('/', userRoutes)
+app.use('/form', formRoutes)
