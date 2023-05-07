@@ -12,6 +12,7 @@ import PrivacyPolicy from './Components/Other-pages/Privacy';
 import Login from './Components/Users/Login';
 import Signup from './Components/Users/Signup';
 import Bug from './Components/Other-pages/Bug';
+import Howto from './Components/Other-pages/Howto';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/bug" element={<Bug />} />
+        <Route path="/howto" element={<Howto />} />
       </Routes>
     </BrowserRouter>
   );

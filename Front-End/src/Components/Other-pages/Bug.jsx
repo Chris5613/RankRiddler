@@ -12,11 +12,33 @@ function BugReportForm() {
     setDescription(event.target.value);
   };
 
+  const submit = (event) => {
+    event.preventDefault();
+
+    const data = {};
+    data.email = title;
+    data.description = description;
+
+    const response = fetch('http://localhost:3001/form/bug', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response);
+    alert('Thank you for your feedback!');
+  };
 
   return (
     <div className="container">
-			<h2>See a bug? Please use this form to report it</h2>
-      <form className="form" ction="https://formsubmit.co/christianwu58@email.com" method='POST'>
+      <h2>See a bug? Please use this form to report it</h2>
+      <form
+        onSubmit={submit}
+        className="form"
+        action="https://formsubmit.co/christianwu58@email.com"
+        method="POST"
+      >
         <label className="form-label">
           Your Email: <span style={{ color: '#e34234' }}>*</span>
         </label>

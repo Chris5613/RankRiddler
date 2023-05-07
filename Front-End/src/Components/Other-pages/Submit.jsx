@@ -27,6 +27,7 @@ function Submit() {
         <ul className="submission-list">
           <li>Must be from a ranked match</li>
           <li>Must be from 30 seconds to 1 min long</li>
+          <li>Must Submit Clips from Youtube Only</li>
           <li>No Smurfing</li>
           <li>At least be 720p</li>
         </ul>
@@ -67,10 +68,36 @@ function LeagueOfLegendsForm() {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can handle the form submission logic
+
+    const formData = {
+      youtubeLink: youtubeLink,
+      username: userName,
+      playerInfo: playerInfo,
+      rank: selectedRank,
+      trackerLink: discordLink,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/form/league', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log(formData);
+
+      if (response.ok) {
+        alert('Form submitted successfully!');
+      }
+    } catch (error) {
+      alert('Error submitting form. Please try again later.');
+    }
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
@@ -79,7 +106,7 @@ function LeagueOfLegendsForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
         />
@@ -125,7 +152,7 @@ function LeagueOfLegendsForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={discordLink}
           onChange={handleDiscordLinkChange}
         />
@@ -182,10 +209,36 @@ function ValorantForm() {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can handle the form submission logic
+
+    const formData = {
+      youtubeLink: youtubeLink,
+      username: userName,
+      playerInfo: playerInfo,
+      rank: selectedRank,
+      trackerLink: discordLink,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/form/val', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log(formData);
+
+      if (response.ok) {
+        alert('Form submitted successfully!');
+      }
+    } catch (error) {
+      alert('Error submitting form. Please try again later.');
+    }
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
@@ -194,9 +247,10 @@ function ValorantForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
+          required
         />
         <br />
 
@@ -207,6 +261,7 @@ function ValorantForm() {
           className="form-input"
           type="text"
           value={userName}
+          required
           onChange={handleUserNameChange}
         />
         <br />
@@ -221,7 +276,7 @@ function ValorantForm() {
           {' '}
           Select a rank: <span style={{ color: '#e34234' }}>*</span>
         </label>
-        <select value={selectedRank} onChange={handleRankChange}>
+        <select value={selectedRank} required onChange={handleRankChange}>
           <option value="">Select a rank</option>
           <option value="Iron">Iron</option>
           <option value="Bronze">Bronze</option>
@@ -239,9 +294,10 @@ function ValorantForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={discordLink}
           onChange={handleDiscordLinkChange}
+          required
         />
         <br />
 
@@ -250,6 +306,7 @@ function ValorantForm() {
           className="form-checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
+          required
         />
         <label className="form-label">
           I agree to the terms and conditions
@@ -291,10 +348,35 @@ function CSGOForm() {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can handle the form submission logic
+
+    const formData = {
+      youtubeLink: youtubeLink,
+      username: userName,
+      playerInfo: playerInfo,
+      rank: selectedRank,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/form/csgo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log(formData);
+
+      if (response.ok) {
+        alert('Form submitted successfully!');
+      }
+    } catch (error) {
+      alert('Error submitting form. Please try again later.');
+    }
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
@@ -303,7 +385,7 @@ function CSGOForm() {
         </label>
         <input
           className="form-input"
-          type="text"
+          type="url"
           value={youtubeLink}
           onChange={handleYoutubeLinkChange}
         />

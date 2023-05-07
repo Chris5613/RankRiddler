@@ -15,8 +15,8 @@ const PrivacyPolicy = () => {
       <h2>How We Use Your Information</h2>
       <p>
         We use your personal information to respond to your inquiries, provide
-        you with our services, and to communicate with you  <br /> about updates or{' '}
-        changes to our policies or services. We may also use your information
+        you with our services, and to communicate with you <br /> about updates
+        or changes to our policies or services. We may also use your information
         for research or analytics purposes.
       </p>
       <h2>Sharing Your Information</h2>
