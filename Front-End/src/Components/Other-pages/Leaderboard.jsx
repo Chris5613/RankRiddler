@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from 'react';
 
+// Refactor in the future when weekly and monthly leaderboards are implemented
+
 const Leaderboard = () => {
   const [selection, setSelection] = useState('');
   const handleGameChange = (event) => {
