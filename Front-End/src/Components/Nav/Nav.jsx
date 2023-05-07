@@ -23,7 +23,7 @@ const Nav = () => {
   }, [token]);
 
   const logout = async () => {
-    const url = 'http://localhost:3001/signout';
+    const url = 'https://rr-back-end.onrender.com/signout';
     const response = await fetch(url, {
       method: 'PUT',
     });
