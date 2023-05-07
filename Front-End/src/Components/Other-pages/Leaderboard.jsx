@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 const Leaderboard = () => {
   const [selection, setSelection] = useState('');
-
   const handleGameChange = (event) => {
     setSelection(event.target.value);
   };
@@ -33,20 +32,33 @@ const Leaderboard = () => {
 };
 
 function AllTime() {
-  const mockData = [
-    { username: 'John', score: 23 },
-    { username: 'Jane', score: 4 },
-    { username: 'Bob', score: 5 },
-    { username: 'Alice', score: 66 },
-    { username: 'Alice', score: 77 },
-    { username: 'John', score: 23 },
-    { username: 'Jane', score: 4 },
-    { username: 'Bob', score: 5 },
-    { username: 'Alice', score: 66 },
-    { username: 'Alice', score: 77 },
-  ];
+  const [data, setData] = useState([]);
 
-  mockData.sort((a, b) => b.score - a.score);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/allusers', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const userData = await response.json();
+        setData(userData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+  ;
+  
+  console.log(data)
+  data.sort((a, b) => b.score - a.score);
+
   return (
     <div className="form-container">
       <table>
@@ -58,11 +70,11 @@ function AllTime() {
           </tr>
         </thead>
         <tbody>
-          {mockData.map((data, index) => (
+          {data && data.map((data, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{data.username}</td>
-              <td>{data.score}</td>
+              <td>{data.points}</td>
             </tr>
           ))}
         </tbody>
