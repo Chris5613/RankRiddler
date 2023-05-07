@@ -387,7 +387,7 @@ function CSGOForm() {
           I agree to the terms and conditions
         </label>
         <br />
-
+        <br />
         <button type="submit" disabled={!isChecked}>
           Submit
         </button>
