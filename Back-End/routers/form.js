@@ -9,6 +9,7 @@ const {
 } = require("../controllers/formControllers");
 
 const { bugForm } = require("../controllers/bugController");
+const {auth} = require("../controllers/auth");
 
 const router = express.Router();
 

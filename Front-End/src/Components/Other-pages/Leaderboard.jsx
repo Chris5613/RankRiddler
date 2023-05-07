@@ -1,7 +1,9 @@
+import Cookies from 'js-cookie';
 import React, { useState,useEffect } from 'react';
 
 const Leaderboard = () => {
   const [selection, setSelection] = useState('');
+
   const handleGameChange = (event) => {
     setSelection(event.target.value);
   };
@@ -33,6 +35,7 @@ const Leaderboard = () => {
 
 function AllTime() {
   const [data, setData] = useState([]);
+  const token = Cookies.get('token');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +44,7 @@ function AllTime() {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
           },
         });
         if (!response.ok) {
@@ -53,7 +57,7 @@ function AllTime() {
       }
     };
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <div className="form-container">

@@ -109,6 +109,7 @@ const League = () => {
         method: 'PUT',
         headers: {
           username: Cookies.get('userName'),
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           points: points,
@@ -123,6 +124,7 @@ const League = () => {
         method: 'PUT',
         headers: {
           username: Cookies.get('userName'),
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           points: points,
@@ -156,13 +158,14 @@ const League = () => {
       const response = await fetch('http://localhost:3001/user', {
         headers: {
           username: Cookies.get('userName'),
+          'Authorization': `Bearer ${token}`,
         },
       });
       const data = await response.json();
       setScore(data.points);
     };
     getUser();
-  }, []);
+  }, [token]);
 
   return (
     <>
