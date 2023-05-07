@@ -121,6 +121,7 @@ const Csgo = () => {
         }),
       });
       const data = await response.json();
+      setScore(data.points);
     };
 
     const deductPoints = async () => {
@@ -134,6 +135,7 @@ const Csgo = () => {
         }),
       });
       const data = await response.json();
+      setScore(data.points);
     };
 
   useEffect(() => {

@@ -115,7 +115,7 @@ const League = () => {
         }),
       });
       const data = await response.json();
-      console.log(data);
+      setScore(data.points);
     };
 
     const deductPoints = async () => {
@@ -129,7 +129,7 @@ const League = () => {
         }),
       });
       const data = await response.json();
-      console.log(data);
+      setScore(data.points);
     };
 
   useEffect(() => {

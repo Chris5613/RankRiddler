@@ -119,7 +119,7 @@ const Valorant = () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    setScore(data.points);
   };
 
   const deductPoints = async () => {
@@ -133,7 +133,8 @@ const Valorant = () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    setScore(data.points);
+    console.log(data.points);
   };
 
 useEffect(() => {
