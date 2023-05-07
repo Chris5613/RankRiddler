@@ -91,7 +91,24 @@ const addPointsbyUsername = async (req, res) => {
   }
 };
 
-
+const deductPointsbyUsername = async (req, res) => {
+  const { userName } = req.params;
+  try {
+    const user = await User.findOne({userName });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    if (user.points < points) {
+      return res.status(400).json({ error: 'Not enough points' });
+    }
+    user.points -= 1
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 
 module.exports = {
   register,
@@ -99,5 +116,6 @@ module.exports = {
   userSignout,
   token,
   getUserbyUsername,
-  addPointsbyUsername
+  addPointsbyUsername,
+  deductPointsbyUsername
 };

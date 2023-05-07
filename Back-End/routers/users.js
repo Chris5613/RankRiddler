@@ -6,6 +6,7 @@ const {
   token,
   getUserbyUsername,
   addPointsbyUsername,
+  deductPointsbyUsername,
 
 } = require("../controllers/userControllers");
 
@@ -21,5 +22,6 @@ router.put("/signout", userSignout);
 
 router.get("/user", getUserbyUsername);
 router.put("/addpoints", addPointsbyUsername);
+router.put("/deductpoints", deductPointsbyUsername);
 
 module.exports = router;

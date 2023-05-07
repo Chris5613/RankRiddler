@@ -104,8 +104,22 @@ const League = () => {
     points = -1;
   }
 
-    const updateUser = async () => {
+    const addPoints = async () => {
       const response = await fetch('http://localhost:3001/addpoints', {
+        method: 'PUT',
+        headers: {
+          username: Cookies.get('userName'),
+        },
+        body: JSON.stringify({
+          points: points,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    };
+
+    const deductPoints = async () => {
+      const response = await fetch('http://localhost:3001/deductpoints', {
         method: 'PUT',
         headers: {
           username: Cookies.get('userName'),
@@ -128,7 +142,12 @@ const League = () => {
 
   const checkAnswer = () => {
     if(rank === selectedRank){
-      updateUser();
+      addPoints();
+    }
+    else {
+      if(score > 0){
+        deductPoints();
+      }   
     }
   }
 
