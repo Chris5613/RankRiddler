@@ -4,6 +4,9 @@ const {
   userLogin,
   userSignout,
   token,
+  getUserbyUsername,
+  addPointsbyUsername,
+
 } = require("../controllers/userControllers");
 
 const User = require("../models/User");
@@ -15,5 +18,8 @@ router.get("/token", token);
 router.post("/register", register);
 router.post("/login", userLogin);
 router.put("/signout", userSignout);
+
+router.get("/user", getUserbyUsername);
+router.put("/addpoints", addPointsbyUsername);
 
 module.exports = router;

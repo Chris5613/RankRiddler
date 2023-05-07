@@ -61,9 +61,43 @@ const token = async (req, res) => {
   }
 };
 
+const getUserbyUsername = async (req, res) => {
+  const { userName } = req.params;
+  try {
+    const user = await User.findOne({ userName });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const addPointsbyUsername = async (req, res) => {
+  const { userName } = req.params;
+  try {
+    const user = await User.findOne({userName });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    user.points += 1
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+
 module.exports = {
   register,
   userLogin,
   userSignout,
   token,
+  getUserbyUsername,
+  addPointsbyUsername
 };

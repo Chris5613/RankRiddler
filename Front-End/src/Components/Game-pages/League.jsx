@@ -21,13 +21,10 @@ const League = () => {
   const token = Cookies.get('token');
   const [showModal, setShowModal] = useState(false);
   const [rank, setRank] = useState('');
+  const [score, setScore] = useState(0);
 
   const handleModal = () => {
     setShowModal(!showModal);
-  };
-
-  const refresh = () => {
-    window.location.reload();
   };
 
   useEffect(() => {
@@ -107,8 +104,45 @@ const League = () => {
     points = -1;
   }
 
+    const updateUser = async () => {
+      const response = await fetch('http://localhost:3001/addpoints', {
+        method: 'PUT',
+        headers: {
+          username: Cookies.get('userName'),
+        },
+        body: JSON.stringify({
+          points: points,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    };
+
   useEffect(() => {
     getYoutubeUrl();
+  }, []);
+
+  const refresh = () => {
+    window.location.reload();
+  };
+
+  const checkAnswer = () => {
+    if(rank === selectedRank){
+      updateUser();
+    }
+  }
+
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch('http://localhost:3001/user', {
+        headers: {
+          username: Cookies.get('userName'),
+        },
+      });
+      const data = await response.json();
+      setScore(data.points);
+    };
+    getUser();
   }, []);
 
   return (
@@ -121,6 +155,7 @@ const League = () => {
           {showModal ? (
             <div className="modal">
               <div className="modal-content">
+              <span className="X" onClick={handleModal}>X</span>
                 <br />
                 <div className="modal-example">
                   <div>
@@ -158,11 +193,10 @@ const League = () => {
                 </div>
                 <br />
                 <br />
-                <p className="text">You currently have 0 points</p>
+                <p className="text">You currently have {score} points</p>
                 <br />
                 <button
                   onClick={() => {
-                    handleModal();
                     refresh();
                   }}
                   className="submit-btn"
@@ -280,7 +314,10 @@ const League = () => {
           <div>
             <button
               className="submit"
-              onClick={handleModal}
+              onClick={() => {
+                handleModal();
+                checkAnswer();
+              }}
               disabled={isButtonDisabled}
             >
               {selectedRank
