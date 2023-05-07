@@ -110,6 +110,28 @@ const deductPointsbyUsername = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().sort({ points: -1 }).limit(10).exec();
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const getWeeklyScores = async (req, res) => {
+  const date = new Date();
+  const weekAgo = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const users = await User.find({ createdAt: { $gte: weekAgo } }).sort({ score: -1 }).limit(10);
+  try {
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 module.exports = {
   register,
   userLogin,
@@ -117,5 +139,7 @@ module.exports = {
   token,
   getUserbyUsername,
   addPointsbyUsername,
-  deductPointsbyUsername
+  deductPointsbyUsername,
+  getAllUsers,
+  getWeeklyScores
 };
