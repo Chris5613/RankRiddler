@@ -110,6 +110,16 @@ const deductPointsbyUsername = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 module.exports = {
   register,
   userLogin,
@@ -117,5 +127,6 @@ module.exports = {
   token,
   getUserbyUsername,
   addPointsbyUsername,
-  deductPointsbyUsername
+  deductPointsbyUsername,
+  getAllUsers
 };

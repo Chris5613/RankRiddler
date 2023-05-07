@@ -7,7 +7,7 @@ const {
   getUserbyUsername,
   addPointsbyUsername,
   deductPointsbyUsername,
-
+  getAllUsers,
 } = require("../controllers/userControllers");
 
 const User = require("../models/User");
@@ -19,6 +19,7 @@ router.get("/token", token);
 router.post("/register", register);
 router.post("/login", userLogin);
 router.put("/signout", userSignout);
+router.get("/allusers", getAllUsers);
 
 router.get("/user", getUserbyUsername);
 router.put("/addpoints", addPointsbyUsername);
