@@ -185,7 +185,6 @@ const League = () => {
                       alt="Radiant"
                       width={100}
                     />
-                    <p className="modal-example-rad">{rank}</p>
                   </div>
                   <div>
                     <div className="modal-example-heading">Your Guess</div>
@@ -195,7 +194,6 @@ const League = () => {
                       alt="Iron"
                       width={100}
                     />
-                    <p>{selectedRank}</p>
                   </div>
                   <div>
                     <div className="modal-example-heading result-title">

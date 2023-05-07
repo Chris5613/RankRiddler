@@ -94,6 +94,9 @@ const Nav = () => {
               <a href="/howto">How to play</a>
             </li>
             <li className="bottom-links other-links">
+              <a href="/settings">Settings</a>
+            </li>
+            <li className="bottom-links other-links">
               <a href="/tos">Terms of Services</a>
             </li>
             <li className="bottom-links other-links">

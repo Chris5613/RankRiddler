@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import silver from '../../Assets/Csgo-Icons/Silver.png';
 import se from '../../Assets/Csgo-Icons/SE.png';
 import nova from '../../Assets/Csgo-Icons/Nova.png';
@@ -20,6 +19,13 @@ const Csgo = () => {
   const [url, setUrl] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const token = Cookies.get('token');
+  const [showModal, setShowModal] = useState(false);
+  const [rank, setRank] = useState('');
+  const [score, setScore] = useState(0);
+
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
 
   useEffect(() => {
     if (token) {
@@ -33,27 +39,134 @@ const Csgo = () => {
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
-    console.log(selectedRank);
-  };
-
-  const handleButtonClick = () => {
-    console.log('clicked');
   };
 
   const getYoutubeUrl = async () => {
-    const response = await fetch('http://localhost:3001/form/leaguedata');
+    const response = await fetch('http://localhost:3001/form/csgodata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
-    console.log(data);
     setUrl(data.form[randomIndex].youtubeLink);
+    setRank(data.form[randomIndex].rank);
   };
 
   useEffect(() => {
     getYoutubeUrl();
   }, []);
 
-  console.log(url);
   const youtubeUrl = url;
+  let pic = '';
+
+  if (rank === 'Silver') {
+    pic = silver;
+  } else if (rank === 'SE') {
+    pic = se;
+  } else if (rank === 'Nova') {
+    pic = nova;
+  } else if (rank === 'MG') {
+    pic = mg;
+  } else if (rank === 'DMG') {
+    pic = dmg;
+  } else if (rank === 'LE') {
+    pic = le;
+  } else if (rank === 'MGE') {
+    pic = mge;
+  } else if (rank === 'SMFC') {
+    pic = smfc;
+  } else if (rank === 'GE') {
+    pic = ge;
+  }
+
+
+  let submittedRank = '';
+  if (selectedRank === 'Silver') {
+    submittedRank = silver;
+  } else if (selectedRank === 'Silver Elite') {
+    submittedRank = se;
+  } else if (selectedRank === 'Gold Nova') {
+    submittedRank = nova;
+  } else if (selectedRank === 'Master Guardian') {
+    submittedRank = mg;
+  } else if (selectedRank === 'Distinguished Master Guardian') {
+    submittedRank = dmg;
+  } else if (selectedRank === 'Legendary Eagle') {
+    submittedRank = le;
+  } else if (selectedRank === 'Master Guardian Elite') {
+    submittedRank = mge;
+  } else if (selectedRank === 'Supreme') {
+    submittedRank = smfc;
+  } else if (selectedRank === 'Global Elite') {
+    submittedRank = ge;
+  }
+
+
+  let result = '';
+  let points = 0;
+
+  if (rank === selectedRank) {
+    result = check;
+    points = 1;
+  } else {
+    result = wrong;
+    points = -1;
+  }
+
+    const addPoints = async () => {
+      const response = await fetch('http://localhost:3001/addpoints', {
+        method: 'PUT',
+        headers: {
+          username: Cookies.get('userName'),
+        },
+        body: JSON.stringify({
+          points: points,
+        }),
+      });
+      const data = await response.json();
+    };
+
+    const deductPoints = async () => {
+      const response = await fetch('http://localhost:3001/deductpoints', {
+        method: 'PUT',
+        headers: {
+          username: Cookies.get('userName'),
+        },
+        body: JSON.stringify({
+          points: points,
+        }),
+      });
+      const data = await response.json();
+    };
+
+  useEffect(() => {
+    getYoutubeUrl();
+  }, []);
+
+  const refresh = () => {
+    window.location.reload();
+  };
+
+  const checkAnswer = () => {
+    if(rank === selectedRank){
+      addPoints();
+    }
+    else {
+      if(score > 0){
+        deductPoints();
+      }   
+    }
+  }
+
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch('http://localhost:3001/user', {
+        headers: {
+          username: Cookies.get('userName'),
+        },
+      });
+      const data = await response.json();
+      setScore(data.points);
+    };
+    getUser();
+  }, []);
 
   return (
     <>
@@ -62,6 +175,60 @@ const Csgo = () => {
           <div>
             <VideoPlayer url={youtubeUrl} />
           </div>
+          {showModal ? (
+            <div className="modal">
+              <div className="modal-content">
+              <span className="X" onClick={handleModal}>X</span>
+                <br />
+                <div className="modal-example">
+                  <div>
+                    <div className="modal-example-heading">Correct Rank</div>
+                    <img
+                      className="modal-example-image"
+                      src={pic}
+                      alt="Radiant"
+                      width={100}
+                    />
+                    {/* <p className="modal-example-rad">{rank}</p> */}
+                  </div>
+                  <div>
+                    <div className="modal-example-heading">Your Guess</div>
+                    <img
+                      className="modal-example-image"
+                      src={submittedRank}
+                      alt="rank"
+                      width={100}
+                    />
+                    {/* <p>{selectedRank}</p> */}
+                  </div>
+                  <div>
+                    <div className="modal-example-heading result-title">
+                      Result
+                    </div>
+                    <img
+                      className="modal-example-image wrong"
+                      src={result}
+                      alt="wrong"
+                      width={70}
+                    />
+                    <p className="modal-example-wrong">{points} Point</p>
+                  </div>
+                </div>
+                <br />
+                <br />
+                <p className="text">You currently have {score} points</p>
+                <br />
+                <button
+                  onClick={() => {
+                    refresh();
+                  }}
+                  className="submit-btn"
+                >
+                  Next Video
+                </button>
+              </div>
+            </div>
+          ) : null}
           <div className="ranks">
             <img
               className="rank"
@@ -183,7 +350,10 @@ const Csgo = () => {
           <div>
             <button
               className="submit"
-              onClick={handleButtonClick}
+              onClick={() => {
+                handleModal();
+                checkAnswer();
+              }}
               disabled={isButtonDisabled}
             >
               {selectedRank
