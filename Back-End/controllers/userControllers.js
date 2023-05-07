@@ -112,7 +112,7 @@ const deductPointsbyUsername = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().sort({ points: -1 }).limit(10).exec();
     res.json(users);
   } catch (err) {
     console.error(err);
