@@ -4,7 +4,7 @@ import val from '../../Assets/Nav-Icons/valorant.png';
 import csgo from '../../Assets/Nav-Icons/csgo.png';
 import submit from '../../Assets/Nav-Icons/submit.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Logout from '../../Assets/Nav-Icons/Logout.png';
@@ -35,10 +35,40 @@ const Nav = () => {
     }
   };
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  let menuRef = useRef(null);
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handler);
+  });
+
+
   return (
     <>
       <div className="app">
-        <div className="sidebar active">
+      <button className="hamburger" onClick={toggleMenu}>
+          {showMenu ? (
+            null
+          ) : (
+            <svg viewBox="0 0 100 80" width="40" height="40">
+              <rect width="90" height="10"></rect>
+              <rect y="30" width="90" height="10"></rect>
+              <rect y="60" width="90" height="10"></rect>
+            </svg>
+          )}
+        </button>
+        <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
         <ul>
           {loggedIn ? (
             <>
