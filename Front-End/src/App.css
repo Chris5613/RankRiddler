@@ -454,10 +454,12 @@ td,
   color: white;
 }
 
-.modal-container {
+.modal-container,
+.settings-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 75vh;
 }
 
@@ -475,4 +477,9 @@ td,
 
 .X {
   cursor: pointer;
+}
+
+.settings-container h3 {
+  color: white;
+  font-size: 25px;
 }
