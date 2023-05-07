@@ -10,7 +10,6 @@ import Challenger from '../../Assets/League-Icons/Challenger.png';
 import { useState, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
 
@@ -27,6 +26,10 @@ const League = () => {
     setShowModal(!showModal);
   };
 
+  const refresh = () => {
+    window.location.reload();
+  };
+
   useEffect(() => {
     if (token) {
       setLoggedIn(true);
@@ -41,40 +44,13 @@ const League = () => {
     setSelectedRank(rank);
   };
 
-  useEffect(() => {
-    const modal = document.getElementById('myModal');
-    const closeBtn = document.querySelector('.close');
-
-    if (modal !== null) {
-      modal.style.display = 'block';
-
-      closeBtn.onclick = function () {
-        modal.style.display = 'none';
-      };
-
-      window.onclick = function (event) {
-        if (event.target === modal) {
-          modal.style.display = 'none';
-        }
-      };
-    }
-
-    return () => {
-      window.removeEventListener('click', onclick);
-    };
-  }, []);
-
   const getYoutubeUrl = async () => {
-    const response = await fetch('http://localhost:3001/form/csgodata');
+    const response = await fetch('http://localhost:3001/form/leaguedata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
     setRank(data.form[randomIndex].rank);
   };
-
-  useEffect(() => {
-    getYoutubeUrl();
-  }, []);
 
   const youtubeUrl = url;
   let pic = '';
@@ -131,6 +107,10 @@ const League = () => {
     points = -1;
   }
 
+  useEffect(() => {
+    getYoutubeUrl();
+  }, []);
+
   return (
     <>
       {loggedIn ? (
@@ -180,7 +160,13 @@ const League = () => {
                 <br />
                 <p className="text">You currently have 0 points</p>
                 <br />
-                <button onClick={handleModal} className="submit-btn">
+                <button
+                  onClick={() => {
+                    handleModal();
+                    refresh();
+                  }}
+                  className="submit-btn"
+                >
                   Next Video
                 </button>
               </div>
@@ -302,73 +288,6 @@ const League = () => {
                 : 'Select a Rank'}
             </button>
           </div>
-          {/* <div id="myModal" className="modal">
-            <div className="modal-content">
-              <span className="close">&times;</span>
-              <h2 className="modal-title">How to Play</h2>
-              <br />
-              <p>
-                Watch the clip and decide what rank the player is
-                <br />
-                <br />
-                Correct guesses are worth 1 point{' '}
-                <img src={check} alt="check" width={30} />
-                <br /> Incorrect guesses will deduct 1 point{' '}
-                <img src={wrong} width={40} alt="wrong icon" />
-                <br />
-                <p>
-                  Get enough points to top the leaderboard{' '}
-                  <img src={leader} width={50} alt="board" />
-                </p>
-              </p>
-              <br />
-              <h3 className="modal-title">Example</h3>
-              <br />
-              <div className="modal-example">
-                <div>
-                  <div className="modal-example-heading">Correct Rank</div>
-                  <img
-                    className="modal-example-image"
-                    src={Grandmaster}
-                    alt="Radiant"
-                    width={100}
-                  />
-                  <p className="modal-example-rad">GrandMaster</p>
-                </div>
-
-                <div>
-                  <div className="modal-example-heading">Your Guess</div>
-                  <img
-                    className="modal-example-image"
-                    src={Diamond}
-                    alt="Iron"
-                    width={100}
-                  />
-                  <p className="modal-example-iron">Diamond</p>
-                </div>
-
-                <div>
-                  <div className="modal-example-heading result-title">
-                    Result
-                  </div>
-                  <img
-                    className="modal-example-image wrong"
-                    src={wrong}
-                    alt="wrong"
-                    width={70}
-                  />
-                  <p className="modal-example-wrong">-1 Point</p>
-                </div>
-              </div>
-              <br />
-              <div>
-                Want your clips featured? Submit your clips{' '}
-                <a className="modal-a-tag" href="/submit">
-                  here!
-                </a>
-              </div>
-            </div>
-          </div> */}
         </>
       ) : (
         <p>Please Login to play</p>

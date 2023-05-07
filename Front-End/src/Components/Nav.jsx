@@ -75,7 +75,7 @@ const Nav = () => {
                   <NavLink to="/" onClick={logout}>
                     Logout
                   </NavLink>
-                </li>
+                </li>              
               </>
             ) : (
               <>
@@ -90,6 +90,9 @@ const Nav = () => {
           </ul>
           <hr />
           <ul>
+            <li className="bottom-links other-links">
+              <a href="/howto">How to play</a>
+            </li>
             <li className="bottom-links other-links">
               <a href="/tos">Terms of Services</a>
             </li>

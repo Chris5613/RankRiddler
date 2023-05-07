@@ -219,17 +219,6 @@ h1 {
   margin-top: 2rem;
 }
 
-.modal {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
 
 .close {
   color: #aaa;
@@ -458,4 +447,28 @@ td,
   outline: none;
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: 100%;
+}
+
+.howto {
+  cursor: pointer;
+  color: white;
+}
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }

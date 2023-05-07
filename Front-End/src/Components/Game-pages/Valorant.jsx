@@ -8,9 +8,6 @@ import Ascendant from '../../Assets/Val-Ranks/Ascendant.png';
 import Immortal from '../../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import { useState, useEffect } from 'react';
-import check from '../../Assets/Modal-Icons/Check.png';
-import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import VideoPlayer from '../Youtube';
 
 const Valorant = () => {
@@ -21,27 +18,6 @@ const Valorant = () => {
   useEffect(() => {
     setIsButtonDisabled(selectedRank === null);
   }, [selectedRank]);
-
-  useEffect(() => {
-    const modal = document.getElementById('myModal');
-    const closeBtn = document.querySelector('.close');
-    if (modal !== null) {
-      modal.style.display = 'block';
-
-      closeBtn.onclick = function () {
-        modal.style.display = 'none';
-      };
-
-      window.onclick = function (event) {
-        if (event.target === modal) {
-          modal.style.display = 'none';
-        }
-      };
-    }
-    return () => {
-      window.removeEventListener('click', onclick);
-    };
-  }, []);
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
@@ -56,7 +32,6 @@ const Valorant = () => {
     const response = await fetch('http://localhost:3001/form/valdata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
-    console.log(data);
     setUrl(data.form[randomIndex].youtubeLink);
   };
 
@@ -64,7 +39,6 @@ const Valorant = () => {
     getYoutubeUrl();
   }, []);
 
-  console.log(url);
   const youtubeUrl = url;
 
   return (
@@ -178,71 +152,6 @@ const Valorant = () => {
         >
           {selectedRank ? `Selected Rank: ${selectedRank}` : 'Select a Rank'}
         </button>
-      </div>
-      <div id="myModal" className="modal">
-        <div className="modal-content">
-          <span className="close">&times;</span>
-          <h2 className="modal-title">How to Play</h2>
-          <br />
-          <p>
-            Watch the clip and decide what rank the player is
-            <br />
-            <br />
-            Correct guesses are worth 1 point{' '}
-            <img src={check} alt="check" width={30} />
-            <br /> Incorrect guesses will deduct 1 point{' '}
-            <img src={wrong} width={40} alt="wrong icon" />
-            <br />
-          </p>
-          <p>
-            Get enough points to top the leaderboard{' '}
-            <img src={leader} width={50} alt="board" />
-          </p>
-          <br />
-          <h3 className="modal-title">Example</h3>
-          <br />
-          <div className="modal-example">
-            <div>
-              <div className="modal-example-heading">Correct Rank</div>
-              <img
-                className="modal-example-image"
-                src={Radiant}
-                alt="Radiant"
-                width={100}
-              />
-              <p className="modal-example-rad">Radiant</p>
-            </div>
-
-            <div>
-              <div className="modal-example-heading">Your Guess</div>
-              <img
-                className="modal-example-image"
-                src={Iron}
-                alt="Iron"
-                width={100}
-              />
-              <p className="modal-example-iron">Iron</p>
-            </div>
-
-            <div>
-              <div className="modal-example-heading result-title">Result</div>
-              <img
-                className="modal-example-image wrong"
-                src={wrong}
-                alt="wrong"
-                width={70}
-              />
-              <p className="modal-example-wrong">-1 Point</p>
-            </div>
-          </div>
-          <br />
-          <div>
-            Want your clips featured? Submit your clips{' '}
-            <a className="modal-a-tag" href="/submit">
-              here!
-            </a>
-          </div>
-        </div>
       </div>
     </>
   );
