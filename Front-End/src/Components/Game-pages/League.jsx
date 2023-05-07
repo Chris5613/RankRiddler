@@ -121,9 +121,10 @@ const League = () => {
     getYoutubeUrl();
   }, []);
 
-  const refresh = () => {
-    window.location.reload();
-  };
+  function refresh() {
+    // eslint-disable-next-line no-restricted-globals
+    location.reload(true);
+  }
 
   const checkAnswer = () => {
     if(rank === selectedRank){
