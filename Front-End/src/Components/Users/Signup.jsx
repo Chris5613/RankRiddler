@@ -33,7 +33,7 @@ function Signup() {
     const data = {};
     data.username = userName;
     data.password = password;
-    const res = await fetch('http://localhost:3001/register', {
+    const res = await fetch('https://rr-back-end.onrender.com/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

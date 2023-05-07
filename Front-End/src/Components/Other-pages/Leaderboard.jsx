@@ -39,7 +39,7 @@ function AllTime() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/allusers', {
+        const response = await fetch('https://rr-back-end.onrender.com/allusers', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
