@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 function Signup() {
   const [userName, setUserName] = useState('');
@@ -88,9 +89,9 @@ function Signup() {
         <br />
         <p className="login-text">
           Already have a account?{' '}
-          <a className="signup-atag" href="/login">
+          <NavLink className="signup-atag" href="/login">
             Login
-          </a>
+          </NavLink>
         </p>
         <br />
         {!passwordsMatch && (

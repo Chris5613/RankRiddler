@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Tos = () => {
   return (
@@ -29,9 +30,9 @@ const Tos = () => {
       <h2>Confidentiality and Privacy</h2>
       <p>
         We take your privacy seriously. Please refer to our{' '}
-        <a style={{ color: 'white' }} href="/privacy">
+        <NavLink style={{ color: 'white' }} to="/privacy">
           Privacy Policy
-        </a>{' '}
+        </NavLink>{' '}
         for more information.
       </p>
 
