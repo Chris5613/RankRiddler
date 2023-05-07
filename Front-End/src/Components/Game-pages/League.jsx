@@ -12,6 +12,7 @@ import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
+import RankImage from './RankImage';
 
 const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
@@ -50,48 +51,21 @@ const League = () => {
   };
 
   const youtubeUrl = url;
-  let pic = '';
+  const rankImages = {
+    'Iron': Iron,
+    'Bronze': Bronze,
+    'Silver': Silver,
+    'Gold': Gold,
+    'Platinum': Platinum,
+    'Diamond': Diamond,
+    'Master': Master,
+    'Grandmaster': Grandmaster,
+    'Challenger': Challenger,
+  };
 
-  if (rank === 'Iron') {
-    pic = Iron;
-  } else if (rank === 'Bronze') {
-    pic = Bronze;
-  } else if (rank === 'Silver') {
-    pic = Silver;
-  } else if (rank === 'Gold') {
-    pic = Gold;
-  } else if (rank === 'Platinum') {
-    pic = Platinum;
-  } else if (rank === 'Diamond') {
-    pic = Diamond;
-  } else if (rank === 'Master') {
-    pic = Master;
-  } else if (rank === 'Grandmaster') {
-    pic = Grandmaster;
-  } else if (rank === 'Challenger') {
-    pic = Challenger;
-  }
+  const pic = rankImages[rank];
+  const submittedRank = rankImages[selectedRank];
 
-  let submittedRank = '';
-  if (selectedRank === 'Iron') {
-    submittedRank = Iron;
-  } else if (selectedRank === 'Bronze') {
-    submittedRank = Bronze;
-  } else if (selectedRank === 'Silver') {
-    submittedRank = Silver;
-  } else if (selectedRank === 'Gold') {
-    submittedRank = Gold;
-  } else if (selectedRank === 'Platinum') {
-    submittedRank = Platinum;
-  } else if (selectedRank === 'Diamond') {
-    submittedRank = Diamond;
-  } else if (selectedRank === 'Master') {
-    submittedRank = Master;
-  } else if (selectedRank === 'Grandmaster') {
-    submittedRank = Grandmaster;
-  } else if (selectedRank === 'Challenger') {
-    submittedRank = Challenger;
-  }
 
   let result = '';
   let points = 0;
@@ -131,8 +105,19 @@ const League = () => {
       const data = await response.json();
       setScore(data.points);
     };
+;
 
   useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch('http://localhost:3001/user', {
+        headers: {
+          username: Cookies.get('userName'),
+        },
+      });
+      const data = await response.json();
+      setScore(data.points);
+    };
+    getUser();
     getYoutubeUrl();
   }, []);
 
@@ -151,19 +136,6 @@ const League = () => {
     }
   }
 
-  useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch('http://localhost:3001/user', {
-        headers: {
-          username: Cookies.get('userName'),
-        },
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-    getUser();
-  }, []);
-
   return (
     <>
       {loggedIn ? (
@@ -171,183 +143,87 @@ const League = () => {
           <div>
             <VideoPlayer url={youtubeUrl} />
           </div>
-          {showModal ? (
-            <div className="modal">
-              <div className="modal-content">
-              <span className="X" onClick={handleModal}>X</span>
-                <br />
-                <div className="modal-example">
-                  <div>
-                    <div className="modal-example-heading">Correct Rank</div>
-                    <img
-                      className="modal-example-image"
-                      src={pic}
-                      alt="Radiant"
-                      width={100}
-                    />
-                  </div>
-                  <div>
-                    <div className="modal-example-heading">Your Guess</div>
-                    <img
-                      className="modal-example-image"
-                      src={submittedRank}
-                      alt="Iron"
-                      width={100}
-                    />
-                  </div>
-                  <div>
-                    <div className="modal-example-heading result-title">
-                      Result
+            {showModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="X" onClick={handleModal}>X</span>
+                  <br />
+                  <div className="modal-example">
+                    <div>
+                      <div className="modal-example-heading">Correct Rank</div>
+                      <img
+                        className="modal-example-image"
+                        src={pic}
+                        alt="Radiant"
+                        width={100}
+                      />
                     </div>
-                    <img
-                      className="modal-example-image wrong"
-                      src={result}
-                      alt="wrong"
-                      width={70}
-                    />
-                    <p className="modal-example-wrong">{points} Point</p>
+                    <div>
+                      <div className="modal-example-heading">Your Guess</div>
+                      <img
+                        className="modal-example-image"
+                        src={submittedRank}
+                        alt="rank"
+                        width={100}
+                      />
+                    </div>
+                    <div>
+                      <div className="modal-example-heading result-title">Result</div>
+                      <img
+                        className="modal-example-image wrong"
+                        src={result}
+                        alt="wrong"
+                        width={70}
+                      />
+                      <p className="modal-example-wrong">{points} Point</p>
+                    </div>
                   </div>
+                  <br />
+                  <br />
+                  <p className="text">You currently have {score} points</p>
+                  <br />
+                  <button
+                    onClick={refresh}
+                    className="submit-btn"
+                  >
+                    Next Video
+                  </button>
                 </div>
-                <br />
-                <br />
-                <p className="text">You currently have {score} points</p>
-                <br />
-                <button
-                  onClick={() => {
-                    refresh();
-                  }}
-                  className="submit-btn"
-                >
-                  Next Video
-                </button>
               </div>
-            </div>
-          ) : null}
-          <div className="ranks">
-            <img
-              className="rank iron"
-              onClick={() => handleRankClick('Iron')}
-              style={{
-                boxShadow:
-                  selectedRank === 'Iron'
-                    ? '0 0 10px 5px rgba(255, 215, 0, 0.5)'
-                    : 'none',
-              }}
-              src={Iron}
-              alt="Iron"
-            />
-            <img
-              className={`rank bronze ${
-                selectedRank === 'Bronze' ? 'selected' : ''
-              }`}
-              src={Bronze}
-              alt="Bronze"
-              onClick={() => handleRankClick('Bronze')}
-              style={{
-                boxShadow: selectedRank === 'Bronze' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              className={`silver ${
-                selectedRank === 'Silver' ? 'selected' : ''
-              }`}
-              width={100}
-              src={Silver}
-              alt="Silver"
-              onClick={() => handleRankClick('Silver')}
-              style={{
-                boxShadow: selectedRank === 'Silver' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              width={100}
-              src={Gold}
-              alt="Gold"
-              className={`gold ${selectedRank === 'Gold' ? 'selected' : ''}`}
-              onClick={() => handleRankClick('Gold')}
-              style={{
-                boxShadow: selectedRank === 'Gold' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              className={`rank plat ${
-                selectedRank === 'Platinum' ? 'selected' : ''
-              }`}
-              src={Platinum}
-              alt="Platinum"
-              onClick={() => handleRankClick('Platinum')}
-              style={{
-                boxShadow: selectedRank === 'Platinum' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              className={`rank diamond ${
-                selectedRank === 'Diamond' ? 'selected' : ''
-              }`}
-              src={Diamond}
-              alt="Diamond"
-              onClick={() => handleRankClick('Diamond')}
-              style={{
-                boxShadow: selectedRank === 'Diamond' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              className={`rank asc ${
-                selectedRank === 'Master' ? 'selected' : ''
-              }`}
-              src={Master}
-              alt="Master"
-              onClick={() => handleRankClick('Master')}
-              style={{
-                boxShadow: selectedRank === 'Master' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              className={`Grandmaster asc ${
-                selectedRank === 'Grandmaster' ? 'selected' : ''
-              }`}
-              width={100}
-              src={Grandmaster}
-              alt="Grandmaster"
-              onClick={() => handleRankClick('Grandmaster')}
-              style={{
-                boxShadow:
-                  selectedRank === 'Grandmaster' ? '0 0 10px gold' : '',
-              }}
-            />
-            <img
-              width={100}
-              src={Challenger}
-              alt="Challenger"
-              className={`radiant ${
-                selectedRank === 'Challenger' ? 'selected' : ''
-              }`}
-              onClick={() => handleRankClick('Challenger')}
-              style={{
-                boxShadow: selectedRank === 'Challenger' ? '0 0 10px gold' : '',
-              }}
-            />
-          </div>
-          <div>
-            <button
-              className="submit"
-              onClick={() => {
-                handleModal();
-                checkAnswer();
-              }}
-              disabled={isButtonDisabled}
-            >
-              {selectedRank
-                ? `Selected Rank: ${selectedRank}`
-                : 'Select a Rank'}
-            </button>
-          </div>
-        </>
-      ) : (
-        <p>Please Login to play</p>
-      )}
-    </>
-  );
+            )}
+        <div className="ranks">
+          <RankImage rank="Iron" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Iron}/>
+          <RankImage rank="Bronze" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Bronze}/>
+          <RankImage rank="Silver" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Silver} />
+          <RankImage rank="Gold" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Gold}/>
+          <RankImage rank="Platinum" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Platinum}/>
+          <RankImage rank="Diamond" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Diamond}/>
+          <RankImage rank="Master" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Master}/>
+          <RankImage rank="Grandmaster" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Grandmaster}/>
+          <RankImage rank="Challenger" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Challenger}/>
+        </div>
+        <div>
+          <button
+            className="submit"
+            onClick={() => {
+              handleModal();
+              checkAnswer();
+            }}
+            disabled={isButtonDisabled}
+          >
+            {selectedRank
+              ? `Selected Rank: ${selectedRank}`
+              : 'Select a Rank'}
+          </button>
+        </div>
+      </>
+    ) : (
+      <div>
+        <h1>Please Login to play</h1>
+      </div>
+    )}
+  </>
+);
 };
 
 export default League;

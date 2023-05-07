@@ -21,15 +21,15 @@ const limiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
 });
 
-router.get("/token", token);
-router.post("/register", register);
-router.post("/login", userLogin);
-router.put("/signout", userSignout);
+router.get("/token",limiter, token);
+router.post("/register",limiter, register);
+router.post("/login", limiter,userLogin);
+router.put("/signout",limiter, userSignout);
 router.get("/allusers",limiter, getAllUsers);
-router.get("/weeklyscores", getWeeklyScores);
+router.get("/weeklyscores",limiter, getWeeklyScores);
 
-router.get("/user", getUserbyUsername);
-router.put("/addpoints", addPointsbyUsername);
-router.put("/deductpoints", deductPointsbyUsername);
+router.get("/user",limiter, getUserbyUsername);
+router.put("/addpoints",limiter, addPointsbyUsername);
+router.put("/deductpoints",limiter, deductPointsbyUsername);
 
 module.exports = router;

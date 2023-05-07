@@ -38,7 +38,6 @@ function Submit() {
 
 function LeagueOfLegendsForm() {
   const [youtubeLink, setYoutubeLink] = useState('');
-  const [userName, setUserName] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
   const [discordLink, setDiscordLink] = useState('');
@@ -46,10 +45,6 @@ function LeagueOfLegendsForm() {
 
   const handleYoutubeLinkChange = (event) => {
     setYoutubeLink(event.target.value);
-  };
-
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
   };
 
   const handlePlayerInfoChange = (event) => {
@@ -73,7 +68,6 @@ function LeagueOfLegendsForm() {
 
     const formData = {
       youtubeLink: youtubeLink,
-      username: userName,
       playerInfo: playerInfo,
       rank: selectedRank,
       trackerLink: discordLink,
@@ -111,16 +105,6 @@ function LeagueOfLegendsForm() {
           onChange={handleYoutubeLinkChange}
         />
         <br />
-
-        <label className="form-label">
-          User's Name: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          value={userName}
-          onChange={handleUserNameChange}
-        />
         <br />
 
         <label className="form-label">
@@ -179,7 +163,6 @@ function LeagueOfLegendsForm() {
 
 function ValorantForm() {
   const [youtubeLink, setYoutubeLink] = useState('');
-  const [userName, setUserName] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
   const [discordLink, setDiscordLink] = useState('');
@@ -187,10 +170,6 @@ function ValorantForm() {
 
   const handleYoutubeLinkChange = (event) => {
     setYoutubeLink(event.target.value);
-  };
-
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
   };
 
   const handlePlayerInfoChange = (event) => {
@@ -214,7 +193,6 @@ function ValorantForm() {
 
     const formData = {
       youtubeLink: youtubeLink,
-      username: userName,
       playerInfo: playerInfo,
       rank: selectedRank,
       trackerLink: discordLink,
@@ -253,17 +231,6 @@ function ValorantForm() {
           required
         />
         <br />
-
-        <label className="form-label">
-          User's Name: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          value={userName}
-          required
-          onChange={handleUserNameChange}
-        />
         <br />
 
         <label className="form-label">
@@ -323,17 +290,12 @@ function ValorantForm() {
 
 function CSGOForm() {
   const [youtubeLink, setYoutubeLink] = useState('');
-  const [userName, setUserName] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
   const handleYoutubeLinkChange = (event) => {
     setYoutubeLink(event.target.value);
-  };
-
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
   };
 
   const handlePlayerInfoChange = (event) => {
@@ -353,7 +315,6 @@ function CSGOForm() {
 
     const formData = {
       youtubeLink: youtubeLink,
-      username: userName,
       playerInfo: playerInfo,
       rank: selectedRank,
     };
@@ -390,16 +351,6 @@ function CSGOForm() {
           onChange={handleYoutubeLinkChange}
         />
         <br />
-
-        <label className="form-label">
-          User's Name: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          value={userName}
-          onChange={handleUserNameChange}
-        />
         <br />
 
         <label className="form-label">
@@ -436,7 +387,7 @@ function CSGOForm() {
           I agree to the terms and conditions
         </label>
         <br />
-
+        <br />
         <button type="submit" disabled={!isChecked}>
           Submit
         </button>

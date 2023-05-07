@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Nav from './Components/Nav';
+import Nav from './Components/Nav/Nav';
 import Valorant from './Components/Game-pages/Valorant';
 import Home from './Components/Other-pages/Home';
 import Tos from './Components/Other-pages/Tos';
