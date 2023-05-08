@@ -45,7 +45,7 @@ function Signup() {
       const data = await res.json();
       Cookies.set('token', data.token, { expires: 1 });
       alert('Signed up successfully!');
-      navigate('/login');
+      navigate('/');
     } else {
       alert('Username already exists');
     }

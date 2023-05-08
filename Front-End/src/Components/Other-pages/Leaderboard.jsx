@@ -101,8 +101,6 @@ function Weekly() {
     fetchScores();
   }, []);
 
-  console.log(scores)
-
   scores.sort((a, b) => b.score - a.score);
 
   return (

@@ -26,7 +26,6 @@ function BugReportForm() {
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
     alert('Thank you for your feedback!');
   };
 

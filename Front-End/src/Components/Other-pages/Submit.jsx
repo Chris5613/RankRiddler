@@ -82,8 +82,6 @@ function LeagueOfLegendsForm() {
         body: JSON.stringify(formData),
       });
 
-      console.log(formData);
-
       if (response.ok) {
         alert('Form submitted successfully!');
       }
@@ -207,8 +205,6 @@ function ValorantForm() {
         body: JSON.stringify(formData),
       });
 
-      console.log(formData);
-
       if (response.ok) {
         alert('Form submitted successfully!');
       }
@@ -327,8 +323,6 @@ function CSGOForm() {
         },
         body: JSON.stringify(formData),
       });
-
-      console.log(formData);
 
       if (response.ok) {
         alert('Form submitted successfully!');

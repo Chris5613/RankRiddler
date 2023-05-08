@@ -9,10 +9,6 @@ html {
   background-color: #292929;
 }
 
-.app {
-  display: flex;
-}
-
 .hamburger {
   position: fixed;
   top: 20px;
