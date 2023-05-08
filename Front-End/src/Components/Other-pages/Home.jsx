@@ -38,13 +38,10 @@ const Home = () => {
                   alt="csgo"
                 />
               </NavLink> */}
-              <h1 style={{color: "white"}}>Submit some clips!</h1>
             </>
           ) : (
             <>
-              <h1 style={{ color: 'white' }}>
-                Login or Signup to get started.
-              </h1>
+              <h1 style={{color: "white"}}>Submit some clips!</h1>
             </>
           )}
         </div>
