@@ -31,6 +31,7 @@ const Nav = () => {
     if (response.ok) {
       setLoggedIn(false);
       Cookies.remove('token');
+      Cookies.remove('username');
       navigate('/login');
     }
   };
