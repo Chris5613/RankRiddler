@@ -20,6 +20,11 @@ html {
   border: none;
   z-index: 1;
 }
+@media screen and (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}
 
 h2, .tos {
   color: white;
