@@ -122,7 +122,9 @@ const Csgo = () => {
   }, []);
 
   const refresh = () => {
-    window.location.reload();
+    getYoutubeUrl();
+    setSelectedRank(null);
+    setIsButtonDisabled(true);
   };
 
   const checkAnswer = () => {

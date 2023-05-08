@@ -122,7 +122,9 @@ const Valorant = () => {
   }, []);
 
   const refresh = () => {
-    window.location.reload();
+    getYoutubeUrl();
+    setSelectedRank(null);
+    setIsButtonDisabled(true);
   };
 
   const checkAnswer = () => {
