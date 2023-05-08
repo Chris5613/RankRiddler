@@ -123,16 +123,16 @@ const Nav = () => {
           </ul>
           <hr />
           <ul>
-            <li className="bottom-links other-links">
+            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
               <NavLink to="/howto">How to play</NavLink>
             </li>
-            <li className="bottom-links other-links">
+            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
               <NavLink to="/tos">Terms of Services</NavLink>
             </li>
-            <li className="bottom-links other-links">
+            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
               <NavLink to="/privacy">Privacy Policy</NavLink>
             </li>
-            <li className="bottom-links other-links">
+            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
               <NavLink to="/bug">Report a Bug</NavLink>
             </li>
           </ul>
