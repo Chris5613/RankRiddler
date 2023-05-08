@@ -71,54 +71,61 @@ const Nav = () => {
         </button>
         <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
         <ul>
-        <BottomLink
-          imgSrc={submit}
-          altText="movie-logo"
-          linkText="Submit a Clip"
-          to="/submit"
-        />
           {loggedIn ? (
             <>
-              {/* <GameLink
+              <GameLink
                 imgSrc={val}
                 altText="Valorant"
                 linkText="Valorant"
                 to="/valorant"
+                onClick={() => setShowMenu(false)}
               />
               <GameLink
                 imgSrc={lol}
                 altText="league"
                 linkText="League"
                 to="/league"
+                onClick={() => setShowMenu(false)}
               />
               <GameLink
                 imgSrc={csgo}
                 altText="csgo"
                 linkText="CSGO"
                 to="/csgo"
-              /> */}
-              {/* <BottomLink
+                onClick={() => setShowMenu(false)}
+              /> 
+              <BottomLink
                 imgSrc={submit}
                 altText="movie-logo"
                 linkText="Submit a Clip"
                 to="/submit"
-              /> */}
-              {/* <BottomLink
+                onClick={() => setShowMenu(false)}
+              /> 
+              <BottomLink
                 imgSrc={leader}
                 altText="movie-logo"
                 linkText="Leaderboard"
                 to="/leaderboard"
-              /> */}
-              {/* <BottomLink
+                onClick={() => setShowMenu(false)}
+              /> 
+              <BottomLink
                 imgSrc={Logout}
                 altText="logout-logo"
                 linkText="Logout"
                 to="/"
                 onClick={logout}
-              /> */}
+                
+              />
             </>
           ) : (
-            null
+            <div>
+              <BottomLink
+                imgSrc={Logout}
+                altText="logout-logo"
+                linkText="Login/Signup"
+                to="/login"
+              />
+            </div>
           )}
           </ul>
           <hr />
