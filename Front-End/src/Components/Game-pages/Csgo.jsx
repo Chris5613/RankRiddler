@@ -24,6 +24,7 @@ const Csgo = () => {
   const [rank, setRank] = useState('');
   const [score, setScore] = useState(0);
 
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -58,7 +59,6 @@ const Csgo = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-
   let result = '';
   let points = 0;
 
@@ -74,31 +74,30 @@ const Csgo = () => {
     const response = await fetch('http://localhost:3001/addpoints', {
       method: 'PUT',
       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
         username: Cookies.get('userName'),
       },
-      body: JSON.stringify({
-        points: points,
-      }),
     });
+    // eslint-disable-next-line no-unused-vars
     const data = await response.json();
-    setScore(data.points);
+    setScore(data.user.points)
   };
-
+  
   const deductPoints = async () => {
     const response = await fetch('http://localhost:3001/deductpoints', {
       method: 'PUT',
       headers: {
-        username: Cookies.get('userName'),
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
       },
-      body: JSON.stringify({
-        points: points,
-      }),
     });
+    // eslint-disable-next-line no-unused-vars
     const data = await response.json();
-    setScore(data.points);
+    setScore(data.user.points)
   };
   
-
   const getYoutubeUrl = async () => {
     const response = await fetch('http://localhost:3001/form/csgodata');
     const data = await response.json();
@@ -108,21 +107,14 @@ const Csgo = () => {
   };
 
   useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch('http://localhost:3001/user', {
-        headers: {
-          username: Cookies.get('userName'),
-        },
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-    getUser();
     getYoutubeUrl();
   }, []);
 
   const refresh = () => {
-    window.location.reload();
+    getYoutubeUrl();
+    setSelectedRank(null);
+    setIsButtonDisabled(true);
+    setShowModal(false);
   };
 
   const checkAnswer = () => {

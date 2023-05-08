@@ -24,6 +24,7 @@ const League = () => {
   const [rank, setRank] = useState('');
   const [score, setScore] = useState(0);
 
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -42,14 +43,6 @@ const League = () => {
     setSelectedRank(rank);
   };
 
-  const getYoutubeUrl = async () => {
-    const response = await fetch('http://localhost:3001/form/leaguedata');
-    const data = await response.json();
-    const randomIndex = Math.floor(Math.random() * data.form.length);
-    setUrl(data.form[randomIndex].youtubeLink);
-    setRank(data.form[randomIndex].rank);
-  };
-
   const youtubeUrl = url;
   const rankImages = {
     'Iron': Iron,
@@ -62,7 +55,7 @@ const League = () => {
     'Grandmaster': Grandmaster,
     'Challenger': Challenger,
   };
-
+  
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
@@ -78,64 +71,56 @@ const League = () => {
     points = -1;
   }
 
-    const addPoints = async () => {
-      const response = await fetch('http://localhost:3001/addpoints', {
-        method: 'PUT',
-        headers: {
-          username: Cookies.get('userName'),
-        },
-        body: JSON.stringify({
-          points: points,
-        }),
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-
-    const deductPoints = async () => {
-      const response = await fetch('http://localhost:3001/deductpoints', {
-        method: 'PUT',
-        headers: {
-          username: Cookies.get('userName'),
-        },
-        body: JSON.stringify({
-          points: points,
-        }),
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-;
+  const addPoints = async () => {
+    const response = await fetch('http://localhost:3001/addpoints', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName'),
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
+  
+  const deductPoints = async () => {
+    const response = await fetch('http://localhost:3001/deductpoints', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
+  
+  const getYoutubeUrl = async () => {
+    const response = await fetch('http://localhost:3001/form/leaguedata');
+    const data = await response.json();
+    const randomIndex = Math.floor(Math.random() * data.form.length);
+    setUrl(data.form[randomIndex].youtubeLink);
+    setRank(data.form[randomIndex].rank);
+  };
 
   useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch('http://localhost:3001/user', {
-        headers: {
-          username: Cookies.get('userName'),
-        },
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-    getUser();
     getYoutubeUrl();
   }, []);
 
-  const refresh = () => {
-    window.location.reload();
-  };
-
   const checkAnswer = () => {
-    if(rank === selectedRank){
-      addPoints();
-    }
-    else {
-      if(score > 0){
-        deductPoints();
-      }   
-    }
+    rank === selectedRank ? addPoints() : score > 0 && deductPoints();
   }
 
+  const refresh = () => {
+    getYoutubeUrl();
+    setSelectedRank(null);
+    setIsButtonDisabled(true);
+    setShowModal(false);
+  };
   return (
     <>
       {loggedIn ? (

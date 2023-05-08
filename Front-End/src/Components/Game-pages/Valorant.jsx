@@ -101,7 +101,7 @@ const Valorant = () => {
   };
   
   const getYoutubeUrl = async () => {
-    const response = await fetch('http://localhost:3001/form/csgodata');
+    const response = await fetch('http://localhost:3001/form/valdata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
