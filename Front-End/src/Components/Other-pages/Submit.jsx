@@ -40,7 +40,6 @@ function LeagueOfLegendsForm() {
   const [youtubeLink, setYoutubeLink] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
-  const [discordLink, setDiscordLink] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
   const handleYoutubeLinkChange = (event) => {
@@ -55,9 +54,6 @@ function LeagueOfLegendsForm() {
     setSelectedRank(event.target.value);
   };
 
-  const handleDiscordLinkChange = (event) => {
-    setDiscordLink(event.target.value);
-  };
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -70,7 +66,6 @@ function LeagueOfLegendsForm() {
       youtubeLink: youtubeLink,
       playerInfo: playerInfo,
       rank: selectedRank,
-      trackerLink: discordLink,
     };
 
     try {
@@ -129,17 +124,6 @@ function LeagueOfLegendsForm() {
         </select>
         <br />
 
-        <label className="form-label">
-          Tracker.gg Link: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="url"
-          value={discordLink}
-          onChange={handleDiscordLinkChange}
-        />
-        <br />
-
         <input
           type="checkbox"
           className="form-checkbox"
@@ -163,7 +147,6 @@ function ValorantForm() {
   const [youtubeLink, setYoutubeLink] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
-  const [discordLink, setDiscordLink] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
   const handleYoutubeLinkChange = (event) => {
@@ -178,10 +161,6 @@ function ValorantForm() {
     setSelectedRank(event.target.value);
   };
 
-  const handleDiscordLinkChange = (event) => {
-    setDiscordLink(event.target.value);
-  };
-
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
@@ -193,7 +172,6 @@ function ValorantForm() {
       youtubeLink: youtubeLink,
       playerInfo: playerInfo,
       rank: selectedRank,
-      trackerLink: discordLink,
     };
 
     try {
@@ -250,18 +228,6 @@ function ValorantForm() {
           <option value="Immortal">Immortal</option>
           <option value="Radiant">Radiant</option>
         </select>
-        <br />
-
-        <label className="form-label">
-          Tracker.gg Link: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="url"
-          value={discordLink}
-          onChange={handleDiscordLinkChange}
-          required
-        />
         <br />
 
         <input

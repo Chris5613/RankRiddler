@@ -6,7 +6,6 @@ const valSchema = new Schema({
   youtubeLink: { type: String, required: true },
   playerInfo: { type: String, required: true },
   rank: { type: String, required: true },
-  trackerLink: { type: String, required: true },
 });
 
 const valForm = mongoose.model("valForm", valSchema);
