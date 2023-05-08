@@ -125,6 +125,7 @@ const Valorant = () => {
     getYoutubeUrl();
     setSelectedRank(null);
     setIsButtonDisabled(true);
+    setShowModal(false);
   };
 
   const checkAnswer = () => {

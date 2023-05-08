@@ -125,6 +125,7 @@ const Csgo = () => {
     getYoutubeUrl();
     setSelectedRank(null);
     setIsButtonDisabled(true);
+    setShowModal(false);
   };
 
   const checkAnswer = () => {
