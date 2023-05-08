@@ -8,7 +8,6 @@ const {
   addPointsbyUsername,
   deductPointsbyUsername,
   getAllUsers,
-  getWeeklyScores
 } = require("../controllers/userControllers");
 
 const User = require("../models/User");
@@ -26,7 +25,6 @@ router.post("/register",limiter, register);
 router.post("/login", limiter,userLogin);
 router.put("/signout",limiter, userSignout);
 router.get("/allusers",limiter, getAllUsers);
-router.get("/weeklyscores",limiter, getWeeklyScores);
 
 router.get("/user",limiter, getUserbyUsername);
 router.put("/addpoints",limiter, addPointsbyUsername);
