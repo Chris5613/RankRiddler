@@ -71,6 +71,12 @@ const Nav = () => {
         </button>
         <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
         <ul>
+        <BottomLink
+          imgSrc={submit}
+          altText="movie-logo"
+          linkText="Submit a Clip"
+          to="/submit"
+        />
           {loggedIn ? (
             <>
               {/* <GameLink
@@ -91,25 +97,25 @@ const Nav = () => {
                 linkText="CSGO"
                 to="/csgo"
               /> */}
-              <BottomLink
+              {/* <BottomLink
                 imgSrc={submit}
                 altText="movie-logo"
                 linkText="Submit a Clip"
                 to="/submit"
-              />
+              /> */}
               {/* <BottomLink
                 imgSrc={leader}
                 altText="movie-logo"
                 linkText="Leaderboard"
                 to="/leaderboard"
               /> */}
-              <BottomLink
+              {/* <BottomLink
                 imgSrc={Logout}
                 altText="logout-logo"
                 linkText="Logout"
                 to="/"
                 onClick={logout}
-              />
+              /> */}
             </>
           ) : (
             <div>
