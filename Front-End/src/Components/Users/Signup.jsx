@@ -6,8 +6,6 @@ import { NavLink } from 'react-router-dom';
 function Signup() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const navigate = useNavigate();
 
@@ -19,17 +17,8 @@ function Signup() {
     setPassword(event.target.value);
   };
 
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      setPasswordsMatch(false);
-    } else {
-      setPasswordsMatch(true);
-    }
 
     const data = {};
     data.username = userName;
@@ -76,16 +65,6 @@ function Signup() {
           onChange={handlePasswordChange}
         />
 
-        <label className="form-label">
-          Confirm Password <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="password"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-        />
-
         <br />
         <p className="login-text">
           Already have a account?{' '}
@@ -94,9 +73,6 @@ function Signup() {
           </NavLink>
         </p>
         <br />
-        {!passwordsMatch && (
-          <p className="error-message">Passwords do not match!</p>
-        )}
         <button type="submit">Submit</button>
       </form>
     </div>
