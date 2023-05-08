@@ -17,7 +17,7 @@ const Home = () => {
         <div>
           {loggedIn ? (
             <>
-              {/* <NavLink to="/valorant">
+              <NavLink to="/valorant">
                 <img
                   className="main-images"
                   src="https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/valtall_1200x1600-300d8e4cb9bee9dbb1166b574b3bdc93"
@@ -37,11 +37,11 @@ const Home = () => {
                   src="https://downloadwap.com/thumbs4/games/preview/2020j/img/133656_counter-st_1.jpg"
                   alt="csgo"
                 />
-              </NavLink> */}
+              </NavLink>
             </>
           ) : (
             <>
-              <h1 style={{color: "white"}}>Submit some clips!</h1>
+              <h1 style={{color: "white"}}>Login to get started</h1>
             </>
           )}
         </div>
