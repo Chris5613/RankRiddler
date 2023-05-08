@@ -72,7 +72,7 @@ const League = () => {
   }
 
   const addPoints = async () => {
-    const response = await fetch('http://localhost:3001/addpoints', {
+    const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const League = () => {
   };
   
   const deductPoints = async () => {
-    const response = await fetch('http://localhost:3001/deductpoints', {
+    const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const League = () => {
   };
   
   const getYoutubeUrl = async () => {
-    const response = await fetch('http://localhost:3001/form/leaguedata');
+    const response = await fetch('https://rr-back-end.onrender.com/form/leaguedata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
