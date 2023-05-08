@@ -73,7 +73,7 @@ const Nav = () => {
         <ul>
           {loggedIn ? (
             <>
-              <GameLink
+              {/* <GameLink
                 imgSrc={val}
                 altText="Valorant"
                 linkText="Valorant"
@@ -90,19 +90,19 @@ const Nav = () => {
                 altText="csgo"
                 linkText="CSGO"
                 to="/csgo"
-              />
+              /> */}
               <BottomLink
                 imgSrc={submit}
                 altText="movie-logo"
                 linkText="Submit a Clip"
                 to="/submit"
               />
-              <BottomLink
+              {/* <BottomLink
                 imgSrc={leader}
                 altText="movie-logo"
                 linkText="Leaderboard"
                 to="/leaderboard"
-              />
+              /> */}
               <BottomLink
                 imgSrc={Logout}
                 altText="logout-logo"
