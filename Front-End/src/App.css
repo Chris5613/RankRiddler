@@ -216,6 +216,14 @@ h1 {
   border-radius: 10rem;
 }
 
+@media screen and (max-width: 768px) {
+  .rank {
+    width: 40px;
+    height: 40px;
+    border-radius: 10rem;
+  }
+}
+
 .rank:hover {
   transform: scale(1.1);
   transition: all 0.3s ease-in-out;
