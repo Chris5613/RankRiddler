@@ -122,7 +122,7 @@ const Valorant = () => {
   const checkAnswer = () => {
     rank === selectedRank ? addPoints() : score > 0 && deductPoints();
   }
-
+  
 return (
   <>
     {loggedIn ? (

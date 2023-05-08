@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import {NavLink} from 'react-router-dom';
 
 function Login() {
   const [userName, setUserName] = useState('');
@@ -18,7 +19,7 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3001/login', {
+      const response = await axios.post('https://rr-back-end.onrender.com/login', {
         username: userName,
         password: password,
       });
@@ -64,9 +65,9 @@ function Login() {
         <br />
         <p className="login-text">
           Don't have an account?{' '}
-          <a className="signup-atag" href="/signup">
+          <NavLink className="signup-atag" to="/signup">
             Sign up
-          </a>
+          </NavLink>
         </p>
         <br />
         <button type="submit">Submit</button>

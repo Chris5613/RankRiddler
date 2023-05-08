@@ -10,9 +10,10 @@ const cors = require("cors");
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000"
+    origin: ["https://rr-front-end.onrender.com", "https://www.rankriddler.com"]
   })
 );
+
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, res.method);

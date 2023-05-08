@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import Logout from '../../Assets/Nav-Icons/Logout.png';
 import BottomLink from './BottomLink';
 import GameLink from './Gamelink';
+import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,7 +24,7 @@ const Nav = () => {
   }, [token]);
 
   const logout = async () => {
-    const url = 'http://localhost:3001/signout';
+    const url = 'https://rr-back-end.onrender.com/signout';
     const response = await fetch(url, {
       method: 'PUT',
     });
@@ -123,16 +124,16 @@ const Nav = () => {
           <hr />
           <ul>
             <li className="bottom-links other-links">
-              <a href="/howto">How to play</a>
+              <NavLink to="/howto">How to play</NavLink>
             </li>
             <li className="bottom-links other-links">
-              <a href="/tos">Terms of Services</a>
+              <NavLink to="/tos">Terms of Services</NavLink>
             </li>
             <li className="bottom-links other-links">
-              <a href="/privacy">Privacy Policy</a>
+              <NavLink to="/privacy">Privacy Policy</NavLink>
             </li>
             <li className="bottom-links other-links">
-              <a href="/bug">Report a Bug</a>
+              <NavLink to="/bug">Report a Bug</NavLink>
             </li>
           </ul>
         </div>

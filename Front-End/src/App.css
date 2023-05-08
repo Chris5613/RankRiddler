@@ -9,10 +9,6 @@ html {
   background-color: #292929;
 }
 
-.app {
-  display: flex;
-}
-
 .hamburger {
   position: fixed;
   top: 20px;
@@ -214,6 +210,14 @@ h1 {
   width: 100px;
   height: 100px;
   border-radius: 10rem;
+}
+
+@media screen and (max-width: 768px) {
+  .rank {
+    width: 40px;
+    height: 40px;
+    border-radius: 10rem;
+  }
 }
 
 .rank:hover {

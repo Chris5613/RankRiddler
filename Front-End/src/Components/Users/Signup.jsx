@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 function Signup() {
   const [userName, setUserName] = useState('');
@@ -33,7 +34,7 @@ function Signup() {
     const data = {};
     data.username = userName;
     data.password = password;
-    const res = await fetch('http://localhost:3001/register', {
+    const res = await fetch('https://rr-back-end.onrender.com/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ function Signup() {
       const data = await res.json();
       Cookies.set('token', data.token, { expires: 1 });
       alert('Signed up successfully!');
-      navigate('/login');
+      navigate('/');
     } else {
       alert('Username already exists');
     }
@@ -88,9 +89,9 @@ function Signup() {
         <br />
         <p className="login-text">
           Already have a account?{' '}
-          <a className="signup-atag" href="/login">
+          <NavLink className="signup-atag" href="/login">
             Login
-          </a>
+          </NavLink>
         </p>
         <br />
         {!passwordsMatch && (

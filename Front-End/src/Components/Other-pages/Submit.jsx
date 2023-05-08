@@ -74,15 +74,13 @@ function LeagueOfLegendsForm() {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/form/league', {
+      const response = await fetch('https://rr-back-end.onrender.com/form/league', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
-      console.log(formData);
 
       if (response.ok) {
         alert('Form submitted successfully!');
@@ -199,15 +197,13 @@ function ValorantForm() {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/form/val', {
+      const response = await fetch('https://rr-back-end.onrender.com/form/val', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
-      console.log(formData);
 
       if (response.ok) {
         alert('Form submitted successfully!');
@@ -320,15 +316,13 @@ function CSGOForm() {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/form/csgo', {
+      const response = await fetch('https://rr-back-end.onrender.com/form/csgo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
-      console.log(formData);
 
       if (response.ok) {
         alert('Form submitted successfully!');

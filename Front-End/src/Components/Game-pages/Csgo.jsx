@@ -71,7 +71,7 @@ const Csgo = () => {
   }
 
   const addPoints = async () => {
-    const response = await fetch('http://localhost:3001/addpoints', {
+    const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const Csgo = () => {
   };
   
   const deductPoints = async () => {
-    const response = await fetch('http://localhost:3001/deductpoints', {
+    const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ const Csgo = () => {
   };
   
   const getYoutubeUrl = async () => {
-    const response = await fetch('http://localhost:3001/form/csgodata');
+    const response = await fetch('https://rr-back-end.onrender.com/form/csgodata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);

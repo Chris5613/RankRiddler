@@ -3,6 +3,7 @@ import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import Grandmaster from '../../Assets/League-Icons/GrandMaster.png';
 import Diamond from '../../Assets/League-Icons/Diamond.png';
 import leader from '../../Assets/Nav-Icons/leaderboard.png';
+import { NavLink } from 'react-router-dom';
 
 const Howto = () => {
   return (
@@ -63,9 +64,9 @@ const Howto = () => {
         <br />
         <div>
           Want your clips featured? Submit your clips{' '}
-          <a className="modal-a-tag" href="/submit">
+          <NavLink className="modal-a-tag" to="/submit">
             here!
-          </a>
+          </NavLink>
         </div>
       </div>
     </div>

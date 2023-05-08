@@ -19,14 +19,13 @@ function BugReportForm() {
     data.email = title;
     data.description = description;
 
-    const response = fetch('http://localhost:3001/form/bug', {
+    const response = fetch('https://rr-back-end.onrender.com/form/bug', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
     alert('Thank you for your feedback!');
   };
 
