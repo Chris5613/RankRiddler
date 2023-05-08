@@ -27,8 +27,7 @@ function Login() {
       if (response.status === 200) {
         const token = response.data.token;
         Cookies.set('token', token); // Store the token in a cookie
-
-        localStorage.setItem('username', userName);
+        Cookies.set('userName', userName);
         alert('Logged in successfully!');
         window.location.href = '/';
       }
