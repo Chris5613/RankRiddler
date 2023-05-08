@@ -118,14 +118,7 @@ const Nav = () => {
               /> */}
             </>
           ) : (
-            <div>
-              <BottomLink
-                imgSrc={Logout}
-                altText="logout-logo"
-                linkText="Login/Signup"
-                to="/login"
-              />
-            </div>
+            null
           )}
           </ul>
           <hr />
