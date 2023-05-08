@@ -76,55 +76,40 @@ const getUserbyUsername = async (req, res) => {
 };
 
 const addPointsbyUsername = async (req, res) => {
-  const { userName } = req.params;
+  const { username } = req.headers;
   try {
-    const user = await User.findOne({userName });
+    const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
-    user.points += 1
-    const updatedUser = await user.save();
-    res.json(updatedUser);
+    user.points += 1;
+    await user.save();
+    return res.status(200).json({ message: 'Points added successfully', user });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    console.log(error);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 };
 
 const deductPointsbyUsername = async (req, res) => {
-  const { userName } = req.params;
+  const { username } = req.headers;
   try {
-    const user = await User.findOne({userName });
+    const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
-    if (user.points < 0) {
-      return res.status(400).json({ error: 'Not enough points' });
-    }
-    user.points -= 1
-    const updatedUser = await user.save();
-    res.json(updatedUser);
+    user.points -= 1;
+    await user.save();
+    return res.status(200).json({ message: 'Points added successfully', user });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    console.log(error);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 };
 
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().sort({ points: -1 }).limit(10).exec();
-    res.json(users);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
-};
-
-const getWeeklyScores = async (req, res) => {
-  const date = new Date();
-  const weekAgo = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
-  const users = await User.find({ createdAt: { $gte: weekAgo } }).sort({ score: -1 }).limit(10);
-  try {
     res.json(users);
   } catch (err) {
     console.error(err);
@@ -141,5 +126,4 @@ module.exports = {
   addPointsbyUsername,
   deductPointsbyUsername,
   getAllUsers,
-  getWeeklyScores
 };

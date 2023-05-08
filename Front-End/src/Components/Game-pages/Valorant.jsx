@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Iron from '../../Assets/Val-Ranks/Iron.png';
 import Bronze from '../../Assets/Val-Ranks/Bronze.png';
 import Silver from '../../Assets/Val-Ranks/Sliver.png';
@@ -23,6 +24,7 @@ const Valorant = () => {
   const [showModal, setShowModal] = useState(false);
   const [rank, setRank] = useState('');
   const [score, setScore] = useState(0);
+
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -71,36 +73,35 @@ const Valorant = () => {
   }
 
   const addPoints = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
+    const response = await fetch('http://localhost:3001/addpoints', {
       method: 'PUT',
       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
         username: Cookies.get('userName'),
       },
-      body: JSON.stringify({
-        points: points,
-      }),
     });
+    // eslint-disable-next-line no-unused-vars
     const data = await response.json();
-    setScore(data.points);
-  };
-
-  const deductPoints = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
-      method: 'PUT',
-      headers: {
-        username: Cookies.get('userName'),
-      },
-      body: JSON.stringify({
-        points: points,
-      }),
-    });
-    const data = await response.json();
-    setScore(data.points);
+    setScore(data.user.points)
   };
   
-
+  const deductPoints = async () => {
+    const response = await fetch('http://localhost:3001/deductpoints', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
+  
   const getYoutubeUrl = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/form/csgodata');
+    const response = await fetch('http://localhost:3001/form/valdata');
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
@@ -108,16 +109,6 @@ const Valorant = () => {
   };
 
   useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch('https://rr-back-end.onrender.com/user', {
-        headers: {
-          username: Cookies.get('userName'),
-        },
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-    getUser();
     getYoutubeUrl();
   }, []);
 
@@ -131,21 +122,7 @@ const Valorant = () => {
   const checkAnswer = () => {
     rank === selectedRank ? addPoints() : score > 0 && deductPoints();
   }
-
-
-useEffect(() => {
-  const getUser = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/user', {
-      headers: {
-        username: Cookies.get('userName'),
-      },
-    });
-    const data = await response.json();
-    setScore(data.points);
-  };
-  getUser();
-}, []);
-
+  
 return (
   <>
     {loggedIn ? (

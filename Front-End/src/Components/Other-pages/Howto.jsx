@@ -18,6 +18,8 @@ const Howto = () => {
           <br /> Incorrect guesses will deduct 1 point{' '}
           <img src={wrong} width={40} alt="wrong icon" />
           <br />
+          <br />
+          <p> Can't go under 0 points</p>
           <p>
             Get enough points to top the leaderboard{' '}
             <img src={leader} width={50} alt="board" />

@@ -24,6 +24,7 @@ const Csgo = () => {
   const [rank, setRank] = useState('');
   const [score, setScore] = useState(0);
 
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -58,7 +59,6 @@ const Csgo = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-
   let result = '';
   let points = 0;
 
@@ -74,31 +74,30 @@ const Csgo = () => {
     const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
       method: 'PUT',
       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
         username: Cookies.get('userName'),
       },
-      body: JSON.stringify({
-        points: points,
-      }),
     });
+    // eslint-disable-next-line no-unused-vars
     const data = await response.json();
-    setScore(data.points);
+    setScore(data.user.points)
   };
-
+  
   const deductPoints = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
       method: 'PUT',
       headers: {
-        username: Cookies.get('userName'),
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
       },
-      body: JSON.stringify({
-        points: points,
-      }),
     });
+    // eslint-disable-next-line no-unused-vars
     const data = await response.json();
-    setScore(data.points);
+    setScore(data.user.points)
   };
   
-
   const getYoutubeUrl = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/form/csgodata');
     const data = await response.json();
@@ -108,16 +107,6 @@ const Csgo = () => {
   };
 
   useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch('https://rr-back-end.onrender.com/user', {
-        headers: {
-          username: Cookies.get('userName'),
-        },
-      });
-      const data = await response.json();
-      setScore(data.points);
-    };
-    getUser();
     getYoutubeUrl();
   }, []);
 
