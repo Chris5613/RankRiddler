@@ -33,7 +33,7 @@ const Howto = () => {
             <img
               className="modal-example-image"
               src={Grandmaster}
-              alt="Radiant"
+              alt="Grandmaster"
               width={100}
             />
             <p className="modal-example-rad">GrandMaster</p>
@@ -44,7 +44,7 @@ const Howto = () => {
             <img
               className="modal-example-image"
               src={Diamond}
-              alt="Iron"
+              alt="Diamond"
               width={100}
             />
             <p className="modal-example-iron">Diamond</p>

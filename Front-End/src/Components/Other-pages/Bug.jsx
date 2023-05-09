@@ -19,6 +19,7 @@ function BugReportForm() {
     data.email = title;
     data.description = description;
 
+    // eslint-disable-next-line no-unused-vars
     const response = fetch('https://rr-back-end.onrender.com/form/bug', {
       method: 'POST',
       headers: {
