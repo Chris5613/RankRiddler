@@ -67,7 +67,7 @@ function Signup() {
         <br />
         <p className="login-text">
           Already have a account?{' '}
-          <NavLink className="signup-atag" href="/login">
+          <NavLink className="signup-atag" to="/login">
             Login
           </NavLink>
         </p>
