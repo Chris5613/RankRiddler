@@ -59,7 +59,6 @@ const League = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-
   let result = '';
   let points = 0;
 
