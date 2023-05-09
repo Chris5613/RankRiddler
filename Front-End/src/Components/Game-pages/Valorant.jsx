@@ -127,81 +127,83 @@ return (
   <>
     {loggedIn ? (
       <>
-        <div>
-          <VideoPlayer url={youtubeUrl} />
-        </div>
-          {showModal && (
-            <div className="modal">
-              <div className="modal-content">
-                <span className="X" onClick={handleModal}>X</span>
-                <br />
-                <div className="modal-example">
-                  <div>
-                    <div className="modal-example-heading">Correct Rank</div>
-                    <img
-                      className="modal-example-image"
-                      src={pic}
-                      alt="Radiant"
-                      width={100}
-                    />
+      <div className='game-container'>
+          <div>
+            <VideoPlayer url={youtubeUrl} />
+          </div>
+            {showModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="X" onClick={handleModal}>X</span>
+                  <br />
+                  <div className="modal-example">
+                    <div>
+                      <div className="modal-example-heading">Correct Rank</div>
+                      <img
+                        className="modal-example-image"
+                        src={pic}
+                        alt="Radiant"
+                        width={100}
+                      />
+                    </div>
+                    <div>
+                      <div className="modal-example-heading">Your Guess</div>
+                      <img
+                        className="modal-example-image"
+                        src={submittedRank}
+                        alt="rank"
+                        width={100}
+                      />
+                    </div>
+                    <div>
+                      <div className="modal-example-heading result-title">Result</div>
+                      <img
+                        className="modal-example-image wrong"
+                        src={result}
+                        alt="wrong"
+                        width={70}
+                      />
+                      <p className="modal-example-wrong">{points} Point</p>
+                    </div>
                   </div>
-                  <div>
-                    <div className="modal-example-heading">Your Guess</div>
-                    <img
-                      className="modal-example-image"
-                      src={submittedRank}
-                      alt="rank"
-                      width={100}
-                    />
-                  </div>
-                  <div>
-                    <div className="modal-example-heading result-title">Result</div>
-                    <img
-                      className="modal-example-image wrong"
-                      src={result}
-                      alt="wrong"
-                      width={70}
-                    />
-                    <p className="modal-example-wrong">{points} Point</p>
-                  </div>
+                  <br />
+                  <br />
+                  <p className="text">You currently have {score} points</p>
+                  <br />
+                  <button
+                    onClick={refresh}
+                    className="submit-btn"
+                  >
+                    Next Video
+                  </button>
                 </div>
-                <br />
-                <br />
-                <p className="text">You currently have {score} points</p>
-                <br />
-                <button
-                  onClick={refresh}
-                  className="submit-btn"
-                >
-                  Next Video
-                </button>
               </div>
-            </div>
-          )}
-      <div className="ranks">
-        <RankImage rank="Iron" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Iron} />
-        <RankImage rank="Bronze" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Bronze} />
-        <RankImage rank="Silver" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Silver} />
-        <RankImage rank="Gold" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Gold}/>
-        <RankImage rank="Platinum" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Platinum} />
-        <RankImage rank="Diamond" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Diamond} />
-        <RankImage rank="Ascendant" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Ascendant} />
-        <RankImage rank="Immortal" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Immortal} />
-        <RankImage rank="Radiant" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Radiant} />
-      </div>
-      <div>
-        <button
-          className="submit"
-          onClick={() => {
-            handleModal();
-            checkAnswer();
-          }}
-          disabled={isButtonDisabled}
-        >
-          {selectedRank
-            ? `Selected Rank: ${selectedRank}`
-            : 'Select a Rank'}
-        </button>
+            )}
+        <div className="ranks">
+          <RankImage rank="Iron" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Iron} />
+          <RankImage rank="Bronze" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Bronze} />
+          <RankImage rank="Silver" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Silver} />
+          <RankImage rank="Gold" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Gold}/>
+          <RankImage rank="Platinum" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Platinum} />
+          <RankImage rank="Diamond" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Diamond} />
+          <RankImage rank="Ascendant" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Ascendant} />
+          <RankImage rank="Immortal" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Immortal} />
+          <RankImage rank="Radiant" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Radiant} />
+        </div>
+        <div>
+          <button
+            className="submit"
+            onClick={() => {
+              handleModal();
+              checkAnswer();
+            }}
+            disabled={isButtonDisabled}
+          >
+            {selectedRank
+              ? `Selected Rank: ${selectedRank}`
+              : 'Select a Rank'}
+          </button>
+        </div>
       </div>
     </>
   ) : (

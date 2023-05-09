@@ -165,7 +165,6 @@ h1 {
   }
 }
 
-/* On bigger screens the sidebar should be visible by default and absolute positioned */
 @media screen and (min-width: 769px) {
   .sidebar {
     position: absolute;
@@ -199,11 +198,14 @@ h1 {
   }
 }
 
-/* when the navbar is open it goes over the video and the video is not visible */
 @media screen and (max-width: 768px) {
   .sidebar.active {
     z-index: 2;
   }
+}
+
+.game-container {
+  margin-left: 5rem;
 }
 
 .ranks {
