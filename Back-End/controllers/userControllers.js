@@ -117,6 +117,20 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getPointsbyUsername = async (req, res) => {
+  const { username } = req.headers;
+  try {
+    const user = await User.findOne({ username });
+    const points = user.points;
+    res.json({ points });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+
 module.exports = {
   register,
   userLogin,
@@ -126,4 +140,5 @@ module.exports = {
   addPointsbyUsername,
   deductPointsbyUsername,
   getAllUsers,
+  getPointsbyUsername,
 };
