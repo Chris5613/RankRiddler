@@ -32,9 +32,8 @@ function Signup() {
     });
     if (res.ok) {
       const data = await res.json();
-      Cookies.set('token', data.token, { expires: 1 });
       alert('Signed up successfully!');
-      navigate('/');
+      navigate('/login');
     } else {
       alert('Username already exists');
     }
