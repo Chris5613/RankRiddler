@@ -225,6 +225,7 @@ function ValorantForm() {
           <option value="Gold">Gold</option>
           <option value="Platinum">Platinum</option>
           <option value="Diamond">Diamond</option>
+          <option value="Ascendant">Ascendant</option>
           <option value="Immortal">Immortal</option>
           <option value="Radiant">Radiant</option>
         </select>
