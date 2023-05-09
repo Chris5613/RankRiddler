@@ -5,12 +5,13 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routers/users");
 const formRoutes = require("./routers/form");
 const cors = require("cors");
+const path = require('path');
 
 // server file
 const app = express();
 app.use(
   cors({
-    origin: ["https://rr-front-end.onrender.com", "https://www.rankriddler.com"]
+    origin: ["https://rr-front-end.onrender.com", "https://www.rankriddler.com", "http://localhost:3000"]
   })
 );
 

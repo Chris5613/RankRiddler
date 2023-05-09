@@ -70,6 +70,23 @@ const Csgo = () => {
     points = -1;
   }
 
+  useEffect(() => {
+    const getPoints = async () => {
+      const response = await fetch('https://rr-back-end.onrender.com/getpoints', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          username: Cookies.get('userName'),
+        },
+      });
+      const data = await response.json();
+      setScore(data.points)
+    };
+    getPoints();
+  }, [token]);
+
+
   const addPoints = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
       method: 'PUT',
