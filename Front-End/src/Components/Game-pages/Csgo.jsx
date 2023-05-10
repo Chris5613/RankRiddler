@@ -18,13 +18,12 @@ const Csgo = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [url, setUrl] = useState('');
-  const token = Cookies.get('token');
   const [showModal, setShowModal] = useState(false);
   const [rank, setRank] = useState('');
-  const [score, setScore] = useState(0);
   const [result, setResult] = useState('');
-  const [point, setPoint] = useState(0);
   const [player, setPlayer] = useState('');
+  let [score, setScore] = useState();
+  const [point, setPoint] = useState(0);
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -36,83 +35,23 @@ const Csgo = () => {
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
-  };
+  };  
 
   const youtubeUrl = url;
   const rankImages = {
-    Silver: silver,
+    'Silver': silver,
     'Silver Elite': se,
     'Gold Nova': nova,
     'Master Guardian': mg,
     'Distinguished Master Guardian': dmg,
     'Legendary Eagle': le,
     'Master Guardian Elite': mge,
-    Supreme: smfc,
+    'Supreme': smfc,
     'Global Elite': ge,
   };
 
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
-
-  useEffect(() => {
-    const getPoints = async () => {
-      const response = await fetch(
-        'https://rr-back-end.onrender.com/getpoints',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            username: Cookies.get('userName'),
-          },
-        }
-      );
-      const data = await response.json();
-      setScore(data.points);
-    };
-    getPoints();
-  }, [token]);
-
-  const addPoints = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        username: Cookies.get('userName'),
-      },
-    });
-    // eslint-disable-next-line no-unused-vars
-    const data = await response.json();
-    setScore(data.user.points);
-  };
-
-  const Add1Points = async () => {
-    const response = await fetch(
-      'https://rr-back-end.onrender.com/add1points',
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          username: Cookies.get('userName'),
-        },
-      }
-    );
-    // eslint-disable-next-line no-unused-vars
-    const data = await response.json();
-    setScore(data.user.points);
-  };
-
-  const deductPoints = async () => {
-    const response = await fetch('http://localhost:3001/deductpoints', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        username: Cookies.get('userName'),
-      },
-    });
-    // eslint-disable-next-line no-unused-vars
-    const data = await response.json();
-    setScore(data.user.points);
-  };
 
   const getYoutubeUrl = async () => {
     const response = await fetch(
@@ -151,22 +90,27 @@ const Csgo = () => {
     const rankIndex = rankList.indexOf(rank);
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
-
+  
+    let newScore = parseInt(Cookies.get('score') || '0'); // Parse the current score from cookies
+    let newPoint = 0;
+  
     if (rank === selectedRank) {
       setResult(check);
-      let point = +2;
-      setPoint(point);
-      addPoints();
+      newPoint = 2;
+      newScore += 2;
     } else if (distance === 1) {
       setResult(wrong);
-      let point = +1;
-      setPoint(1);
-      Add1Points(point);
+      newPoint = 1;
+      newScore += 1;
     } else {
       setResult(wrong);
-      setPoint(-1);
-      deductPoints();
+      newPoint = -1;
+      newScore -= 1;
     }
+  
+    Cookies.set('score', newScore.toString()); 
+    setScore(newScore); 
+    setPoint(newPoint); 
   };
 
   return (

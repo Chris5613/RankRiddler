@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 const Settings = () => {
   const [userId, setUserId] = useState(() => localStorage.getItem('userId') || '');
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(parseInt(Cookies.get('score')) || 0);
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(-1);
   const [username, setUsername] = useState(Cookies.get('userName') || 'Guest');
@@ -22,7 +22,7 @@ const Settings = () => {
         }
       );
       const data = await response.json();
-      setScore(data.points);
+      setScore(parseInt(Cookies.get('score')) || data.points);
     };
     getPoints();
   }, []);
@@ -31,7 +31,7 @@ const Settings = () => {
     if (!userId) {
       const id = uuidv4();
       const shortUuid = id.slice(0, 8);
-      localStorage.setItem('userId', shortUuid);
+      Cookies.set('userId', shortUuid);
       setUserId(shortUuid);
     }
   }, [userId]);
@@ -84,7 +84,7 @@ const Settings = () => {
       <div className='settings-container'>
         <p>Current ID: <span><u>{userId}</u></span></p>
         <p>Current User: <span>{username}</span></p>
-        <p>Current Score: <span></span>{score}</p>
+        <p>Current Score: <span>{score}</span></p>
         <p>Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span></p>
         <div className='reset-container'>
         <p>Want to change your username?<span className='reset-text' onClick={usernameReset}>here</span></p>
