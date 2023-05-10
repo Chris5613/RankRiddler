@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import logo from '../../Assets/Nav-Icons/logo.png';
 import lol from '../../Assets/Nav-Icons/LoL.png';
 import val from '../../Assets/Nav-Icons/valorant.png';
@@ -81,20 +80,20 @@ const Nav = () => {
                 to="/valorant"
                 onClick={() => setShowMenu(false)}
               />
-              {/* <GameLink
+              <GameLink
                 imgSrc={lol}
                 altText="league"
                 linkText="League"
                 to="/league"
                 onClick={() => setShowMenu(false)}
-              /> */}
-              {/* <GameLink
+              />
+              <GameLink
                 imgSrc={csgo}
                 altText="csgo"
                 linkText="CSGO"
                 to="/csgo"
                 onClick={() => setShowMenu(false)}
-              />  */}
+              /> 
               <BottomLink
                 imgSrc={submit}
                 altText="movie-logo"

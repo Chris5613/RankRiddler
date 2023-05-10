@@ -27,7 +27,7 @@ const Leaderboard = () => {
         {selection === 'monthly' && <Monthly />}
       </div>
       <div className="text">
-        Leaderboard refreshes in real time. Only shows top 10 players.
+        Leaderboard refreshes every 10 minutes. Only shows top 10 players.
       </div>
     </>
   );
