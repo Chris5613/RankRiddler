@@ -24,6 +24,9 @@ const Valorant = () => {
   const [showModal, setShowModal] = useState(false);
   const [rank, setRank] = useState('');
   const [score, setScore] = useState(0);
+  const [result, setResult] = useState('');
+  const [point , setPoint] = useState(0);
+  const [player , setPlayer] = useState('');
 
 
   const handleModal = () => {
@@ -60,18 +63,6 @@ const Valorant = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-
-  let result = '';
-  let points = 0;
-
-  if (rank === selectedRank) {
-    result = check;
-    points = 1;
-  } else {
-    result = wrong;
-    points = -1;
-  }
-
   useEffect(() => {
     const getPoints = async () => {
       const response = await fetch('https://rr-back-end.onrender.com/getpoints', {
@@ -102,8 +93,9 @@ const Valorant = () => {
     setScore(data.user.points)
   };
   
-  const deductPoints = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
+  
+  const Add1Points = async () => {
+    const response = await fetch('https://rr-back-end.onrender.com/add1points', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -122,6 +114,7 @@ const Valorant = () => {
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
     setRank(data.form[randomIndex].rank);
+    setPlayer(data.form[randomIndex].playerInfo)
   };
 
   useEffect(() => {
@@ -136,7 +129,35 @@ const Valorant = () => {
   };
 
   const checkAnswer = () => {
-    rank === selectedRank ? addPoints() : score > 0 && deductPoints();
+      const rankList = [
+        'Iron',
+        'Bronze',
+        'Silver',
+        'Gold',
+        'Platinum',
+        'Diamond',
+        'Ascendant',
+        'Immortal',
+        'Radiant',
+      ];
+      const rankIndex = rankList.indexOf(rank);
+      const selectedRankIndex = rankList.indexOf(selectedRank);
+      const distance = Math.abs(rankIndex - selectedRankIndex);
+
+      if (rank === selectedRank) {
+        setResult(check);
+        let point = +2;
+        setPoint(point);
+        addPoints();
+      } else if (distance === 1) {
+        setResult(wrong);
+        let point = +1;
+        setPoint(point);
+        Add1Points();
+      } else {
+        setResult(wrong);
+        setPoint(0);
+      }
   }
   
 return (
@@ -179,13 +200,14 @@ return (
                         alt="wrong"
                         width={70}
                       />
-                      <p className="modal-example-wrong">{points} Point</p>
+                      <p className="modal-example-wrong">{point} Point</p>
                     </div>
                   </div>
                   <br />
                   <br />
                   <p className="text">You currently have {score} points</p>
                   <br />
+                  <p className="text">Credit: {player}</p>
                   <button
                     onClick={refresh}
                     className="submit-btn"

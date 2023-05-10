@@ -6,7 +6,7 @@ const {
   token,
   getUserbyUsername,
   addPointsbyUsername,
-  deductPointsbyUsername,
+  add1PointbyUsername,
   getAllUsers,
   getPointsbyUsername,
 } = require("../controllers/userControllers");
@@ -29,7 +29,7 @@ router.get("/allusers",limiter, getAllUsers);
 
 router.get("/user",limiter, getUserbyUsername);
 router.put("/addpoints",limiter, addPointsbyUsername);
-router.put("/deductpoints",limiter, deductPointsbyUsername);
+router.put("/add1points",limiter, add1PointbyUsername);
 router.get("/getpoints",limiter, getPointsbyUsername);
 
 module.exports = router;
