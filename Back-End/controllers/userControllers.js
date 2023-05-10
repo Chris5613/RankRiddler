@@ -82,7 +82,7 @@ const addPointsbyUsername = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    user.points += 1;
+    user.points += 2;
     await user.save();
     return res.status(200).json({ message: 'Points added successfully', user });
   } catch (error) {
@@ -91,14 +91,14 @@ const addPointsbyUsername = async (req, res) => {
   }
 };
 
-const deductPointsbyUsername = async (req, res) => {
+const add1PointbyUsername = async (req, res) => {
   const { username } = req.headers;
   try {
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    user.points -= 1;
+    user.points += 1;
     await user.save();
     return res.status(200).json({ message: 'Points added successfully', user });
   } catch (error) {
@@ -138,7 +138,7 @@ module.exports = {
   token,
   getUserbyUsername,
   addPointsbyUsername,
-  deductPointsbyUsername,
+  add1PointbyUsername,
   getAllUsers,
   getPointsbyUsername,
 };
