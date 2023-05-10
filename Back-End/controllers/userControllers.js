@@ -146,6 +146,22 @@ const getPointsbyUsername = async (req, res) => {
 };
 
 
+const deductPointsbyUsername = async (req, res) => {
+  const { username } = req.headers;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.points -= 1;
+    await user.save();
+    return res.status(200).json({ message: 'Points added successfully', user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 
 module.exports = {
   register,
@@ -155,6 +171,7 @@ module.exports = {
   getUserbyUsername,
   addPointsbyUsername,
   add1PointbyUsername,
+  deductPointsbyUsername,
   getAllUsers,
   getPointsbyUsername,
   deductPointsbyUsername,
