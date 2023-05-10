@@ -107,6 +107,20 @@ const Valorant = () => {
     const data = await response.json();
     setScore(data.user.points)
   };
+
+  const deductPoints = async () => {
+    const response = await fetch('http://localhost:3001/deductpoints', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
   
   const getYoutubeUrl = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/form/valdata');
@@ -146,17 +160,16 @@ const Valorant = () => {
 
       if (rank === selectedRank) {
         setResult(check);
-        let point = +2;
-        setPoint(point);
+        setPoint(2);
         addPoints();
       } else if (distance === 1) {
         setResult(wrong);
-        let point = +1;
-        setPoint(point);
+        setPoint(1);
         Add1Points();
       } else {
         setResult(wrong);
-        setPoint(0);
+        setPoint(-1);
+        deductPoints();
       }
   }
   
