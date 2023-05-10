@@ -70,7 +70,7 @@ const League = () => {
       setScore(data.points);
     };
     getPoints();
-  }, [token]);
+  }, []);
 
   const addPoints = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/addpoints', {

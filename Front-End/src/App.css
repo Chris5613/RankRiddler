@@ -528,3 +528,39 @@ td,
 .X {
   cursor: pointer;
 }
+
+.settings-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  color: white;
+  font: 25px Helvetica, sans-serif;
+  text-align: center;
+}
+
+.settings-container span {
+  margin-left: 1rem;
+}
+
+.settings-container p {
+  margin-top: 1rem;
+}
+
+.reset-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 20vh;
+  color: white;
+  font: 25px Helvetica, sans-serif;
+  text-align: center;
+}
+
+.reset-text {
+  color:#ff0000;
+  cursor: pointer;
+  text-decoration: underline;
+}
