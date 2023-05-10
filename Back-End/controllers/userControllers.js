@@ -107,6 +107,22 @@ const add1PointbyUsername = async (req, res) => {
   }
 };
 
+const deductPointsbyUsername = async (req, res) => {
+  const { username } = req.headers;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.points -= 1;
+    await user.save();
+    return res.status(200).json({ message: 'Points added successfully', user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().sort({ points: -1 }).limit(10).exec();
@@ -141,4 +157,5 @@ module.exports = {
   add1PointbyUsername,
   getAllUsers,
   getPointsbyUsername,
+  deductPointsbyUsername,
 };

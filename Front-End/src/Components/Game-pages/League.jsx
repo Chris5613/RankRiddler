@@ -106,6 +106,20 @@ const League = () => {
     const data = await response.json();
     setScore(data.user.points)
   };
+
+  const deductPoints = async () => {
+    const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
   
   const getYoutubeUrl = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/form/leaguedata');
@@ -154,7 +168,8 @@ const League = () => {
       Add1Points();
     } else {
       setResult(wrong);
-      setPoint(0);
+      setPoint(-1);
+      deductPoints();
     }
 }
 
