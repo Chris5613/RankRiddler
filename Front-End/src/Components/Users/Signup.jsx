@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import { NavLink } from 'react-router-dom';
 
 function Signup() {
@@ -31,7 +30,6 @@ function Signup() {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      const data = await res.json();
       alert('Signed up successfully!');
       navigate('/login');
     } else {
