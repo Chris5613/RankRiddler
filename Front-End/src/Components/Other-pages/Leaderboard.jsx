@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-// Refactor in the future when weekly and monthly leaderboards are implemented
+import { useState, useEffect } from 'react';
 
 const Leaderboard = () => {
   const [selection, setSelection] = useState('');
@@ -86,50 +84,9 @@ function AllTime() {
 }
 
 function Weekly() {
-  const [scores, setScores] = useState([]);
-
-  useEffect(() => {
-    const fetchScores = async () => {
-      const response = await fetch('http://localhost:3001/weeklyscores', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const scoresData = await response.json();
-      setScores(scoresData);
-    };
-    fetchScores();
-  }, []);
-
-  scores.sort((a, b) => b.score - a.score);
-
   return (
     <>
       <h2>In Progress</h2>
-      {/* <div className="form-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Score</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {scores.map((user, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{user.username}</td>
-              <td>{user.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div> */}
     </>
   );
 }
@@ -138,26 +95,6 @@ function Monthly() {
   return (
     <>
       <h2>In Progress</h2>
-      {/* <div className="form-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Score</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {mockData.map((user, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{user.username}</td>
-              <td>{user.score}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div> */}
     </>
   );
 }

@@ -12,6 +12,7 @@ import Logout from '../../Assets/Nav-Icons/Logout.png';
 import BottomLink from './BottomLink';
 import GameLink from './Gamelink';
 import { NavLink } from 'react-router-dom';
+import setting from '../../Assets/Nav-Icons/settings.png';
 
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -73,20 +74,20 @@ const Nav = () => {
               to="/valorant"
               onClick={() => setShowMenu(false)}
             />
-            {/* <GameLink
+            <GameLink
                 imgSrc={lol}
                 altText="league"
                 linkText="League"
                 to="/league"
                 onClick={() => setShowMenu(false)}
-              /> */}
-            {/* <GameLink
+              /> 
+            <GameLink
                 imgSrc={csgo}
                 altText="csgo"
                 linkText="CSGO"
                 to="/csgo"
                 onClick={() => setShowMenu(false)}
-              />  */}
+              /> 
             <BottomLink
               imgSrc={submit}
               altText="movie-logo"
@@ -99,6 +100,13 @@ const Nav = () => {
               altText="movie-logo"
               linkText="Leaderboard"
               to="/leaderboard"
+              onClick={() => setShowMenu(false)}
+            />
+            <BottomLink
+              imgSrc={setting}
+              altText="movie-logo"
+              linkText="Settings"
+              to="/settings"
               onClick={() => setShowMenu(false)}
             />
             {!loggedin ? (
