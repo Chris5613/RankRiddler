@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Login() {
   const [userName, setUserName] = useState('');
@@ -19,10 +19,13 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://rr-back-end.onrender.com/login', {
-        username: userName,
-        password: password,
-      });
+      const response = await axios.post(
+        'https://rr-back-end.onrender.com/login',
+        {
+          username: userName,
+          password: password,
+        }
+      );
 
       if (response.status === 200) {
         const token = response.data.token;

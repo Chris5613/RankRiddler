@@ -26,7 +26,8 @@ html {
   }
 }
 
-h2, .tos {
+h2,
+.tos {
   color: white;
   margin-top: 2rem;
 }
@@ -522,7 +523,6 @@ td,
   .modal-content {
     width: 100%;
   }
-
 }
 
 .X {

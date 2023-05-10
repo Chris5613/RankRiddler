@@ -41,7 +41,7 @@ const Home = () => {
             </>
           ) : (
             <>
-              <h1 style={{color: "white"}}>Login to get started</h1>
+              <h1 style={{ color: 'white' }}>Login to get started</h1>
             </>
           )}
         </div>

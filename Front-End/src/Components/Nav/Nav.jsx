@@ -14,13 +14,14 @@ import GameLink from './Gamelink';
 import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [loggedin, setLoggedin] = useState(false);
   const token = Cookies.get('token');
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
-      setLoggedIn(true);
+      setLoggedin(true);
     }
   }, [token]);
 
@@ -30,39 +31,32 @@ const Nav = () => {
       method: 'PUT',
     });
     if (response.ok) {
-      setLoggedIn(false);
+      setLoggedin(false);
       Cookies.remove('token');
-      Cookies.remove('username');
-      navigate('/login');
+      Cookies.remove('userName');
+      navigate('/');
     }
   };
-
-  const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
   let menuRef = useRef(null);
-
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
-
     document.addEventListener('mousedown', handler);
   });
-
 
   return (
     <>
       <div className="app">
-      <button className="hamburger" onClick={toggleMenu}>
-          {showMenu ? (
-            null
-          ) : (
+        <button className="hamburger" onClick={toggleMenu}>
+          {showMenu ? null : (
             <svg viewBox="0 0 100 80" width="40" height="40">
               <rect width="90" height="10"></rect>
               <rect y="30" width="90" height="10"></rect>
@@ -71,76 +65,84 @@ const Nav = () => {
           )}
         </button>
         <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
-        <ul>
-          {loggedIn ? (
-            <>
-              <GameLink
-                imgSrc={val}
-                altText="Valorant"
-                linkText="Valorant"
-                to="/valorant"
-                onClick={() => setShowMenu(false)}
-              />
-              {/* <GameLink
+          <ul>
+            <GameLink
+              imgSrc={val}
+              altText="Valorant"
+              linkText="Valorant"
+              to="/valorant"
+              onClick={() => setShowMenu(false)}
+            />
+            {/* <GameLink
                 imgSrc={lol}
                 altText="league"
                 linkText="League"
                 to="/league"
                 onClick={() => setShowMenu(false)}
               /> */}
-              {/* <GameLink
+            {/* <GameLink
                 imgSrc={csgo}
                 altText="csgo"
                 linkText="CSGO"
                 to="/csgo"
                 onClick={() => setShowMenu(false)}
               />  */}
+            <BottomLink
+              imgSrc={submit}
+              altText="movie-logo"
+              linkText="Submit a Clip"
+              to="/submit"
+              onClick={() => setShowMenu(false)}
+            />
+            <BottomLink
+              imgSrc={leader}
+              altText="movie-logo"
+              linkText="Leaderboard"
+              to="/leaderboard"
+              onClick={() => setShowMenu(false)}
+            />
+            {!loggedin ? (
               <BottomLink
-                imgSrc={submit}
-                altText="movie-logo"
-                linkText="Submit a Clip"
-                to="/submit"
+                imgSrc={Logout}
+                altText="logout-logo"
+                linkText="Login/Signup"
+                to="/login"
                 onClick={() => setShowMenu(false)}
-              /> 
-              <BottomLink
-                imgSrc={leader}
-                altText="movie-logo"
-                linkText="Leaderboard"
-                to="/leaderboard"
-                onClick={() => setShowMenu(false)}
-              /> 
+              />
+            ) : (
               <BottomLink
                 imgSrc={Logout}
                 altText="logout-logo"
                 linkText="Logout"
                 to="/"
                 onClick={logout}
-                
               />
-            </>
-          ) : (
-            <div>
-              <BottomLink
-                imgSrc={Logout}
-                altText="logout-logo"
-                linkText="Login/Signup"
-                to="/login"
-              />
-            </div>
-          )}
+            )}
           </ul>
           <hr />
           <ul>
-            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
+            <li
+              className="bottom-links other-links"
+              onClick={() => setShowMenu(false)}
+            >
               <NavLink to="/howto">How to play</NavLink>
             </li>
-            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
+            <li
+              className="bottom-links other-links"
+              onClick={() => setShowMenu(false)}
+            >
               <NavLink to="/tos">Terms of Services</NavLink>
             </li>
-            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
+            <li
+              className="bottom-links other-links"
+              onClick={() => setShowMenu(false)}
+            >
               <NavLink to="/privacy">Privacy Policy</NavLink>
             </li>
-            <li className="bottom-links other-links" onClick={() => setShowMenu(false)}>
+            <li
+              className="bottom-links other-links"
+              onClick={() => setShowMenu(false)}
+            >
               <NavLink to="/bug">Report a Bug</NavLink>
             </li>
           </ul>

@@ -68,13 +68,16 @@ function Form(props) {
     };
 
     try {
-      const response = await fetch(`https://rr-back-end.onrender.com/form/${props.game}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `https://rr-back-end.onrender.com/form/${props.game}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         alert('Form submitted successfully!');
@@ -121,9 +124,15 @@ function Form(props) {
         { value: 'Gold Nova', label: 'Gold Nova' },
         { value: 'Master Guardian', label: 'Master Guardian' },
         { value: 'Master Guardian Elite', label: 'Master Guardian Elite' },
-        { value: 'Distinguished Master Guardian', label: 'Distinguished Master Guardian' },
+        {
+          value: 'Distinguished Master Guardian',
+          label: 'Distinguished Master Guardian',
+        },
         { value: 'Legendary Eagle', label: 'Legendary Eagle' },
-        { value: 'Supreme Master First Class', label: 'Supreme Master First Class' },
+        {
+          value: 'Supreme Master First Class',
+          label: 'Supreme Master First Class',
+        },
         { value: 'Global Elite', label: 'Global Elite' },
       ],
     },
@@ -133,7 +142,9 @@ function Form(props) {
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <div className="form">
-          <label className="form-label" htmlFor="youtubeLink">Youtube Link <span style={{ color: '#e34234' }}>*</span></label>
+          <label className="form-label" htmlFor="youtubeLink">
+            Youtube Link <span style={{ color: '#e34234' }}>*</span>
+          </label>
           <input
             className="form-input"
             type="url"
@@ -145,7 +156,9 @@ function Form(props) {
           />
         </div>
         <div className="form">
-          <label htmlFor="playerInfo" className="form-label">Player Info <span style={{ color: '#e34234' }}>*</span></label>
+          <label htmlFor="playerInfo" className="form-label">
+            Player Info <span style={{ color: '#e34234' }}>*</span>
+          </label>
           <input
             className="form-input"
             type="text"
@@ -173,7 +186,12 @@ function Form(props) {
           </select>
         </div>
         <div className="form">
-          <label htmlFor="checkbox" style={{color : "white", marginLeft: "10px"}}>I agree to the terms and conditions</label>
+          <label
+            htmlFor="checkbox"
+            style={{ color: 'white', marginLeft: '10px' }}
+          >
+            I agree to the terms and conditions
+          </label>
           <input
             type="checkbox"
             id="checkbox"

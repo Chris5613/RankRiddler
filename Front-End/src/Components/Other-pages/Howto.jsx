@@ -7,26 +7,26 @@ import { NavLink } from 'react-router-dom';
 
 const Howto = () => {
   return (
-    <div className='modal-container'>
+    <div className="modal-container">
       <div className="modal-content">
         <h2 className="modal-title">How to Play</h2>
         <br />
         <p>Watch the clip and decide what rank the player is</p>
-          <br />
-          Correct guesses are worth 2 point{' '}
-          <img src={check} alt="check" width={30} />
-          <br /> 
-          Guesses within 1 rank are worth 1 point{' '}
-          <img src={wrong} width={40} alt="wrong icon" />
-          <br />
-          <br /> 
-          Incorrect guesses will deduct 1 point{' '}
-          <img src={wrong} width={40} alt="wrong icon" />
-          <br />
-          <p>
-            Get enough points to top the leaderboard{' '}
-            <img src={leader} width={50} alt="board" />
-          </p>
+        <br />
+        Correct guesses are worth 2 point{' '}
+        <img src={check} alt="check" width={30} />
+        <br />
+        Guesses within 1 rank are worth 1 point{' '}
+        <img src={wrong} width={40} alt="wrong icon" />
+        <br />
+        <br />
+        Incorrect guesses will deduct 1 point{' '}
+        <img src={wrong} width={40} alt="wrong icon" />
+        <br />
+        <p>
+          Get enough points to top the leaderboard{' '}
+          <img src={leader} width={50} alt="board" />
+        </p>
         <br />
         <h3 className="modal-title">Example</h3>
         <br />

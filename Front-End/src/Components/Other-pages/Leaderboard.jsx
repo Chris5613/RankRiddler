@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Refactor in the future when weekly and monthly leaderboards are implemented
 
@@ -39,12 +39,15 @@ function AllTime() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://rr-back-end.onrender.com/allusers', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await fetch(
+          'https://rr-back-end.onrender.com/allusers',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -68,13 +71,14 @@ function AllTime() {
           </tr>
         </thead>
         <tbody>
-          {data && data.map((data, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{data.username}</td>
-              <td>{data.points}</td>
-            </tr>
-          ))}
+          {data &&
+            data.map((data, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{data.username}</td>
+                <td>{data.points}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -97,7 +101,7 @@ function Weekly() {
       }
       const scoresData = await response.json();
       setScores(scoresData);
-    }
+    };
     fetchScores();
   }, []);
 
@@ -105,8 +109,8 @@ function Weekly() {
 
   return (
     <>
-    <h2>In Progress</h2>
-    {/* <div className="form-container">
+      <h2>In Progress</h2>
+      {/* <div className="form-container">
       <table>
         <thead>
           <tr>
@@ -128,13 +132,13 @@ function Weekly() {
     </div> */}
     </>
   );
-};
+}
 
 function Monthly() {
   return (
     <>
-    <h2>In Progress</h2>
-    {/* <div className="form-container">
+      <h2>In Progress</h2>
+      {/* <div className="form-container">
       <table>
         <thead>
           <tr>
