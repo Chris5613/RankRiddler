@@ -13,13 +13,16 @@ const Howto = () => {
         <br />
         <p>Watch the clip and decide what rank the player is</p>
           <br />
-          Correct guesses are worth 1 point{' '}
+          Correct guesses are worth 2 point{' '}
           <img src={check} alt="check" width={30} />
-          <br /> Incorrect guesses will deduct 1 point{' '}
+          <br /> 
+          Guesses within 1 rank are worth 1 point{' '}
           <img src={wrong} width={40} alt="wrong icon" />
           <br />
+          <br /> 
+          Incorrect guesses will deduct 1 point{' '}
+          <img src={wrong} width={40} alt="wrong icon" />
           <br />
-          <p> Can't go under 0 points</p>
           <p>
             Get enough points to top the leaderboard{' '}
             <img src={leader} width={50} alt="board" />

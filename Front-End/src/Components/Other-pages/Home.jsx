@@ -24,20 +24,20 @@ const Home = () => {
                   alt="valorant"
                 />
               </NavLink>
-              <NavLink to="/league">
+              {/* <NavLink to="/league">
                 <img
                   className="main-images"
                   src="https://cdn1.epicgames.com/offer/24b9b5e323bc40eea252a10cdd3b2f10/LoL_1200x1600-15ad6c981af8d98f50e833eac7843986"
                   alt="league"
                 />
-              </NavLink>
-              <NavLink to="/csgo">
+              </NavLink> */}
+              {/* <NavLink to="/csgo">
                 <img
                   className="main-images"
                   src="https://downloadwap.com/thumbs4/games/preview/2020j/img/133656_counter-st_1.jpg"
                   alt="csgo"
                 />
-              </NavLink>
+              </NavLink> */}
             </>
           ) : (
             <>

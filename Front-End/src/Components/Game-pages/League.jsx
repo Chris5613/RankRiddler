@@ -183,7 +183,6 @@ const League = () => {
             {showModal && (
               <div className="modal">
                 <div className="modal-content">
-                  <span className="X" onClick={handleModal}>X</span>
                   <br />
                   <div className="modal-example">
                     <div>
