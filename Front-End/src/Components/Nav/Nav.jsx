@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import logo from '../../Assets/Nav-Icons/logo.png';
 import lol from '../../Assets/Nav-Icons/LoL.png';
 import val from '../../Assets/Nav-Icons/valorant.png';
