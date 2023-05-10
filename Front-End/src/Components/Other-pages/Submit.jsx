@@ -17,9 +17,9 @@ function Submit() {
           <option value="val">Valorant</option>
           <option value="csgo">CS:GO</option>
         </select>
-        {game === 'lol' && <LeagueOfLegendsForm />}
-        {game === 'val' && <ValorantForm />}
-        {game === 'csgo' && <CSGOForm />}
+        {game === 'lol' && <Form game="league" />}
+        {game === 'val' && <Form game="val" />}
+        {game === 'csgo' && <Form game="csgo" />}
       </div>
       <div className="text">
         Clips must be submitted in the following format or will be{' '}
@@ -36,114 +36,7 @@ function Submit() {
   );
 }
 
-function LeagueOfLegendsForm() {
-  const [youtubeLink, setYoutubeLink] = useState('');
-  const [playerInfo, setPlayerInfo] = useState('');
-  const [selectedRank, setSelectedRank] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleYoutubeLinkChange = (event) => {
-    setYoutubeLink(event.target.value);
-  };
-
-  const handlePlayerInfoChange = (event) => {
-    setPlayerInfo(event.target.value);
-  };
-
-  const handleRankChange = (event) => {
-    setSelectedRank(event.target.value);
-  };
-
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const formData = {
-      youtubeLink: youtubeLink,
-      playerInfo: playerInfo,
-      rank: selectedRank,
-    };
-
-    try {
-      const response = await fetch('https://rr-back-end.onrender.com/form/league', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert('Form submitted successfully!');
-      }
-    } catch (error) {
-      alert('Error submitting form. Please try again later.');
-    }
-  };
-
-  return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit} className="form">
-        <label className="form-label">
-          YouTube link: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="url"
-          value={youtubeLink}
-          onChange={handleYoutubeLinkChange}
-        />
-        <br />
-        <br />
-
-        <label className="form-label">
-          Player info: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <textarea value={playerInfo} onChange={handlePlayerInfoChange} />
-        <br />
-
-        <label className="form-label">
-          {' '}
-          Select a rank: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <select value={selectedRank} onChange={handleRankChange}>
-          <option value="">Select a rank</option>
-          <option value="Iron">Iron</option>
-          <option value="Bronze">Bronze</option>
-          <option value="Silver">Silver</option>
-          <option value="Gold">Gold</option>
-          <option value="Platinum">Platinum</option>
-          <option value="Diamond">Diamond</option>
-          <option value="Immortal">Master</option>
-          <option value="Radiant">Grandmaster</option>
-          <option value="Challenger">Challenger</option>
-        </select>
-        <br />
-
-        <input
-          type="checkbox"
-          className="form-checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-label">
-          I agree to the terms and conditions
-        </label>
-        <br />
-
-        <button type="submit" disabled={!isChecked}>
-          Submit
-        </button>
-      </form>
-    </div>
-  );
-}
-
-function ValorantForm() {
+function Form(props) {
   const [youtubeLink, setYoutubeLink] = useState('');
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
@@ -175,7 +68,7 @@ function ValorantForm() {
     };
 
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/form/val', {
+      const response = await fetch(`https://rr-back-end.onrender.com/form/${props.game}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -191,164 +84,105 @@ function ValorantForm() {
     }
   };
 
-  return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit} className="form">
-        <label className="form-label">
-          YouTube link: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="url"
-          value={youtubeLink}
-          onChange={handleYoutubeLinkChange}
-          required
-        />
-        <br />
-        <br />
-
-        <label className="form-label">
-          Player info: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <textarea value={playerInfo} onChange={handlePlayerInfoChange} />
-        <br />
-
-        <label className="form-label">
-          {' '}
-          Select a rank: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <select value={selectedRank} required onChange={handleRankChange}>
-          <option value="">Select a rank</option>
-          <option value="Iron">Iron</option>
-          <option value="Bronze">Bronze</option>
-          <option value="Silver">Silver</option>
-          <option value="Gold">Gold</option>
-          <option value="Platinum">Platinum</option>
-          <option value="Diamond">Diamond</option>
-          <option value="Ascendant">Ascendant</option>
-          <option value="Immortal">Immortal</option>
-          <option value="Radiant">Radiant</option>
-        </select>
-        <br />
-
-        <input
-          type="checkbox"
-          className="form-checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-          required
-        />
-        <label className="form-label">
-          I agree to the terms and conditions
-        </label>
-        <br />
-
-        <button type="submit" disabled={!isChecked}>
-          Submit
-        </button>
-      </form>
-    </div>
-  );
-}
-
-function CSGOForm() {
-  const [youtubeLink, setYoutubeLink] = useState('');
-  const [playerInfo, setPlayerInfo] = useState('');
-  const [selectedRank, setSelectedRank] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleYoutubeLinkChange = (event) => {
-    setYoutubeLink(event.target.value);
-  };
-
-  const handlePlayerInfoChange = (event) => {
-    setPlayerInfo(event.target.value);
-  };
-
-  const handleRankChange = (event) => {
-    setSelectedRank(event.target.value);
-  };
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const formData = {
-      youtubeLink: youtubeLink,
-      playerInfo: playerInfo,
-      rank: selectedRank,
-    };
-
-    try {
-      const response = await fetch('https://rr-back-end.onrender.com/form/csgo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert('Form submitted successfully!');
-      }
-    } catch (error) {
-      alert('Error submitting form. Please try again later.');
-    }
+  const gameOptions = {
+    league: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Iron', label: 'Iron' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Master', label: 'Master' },
+        { value: 'Grandmaster', label: 'Grandmaster' },
+        { value: 'Challenger', label: 'Challenger' },
+      ],
+    },
+    val: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Iron', label: 'Iron' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Immortal', label: 'Immortal' },
+        { value: 'Ascendant', label: 'Ascendant' },
+        { value: 'Radiant', label: 'Radiant' },
+      ],
+    },
+    csgo: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Silver Elite', label: 'Silver Elite' },
+        { value: 'Gold Nova', label: 'Gold Nova' },
+        { value: 'Master Guardian', label: 'Master Guardian' },
+        { value: 'Master Guardian Elite', label: 'Master Guardian Elite' },
+        { value: 'Distinguished Master Guardian', label: 'Distinguished Master Guardian' },
+        { value: 'Legendary Eagle', label: 'Legendary Eagle' },
+        { value: 'Supreme Master First Class', label: 'Supreme Master First Class' },
+        { value: 'Global Elite', label: 'Global Elite' },
+      ],
+    },
   };
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit} className="form">
-        <label className="form-label">
-          YouTube link: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <input
-          className="form-input"
-          type="url"
-          value={youtubeLink}
-          onChange={handleYoutubeLinkChange}
-        />
-        <br />
-        <br />
-
-        <label className="form-label">
-          Player info: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <textarea value={playerInfo} onChange={handlePlayerInfoChange} />
-        <br />
-
-        <label className="form-label">
-          {' '}
-          Select a rank: <span style={{ color: '#e34234' }}>*</span>
-        </label>
-        <select value={selectedRank} onChange={handleRankChange}>
-          <option value="">Select a rank</option>
-          <option value="Silver">Silver</option>
-          <option value="Silver Elite">Silver Elite</option>
-          <option value="Gold Nova">Gold Nova</option>
-          <option value="aster Guradian">Master Guradian</option>
-          <option value="Master Guardian Elite">Master Guardian Elite</option>
-          <option value="DMG">DMG</option>
-          <option value="Legendary Eagle">Legendary Eagle</option>
-          <option value="Supreme">Supreme</option>
-          <option value="Global Elite">Global Elite</option>
-        </select>
-        <br />
-
-        <input
-          type="checkbox"
-          className="form-checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        <label className="form-label">
-          I agree to the terms and conditions
-        </label>
-        <br />
-        <br />
+      <form onSubmit={handleSubmit}>
+        <div className="form">
+          <label className="form-label" htmlFor="youtubeLink">Youtube Link <span style={{ color: '#e34234' }}>*</span></label>
+          <input
+            className="form-input"
+            type="url"
+            id="youtubeLink"
+            name="youtubeLink"
+            value={youtubeLink}
+            onChange={handleYoutubeLinkChange}
+            required
+          />
+        </div>
+        <div className="form">
+          <label htmlFor="playerInfo" className="form-label">Player Info <span style={{ color: '#e34234' }}>*</span></label>
+          <input
+            className="form-input"
+            type="text"
+            id="playerInfo"
+            name="playerInfo"
+            value={playerInfo}
+            onChange={handlePlayerInfoChange}
+            required
+          />
+        </div>
+        <div className="form">
+          <select
+            className="select"
+            id="rank"
+            name="rank"
+            value={selectedRank}
+            onChange={handleRankChange}
+            required
+          >
+            {gameOptions[props.game].ranks.map((rank) => (
+              <option key={rank.value} value={rank.value}>
+                {rank.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form">
+          <label htmlFor="checkbox" style={{color : "white", marginLeft: "10px"}}>I agree to the terms and conditions</label>
+          <input
+            type="checkbox"
+            id="checkbox"
+            name="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            required
+          />
+        </div>
         <button type="submit" disabled={!isChecked}>
           Submit
         </button>

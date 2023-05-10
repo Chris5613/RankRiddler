@@ -23,6 +23,9 @@ const League = () => {
   const [showModal, setShowModal] = useState(false);
   const [rank, setRank] = useState('');
   const [score, setScore] = useState(0);
+  const [result, setResult] = useState('');
+  const [point , setPoint] = useState(0);
+  const [player , setPlayer] = useState('');
 
 
   const handleModal = () => {
@@ -59,18 +62,6 @@ const League = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-
-  let result = '';
-  let points = 0;
-
-  if (rank === selectedRank) {
-    result = check;
-    points = 1;
-  } else {
-    result = wrong;
-    points = -1;
-  }
-
   useEffect(() => {
     const getPoints = async () => {
       const response = await fetch('https://rr-back-end.onrender.com/getpoints', {
@@ -102,6 +93,20 @@ const League = () => {
     setScore(data.user.points)
   };
   
+  const Add1Points = async () => {
+    const response = await fetch('https://rr-back-end.onrender.com/add1points', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
+
   const deductPoints = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
       method: 'PUT',
@@ -122,15 +127,12 @@ const League = () => {
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
     setRank(data.form[randomIndex].rank);
+    setPlayer(data.form[randomIndex].playerInfo)
   };
 
   useEffect(() => {
     getYoutubeUrl();
   }, []);
-
-  const checkAnswer = () => {
-    rank === selectedRank ? addPoints() : score > 0 && deductPoints();
-  }
 
   const refresh = () => {
     getYoutubeUrl();
@@ -138,6 +140,39 @@ const League = () => {
     setIsButtonDisabled(true);
     setShowModal(false);
   };
+
+  const checkAnswer = () => {
+
+    const rankList = [
+      'Iron',
+      'Bronze',
+      'Silver',
+      'Gold',
+      'Platinum',
+      'Diamond',
+      'Master',
+      'Grandmaster',
+      'Challenger',
+    ];
+    const rankIndex = rankList.indexOf(rank);
+    const selectedRankIndex = rankList.indexOf(selectedRank);
+    const distance = Math.abs(rankIndex - selectedRankIndex);
+
+    if (rank === selectedRank) {
+      setResult(check);
+      setPoint(2);
+      addPoints();
+    } else if (distance === 1) {
+      setResult(wrong);
+      setPoint(1);
+      Add1Points();
+    } else {
+      setResult(wrong);
+      setPoint(-1);
+      deductPoints();
+    }
+}
+
   return (
     <>
       {loggedIn ? (
@@ -148,7 +183,6 @@ const League = () => {
             {showModal && (
               <div className="modal">
                 <div className="modal-content">
-                  <span className="X" onClick={handleModal}>X</span>
                   <br />
                   <div className="modal-example">
                     <div>
@@ -177,13 +211,14 @@ const League = () => {
                         alt="wrong"
                         width={70}
                       />
-                      <p className="modal-example-wrong">{points} Point</p>
+                      <p className="modal-example-wrong">{point} Point</p>
                     </div>
                   </div>
                   <br />
                   <br />
                   <p className="text">You currently have {score} points</p>
                   <br />
+                  <p className="text">Credit: {player}</p>
                   <button
                     onClick={refresh}
                     className="submit-btn"

@@ -30,6 +30,8 @@ function Signup() {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      // eslint-disable-next-line no-unused-vars
+      const data = await res.json();
       alert('Signed up successfully!');
       navigate('/login');
     } else {
