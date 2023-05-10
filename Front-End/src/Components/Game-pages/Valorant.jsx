@@ -93,6 +93,19 @@ const Valorant = () => {
     setScore(data.user.points)
   };
   
+  const deductPoints = async () => {
+    const response = await fetch('http://localhost:3001/deductpoints', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        username: Cookies.get('userName')
+      },
+    });
+    // eslint-disable-next-line no-unused-vars
+    const data = await response.json();
+    setScore(data.user.points)
+  };
   
   const Add1Points = async () => {
     const response = await fetch('https://rr-back-end.onrender.com/add1points', {
