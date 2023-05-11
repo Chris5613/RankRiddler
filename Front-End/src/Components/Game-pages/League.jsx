@@ -53,7 +53,6 @@ const League = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-
   const getYoutubeUrl = async () => {
     const response = await fetch(
       'https://rr-back-end.onrender.com/form/leaguedata'
@@ -91,10 +90,10 @@ const League = () => {
     const rankIndex = rankList.indexOf(rank);
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
-  
+
     let newScore = parseInt(Cookies.get('score') || '0'); // Parse the current score from cookies
     let newPoint = 0;
-  
+
     if (rank === selectedRank) {
       setResult(check);
       newPoint = 2;
@@ -108,10 +107,10 @@ const League = () => {
       newPoint = -1;
       newScore -= 1;
     }
-  
-    Cookies.set('score', newScore.toString()); 
-    setScore(newScore); 
-    setPoint(newPoint); 
+
+    Cookies.set('score', newScore.toString());
+    setScore(newScore);
+    setPoint(newPoint);
   };
 
   return (

@@ -3,30 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 
 const Settings = () => {
-  const [userId, setUserId] = useState(() => localStorage.getItem('userId') || '');
-  const [score, setScore] = useState(parseInt(Cookies.get('score')) || 0);
+  const [userId, setUserId] = useState(
+    () => localStorage.getItem('userId') || ''
+  );
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(-1);
-  const [username, setUsername] = useState(Cookies.get('userName') || 'Guest');
+  const [username, setUsername] = useState(Cookies.get('username'));
+  const [isUsernameChanged, setIsUsernameChanged] = useState(false);
 
-  useEffect(() => {
-    const getPoints = async () => {
-      const response = await fetch(
-        'https://rr-back-end.onrender.com/getpoints',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            username: Cookies.get('userName'),
-          },
-        }
-      );
-      const data = await response.json();
-      setScore(parseInt(Cookies.get('score')) || data.points);
-    };
-    getPoints();
-  }, []);
-
+  const score = Cookies.get('score') || 0;
   useEffect(() => {
     if (!userId) {
       const id = uuidv4();
@@ -60,8 +45,27 @@ const Settings = () => {
     fetchData();
   }, []);
 
+  const saveUser = async (username, score) => {
+    try {
+      const response = await fetch('http://localhost:3001/saveuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          points: score,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const foundUser = data.find(user => user.username === username);
+    const foundUser = data.find((user) => user.username === username);
     if (foundUser) {
       setIndex(data.indexOf(foundUser));
     } else {
@@ -70,25 +74,73 @@ const Settings = () => {
   }, [username, data]);
 
   const usernameReset = () => {
-    Cookies.remove('userName');
-    let newUsername = prompt('Please enter a new username');
-    if (newUsername === null) {
-      newUsername = 'Guest';
+    if (isUsernameChanged) {
+      return;
     }
-    Cookies.set('userName', newUsername);
-    setUsername(newUsername);
+    Cookies.remove('username');
+    let newUsername = prompt('Please enter a new username');
+    const checkUsername = () => {
+      if (newUsername === null) {
+        newUsername = prompt('Please enter a new username');
+        checkUsername();
+      } else if (newUsername === '') {
+        newUsername = prompt('Please enter a new username');
+        checkUsername();
+      } else {
+        const sameName = data.find((user) => user.username === newUsername);
+        if (sameName) {
+          newUsername = prompt(
+            'Username already exists, please enter a new username'
+          );
+          checkUsername();
+        }
+        Cookies.set('username', newUsername);
+        setUsername(newUsername);
+        setIsUsernameChanged(true);
+      }
+    };
+    checkUsername();
+    saveUser(newUsername, score);
   };
 
   return (
     <>
-      <div className='settings-container'>
-        <p>Current ID: <span><u>{userId}</u></span></p>
-        <p>Current User: <span>{username}</span></p>
-        <p>Current Score: <span>{score}</span></p>
-        <p>Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span></p>
-        <div className='reset-container'>
-        <p>Want to change your username?<span className='reset-text' onClick={usernameReset}>here</span></p>
-      </div>
+      <div className="settings-container">
+        <p>
+          Current ID:{' '}
+          <span>
+            <u>{userId}</u>
+          </span>
+        </p>
+        <p>
+          Current User: <span>{username}</span>
+        </p>
+        <p>
+          Current Score: <span>{score}</span>
+        </p>
+        <p>
+          Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
+        </p>
+        <div className="reset-container">
+          {isUsernameChanged ? (
+            <h5>Username has been changed.</h5>
+          ) : (
+            <div>
+              <h5>
+                Can only be changed
+                <span style={{ color: '#e34234' }}>
+                  <u>ONCE</u>
+                </span>
+              </h5>
+              <p>
+                Want to change your username?
+                <span className="reset-text" onClick={usernameReset}>
+                  here
+                </span>
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

@@ -18,7 +18,7 @@ const Home = () => {
               src="https://cdn1.epicgames.com/offer/24b9b5e323bc40eea252a10cdd3b2f10/LoL_1200x1600-15ad6c981af8d98f50e833eac7843986"
               alt="league"
             />
-          </NavLink> 
+          </NavLink>
           <NavLink to="/csgo">
             <img
               className="main-images"

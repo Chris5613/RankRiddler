@@ -35,18 +35,18 @@ const Csgo = () => {
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
-  };  
+  };
 
   const youtubeUrl = url;
   const rankImages = {
-    'Silver': silver,
+    Silver: silver,
     'Silver Elite': se,
     'Gold Nova': nova,
     'Master Guardian': mg,
     'Distinguished Master Guardian': dmg,
     'Legendary Eagle': le,
     'Master Guardian Elite': mge,
-    'Supreme': smfc,
+    Supreme: smfc,
     'Global Elite': ge,
   };
 
@@ -90,10 +90,10 @@ const Csgo = () => {
     const rankIndex = rankList.indexOf(rank);
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
-  
+
     let newScore = parseInt(Cookies.get('score') || '0'); // Parse the current score from cookies
     let newPoint = 0;
-  
+
     if (rank === selectedRank) {
       setResult(check);
       newPoint = 2;
@@ -107,10 +107,10 @@ const Csgo = () => {
       newPoint = -1;
       newScore -= 1;
     }
-  
-    Cookies.set('score', newScore.toString()); 
-    setScore(newScore); 
-    setPoint(newPoint); 
+
+    Cookies.set('score', newScore.toString());
+    setScore(newScore);
+    setPoint(newPoint);
   };
 
   return (

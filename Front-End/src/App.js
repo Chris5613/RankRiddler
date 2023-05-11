@@ -9,8 +9,6 @@ import Csgo from './Components/Game-pages/Csgo';
 import Submit from './Components/Other-pages/Submit';
 import Leaderboard from './Components/Other-pages/Leaderboard';
 import PrivacyPolicy from './Components/Other-pages/Privacy';
-import Login from './Components/Users/Login';
-import Signup from './Components/Users/Signup';
 import Bug from './Components/Other-pages/Bug';
 import Howto from './Components/Other-pages/Howto';
 import Settings from './Components/Other-pages/Settings';
@@ -28,8 +26,6 @@ function App() {
         <Route path="/submit" element={<Submit />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/bug" element={<Bug />} />
         <Route path="/howto" element={<Howto />} />
         <Route path="/settings" element={<Settings />} />
