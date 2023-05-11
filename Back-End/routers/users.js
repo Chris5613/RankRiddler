@@ -3,7 +3,7 @@ const {
   getUserbyUsername,
   getAllUsers,
   createUser,
-  deleteUser,
+  updatePointByUsername,
 } = require("../controllers/userControllers");
 
 const router = express.Router();
@@ -16,5 +16,5 @@ const limiter = rateLimit({
 router.get("/allusers", limiter, getAllUsers);
 router.get("/user", limiter, getUserbyUsername);
 router.post("/saveuser", limiter, createUser);
-router.delete("/deleteuser", limiter, deleteUser);
+router.put("/updatepoints", limiter, updatePointByUsername);
 module.exports = router;

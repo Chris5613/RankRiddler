@@ -39,21 +39,24 @@ const createUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
-  const { username } = req.params;
+const updatePointByUsername = async (req, res) => {
+  const { username, points } = req.body;
+  console.log(username, points);
   try {
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    await user.remove();
-
-    res.json({ message: 'User deleted successfully' });
-  } catch (err) {
-    console.error(err);
+    user.points = points;
+    await user.save();
+    console.log(user);
+    res.status(200).json({ message: 'Points updated successfully' });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };
+
 
 
 
@@ -61,5 +64,5 @@ module.exports = {
   getUserbyUsername,
   getAllUsers,
   createUser,
-  deleteUser,
+  updatePointByUsername,
 };
