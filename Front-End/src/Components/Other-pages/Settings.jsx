@@ -8,10 +8,8 @@ const Settings = () => {
   );
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(-1);
-  const [username, setUsername] = useState(Cookies.get('username'));
-
-  const [isUsernameChanged, setIsUsernameChanged] = useState(false); // added state variable
-
+  const [username, setUsername] = useState(Cookies.get('username') || 'Guest');
+  const [isUsernameChanged, setIsUsernameChanged] = useState(Cookies.get('isUsernameChanged') === 'true');
   const score = Cookies.get('score') || 0;
   useEffect(() => {
     if (!userId) {
@@ -97,6 +95,7 @@ const Settings = () => {
           checkUsername();
         }
         Cookies.set('username', newUsername,{ secure: true });
+        Cookies.set('isUsernameChanged', true, { secure: true }); // added statement
         setUsername(newUsername);
         setIsUsernameChanged(true); // set isUsernameChanged to true permanently
         saveUser(newUsername, score);
@@ -104,6 +103,7 @@ const Settings = () => {
     };
     checkUsername();
   };
+  
 
   const deleteAccount = async () => {
     Cookies.remove('username');
