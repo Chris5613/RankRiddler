@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
   }
 
   //instantiates filter and checks usernames for profanities
-  var Filter = require("bad-words"), filter = new Filter()
+  let Filter = require("bad-words"), filter = new Filter()
   const isUnclean = filter.isProfane(username)
   //if username contains profanities then a response is sent declaring the username is not allowed
   if(isUnclean){
