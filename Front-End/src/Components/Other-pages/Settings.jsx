@@ -28,11 +28,6 @@ const Settings = () => {
   
     const storedScore = Cookies.get('score') || 0;
     Cookies.set('score', storedScore, { secure: true });
-
-    if (userId && storedUsername !== 'Guest') {
-      saveUser(storedUsername, storedScore);
-    }
-  
   }, [userId]);
   
 
@@ -62,7 +57,7 @@ const Settings = () => {
 
   const saveUser = async (username, score) => {
     try {
-      const response = await fetch('http://localhost:3001/saveuser', {
+      const response = await fetch('ttps://rr-back-end.onrender.com/saveuser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
