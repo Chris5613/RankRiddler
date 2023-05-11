@@ -39,14 +39,14 @@ const Csgo = () => {
 
   const youtubeUrl = url;
   const rankImages = {
-    Silver: silver,
+    'Silver': silver,
     'Silver Elite': se,
     'Gold Nova': nova,
     'Master Guardian': mg,
     'Distinguished Master Guardian': dmg,
     'Legendary Eagle': le,
     'Master Guardian Elite': mge,
-    Supreme: smfc,
+    'Supreme': smfc,
     'Global Elite': ge,
   };
 
@@ -75,6 +75,25 @@ const Csgo = () => {
     setShowModal(false);
   };
 
+  const updatePoints = async (updatedScore) => {
+    try {
+      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: Cookies.get('username'),
+          points: updatedScore,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const checkAnswer = () => {
     const rankList = [
       'Silver',
@@ -91,26 +110,30 @@ const Csgo = () => {
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
 
-    let newScore = parseInt(Cookies.get('score') || '0'); // Parse the current score from cookies
-    let newPoint = 0;
+    let updatedScore = parseInt(Cookies.get('score') || '0'); 
+    let pointEarned = 0;
 
     if (rank === selectedRank) {
       setResult(check);
-      newPoint = 2;
-      newScore += 2;
+      pointEarned = 2;
+      updatedScore += 2;
     } else if (distance === 1) {
       setResult(wrong);
-      newPoint = 1;
-      newScore += 1;
+      pointEarned = 1;
+      updatedScore += 1;
     } else {
       setResult(wrong);
-      newPoint = -1;
-      newScore -= 1;
+      pointEarned = -1;
+      updatedScore -= 1;
     }
 
-    Cookies.set('score', newScore.toString(),{ secure: true });
-    setScore(newScore);
-    setPoint(newPoint);
+    Cookies.set('score', updatedScore.toString());
+    setScore(updatedScore);
+    setPoint(pointEarned);
+
+    console.log(updatedScore);
+    console.log(pointEarned);
+    updatePoints(updatedScore);
   };
 
   return (

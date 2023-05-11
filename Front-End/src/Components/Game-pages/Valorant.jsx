@@ -78,7 +78,7 @@ const Valorant = () => {
 
   const updatePoints = async (updatedScore) => {
     try {
-      const response = await fetch('http://localhost:3001/updatepoints', {
+      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
