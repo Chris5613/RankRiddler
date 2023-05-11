@@ -564,3 +564,29 @@ td,
   cursor: pointer;
   text-decoration: underline;
 }
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.home-instrutions-container {
+  /* make it a small box with a gray border */
+  border: 2px solid gray;
+  padding: 10px;
+  width: 500px;
+  height: 150px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-text {
+  color: wheat;
+}
+
+.bottom-img {
+  margin-right: 1rem;
+}

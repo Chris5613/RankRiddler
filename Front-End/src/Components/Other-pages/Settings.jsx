@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 
@@ -9,7 +9,8 @@ const Settings = () => {
   const [data, setData] = useState([]);
   const [index, setIndex] = useState(-1);
   const [username, setUsername] = useState(Cookies.get('username'));
-  const [isUsernameChanged, setIsUsernameChanged] = useState(false);
+
+  const [isUsernameChanged, setIsUsernameChanged] = useState(false); // added state variable
 
   const score = Cookies.get('score') || 0;
   useEffect(() => {
@@ -74,7 +75,7 @@ const Settings = () => {
   }, [username, data]);
 
   const usernameReset = () => {
-    if (isUsernameChanged) {
+    if (isUsernameChanged) { // don't reset if username has already been changed
       return;
     }
     Cookies.remove('username');
@@ -96,12 +97,14 @@ const Settings = () => {
         }
         Cookies.set('username', newUsername);
         setUsername(newUsername);
-        setIsUsernameChanged(true);
+        setIsUsernameChanged(true); // set isUsernameChanged to true permanently
+        saveUser(newUsername, score);
       }
     };
     checkUsername();
-    saveUser(newUsername, score);
   };
+
+  console.log(isUsernameChanged)
 
   return (
     <>
@@ -122,24 +125,22 @@ const Settings = () => {
           Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
         </p>
         <div className="reset-container">
-          {isUsernameChanged ? (
-            <h5>Username has been changed.</h5>
-          ) : (
-            <div>
-              <h5>
-                Can only be changed
-                <span style={{ color: '#e34234' }}>
-                  <u>ONCE</u>
-                </span>
-              </h5>
-              <p>
-                Want to change your username?
-                <span className="reset-text" onClick={usernameReset}>
-                  here
-                </span>
-              </p>
-            </div>
-          )}
+        {setIsUsernameChanged? null : (
+          <div>
+            <h5>
+              Can only be changed
+              <span style={{ color: '#e34234' }}>
+                <u>ONCE</u>
+              </span>
+            </h5>
+            <p>
+              Want to change your username?
+              <span className="reset-text" onClick={usernameReset}>
+                here
+              </span>
+            </p>
+          </div>
+        )}
         </div>
       </div>
     </>
