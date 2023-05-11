@@ -108,7 +108,7 @@ const Csgo = () => {
       newScore -= 1;
     }
 
-    Cookies.set('score', newScore.toString());
+    Cookies.set('score', newScore.toString(),{ secure: true });
     setScore(newScore);
     setPoint(newPoint);
   };

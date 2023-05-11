@@ -17,7 +17,7 @@ const Settings = () => {
     if (!userId) {
       const id = uuidv4();
       const shortUuid = id.slice(0, 8);
-      Cookies.set('userId', shortUuid);
+      Cookies.set('userId', shortUuid,{ secure: true });
       setUserId(shortUuid);
     }
   }, [userId]);
@@ -96,7 +96,7 @@ const Settings = () => {
           );
           checkUsername();
         }
-        Cookies.set('username', newUsername);
+        Cookies.set('username', newUsername,{ secure: true });
         setUsername(newUsername);
         setIsUsernameChanged(true); // set isUsernameChanged to true permanently
         saveUser(newUsername, score);
