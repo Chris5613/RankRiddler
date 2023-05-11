@@ -28,13 +28,29 @@ const Home = () => {
           </NavLink>
         </div>
       </div>
-      <div className='home-container'>
-        <div className='home-instrutions-container'>
-          <p>Head over to <NavLink className="home-text"to="/settings">settings</NavLink> to set your username</p>
-          <br/>
-          <p>Submit your clips <NavLink className="home-text"to="/submit">here</NavLink></p>
-          <br/>
-          <p>Report bugs,errors, or feedback <NavLink className="home-text"to="/bug">here</NavLink></p>
+      <div className="home-container">
+        <div className="home-instrutions-container">
+          <p>
+            Head over to{' '}
+            <NavLink className="home-text" to="/settings">
+              settings
+            </NavLink>{' '}
+            to set your username
+          </p>
+          <br />
+          <p>
+            Submit your clips{' '}
+            <NavLink className="home-text" to="/submit">
+              here
+            </NavLink>
+          </p>
+          <br />
+          <p>
+            Report bugs,errors, or feedback{' '}
+            <NavLink className="home-text" to="/bug">
+              here
+            </NavLink>
+          </p>
         </div>
       </div>
     </>

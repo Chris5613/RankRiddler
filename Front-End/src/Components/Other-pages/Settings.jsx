@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 
@@ -75,7 +75,8 @@ const Settings = () => {
   }, [username, data]);
 
   const usernameReset = () => {
-    if (isUsernameChanged) { // don't reset if username has already been changed
+    if (isUsernameChanged) {
+      // don't reset if username has already been changed
       return;
     }
     Cookies.remove('username');
@@ -104,7 +105,31 @@ const Settings = () => {
     checkUsername();
   };
 
-  console.log(isUsernameChanged)
+  const deleteAccount = async () => {
+    Cookies.remove('username');
+    Cookies.remove('score');
+    Cookies.remove('userId');
+    localStorage.removeItem('userId');
+    try {
+      const response = await fetch(
+        `https://rr-back-end.onrender.com/deleteuser`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -125,22 +150,27 @@ const Settings = () => {
           Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
         </p>
         <div className="reset-container">
-        {setIsUsernameChanged? null : (
-          <div>
-            <h5>
-              Can only be changed
-              <span style={{ color: '#e34234' }}>
-                <u>ONCE</u>
-              </span>
-            </h5>
-            <p>
-              Want to change your username?
-              <span className="reset-text" onClick={usernameReset}>
-                here
-              </span>
-            </p>
-          </div>
-        )}
+          {setIsUsernameChanged ? (
+          <span className="reset-text" onClick={deleteAccount}>
+            Delete my Account
+          </span> 
+          ) : (
+            <div>
+              <p>Must set a username to have your points save</p>
+              <br/>
+              <h5>
+                Can only be changed
+                <span style={{ color: '#e34234' }}>
+                  <u>ONCE</u>
+                </span>
+              </h5>
+              <p>
+                <span className="reset-text" onClick={usernameReset}>
+                  Change
+                </span>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </>
