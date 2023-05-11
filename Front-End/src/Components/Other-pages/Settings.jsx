@@ -94,10 +94,7 @@ const Settings = () => {
     Cookies.remove('username');
     let newUsername = prompt('Please enter a new username');
     const checkUsername = () => {
-      if (newUsername === null) {
-        newUsername = prompt('Please enter a new username');
-        checkUsername();
-      } else if (newUsername === '') {
+      if (newUsername === null || newUsername === '') {
         newUsername = prompt('Please enter a new username');
         checkUsername();
       } else {
@@ -108,6 +105,7 @@ const Settings = () => {
           );
           checkUsername();
         }
+
         Cookies.set('username', newUsername,{ secure: true });
         Cookies.set('isUsernameChanged', true, { secure: true }); 
         setIsUsernameChanged(true); 
