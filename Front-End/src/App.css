@@ -26,7 +26,8 @@ html {
   }
 }
 
-h2, .tos {
+h2,
+.tos {
   color: white;
   margin-top: 2rem;
 }
@@ -522,9 +523,70 @@ td,
   .modal-content {
     width: 100%;
   }
-
 }
 
 .X {
   cursor: pointer;
+}
+
+.settings-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  color: white;
+  font: 25px Helvetica, sans-serif;
+  text-align: center;
+}
+
+.settings-container span {
+  margin-left: 1rem;
+}
+
+.settings-container p {
+  margin-top: 1rem;
+}
+
+.reset-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 20vh;
+  color: white;
+  font: 25px Helvetica, sans-serif;
+  text-align: center;
+}
+
+.reset-text {
+  color: #ff0000;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.home-instrutions-container {
+  /* make it a small box with a gray border */
+  border: 2px solid gray;
+  padding: 10px;
+  width: 500px;
+  height: 150px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-text {
+  color: wheat;
+}
+
+.bottom-img {
+  margin-right: 1rem;
 }

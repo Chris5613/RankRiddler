@@ -5,13 +5,17 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routers/users");
 const formRoutes = require("./routers/form");
 const cors = require("cors");
-const path = require('path');
+const path = require("path");
 
 // server file
 const app = express();
 app.use(
   cors({
-    origin: ["https://rr-front-end.onrender.com", "https://www.rankriddler.com", "http://localhost:3000"]
+    origin: [
+      "https://rr-front-end.onrender.com",
+      "https://www.rankriddler.com",
+      "http://localhost:3000",
+    ],
   })
 );
 
@@ -32,10 +36,10 @@ mongoose.connection.on("error", (err) => {
   process.exit();
 });
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, "build")));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.use("/", userRoutes);

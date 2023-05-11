@@ -18,25 +18,16 @@ const League = () => {
   const [selectedRank, setSelectedRank] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [url, setUrl] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const token = Cookies.get('token');
   const [showModal, setShowModal] = useState(false);
   const [rank, setRank] = useState('');
-  const [score, setScore] = useState(0);
   const [result, setResult] = useState('');
-  const [point , setPoint] = useState(0);
-  const [player , setPlayer] = useState('');
-
+  const [player, setPlayer] = useState('');
+  let [score, setScore] = useState();
+  const [point, setPoint] = useState(0);
 
   const handleModal = () => {
     setShowModal(!showModal);
   };
-
-  useEffect(() => {
-    if (token) {
-      setLoggedIn(true);
-    }
-  }, [token]);
 
   useEffect(() => {
     setIsButtonDisabled(selectedRank === null);
@@ -48,86 +39,29 @@ const League = () => {
 
   const youtubeUrl = url;
   const rankImages = {
-    'Iron': Iron,
-    'Bronze': Bronze,
-    'Silver': Silver,
-    'Gold': Gold,
-    'Platinum': Platinum,
-    'Diamond': Diamond,
-    'Master': Master,
-    'Grandmaster': Grandmaster,
-    'Challenger': Challenger,
+    Iron: Iron,
+    Bronze: Bronze,
+    Silver: Silver,
+    Gold: Gold,
+    Platinum: Platinum,
+    Diamond: Diamond,
+    Master: Master,
+    Grandmaster: Grandmaster,
+    Challenger: Challenger,
   };
-  
+
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-  useEffect(() => {
-    const getPoints = async () => {
-      const response = await fetch('https://rr-back-end.onrender.com/getpoints', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-          username: Cookies.get('userName'),
-        },
-      });
-      const data = await response.json();
-      setScore(data.points)
-    };
-    getPoints();
-  }, [token]);
-
-
-  const addPoints = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/addpoints', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        username: Cookies.get('userName'),
-      },
-    });
-    // eslint-disable-next-line no-unused-vars
-    const data = await response.json();
-    setScore(data.user.points)
-  };
-  
-  const Add1Points = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/add1points', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        username: Cookies.get('userName')
-      },
-    });
-    // eslint-disable-next-line no-unused-vars
-    const data = await response.json();
-    setScore(data.user.points)
-  };
-
-  const deductPoints = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/deductpoints', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        username: Cookies.get('userName')
-      },
-    });
-    // eslint-disable-next-line no-unused-vars
-    const data = await response.json();
-    setScore(data.user.points)
-  };
-  
   const getYoutubeUrl = async () => {
-    const response = await fetch('https://rr-back-end.onrender.com/form/leaguedata');
+    const response = await fetch(
+      'https://rr-back-end.onrender.com/form/leaguedata'
+    );
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     setUrl(data.form[randomIndex].youtubeLink);
     setRank(data.form[randomIndex].rank);
-    setPlayer(data.form[randomIndex].playerInfo)
+    setPlayer(data.form[randomIndex].playerInfo);
   };
 
   useEffect(() => {
@@ -142,7 +76,6 @@ const League = () => {
   };
 
   const checkAnswer = () => {
-
     const rankList = [
       'Iron',
       'Bronze',
@@ -158,109 +91,148 @@ const League = () => {
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
 
+    let newScore = parseInt(Cookies.get('score') || '0'); // Parse the current score from cookies
+    let newPoint = 0;
+
     if (rank === selectedRank) {
       setResult(check);
-      setPoint(2);
-      addPoints();
+      newPoint = 2;
+      newScore += 2;
     } else if (distance === 1) {
       setResult(wrong);
-      setPoint(1);
-      Add1Points();
+      newPoint = 1;
+      newScore += 1;
     } else {
       setResult(wrong);
-      setPoint(-1);
-      deductPoints();
+      newPoint = -1;
+      newScore -= 1;
     }
-}
+
+    Cookies.set('score', newScore.toString(),{ secure: true });
+    setScore(newScore);
+    setPoint(newPoint);
+  };
 
   return (
     <>
-      {loggedIn ? (
-        <>
-          <div>
-            <VideoPlayer url={youtubeUrl} />
-          </div>
-            {showModal && (
-              <div className="modal">
-                <div className="modal-content">
-                  <br />
-                  <div className="modal-example">
-                    <div>
-                      <div className="modal-example-heading">Correct Rank</div>
-                      <img
-                        className="modal-example-image"
-                        src={pic}
-                        alt="Radiant"
-                        width={100}
-                      />
-                    </div>
-                    <div>
-                      <div className="modal-example-heading">Your Guess</div>
-                      <img
-                        className="modal-example-image"
-                        src={submittedRank}
-                        alt="rank"
-                        width={100}
-                      />
-                    </div>
-                    <div>
-                      <div className="modal-example-heading result-title">Result</div>
-                      <img
-                        className="modal-example-image wrong"
-                        src={result}
-                        alt="wrong"
-                        width={70}
-                      />
-                      <p className="modal-example-wrong">{point} Point</p>
-                    </div>
-                  </div>
-                  <br />
-                  <br />
-                  <p className="text">You currently have {score} points</p>
-                  <br />
-                  <p className="text">Credit: {player}</p>
-                  <button
-                    onClick={refresh}
-                    className="submit-btn"
-                  >
-                    Next Video
-                  </button>
-                </div>
-              </div>
-            )}
-        <div className="ranks">
-          <RankImage rank="Iron" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Iron}/>
-          <RankImage rank="Bronze" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Bronze}/>
-          <RankImage rank="Silver" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Silver} />
-          <RankImage rank="Gold" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Gold}/>
-          <RankImage rank="Platinum" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Platinum}/>
-          <RankImage rank="Diamond" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Diamond}/>
-          <RankImage rank="Master" selectedRank={selectedRank}handleRankClick={handleRankClick} src={Master}/>
-          <RankImage rank="Grandmaster" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Grandmaster}/>
-          <RankImage rank="Challenger" selectedRank={selectedRank} handleRankClick={handleRankClick} src={Challenger}/>
-        </div>
-        <div>
-          <button
-            className="submit"
-            onClick={() => {
-              handleModal();
-              checkAnswer();
-            }}
-            disabled={isButtonDisabled}
-          >
-            {selectedRank
-              ? `Selected Rank: ${selectedRank}`
-              : 'Select a Rank'}
-          </button>
-        </div>
-      </>
-    ) : (
       <div>
-        <h1>Please Login to play</h1>
+        <VideoPlayer url={youtubeUrl} />
       </div>
-    )}
-  </>
-);
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <br />
+            <div className="modal-example">
+              <div>
+                <div className="modal-example-heading">Correct Rank</div>
+                <img
+                  className="modal-example-image"
+                  src={pic}
+                  alt="Radiant"
+                  width={100}
+                />
+              </div>
+              <div>
+                <div className="modal-example-heading">Your Guess</div>
+                <img
+                  className="modal-example-image"
+                  src={submittedRank}
+                  alt="rank"
+                  width={100}
+                />
+              </div>
+              <div>
+                <div className="modal-example-heading result-title">Result</div>
+                <img
+                  className="modal-example-image wrong"
+                  src={result}
+                  alt="wrong"
+                  width={70}
+                />
+                <p className="modal-example-wrong">{point} Point</p>
+              </div>
+            </div>
+            <br />
+            <br />
+            <p className="text">You currently have {score} points</p>
+            <br />
+            <p className="text">Credit: {player}</p>
+            <button onClick={refresh} className="submit-btn">
+              Next Video
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="ranks">
+        <RankImage
+          rank="Iron"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Iron}
+        />
+        <RankImage
+          rank="Bronze"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Bronze}
+        />
+        <RankImage
+          rank="Silver"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Silver}
+        />
+        <RankImage
+          rank="Gold"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Gold}
+        />
+        <RankImage
+          rank="Platinum"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Platinum}
+        />
+        <RankImage
+          rank="Diamond"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Diamond}
+        />
+        <RankImage
+          rank="Master"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Master}
+        />
+        <RankImage
+          rank="Grandmaster"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Grandmaster}
+        />
+        <RankImage
+          rank="Challenger"
+          selectedRank={selectedRank}
+          handleRankClick={handleRankClick}
+          src={Challenger}
+        />
+      </div>
+      <div>
+        <button
+          className="submit"
+          onClick={() => {
+            handleModal();
+            checkAnswer();
+          }}
+          disabled={isButtonDisabled}
+        >
+          {selectedRank ? `Selected Rank: ${selectedRank}` : 'Select a Rank'}
+        </button>
+      </div>
+    </>
+  );
 };
 
 export default League;
