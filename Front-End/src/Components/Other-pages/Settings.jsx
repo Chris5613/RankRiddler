@@ -70,6 +70,7 @@ const Settings = () => {
       });
       const data = await response.json();
       console.log(data);
+      return data
     } catch (error) {
       console.error(error);
     }
@@ -90,22 +91,23 @@ const Settings = () => {
     }
     Cookies.remove('username');
     let newUsername = prompt('Please enter a new username');
-    const checkUsername = () => {
+    const checkUsername = async () => {
       if (newUsername === null || newUsername === '') {
         newUsername = prompt('Please enter a new username');
         checkUsername();
       } else {
-        const sameName = data.find((user) => user.username === newUsername);
-        if (sameName) {
-          newUsername = prompt(
-            'Username already exists, please enter a new username'
-          );
-          checkUsername();
+        // sends username to backend and sets response to the newUser variable   
+        const newUser = await saveUser(newUsername, score);
+        //if there was an error then username prompt is reopened with error msg text
+        //otherwise, cookies are set with new info
+        if(newUser.error){
+          newUsername = prompt(newUser.error)
+          checkUsername()
+        }else{
+          Cookies.set('username', newUsername,{ secure: true });
+          Cookies.set('isUsernameChanged', true, { secure: true }); 
+          setIsUsernameChanged(true); 
         }
-        Cookies.set('username', newUsername,{ secure: true });
-        Cookies.set('isUsernameChanged', true, { secure: true }); 
-        setIsUsernameChanged(true); 
-        saveUser(newUsername, score);
       }
     };
     checkUsername();
