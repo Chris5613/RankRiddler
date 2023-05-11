@@ -29,9 +29,6 @@ const Settings = () => {
     const storedScore = Cookies.get('score') || 0;
     Cookies.set('score', storedScore, { secure: true });
   
-    if (userId && storedUsername !== 'Guest') {
-      saveUser(storedUsername, storedScore);
-    }
   }, [userId]);
   
 
@@ -105,7 +102,6 @@ const Settings = () => {
           );
           checkUsername();
         }
-
         Cookies.set('username', newUsername,{ secure: true });
         Cookies.set('isUsernameChanged', true, { secure: true }); 
         setIsUsernameChanged(true); 
