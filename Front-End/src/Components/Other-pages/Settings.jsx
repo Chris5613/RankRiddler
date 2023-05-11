@@ -74,7 +74,6 @@ const Settings = () => {
 
   const usernameReset = () => {
     if (isUsernameChanged) {
-      // don't reset if username has already been changed
       return;
     }
     Cookies.remove('username');
@@ -95,40 +94,12 @@ const Settings = () => {
           checkUsername();
         }
         Cookies.set('username', newUsername,{ secure: true });
-        Cookies.set('isUsernameChanged', true, { secure: true }); // added statement
-        setUsername(newUsername);
-        setIsUsernameChanged(true); // set isUsernameChanged to true permanently
+        Cookies.set('isUsernameChanged', true, { secure: true }); 
+        setIsUsernameChanged(true); 
         saveUser(newUsername, score);
       }
     };
     checkUsername();
-  };
-  
-
-  const deleteAccount = async () => {
-    Cookies.remove('username');
-    Cookies.remove('score');
-    Cookies.remove('userId');
-    localStorage.removeItem('userId');
-    try {
-      const response = await fetch(
-        `https://rr-back-end.onrender.com/deleteuser`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-          }),
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-    }
-    catch (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -150,11 +121,8 @@ const Settings = () => {
           Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
         </p>
         <div className="reset-container">
-          {setIsUsernameChanged ? (
-          <span className="reset-text" onClick={deleteAccount}>
-            Delete my Account
-          </span> 
-          ) : (
+          {isUsernameChanged ? null 
+          : (
             <div>
               <p>Must set a username to have your points save</p>
               <br/>
