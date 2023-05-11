@@ -11,14 +11,29 @@ const Settings = () => {
   const [username, setUsername] = useState(Cookies.get('username') || 'Guest');
   const [isUsernameChanged, setIsUsernameChanged] = useState(Cookies.get('isUsernameChanged') === 'true');
   const score = Cookies.get('score') || 0;
+  
   useEffect(() => {
     if (!userId) {
       const id = uuidv4();
       const shortUuid = id.slice(0, 8);
-      Cookies.set('userId', shortUuid,{ secure: true });
+      Cookies.set('userId', shortUuid, { secure: true });
       setUserId(shortUuid);
     }
+  
+    const storedUsername = Cookies.get('username') || 'Guest';
+    setUsername(storedUsername);
+  
+    // If the stored username is "Guest", set isUsernameChanged to false
+    setIsUsernameChanged(storedUsername !== 'Guest');
+  
+    const storedScore = Cookies.get('score') || 0;
+    Cookies.set('score', storedScore, { secure: true });
+  
+    if (userId && storedUsername !== 'Guest') {
+      saveUser(storedUsername, storedScore);
+    }
   }, [userId]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
