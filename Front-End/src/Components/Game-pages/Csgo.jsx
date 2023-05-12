@@ -13,7 +13,7 @@ import ge from '../../Assets/Csgo-Icons/GE.png';
 import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
 import RankImage from './RankImage';
-import { csgoActions } from '../../store/CsgoSlice';
+import { csgoActions } from '../store/CsgoSlice';
 import {useDispatch,useSelector} from "react-redux"
 
 const Csgo = () => {

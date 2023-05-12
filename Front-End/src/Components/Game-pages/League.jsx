@@ -14,7 +14,7 @@ import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
-import { leagueActions } from '../../store/LeagueSlice';
+import { leagueActions } from '../store/LeagueSlice';
 
 const League = () => {
   const dispatch = useDispatch();

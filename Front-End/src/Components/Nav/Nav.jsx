@@ -10,7 +10,7 @@ import BottomLink from './BottomLink';
 import GameLink from './Gamelink';
 import { NavLink } from 'react-router-dom';
 import setting from '../../Assets/Nav-Icons/settings.png';
-import { navActions } from '../../store/NavSlice';
+import { navActions } from '../store/NavSlice';
 import { useSelector, useDispatch } from 'react-redux';
 const Nav = () => {
   const dispatch = useDispatch();

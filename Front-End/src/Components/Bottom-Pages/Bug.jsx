@@ -1,5 +1,5 @@
 
-import { bugActions } from '../../store/BugSlice';
+import { bugActions } from '../store/BugSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 function BugReportForm() {

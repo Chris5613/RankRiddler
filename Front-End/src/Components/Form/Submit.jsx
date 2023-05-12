@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { submitActions } from '../../store/SubmitSlice';
+import { submitActions } from '../store/SubmitSlice';
 
 function Submit() {
   const dispatch = useDispatch();

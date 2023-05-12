@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { leaderboardActions } from '../../store/LeaderboardSlice';
+import { leaderboardActions } from '../store/LeaderboardSlice';
 
 const Leaderboard = () => {
   const selection = useSelector((state) => state.leaderboard.selection);

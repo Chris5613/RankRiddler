@@ -2,7 +2,7 @@ import React, {  useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 import {useDispatch,useSelector} from "react-redux"
-import { settingsActions } from '../../store/SettingsSlice';
+import { settingsActions } from '../store/SettingsSlice';
 
 const Settings = () => {
 
