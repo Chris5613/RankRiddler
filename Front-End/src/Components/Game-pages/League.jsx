@@ -22,7 +22,7 @@ const League = () => {
   const isButtonDisabled = useSelector(
     (state) => state.league.isButtonDisabled
   );
-  const url = useSelector((state) => state.csgo.url);
+  const url = useSelector((state) => state.league.url);
   const showModal = useSelector((state) => state.league.showModal);
   const rank = useSelector((state) => state.league.rank);
   const result = useSelector((state) => state.league.result);
