@@ -10,32 +10,41 @@ import Immortal from '../../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import { useState, useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
 import RankImage from './RankImage';
+import { useSelector, useDispatch } from 'react-redux';
+import { valorantActions } from '../../store/ValorantSlice';
 
 const Valorant = () => {
-  const [selectedRank, setSelectedRank] = useState(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [url, setUrl] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [rank, setRank] = useState('');
-  const [result, setResult] = useState('');
-  const [player, setPlayer] = useState('');
-  let [score, setScore] = useState();
-  const [point, setPoint] = useState(0);
+  const dispatch = useDispatch();
+  const selectedRank = useSelector((state) => state.valorant.selectedRank);
+  const isButtonDisabled = useSelector(
+    (state) => state.valorant.isButtonDisabled
+  );
+  const url = useSelector((state) => state.valorant.url);
+  const showModal = useSelector((state) => state.valorant.showModal);
+  const rank = useSelector((state) => state.valorant.rank);
+  const result = useSelector((state) => state.valorant.result);
+  const player = useSelector((state) => state.valorant.player);
+  const score = useSelector((state) => state.valorant.score);
+  const point = useSelector((state) => state.valorant.point);
+
 
   const handleModal = () => {
-    setShowModal(!showModal);
+    dispatch(valorantActions.toggleShowModal());
+
   };
 
   useEffect(() => {
-    setIsButtonDisabled(selectedRank === null);
-  }, [selectedRank]);
+    dispatch(valorantActions.setIsButtonDisabled(selectedRank === null));
+
+  }, [selectedRank, dispatch]);
 
   const handleRankClick = (rank) => {
-    setSelectedRank(rank);
+    dispatch(valorantActions.setSelectedRank(rank));
+
   };
 
   const youtubeUrl = url;
@@ -54,40 +63,49 @@ const Valorant = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-  const getYoutubeUrl = async () => {
+  const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
       'https://rr-back-end.onrender.com/form/valdata'
     );
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
-    setUrl(data.form[randomIndex].youtubeLink);
-    setRank(data.form[randomIndex].rank);
-    setPlayer(data.form[randomIndex].playerInfo);
-  };
+    dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
+
+    dispatch(valorantActions.setRank(data.form[randomIndex].rank));
+
+    dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
+
+  }, [dispatch]);
 
   useEffect(() => {
     getYoutubeUrl();
-  }, []);
+  }, [getYoutubeUrl]);
 
   const refresh = () => {
     getYoutubeUrl();
-    setSelectedRank(null);
-    setIsButtonDisabled(true);
-    setShowModal(false);
+    dispatch(valorantActions.setSelectedRank(null));
+
+    dispatch(valorantActions.setIsButtonDisabled(true));
+
+    dispatch(valorantActions.hideShowModal());
+
   };
 
   const updatePoints = async (updatedScore) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: Cookies.get('username'),
-          points: updatedScore,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/updatepoints',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: Cookies.get('username'),
+            points: updatedScore,
+          }),
+        }
+      );
       const data = await response.json();
       console.log(data);
     } catch (error) {
@@ -111,34 +129,37 @@ const Valorant = () => {
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
 
-    let updatedScore = parseInt(Cookies.get('score') || '0'); 
+    let updatedScore = parseInt(Cookies.get('score') || '0');
     let pointEarned = 0;
 
     if (rank === selectedRank) {
-      setResult(check);
+      dispatch(valorantActions.setResult(check));
+
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
-      setResult(wrong);
+      dispatch(valorantActions.setResult(wrong));
+
       pointEarned = 1;
       updatedScore += 1;
     } else {
-      setResult(wrong);
+      dispatch(valorantActions.setResult(wrong));
+
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
-    setScore(updatedScore);
-    setPoint(pointEarned);
+    dispatch(valorantActions.setScore(updatedScore));
+
+    dispatch(valorantActions.setPoint(pointEarned));
+
 
     console.log(updatedScore);
     console.log(pointEarned);
     updatePoints(updatedScore);
   };
 
-
-  
   return (
     <>
       <div className="game-container">

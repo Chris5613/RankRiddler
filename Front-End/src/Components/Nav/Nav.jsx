@@ -10,18 +10,23 @@ import BottomLink from './BottomLink';
 import GameLink from './Gamelink';
 import { NavLink } from 'react-router-dom';
 import setting from '../../Assets/Nav-Icons/settings.png';
-
+import { navActions } from '../../store/NavSlice';
+import { useSelector, useDispatch } from 'react-redux';
 const Nav = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch();
+  const showMenu = useSelector((state) => state.nav.showMenu);
+
 
   const toggleMenu = () => {
-    setShowMenu(!showMenu);
+    dispatch(navActions.toggleMenu());
+
   };
   let menuRef = useRef(null);
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
-        setShowMenu(false);
+        dispatch(navActions.hideMenu());
+
       }
     };
     document.addEventListener('mousedown', handler);
@@ -46,67 +51,67 @@ const Nav = () => {
               altText="Valorant"
               linkText="Valorant"
               to="/valorant"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             />
             <GameLink
               imgSrc={lol}
               altText="league"
               linkText="League"
               to="/league"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             />
             <GameLink
               imgSrc={csgo}
               altText="csgo"
               linkText="CSGO"
               to="/csgo"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             />
             <BottomLink
               imgSrc={submit}
               altText="movie-logo"
               linkText="Submit a Clip"
               to="/submit"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             />
             <BottomLink
               imgSrc={leader}
               altText="movie-logo"
               linkText="Leaderboard"
               to="/leaderboard"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             />
             <BottomLink
               imgSrc={setting}
               altText="movie-logo"
               linkText="Settings"
               to="/settings"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             />
           </ul>
           <hr />
           <ul>
             <li
               className="bottom-links other-links"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             >
               <NavLink to="/howto">How to play</NavLink>
             </li>
             <li
               className="bottom-links other-links"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             >
               <NavLink to="/tos">Terms of Services</NavLink>
             </li>
             <li
               className="bottom-links other-links"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             >
               <NavLink to="/privacy">Privacy Policy</NavLink>
             </li>
             <li
               className="bottom-links other-links"
-              onClick={() => setShowMenu(false)}
+              onClick={() => dispatch(navActions.hideMenu())}
             >
               <NavLink to="/bug">Report a Bug</NavLink>
             </li>

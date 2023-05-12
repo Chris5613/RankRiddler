@@ -1,35 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
+import {useDispatch,useSelector} from "react-redux"
+import { settingsActions } from '../../store/SettingsSlice';
 
 const Settings = () => {
-  const [userId, setUserId] = useState(
-    () => localStorage.getItem('userId') || ''
+
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.settings.userId);
+  const data = useSelector((state) => state.settings.data);
+  const index = useSelector((state) => state.settings.index);
+  const username = useSelector((state) => state.settings.username);
+  const isUsernameChanged = useSelector(
+    (state) => state.settings.isUsernameChanged
   );
-  const [data, setData] = useState([]);
-  const [index, setIndex] = useState(-1);
-  const [username, setUsername] = useState(Cookies.get('username') || 'Guest');
-  const [isUsernameChanged, setIsUsernameChanged] = useState(Cookies.get('isUsernameChanged') === 'true');
+
+
   const score = Cookies.get('score') || 0;
-  
+
   useEffect(() => {
     if (!userId) {
       const id = uuidv4();
       const shortUuid = id.slice(0, 8);
       Cookies.set('userId', shortUuid, { secure: true });
-      setUserId(shortUuid);
+      dispatch(settingsActions.setUserId(shortUuid));
+
     }
-  
+
     const storedUsername = Cookies.get('username') || 'Guest';
-    setUsername(storedUsername);
-  
+    dispatch(settingsActions.setUsername(storedUsername));
+
+
     // If the stored username is "Guest", set isUsernameChanged to false
-    setIsUsernameChanged(storedUsername !== 'Guest');
-  
+    dispatch(settingsActions.setIsUsernameChanged(storedUsername !== 'Guest'));
+
+
     const storedScore = Cookies.get('score') || 0;
     Cookies.set('score', storedScore, { secure: true });
-  }, [userId]);
-  
+  }, [userId,dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,29 +55,33 @@ const Settings = () => {
           throw new Error('Failed to fetch data');
         }
         const userData = await response.json();
-        setData(userData);
+        dispatch(settingsActions.setData(userData))
+        // setData(userData);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const saveUser = async (username, score) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/saveuser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          points: score,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/saveuser',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            points: score,
+          }),
+        }
+      );
       const data = await response.json();
       console.log(data);
-      return data
+      return data;
     } catch (error) {
       console.error(error);
     }
@@ -78,11 +90,13 @@ const Settings = () => {
   useEffect(() => {
     const foundUser = data.find((user) => user.username === username);
     if (foundUser) {
-      setIndex(data.indexOf(foundUser));
+      dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
+
     } else {
-      setIndex(-1);
+      dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
+
     }
-  }, [username, data]);
+  }, [username, data,dispatch]);
 
   const usernameReset = () => {
     if (isUsernameChanged) {
@@ -94,16 +108,17 @@ const Settings = () => {
       if (newUsername === null || newUsername === '') {
         newUsername = prompt('Please enter a new username');
         checkUsername();
-      }   
+      }
       const newUser = await saveUser(newUsername, score);
-      if(newUser.error){
-        newUsername = prompt(newUser.error)
-        checkUsername()
+      if (newUser.error) {
+        newUsername = prompt(newUser.error);
+        checkUsername();
       }
       Cookies.set('username', newUsername, { secure: true });
       Cookies.set('isUsernameChanged', true, { secure: true });
-      setUsername(Cookies.get('username'));
-      setIsUsernameChanged(true);       
+      dispatch(settingsActions.setUsername(Cookies.get('username')));
+      dispatch(settingsActions.setIsUsernameChanged(true));
+
     };
     checkUsername();
   };
@@ -127,11 +142,10 @@ const Settings = () => {
           Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
         </p>
         <div className="reset-container">
-          {isUsernameChanged ? null 
-          : (
+          {isUsernameChanged ? null : (
             <div>
               <p>Must set a username to see your leaderboard rank</p>
-              <br/>
+              <br />
               <h5>
                 Can only be changed
                 <span style={{ color: '#e34234' }}>

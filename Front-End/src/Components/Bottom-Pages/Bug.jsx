@@ -1,15 +1,21 @@
-import { useState } from 'react';
+
+import { bugActions } from '../../store/BugSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 function BugReportForm() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
+  const title = useSelector((state) => state.nav.title);
+  const description = useSelector((state) => state.nav.description);
+
 
   const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+    dispatch(bugActions.setTitle(event.target.value));
+
   };
 
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    dispatch(bugActions.setDescription(event.target.value));
+
   };
 
   const submit = (event) => {

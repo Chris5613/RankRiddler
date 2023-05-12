@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {  useCallback, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import silver from '../../Assets/Csgo-Icons/Silver.png';
@@ -13,29 +13,37 @@ import ge from '../../Assets/Csgo-Icons/GE.png';
 import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
 import RankImage from './RankImage';
+import { csgoActions } from '../../store/CsgoSlice';
+import {useDispatch,useSelector} from "react-redux"
 
 const Csgo = () => {
-  const [selectedRank, setSelectedRank] = useState(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [url, setUrl] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [rank, setRank] = useState('');
-  const [result, setResult] = useState('');
-  const [player, setPlayer] = useState('');
-  let [score, setScore] = useState();
-  const [point, setPoint] = useState(0);
+  const dispatch = useDispatch()
+  const selectedRank = useSelector(state=>state.csgo.selectedRank)
+  const isButtonDisabled = useSelector(state=>state.csgo.isButtonDisabled)
+  const url = useSelector(state=>state.csgo.url)
+  const showModal = useSelector(state=>state.csgo.showModal)
+  const rank = useSelector(state=>state.csgo.rank)
+  const result = useSelector(state=>state.csgo.result)
+  const player = useSelector(state=>state.csgo.player)
+  const score = useSelector(state=>state.csgo.score)
+  const point = useSelector(state=>state.csgo.point)
+
 
   const handleModal = () => {
-    setShowModal(!showModal);
+    dispatch(csgoActions.toggleShowModal())
+
   };
 
   useEffect(() => {
-    setIsButtonDisabled(selectedRank === null);
-  }, [selectedRank]);
+    dispatch(csgoActions.setIsButtonDisabled(selectedRank === null));
+
+  }, [selectedRank,dispatch]);
 
   const handleRankClick = (rank) => {
-    setSelectedRank(rank);
+
+    dispatch(csgoActions.setSelectedRank(rank))
   };
+
 
   const youtubeUrl = url;
   const rankImages = {
@@ -53,26 +61,31 @@ const Csgo = () => {
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
-  const getYoutubeUrl = async () => {
+  const getYoutubeUrl = useCallback( async () => {
     const response = await fetch(
       'https://rr-back-end.onrender.com/form/csgodata'
     );
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
-    setUrl(data.form[randomIndex].youtubeLink);
-    setRank(data.form[randomIndex].rank);
-    setPlayer(data.form[randomIndex].playerInfo);
-  };
+    dispatch(csgoActions.setUrl(data.form[randomIndex].youtubeLink));
+
+    dispatch(csgoActions.setRank(data.form[randomIndex].rank));
+
+    dispatch(csgoActions.setPlayer(data.form[randomIndex].playerInfo));
+
+  },[dispatch])
 
   useEffect(() => {
     getYoutubeUrl();
-  }, []);
+  }, [getYoutubeUrl]);
 
   const refresh = () => {
     getYoutubeUrl();
-    setSelectedRank(null);
-    setIsButtonDisabled(true);
-    setShowModal(false);
+    dispatch(csgoActions.setSelectedRank(null));
+    dispatch(csgoActions.setIsButtonDisabled(true))
+
+    dispatch(csgoActions.hideShowModal())
+
   };
 
   const updatePoints = async (updatedScore) => {
@@ -114,22 +127,27 @@ const Csgo = () => {
     let pointEarned = 0;
 
     if (rank === selectedRank) {
-      setResult(check);
+      dispatch(csgoActions.setResult(check))
+
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
-      setResult(wrong);
+      dispatch(csgoActions.setResult(wrong))
+
       pointEarned = 1;
       updatedScore += 1;
     } else {
-      setResult(wrong);
+      dispatch(csgoActions.setResult(wrong))
+
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
-    setScore(updatedScore);
-    setPoint(pointEarned);
+    dispatch(csgoActions.setScore(updatedScore));
+
+    dispatch(csgoActions.setPoint(pointEarned))
+
 
     console.log(updatedScore);
     console.log(pointEarned);

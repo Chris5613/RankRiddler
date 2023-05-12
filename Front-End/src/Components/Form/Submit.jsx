@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { submitActions } from '../../store/SubmitSlice';
 
 function Submit() {
-  const [game, setGame] = useState('');
+  const dispatch = useDispatch();
+  const game = useSelector((state) => state.submit.game);
+
 
   const handleGameChange = (event) => {
-    setGame(event.target.value);
+    dispatch(submitActions.setGame(event.target.value));
+
   };
 
   return (
