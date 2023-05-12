@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { leaderboardActions } from '../../store/LeaderboardSlice';
 
 const Leaderboard = () => {
-  const [selection, setSelection] = useState('');
+  const selection = useSelector((state) => state.leaderboard.selection);
+  const dispatch = useDispatch();
+
+  // const [selection, setSelection] = useState('');
   const handleGameChange = (event) => {
-    setSelection(event.target.value);
+    dispatch(leaderboardActions.setSelection(event.target.value));
+    // setSelection(event.target.value);
   };
 
   return (

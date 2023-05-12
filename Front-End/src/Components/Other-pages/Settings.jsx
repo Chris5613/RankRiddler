@@ -1,39 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
+import { settingsActions } from '../../store/SettingsSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Settings = () => {
-  const [userId, setUserId] = useState(
-    () => localStorage.getItem('userId') || ''
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.settings.userId);
+  const data = useSelector((state) => state.settings.data);
+  const index = useSelector((state) => state.settings.index);
+  const username = useSelector((state) => state.settings.username);
+  const isUsernameChanged = useSelector(
+    (state) => state.settings.isUsernameChanged
   );
-  const [data, setData] = useState([]);
-  const [index, setIndex] = useState(-1);
-  const [username, setUsername] = useState(Cookies.get('username') || 'Guest');
-  const [isUsernameChanged, setIsUsernameChanged] = useState(Cookies.get('isUsernameChanged') === 'true');
+  // const [userId, setUserId] = useState(
+  //   () => localStorage.getItem('userId') || ''
+  // );
+  // const [data, setData] = useState([]);
+  // const [index, setIndex] = useState(-1);
+  // const [username, setUsername] = useState(Cookies.get('username') || 'Guest');
+  // const [isUsernameChanged, setIsUsernameChanged] = useState(Cookies.get('isUsernameChanged') === 'true');
   const score = Cookies.get('score') || 0;
-  
+
   useEffect(() => {
     if (!userId) {
       const id = uuidv4();
       const shortUuid = id.slice(0, 8);
       Cookies.set('userId', shortUuid, { secure: true });
-      setUserId(shortUuid);
+      dispatch(settingsActions.setUserId(shortUuid));
+      // setUserId(shortUuid);
     }
-  
+
     const storedUsername = Cookies.get('username') || 'Guest';
-    setUsername(storedUsername);
-  
+    dispatch(settingsActions.setUsername(storedUsername));
+    // setUsername(storedUsername);
+
     // If the stored username is "Guest", set isUsernameChanged to false
-    setIsUsernameChanged(storedUsername !== 'Guest');
-  
+    dispatch(settingsActions.setIsUsernameChanged(storedUsername !== 'Guest'));
+    // setIsUsernameChanged(storedUsername !== 'Guest');
+
     const storedScore = Cookies.get('score') || 0;
     Cookies.set('score', storedScore, { secure: true });
-  
+
     if (userId && storedUsername !== 'Guest') {
       saveUser(storedUsername, storedScore);
     }
-  }, [userId]);
-  
+  }, [userId, dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,26 +63,30 @@ const Settings = () => {
           throw new Error('Failed to fetch data');
         }
         const userData = await response.json();
-        setData(userData);
+        dispatch(settingsActions.setData(userData));
+        // setData(userData);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const saveUser = async (username, score) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/saveuser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          points: score,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/saveuser',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            points: score,
+          }),
+        }
+      );
       const data = await response.json();
       console.log(data);
     } catch (error) {
@@ -81,11 +97,13 @@ const Settings = () => {
   useEffect(() => {
     const foundUser = data.find((user) => user.username === username);
     if (foundUser) {
-      setIndex(data.indexOf(foundUser));
+      dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
+      // setIndex(data.indexOf(foundUser));
     } else {
-      setIndex(-1);
+      dispatch(settingsActions.setIndex(-1));
+      // setIndex(-1);
     }
-  }, [username, data]);
+  }, [username, data, dispatch]);
 
   const usernameReset = () => {
     if (isUsernameChanged) {
@@ -108,9 +126,10 @@ const Settings = () => {
           );
           checkUsername();
         }
-        Cookies.set('username', newUsername,{ secure: true });
-        Cookies.set('isUsernameChanged', true, { secure: true }); 
-        setIsUsernameChanged(true); 
+        Cookies.set('username', newUsername, { secure: true });
+        Cookies.set('isUsernameChanged', true, { secure: true });
+        dispatch(settingsActions.setIsUsernameChanged(true));
+        // setIsUsernameChanged(true);
         saveUser(newUsername, score);
       }
     };
@@ -136,11 +155,10 @@ const Settings = () => {
           Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
         </p>
         <div className="reset-container">
-          {isUsernameChanged ? null 
-          : (
+          {isUsernameChanged ? null : (
             <div>
               <p>Must set a username to have your points save</p>
-              <br/>
+              <br />
               <h5>
                 Can only be changed
                 <span style={{ color: '#e34234' }}>
