@@ -32,17 +32,17 @@ const League = () => {
 
   const handleModal = () => {
     dispatch(leagueActions.toggleShowModal());
-    // setShowModal(!showModal);
+
   };
 
   useEffect(() => {
     dispatch(leagueActions.setIsButtonDisabled(selectedRank === null));
-    // setIsButtonDisabled(selectedRank === null);
+
   }, [selectedRank, dispatch]);
 
   const handleRankClick = (rank) => {
     dispatch(leagueActions.setSelectedRank(rank));
-    // setSelectedRank(rank);
+
   };
 
   const youtubeUrl = url;
@@ -68,11 +68,11 @@ const League = () => {
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     dispatch(leagueActions.setUrl(data.form[randomIndex].youtubeLink));
-    // setUrl(data.form[randomIndex].youtubeLink);
+
     dispatch(leagueActions.setRank(data.form[randomIndex].rank));
-    // setRank(data.form[randomIndex].rank);
+
     dispatch(leagueActions.setPlayer(data.form[randomIndex].playerInfo));
-    // setPlayer(data.form[randomIndex].playerInfo);
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -82,11 +82,11 @@ const League = () => {
   const refresh = () => {
     getYoutubeUrl();
     dispatch(leagueActions.setSelectedRank(null));
-    // setSelectedRank(null);
+
     dispatch(leagueActions.setIsButtonDisabled(true));
-    // setIsButtonDisabled(true);
+
     dispatch(leagueActions.hideShowModal());
-    // setShowModal(false);
+
   };
 
   const updatePoints = async (updatedScore) => {
@@ -132,26 +132,26 @@ const League = () => {
 
     if (rank === selectedRank) {
       dispatch(leagueActions.setResult(check));
-      // setResult(check);
+
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
       dispatch(leagueActions.setResult(wrong));
-      // setResult(wrong);
+
       pointEarned = 1;
       updatedScore += 1;
     } else {
       dispatch(leagueActions.setResult(wrong));
-      // setResult(wrong);
+
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
     dispatch(leagueActions.setScore(updatedScore));
-    // setScore(udatedScore);
+
     dispatch(leagueActions.setPoint(pointEarned));
-    // setPoint(pointEarned);
+
 
     console.log(updatedScore);
     console.log(pointEarned);

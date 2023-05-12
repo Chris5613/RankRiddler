@@ -27,28 +27,20 @@ const Csgo = () => {
   const player = useSelector(state=>state.csgo.player)
   const score = useSelector(state=>state.csgo.score)
   const point = useSelector(state=>state.csgo.point)
-  // const [selectedRank, setSelectedRank] = useState(null);
-  // const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  // const [url, setUrl] = useState('');
-  // const [showModal, setShowModal] = useState(false);
-  // const [rank, setRank] = useState('');
-  // const [result, setResult] = useState('');
-  // const [player, setPlayer] = useState('');
-  // let [score, setScore] = useState();
-  // const [point, setPoint] = useState(0);
+
 
   const handleModal = () => {
     dispatch(csgoActions.toggleShowModal())
-    // setShowModal(!showModal);
+
   };
 
   useEffect(() => {
     dispatch(csgoActions.setIsButtonDisabled(selectedRank === null));
-    // setIsButtonDisabled(selectedRank === null);
+
   }, [selectedRank,dispatch]);
 
   const handleRankClick = (rank) => {
-    // setSelectedRank(rank)
+
     dispatch(csgoActions.setSelectedRank(rank))
   };
 
@@ -76,11 +68,11 @@ const Csgo = () => {
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     dispatch(csgoActions.setUrl(data.form[randomIndex].youtubeLink));
-    // setUrl(data.form[randomIndex].youtubeLink);
+
     dispatch(csgoActions.setRank(data.form[randomIndex].rank));
-    // setRank(data.form[randomIndex].rank);
+
     dispatch(csgoActions.setPlayer(data.form[randomIndex].playerInfo));
-    // setPlayer(data.form[randomIndex].playerInfo);
+
   },[dispatch])
 
   useEffect(() => {
@@ -91,9 +83,9 @@ const Csgo = () => {
     getYoutubeUrl();
     dispatch(csgoActions.setSelectedRank(null));
     dispatch(csgoActions.setIsButtonDisabled(true))
-    // setIsButtonDisabled(true);
+
     dispatch(csgoActions.hideShowModal())
-    // setShowModal(false);
+
   };
 
   const updatePoints = async (updatedScore) => {
@@ -136,26 +128,26 @@ const Csgo = () => {
 
     if (rank === selectedRank) {
       dispatch(csgoActions.setResult(check))
-      // setResult(check);
+
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
       dispatch(csgoActions.setResult(wrong))
-      // setResult(wrong);
+
       pointEarned = 1;
       updatedScore += 1;
     } else {
       dispatch(csgoActions.setResult(wrong))
-      // setResult(wrong);
+
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
     dispatch(csgoActions.setScore(updatedScore));
-    // setScore(updatedScore);
+
     dispatch(csgoActions.setPoint(pointEarned))
-    // setPoint(pointEarned);
+
 
     console.log(updatedScore);
     console.log(pointEarned);

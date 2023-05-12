@@ -30,29 +30,21 @@ const Valorant = () => {
   const player = useSelector((state) => state.valorant.player);
   const score = useSelector((state) => state.valorant.score);
   const point = useSelector((state) => state.valorant.point);
-  // const [selectedRank, setSelectedRank] = useState(null);
-  // const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  // const [url, setUrl] = useState('');
-  // const [showModal, setShowModal] = useState(false);
-  // const [rank, setRank] = useState('');
-  // const [result, setResult] = useState('');
-  // const [player, setPlayer] = useState('');
-  // let [score, setScore] = useState();
-  // const [point, setPoint] = useState(0);
+
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
-    // setShowModal(!showModal);
+
   };
 
   useEffect(() => {
     dispatch(valorantActions.setIsButtonDisabled(selectedRank === null));
-    // setIsButtonDisabled(selectedRank === null);
+
   }, [selectedRank, dispatch]);
 
   const handleRankClick = (rank) => {
     dispatch(valorantActions.setSelectedRank(rank));
-    // setSelectedRank(rank);
+
   };
 
   const youtubeUrl = url;
@@ -78,11 +70,11 @@ const Valorant = () => {
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
-    // setUrl(data.form[randomIndex].youtubeLink);
+
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
-    // setRank(data.form[randomIndex].rank);
+
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
-    // setPlayer(data.form[randomIndex].playerInfo);
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -92,11 +84,11 @@ const Valorant = () => {
   const refresh = () => {
     getYoutubeUrl();
     dispatch(valorantActions.setSelectedRank(null));
-    // setSelectedRank(null);
+
     dispatch(valorantActions.setIsButtonDisabled(true));
-    // setIsButtonDisabled(true);
+
     dispatch(valorantActions.hideShowModal());
-    // setShowModal(false);
+
   };
 
   const updatePoints = async (updatedScore) => {
@@ -142,26 +134,26 @@ const Valorant = () => {
 
     if (rank === selectedRank) {
       dispatch(valorantActions.setResult(check));
-      // setResult(check);
+
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
       dispatch(valorantActions.setResult(wrong));
-      // setResult(wrong);
+
       pointEarned = 1;
       updatedScore += 1;
     } else {
       dispatch(valorantActions.setResult(wrong));
-      // setResult(wrong);
+
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
     dispatch(valorantActions.setScore(updatedScore));
-    // setScore(updatedScore);
+
     dispatch(valorantActions.setPoint(pointEarned));
-    // setPoint(pointEarned);
+
 
     console.log(updatedScore);
     console.log(pointEarned);

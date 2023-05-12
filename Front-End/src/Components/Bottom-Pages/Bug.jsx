@@ -6,17 +6,16 @@ function BugReportForm() {
   const dispatch = useDispatch();
   const title = useSelector((state) => state.nav.title);
   const description = useSelector((state) => state.nav.description);
-  // const [title, setTitle] = useState('');
-  // const [description, setDescription] = useState('');
+
 
   const handleTitleChange = (event) => {
     dispatch(bugActions.setTitle(event.target.value));
-    // setTitle(event.target.value);
+
   };
 
   const handleDescriptionChange = (event) => {
     dispatch(bugActions.setDescription(event.target.value));
-    // setDescription(event.target.value);
+
   };
 
   const submit = (event) => {

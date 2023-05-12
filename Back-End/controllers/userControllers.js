@@ -30,6 +30,15 @@ const createUser = async (req, res) => {
   if (existingUser) {
     return res.status(409).json({ error: "Username already exists" });
   }
+
+  //instantiates filter and checks usernames for profanities
+  let Filter = require("bad-words"), filter = new Filter()
+  const isUnclean = filter.isProfane(username)
+  //if username contains profanities then a response is sent declaring the username is not allowed
+  if(isUnclean){
+    return res.status(409).json({error: "Innapropriate username"})
+  }
+
   const user = new User({ username, points });
   try {
     await user.save();

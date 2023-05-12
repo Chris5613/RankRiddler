@@ -15,18 +15,18 @@ import { useSelector, useDispatch } from 'react-redux';
 const Nav = () => {
   const dispatch = useDispatch();
   const showMenu = useSelector((state) => state.nav.showMenu);
-  // const [showMenu, setShowMenu] = useState(false);
+
 
   const toggleMenu = () => {
     dispatch(navActions.toggleMenu());
-    // setShowMenu(!showMenu);
+
   };
   let menuRef = useRef(null);
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
         dispatch(navActions.hideMenu());
-        // setShowMenu(false);
+
       }
     };
     document.addEventListener('mousedown', handler);

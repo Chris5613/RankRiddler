@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Chris5613/Node#readme",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

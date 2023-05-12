@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
+import {useDispatch,useSelector} from "react-redux"
 import { settingsActions } from '../../store/SettingsSlice';
-import { useSelector, useDispatch } from 'react-redux';
 
 const Settings = () => {
+
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.settings.userId);
   const data = useSelector((state) => state.settings.data);
@@ -13,13 +14,8 @@ const Settings = () => {
   const isUsernameChanged = useSelector(
     (state) => state.settings.isUsernameChanged
   );
-  // const [userId, setUserId] = useState(
-  //   () => localStorage.getItem('userId') || ''
-  // );
-  // const [data, setData] = useState([]);
-  // const [index, setIndex] = useState(-1);
-  // const [username, setUsername] = useState(Cookies.get('username') || 'Guest');
-  // const [isUsernameChanged, setIsUsernameChanged] = useState(Cookies.get('isUsernameChanged') === 'true');
+
+
   const score = Cookies.get('score') || 0;
 
   useEffect(() => {
@@ -28,24 +24,20 @@ const Settings = () => {
       const shortUuid = id.slice(0, 8);
       Cookies.set('userId', shortUuid, { secure: true });
       dispatch(settingsActions.setUserId(shortUuid));
-      // setUserId(shortUuid);
+
     }
 
     const storedUsername = Cookies.get('username') || 'Guest';
     dispatch(settingsActions.setUsername(storedUsername));
-    // setUsername(storedUsername);
+
 
     // If the stored username is "Guest", set isUsernameChanged to false
     dispatch(settingsActions.setIsUsernameChanged(storedUsername !== 'Guest'));
-    // setIsUsernameChanged(storedUsername !== 'Guest');
+
 
     const storedScore = Cookies.get('score') || 0;
     Cookies.set('score', storedScore, { secure: true });
-
-    if (userId && storedUsername !== 'Guest') {
-      saveUser(storedUsername, storedScore);
-    }
-  }, [userId, dispatch]);
+  }, [userId,dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +55,7 @@ const Settings = () => {
           throw new Error('Failed to fetch data');
         }
         const userData = await response.json();
-        dispatch(settingsActions.setData(userData));
+        dispatch(settingsActions.setData(userData))
         // setData(userData);
       } catch (error) {
         console.error(error);
@@ -89,6 +81,7 @@ const Settings = () => {
       );
       const data = await response.json();
       console.log(data);
+      return data;
     } catch (error) {
       console.error(error);
     }
@@ -98,12 +91,12 @@ const Settings = () => {
     const foundUser = data.find((user) => user.username === username);
     if (foundUser) {
       dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
-      // setIndex(data.indexOf(foundUser));
+
     } else {
-      dispatch(settingsActions.setIndex(-1));
-      // setIndex(-1);
+      dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
+
     }
-  }, [username, data, dispatch]);
+  }, [username, data,dispatch]);
 
   const usernameReset = () => {
     if (isUsernameChanged) {
@@ -111,27 +104,21 @@ const Settings = () => {
     }
     Cookies.remove('username');
     let newUsername = prompt('Please enter a new username');
-    const checkUsername = () => {
-      if (newUsername === null) {
+    const checkUsername = async () => {
+      if (newUsername === null || newUsername === '') {
         newUsername = prompt('Please enter a new username');
         checkUsername();
-      } else if (newUsername === '') {
-        newUsername = prompt('Please enter a new username');
-        checkUsername();
-      } else {
-        const sameName = data.find((user) => user.username === newUsername);
-        if (sameName) {
-          newUsername = prompt(
-            'Username already exists, please enter a new username'
-          );
-          checkUsername();
-        }
-        Cookies.set('username', newUsername, { secure: true });
-        Cookies.set('isUsernameChanged', true, { secure: true });
-        dispatch(settingsActions.setIsUsernameChanged(true));
-        // setIsUsernameChanged(true);
-        saveUser(newUsername, score);
       }
+      const newUser = await saveUser(newUsername, score);
+      if (newUser.error) {
+        newUsername = prompt(newUser.error);
+        checkUsername();
+      }
+      Cookies.set('username', newUsername, { secure: true });
+      Cookies.set('isUsernameChanged', true, { secure: true });
+      dispatch(settingsActions.setUsername(Cookies.get('username')));
+      dispatch(settingsActions.setIsUsernameChanged(true));
+
     };
     checkUsername();
   };
@@ -157,7 +144,7 @@ const Settings = () => {
         <div className="reset-container">
           {isUsernameChanged ? null : (
             <div>
-              <p>Must set a username to have your points save</p>
+              <p>Must set a username to see your leaderboard rank</p>
               <br />
               <h5>
                 Can only be changed

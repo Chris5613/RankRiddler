@@ -5,11 +5,11 @@ import { submitActions } from '../../store/SubmitSlice';
 function Submit() {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.submit.game);
-  // const [game, setGame] = useState('');
+
 
   const handleGameChange = (event) => {
     dispatch(submitActions.setGame(event.target.value));
-    // setGame(event.target.value);
+
   };
 
   return (

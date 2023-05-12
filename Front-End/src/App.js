@@ -2,16 +2,16 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './Components/Nav/Nav';
 import Valorant from './Components/Game-pages/Valorant';
-import Home from './Components/Other-pages/Home';
-import Tos from './Components/Other-pages/Tos';
+import Home from './Components/Top-Pages/Home/Home';
+import Tos from './Components/Top-Pages/Legal/Tos';
 import League from './Components/Game-pages/League';
 import Csgo from './Components/Game-pages/Csgo';
-import Submit from './Components/Other-pages/Submit';
-import Leaderboard from './Components/Other-pages/Leaderboard';
-import PrivacyPolicy from './Components/Other-pages/Privacy';
-import Bug from './Components/Other-pages/Bug';
-import Howto from './Components/Other-pages/Howto';
-import Settings from './Components/Other-pages/Settings';
+import Submit from './Components/Form/Submit';
+import Leaderboard from './Components/Top-Pages/Leaderboard';
+import PrivacyPolicy from './Components/Top-Pages/Legal/Privacy';
+import Bug from './Components/Bottom-Pages/Bug';
+import Howto from './Components/Bottom-Pages/Howto';
+import Settings from './Components/Bottom-Pages/Settings';
 
 function App() {
   return (
