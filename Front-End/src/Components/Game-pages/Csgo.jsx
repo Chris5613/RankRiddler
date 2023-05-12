@@ -28,19 +28,15 @@ const Csgo = () => {
   const score = useSelector(state=>state.csgo.score)
   const point = useSelector(state=>state.csgo.point)
 
-
   const handleModal = () => {
     dispatch(csgoActions.toggleShowModal())
-
   };
 
   useEffect(() => {
     dispatch(csgoActions.setIsButtonDisabled(selectedRank === null));
-
   }, [selectedRank,dispatch]);
 
   const handleRankClick = (rank) => {
-
     dispatch(csgoActions.setSelectedRank(rank))
   };
 
@@ -68,11 +64,8 @@ const Csgo = () => {
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     dispatch(csgoActions.setUrl(data.form[randomIndex].youtubeLink));
-
     dispatch(csgoActions.setRank(data.form[randomIndex].rank));
-
     dispatch(csgoActions.setPlayer(data.form[randomIndex].playerInfo));
-
   },[dispatch])
 
   useEffect(() => {
@@ -83,9 +76,7 @@ const Csgo = () => {
     getYoutubeUrl();
     dispatch(csgoActions.setSelectedRank(null));
     dispatch(csgoActions.setIsButtonDisabled(true))
-
     dispatch(csgoActions.hideShowModal())
-
   };
 
   const updatePoints = async (updatedScore) => {
@@ -128,29 +119,21 @@ const Csgo = () => {
 
     if (rank === selectedRank) {
       dispatch(csgoActions.setResult(check))
-
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
       dispatch(csgoActions.setResult(wrong))
-
       pointEarned = 1;
       updatedScore += 1;
     } else {
       dispatch(csgoActions.setResult(wrong))
-
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
     dispatch(csgoActions.setScore(updatedScore));
-
     dispatch(csgoActions.setPoint(pointEarned))
-
-
-    console.log(updatedScore);
-    console.log(pointEarned);
     updatePoints(updatedScore);
   };
 

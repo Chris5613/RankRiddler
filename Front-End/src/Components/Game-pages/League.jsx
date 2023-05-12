@@ -32,17 +32,14 @@ const League = () => {
 
   const handleModal = () => {
     dispatch(leagueActions.toggleShowModal());
-
   };
 
   useEffect(() => {
     dispatch(leagueActions.setIsButtonDisabled(selectedRank === null));
-
   }, [selectedRank, dispatch]);
 
   const handleRankClick = (rank) => {
     dispatch(leagueActions.setSelectedRank(rank));
-
   };
 
   const youtubeUrl = url;
@@ -68,26 +65,20 @@ const League = () => {
     const data = await response.json();
     const randomIndex = Math.floor(Math.random() * data.form.length);
     dispatch(leagueActions.setUrl(data.form[randomIndex].youtubeLink));
-
     dispatch(leagueActions.setRank(data.form[randomIndex].rank));
-
     dispatch(leagueActions.setPlayer(data.form[randomIndex].playerInfo));
-
   }, [dispatch]);
 
-  useEffect(() => {
-    getYoutubeUrl();
-  }, [getYoutubeUrl]);
+useEffect(() => {
+  getYoutubeUrl();
+}, [getYoutubeUrl]);
 
-  const refresh = () => {
-    getYoutubeUrl();
-    dispatch(leagueActions.setSelectedRank(null));
-
-    dispatch(leagueActions.setIsButtonDisabled(true));
-
-    dispatch(leagueActions.hideShowModal());
-
-  };
+const refresh = () => {
+  getYoutubeUrl();
+  dispatch(leagueActions.setSelectedRank(null));
+  dispatch(leagueActions.setIsButtonDisabled(true));
+  dispatch(leagueActions.hideShowModal());
+};
 
   const updatePoints = async (updatedScore) => {
     try {
@@ -132,29 +123,21 @@ const League = () => {
 
     if (rank === selectedRank) {
       dispatch(leagueActions.setResult(check));
-
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
       dispatch(leagueActions.setResult(wrong));
-
       pointEarned = 1;
       updatedScore += 1;
     } else {
       dispatch(leagueActions.setResult(wrong));
-
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
     dispatch(leagueActions.setScore(updatedScore));
-
     dispatch(leagueActions.setPoint(pointEarned));
-
-
-    console.log(updatedScore);
-    console.log(pointEarned);
     updatePoints(updatedScore);
   };
 
