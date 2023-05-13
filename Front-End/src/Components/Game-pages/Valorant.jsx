@@ -261,7 +261,7 @@ const Valorant = () => {
             }}
             disabled={isButtonDisabled}
           >
-            {selectedRank ? `Selected Rank: ${selectedRank}` : 'Select a Rank'}
+            {selectedRank ? `Submit: ${selectedRank}` : 'Select a Rank'}
           </button>
         </div>
       </div>
