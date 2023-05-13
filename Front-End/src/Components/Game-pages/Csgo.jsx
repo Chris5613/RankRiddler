@@ -59,7 +59,7 @@ const Csgo = () => {
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
-      'https://rr-back-end.onrender.com/form/valdata'
+      'https://rr-back-end.onrender.com/form/csgodata'
     );
     const data = await response.json();
   
