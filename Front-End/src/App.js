@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './Components/Nav/Nav';
 import Valorant from './Components/Game-pages/Valorant';
-import Home from './Components/Top-Pages/Home/Home';
+import Home from './Components/Top-Pages/Home';
 import Tos from './Components/Top-Pages/Legal/Tos';
 import League from './Components/Game-pages/League';
 import Csgo from './Components/Game-pages/Csgo';
