@@ -63,7 +63,25 @@ const Valorant = () => {
       'https://rr-back-end.onrender.com/form/valdata'
     );
     const data = await response.json();
-    const randomIndex = Math.floor(Math.random() * data.form.length);
+  
+    // Define the number of consecutive same indices allowed
+    const MAX_CONSECUTIVE_SAME_INDICES = 5;
+  
+    // Create a circular buffer to store the previous selected indices
+    const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
+    buffer.fill(-1);
+  
+    // Find a random index that is not in the buffer
+    let randomIndex = Math.floor(Math.random() * data.form.length);
+    while (buffer.includes(randomIndex)) {
+      randomIndex = Math.floor(Math.random() * data.form.length);
+    }
+  
+    // Add the new index to the buffer
+    buffer.push(randomIndex);
+    buffer.shift();
+  
+    // Use the selected index to set the video URL, rank, and player info
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
