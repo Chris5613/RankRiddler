@@ -92,7 +92,7 @@ const Nav = () => {
               className="bottom-links other-links"
               onClick={() => dispatch(navActions.hideMenu())}
             >
-              <NavLink to="/howto">How to play</NavLink>
+              <NavLink to="/howto">How to Play</NavLink>
             </li>
             <li
               className="bottom-links other-links"

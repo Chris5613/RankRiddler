@@ -1,9 +1,9 @@
 const User = require("../models/User");
 
 const getUserbyUsername = async (req, res) => {
-  const { userName } = req.params;
+  const { username } = req.params;
   try {
-    const user = await User.findOne({ userName });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -39,7 +39,6 @@ const createUser = async (req, res) => {
   }
 
   const user = new User({ username, points, uuid });
-  console.log(user);
   try {
     await user.save();
     res.status(201).json(user);
@@ -62,64 +61,33 @@ const getOneUserByUuid = async (req, res) => {
   }
 };
 
-const Add1PointByUsername = async (req, res) => {
-  const { username } = req.body;
+const AddPointByUsername = async (req, res) => {
+  const { username,points } = req.body;
   try {
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    user.points += 1;
+    if(points === 2 ) {
+      user.points += 2;
+    } else if(points === 1) {
+      user.points += 1;
+    }
+    else {
+      user.points -= 1;
+    }
     await user.save();
-    console.log(user);
     res.status(200).json({ message: "Points updated successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 };
-
-const Add2PointByUsername = async (req, res) => {
-  const { username } = req.body;
-  try {
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    user.points += 2;
-    await user.save();
-    console.log(user);
-    res.status(200).json({ message: "Points updated successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
-};
-
-const deduct1PointByUsername = async (req, res) => {
-  const { username } = req.body;
-  try {
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    user.points -= 1;
-    await user.save();
-    console.log(user);
-    res.status(200).json({ message: "Points updated successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
-};
-
 
 module.exports = {
   getUserbyUsername,
   getAllUsers,
   createUser,
-  Add1PointByUsername,
+  AddPointByUsername,
   getOneUserByUuid,
-  Add2PointByUsername,
-  deduct1PointByUsername,
 };

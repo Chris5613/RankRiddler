@@ -135,16 +135,14 @@ const Settings = () => {
         </p>
         <p>
           Current User:
-          {username ? <span>{username}</span>:<span>Guest</span>}
+          {username ? <span>{username}</span> : <span>Guest</span>}
         </p>
-        <p>
-          Current Score:{score ? <span>{score}</span>:<span>0</span>}
-        </p>
-        <p>
-          Current Rank: #{index === -1 ? 'N/A' : index + 1}
-        </p>
+        <p>Current Score:{score ? <span>{score}</span> : <span>0</span>}</p>
+        <p>Current Rank: #{index === -1 ? 'N/A' : index + 1}</p>
         <div className="reset-container">
-          {isUsernameChanged ? <p>Refresh to see changes</p> : (
+          {isUsernameChanged ? (
+            <p>Refresh to see changes</p>
+          ) : (
             <div>
               <p>Must set a username to see your leaderboard rank</p>
               <br />

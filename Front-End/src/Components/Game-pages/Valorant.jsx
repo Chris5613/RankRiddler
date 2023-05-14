@@ -15,12 +15,13 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
-import { settingsActions } from '../store/SettingsSlice';
 
 const Valorant = () => {
   const dispatch = useDispatch();
   const selectedRank = useSelector((state) => state.valorant.selectedRank);
-  const isButtonDisabled = useSelector((state) => state.valorant.isButtonDisabled);
+  const isButtonDisabled = useSelector(
+    (state) => state.valorant.isButtonDisabled
+  );
   const url = useSelector((state) => state.valorant.url);
   const showModal = useSelector((state) => state.valorant.showModal);
   const rank = useSelector((state) => state.valorant.rank);
@@ -64,7 +65,7 @@ const Valorant = () => {
       'https://rr-back-end.onrender.com/form/valdata'
     );
     const data = await response.json();
-    const MAX_CONSECUTIVE_SAME_INDICES = 5;
+    const MAX_CONSECUTIVE_SAME_INDICES = 10;
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
     buffer.fill(-1);
 
@@ -100,73 +101,28 @@ const Valorant = () => {
         },
       });
       const data = await response.json();
-      dispatch(valorantActions.setScore(data.score));
-      dispatch(settingsActions.setUsername(data.username));
-      console.log(data.points)
+      dispatch(valorantActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const update1Points = async () => {
+  const updatePoints = async (point) => {
     try {
-      const response = await fetch(
-        'http://localhost:3001/updatepoints1',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-          }),
-        }
-      );
+      const response = await fetch('http://localhost:3001/updatepoints', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);
     }
   };
-
-  const update2Points = async () => {
-    try {
-      const response = await fetch(
-        'http://localhost:3001/updatepoints2',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-          }),
-        }
-      );
-      const data = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const deductPoints = async () => {
-    try {
-      const response = await fetch(
-        'http://localhost:3001/deductpoints',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-          }),
-        }
-      );
-      const data = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
 
   const checkAnswer = () => {
     const rankList = [
@@ -176,29 +132,33 @@ const Valorant = () => {
       'Gold',
       'Platinum',
       'Diamond',
-      'Master',
-      'Grandmaster',
-      'Challenger',
+      'Ascendant',
+      'Immortal',
+      'Radiant',
     ];
     const rankIndex = rankList.indexOf(rank);
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
 
+    let newPoint = 0;
     if (rank === selectedRank) {
       dispatch(valorantActions.setResult(check));
-      dispatch(valorantActions.setPoint(2));
-      update2Points(2)
+      newPoint = 2;
+      updatePoints(2);
     } else if (distance === 1) {
       dispatch(valorantActions.setResult(wrong));
-      dispatch(valorantActions.setPoint(1));
-      update1Points(1)
+      newPoint = 1;
+      updatePoints(1);
     } else {
       dispatch(valorantActions.setResult(wrong));
-      dispatch(valorantActions.setPoint(-1));
-      deductPoints(-1)
+      newPoint = -1;
+      updatePoints(-1);
     }
+    const newScore = score + newPoint;
+    dispatch(valorantActions.setPoint(newPoint));
+    dispatch(valorantActions.setScore(newScore));
   };
-  
+
   return (
     <>
       <div>
