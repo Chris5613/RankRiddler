@@ -38,7 +38,7 @@ function BugReportForm() {
 
   return (
     <div className="container">
-      <h2>See a bug? Please use this form to report it</h2>
+      <h2>Need to report something or give feedback? Fill out the form.</h2>
       <form
         onSubmit={submit}
         className="form"
@@ -58,7 +58,7 @@ function BugReportForm() {
         <br />
 
         <label className="form-label">
-          Description of the bug: <span style={{ color: '#e34234' }}>*</span>
+          Description: <span style={{ color: '#e34234' }}>*</span>
         </label>
         <textarea
           className="form-input"
