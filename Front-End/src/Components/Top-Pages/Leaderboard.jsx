@@ -80,7 +80,7 @@ function AllTime() {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{data.username}</td>
-                <td>{data.points}</td>
+                <td>{data.points }</td>
               </tr>
             ))}
         </tbody>
