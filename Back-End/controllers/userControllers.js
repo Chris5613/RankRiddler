@@ -25,19 +25,20 @@ const getAllUsers = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, points,uuid } = req.body;
+  const { username, points, uuid } = req.body;
   const existingUser = await User.findOne({ username });
   if (existingUser) {
     return res.status(409).json({ error: "Username already exists" });
   }
 
-  let Filter = require("bad-words"), filter = new Filter()
-  const isUnclean = filter.isProfane(username)
-  if(isUnclean){
-    return res.status(409).json({error: "Innapropriate username"})
+  let Filter = require("bad-words"),
+    filter = new Filter();
+  const isUnclean = filter.isProfane(username);
+  if (isUnclean) {
+    return res.status(409).json({ error: "Innapropriate username" });
   }
 
-  const user = new User({ username, points,uuid });
+  const user = new User({ username, points, uuid });
   console.log(user);
   try {
     await user.save();
@@ -52,15 +53,15 @@ const updatePointByUsername = async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
     user.points = points;
     await user.save();
     console.log(user);
-    res.status(200).json({ message: 'Points updated successfully' });
+    res.status(200).json({ message: "Points updated successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Server error" });
   }
 };
 

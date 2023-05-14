@@ -5,7 +5,7 @@ const Home = () => {
     <>
       <div className="gamecard">
         <div>
-        <h1>Guess the Rank - Web Game</h1>
+          <h1>Guess the Rank - Web Game</h1>
           <NavLink to="/valorant">
             <img
               className="main-images"

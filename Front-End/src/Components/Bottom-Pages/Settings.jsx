@@ -1,6 +1,6 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from 'react-redux';
 import { settingsActions } from '../store/SettingsSlice';
 import Cookies from 'js-cookie';
 
@@ -10,20 +10,19 @@ const Settings = () => {
   const data = useSelector((state) => state.settings.data);
   const index = useSelector((state) => state.settings.index);
   const username = useSelector((state) => state.settings.username);
-  const isUsernameChanged = useSelector((state) => state.settings.isUsernameChanged);
+  const isUsernameChanged = useSelector(
+    (state) => state.settings.isUsernameChanged
+  );
   const score = useSelector((state) => state.settings.score);
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `http://localhost:3001/user/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:3001/user/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(settingsActions.setUsername(data.username));
       dispatch(settingsActions.setScore(data.points));
@@ -42,11 +41,10 @@ const Settings = () => {
       dispatch(settingsActions.setUserId(storedUserId));
     }
 
-    if(username === undefined){
+    if (username === undefined) {
       dispatch(settingsActions.setIsUsernameChanged(false));
     }
-
-  }, [dispatch,username]);
+  }, [dispatch, username]);
 
   // console.log(username)
   // console.log(isUsernameChanged)
@@ -55,20 +53,17 @@ const Settings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'http://localhost:3001/allusers',
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = await fetch('http://localhost:3001/allusers', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const userData = await response.json();
-        dispatch(settingsActions.setData(userData))
+        dispatch(settingsActions.setData(userData));
       } catch (error) {
         console.error(error);
       }
@@ -76,22 +71,19 @@ const Settings = () => {
     fetchData();
   }, [dispatch]);
 
-  const saveUser = async (username, score,uuid ) => {
+  const saveUser = async (username, score, uuid) => {
     try {
-      const response = await fetch(
-        'http://localhost:3001/saveuser',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            points: score,
-            uuid: uuid,
-          }),
-        }
-      );
+      const response = await fetch('http://localhost:3001/saveuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          points: score,
+          uuid: uuid,
+        }),
+      });
       const data = await response.json();
       console.log(data);
       return data;
@@ -107,7 +99,7 @@ const Settings = () => {
     } else {
       dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
     }
-  }, [username, data,dispatch]);
+  }, [username, data, dispatch]);
 
   const usernameReset = () => {
     if (isUsernameChanged) {
@@ -120,7 +112,7 @@ const Settings = () => {
         checkUsername();
       }
       const id = localStorage.getItem('userId');
-      const newUser = await saveUser(newUsername, score,id);
+      const newUser = await saveUser(newUsername, score, id);
       if (newUser.error) {
         newUsername = prompt(newUser.error);
         checkUsername();
@@ -128,11 +120,9 @@ const Settings = () => {
       Cookies.set('isUsernameChanged', true, { secure: true });
       dispatch(settingsActions.setUsername(username));
       dispatch(settingsActions.setIsUsernameChanged(true));
-
     };
     checkUsername();
   };
-
 
   return (
     <>

@@ -1,4 +1,4 @@
-import {  useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import silver from '../../Assets/Csgo-Icons/Silver.png';
@@ -14,43 +14,42 @@ import VideoPlayer from '../Youtube';
 import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { csgoActions } from '../store/CsgoSlice';
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from 'react-redux';
 
 const Csgo = () => {
-  const dispatch = useDispatch()
-  const selectedRank = useSelector(state=>state.csgo.selectedRank)
-  const isButtonDisabled = useSelector(state=>state.csgo.isButtonDisabled)
-  const url = useSelector(state=>state.csgo.url)
-  const showModal = useSelector(state=>state.csgo.showModal)
-  const rank = useSelector(state=>state.csgo.rank)
-  const result = useSelector(state=>state.csgo.result)
-  const player = useSelector(state=>state.csgo.player)
-  const score = useSelector(state=>state.csgo.score)
-  const point = useSelector(state=>state.csgo.point)
+  const dispatch = useDispatch();
+  const selectedRank = useSelector((state) => state.csgo.selectedRank);
+  const isButtonDisabled = useSelector((state) => state.csgo.isButtonDisabled);
+  const url = useSelector((state) => state.csgo.url);
+  const showModal = useSelector((state) => state.csgo.showModal);
+  const rank = useSelector((state) => state.csgo.rank);
+  const result = useSelector((state) => state.csgo.result);
+  const player = useSelector((state) => state.csgo.player);
+  const score = useSelector((state) => state.csgo.score);
+  const point = useSelector((state) => state.csgo.point);
 
   const handleModal = () => {
-    dispatch(csgoActions.toggleShowModal())
+    dispatch(csgoActions.toggleShowModal());
   };
 
   useEffect(() => {
     dispatch(csgoActions.setIsButtonDisabled(selectedRank === null));
-  }, [selectedRank,dispatch]);
+  }, [selectedRank, dispatch]);
 
   const handleRankClick = (rank) => {
-    dispatch(csgoActions.setSelectedRank(rank))
+    dispatch(csgoActions.setSelectedRank(rank));
   };
-
 
   const youtubeUrl = url;
   const rankImages = {
-    'Silver': silver,
+    Silver: silver,
     'Silver Elite': se,
     'Gold Nova': nova,
     'Master Guardian': mg,
     'Distinguished Master Guardian': dmg,
     'Legendary Eagle': le,
     'Master Guardian Elite': mge,
-    'Supreme': smfc,
+    Supreme: smfc,
     'Global Elite': ge,
   };
 
@@ -62,24 +61,24 @@ const Csgo = () => {
       'https://rr-back-end.onrender.com/form/csgodata'
     );
     const data = await response.json();
-  
+
     // Define the number of consecutive same indices allowed
     const MAX_CONSECUTIVE_SAME_INDICES = 5;
-  
+
     // Create a circular buffer to store the previous selected indices
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
     buffer.fill(-1);
-  
+
     // Find a random index that is not in the buffer
     let randomIndex = Math.floor(Math.random() * data.form.length);
     while (buffer.includes(randomIndex)) {
       randomIndex = Math.floor(Math.random() * data.form.length);
     }
-  
+
     // Add the new index to the buffer
     buffer.push(randomIndex);
     buffer.shift();
-  
+
     // Use the selected index to set the video URL, rank, and player info
     dispatch(csgoActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(csgoActions.setRank(data.form[randomIndex].rank));
@@ -93,22 +92,25 @@ const Csgo = () => {
   const refresh = () => {
     getYoutubeUrl();
     dispatch(csgoActions.setSelectedRank(null));
-    dispatch(csgoActions.setIsButtonDisabled(true))
-    dispatch(csgoActions.hideShowModal())
+    dispatch(csgoActions.setIsButtonDisabled(true));
+    dispatch(csgoActions.hideShowModal());
   };
 
   const updatePoints = async (updatedScore) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: Cookies.get('username'),
-          points: updatedScore,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/updatepoints',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: Cookies.get('username'),
+            points: updatedScore,
+          }),
+        }
+      );
       const data = await response.json();
       console.log(data);
     } catch (error) {
@@ -132,26 +134,26 @@ const Csgo = () => {
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
 
-    let updatedScore = parseInt(Cookies.get('score') || '0'); 
+    let updatedScore = parseInt(Cookies.get('score') || '0');
     let pointEarned = 0;
 
     if (rank === selectedRank) {
-      dispatch(csgoActions.setResult(check))
+      dispatch(csgoActions.setResult(check));
       pointEarned = 2;
       updatedScore += 2;
     } else if (distance === 1) {
-      dispatch(csgoActions.setResult(wrong))
+      dispatch(csgoActions.setResult(wrong));
       pointEarned = 1;
       updatedScore += 1;
     } else {
-      dispatch(csgoActions.setResult(wrong))
+      dispatch(csgoActions.setResult(wrong));
       pointEarned = -1;
       updatedScore -= 1;
     }
 
     Cookies.set('score', updatedScore.toString());
     dispatch(csgoActions.setScore(updatedScore));
-    dispatch(csgoActions.setPoint(pointEarned))
+    dispatch(csgoActions.setPoint(pointEarned));
     updatePoints(updatedScore);
   };
 

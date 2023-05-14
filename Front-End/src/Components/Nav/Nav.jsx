@@ -16,17 +16,14 @@ const Nav = () => {
   const dispatch = useDispatch();
   const showMenu = useSelector((state) => state.nav.showMenu);
 
-
   const toggleMenu = () => {
     dispatch(navActions.toggleMenu());
-
   };
   let menuRef = useRef(null);
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
         dispatch(navActions.hideMenu());
-
       }
     };
     document.addEventListener('mousedown', handler);

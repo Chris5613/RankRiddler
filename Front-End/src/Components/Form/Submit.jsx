@@ -6,10 +6,8 @@ function Submit() {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.submit.game);
 
-
   const handleGameChange = (event) => {
     dispatch(submitActions.setGame(event.target.value));
-
   };
 
   return (

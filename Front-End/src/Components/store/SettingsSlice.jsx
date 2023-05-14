@@ -31,7 +31,7 @@ const settingsSlice = createSlice({
     },
     setScore(state, action) {
       state.score = action.payload;
-    }
+    },
   },
 });
 
