@@ -101,18 +101,6 @@ const Nav = () => {
               className="bottom-links other-links"
               onClick={() => dispatch(navActions.hideMenu())}
             >
-              <NavLink to="/tos">Terms of Services</NavLink>
-            </li>
-            <li
-              className="bottom-links other-links"
-              onClick={() => dispatch(navActions.hideMenu())}
-            >
-              <NavLink to="/privacy">Privacy Policy</NavLink>
-            </li>
-            <li
-              className="bottom-links other-links"
-              onClick={() => dispatch(navActions.hideMenu())}
-            >
               <NavLink to="/bug">Report a Bug</NavLink>
             </li>
           </ul>
