@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useCallback, useEffect } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
@@ -11,7 +12,6 @@ import mge from '../../Assets/Csgo-Icons/MGE.png';
 import smfc from '../../Assets/Csgo-Icons/SMFC.png';
 import ge from '../../Assets/Csgo-Icons/GE.png';
 import VideoPlayer from '../Youtube';
-import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,7 +72,6 @@ const Csgo = () => {
       randomIndex = Math.floor(Math.random() * data.form.length);
     }
 
-
     buffer.push(randomIndex);
     buffer.shift();
     dispatch(csgoActions.setUrl(data.form[randomIndex].youtubeLink));
@@ -122,7 +121,6 @@ const Csgo = () => {
       console.error(error);
     }
   };
-
 
   const checkAnswer = () => {
     const rankList = [

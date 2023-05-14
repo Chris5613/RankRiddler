@@ -62,18 +62,17 @@ const getOneUserByUuid = async (req, res) => {
 };
 
 const AddPointByUsername = async (req, res) => {
-  const { username,points } = req.body;
+  const { username, points } = req.body;
   try {
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    if(points === 2 ) {
+    if (points === 2) {
       user.points += 2;
-    } else if(points === 1) {
+    } else if (points === 1) {
       user.points += 1;
-    }
-    else {
+    } else {
       user.points -= 1;
     }
     await user.save();
