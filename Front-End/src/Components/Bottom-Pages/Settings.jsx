@@ -5,7 +5,6 @@ import {useDispatch,useSelector} from "react-redux"
 import { settingsActions } from '../store/SettingsSlice';
 
 const Settings = () => {
-
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.settings.userId);
   const data = useSelector((state) => state.settings.data);
@@ -17,7 +16,6 @@ const Settings = () => {
 
 
   const score = Cookies.get('score') || 0;
-
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (!storedUserId) {
@@ -63,7 +61,7 @@ const Settings = () => {
     fetchData();
   }, [dispatch]);
 
-  const saveUser = async (username, score) => {
+  const saveUser = async (username, score,uuid ) => {
     try {
       const response = await fetch(
         'https://rr-back-end.onrender.com/saveuser',
@@ -75,6 +73,7 @@ const Settings = () => {
           body: JSON.stringify({
             username: username,
             points: score,
+            uuid: uuid,
           }),
         }
       );
@@ -90,10 +89,8 @@ const Settings = () => {
     const foundUser = data.find((user) => user.username === username);
     if (foundUser) {
       dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
-
     } else {
       dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
-
     }
   }, [username, data,dispatch]);
 
@@ -108,7 +105,8 @@ const Settings = () => {
         newUsername = prompt('Please enter a new username');
         checkUsername();
       }
-      const newUser = await saveUser(newUsername, score);
+      const id = localStorage.getItem('userId');
+      const newUser = await saveUser(newUsername, score,id);
       if (newUser.error) {
         newUsername = prompt(newUser.error);
         checkUsername();
@@ -121,6 +119,7 @@ const Settings = () => {
     };
     checkUsername();
   };
+
 
   return (
     <>

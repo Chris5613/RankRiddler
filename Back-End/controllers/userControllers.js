@@ -25,7 +25,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, points } = req.body;
+  const { username, points,uuid } = req.body;
   const existingUser = await User.findOne({ username });
   if (existingUser) {
     return res.status(409).json({ error: "Username already exists" });
@@ -39,7 +39,7 @@ const createUser = async (req, res) => {
     return res.status(409).json({error: "Innapropriate username"})
   }
 
-  const user = new User({ username, points });
+  const user = new User({ username, points,uuid });
   try {
     await user.save();
     res.status(201).json(user);
