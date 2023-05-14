@@ -6,10 +6,8 @@ const Leaderboard = () => {
   const selection = useSelector((state) => state.leaderboard.selection);
   const dispatch = useDispatch();
 
-  // const [selection, setSelection] = useState('');
   const handleGameChange = (event) => {
     dispatch(leaderboardActions.setSelection(event.target.value));
-    // setSelection(event.target.value);
   };
 
   return (

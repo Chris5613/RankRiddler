@@ -1,8 +1,8 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Cookies from 'js-cookie';
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from 'react-redux';
 import { settingsActions } from '../store/SettingsSlice';
+import Cookies from 'js-cookie';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -13,9 +13,23 @@ const Settings = () => {
   const isUsernameChanged = useSelector(
     (state) => state.settings.isUsernameChanged
   );
+  const score = useSelector((state) => state.settings.score);
 
+  useEffect(() => {
+    const getOneUser = async (uuid) => {
+      const response = await fetch(`http://localhost:3001/user/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      dispatch(settingsActions.setUsername(data.username));
+      dispatch(settingsActions.setScore(data.points));
+    };
+    getOneUser(userId);
+  }, [userId, dispatch]);
 
-  const score = Cookies.get('score') || 0;
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (!storedUserId) {
@@ -26,34 +40,30 @@ const Settings = () => {
     } else {
       dispatch(settingsActions.setUserId(storedUserId));
     }
-  
-    const storedUsername = Cookies.get('username') || 'Guest';
-    dispatch(settingsActions.setUsername(storedUsername));
-    dispatch(settingsActions.setIsUsernameChanged(storedUsername !== 'Guest'));
 
-    const storedScore = Cookies.get('score') || 0;
-    Cookies.set('score', storedScore, { secure: true });
-  }, [dispatch]);
-  
+    if (username === undefined) {
+      dispatch(settingsActions.setIsUsernameChanged(false));
+    }
+  }, [dispatch, username]);
+
+  // console.log(username)
+  // console.log(isUsernameChanged)
+  // console.log(score)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://rr-back-end.onrender.com/allusers',
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = await fetch('http://localhost:3001/allusers', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const userData = await response.json();
-        dispatch(settingsActions.setData(userData))
-        // setData(userData);
+        dispatch(settingsActions.setData(userData));
       } catch (error) {
         console.error(error);
       }
@@ -61,22 +71,19 @@ const Settings = () => {
     fetchData();
   }, [dispatch]);
 
-  const saveUser = async (username, score,uuid ) => {
+  const saveUser = async (username, score, uuid) => {
     try {
-      const response = await fetch(
-        'https://rr-back-end.onrender.com/saveuser',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            points: score,
-            uuid: uuid,
-          }),
-        }
-      );
+      const response = await fetch('http://localhost:3001/saveuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          points: score,
+          uuid: uuid,
+        }),
+      });
       const data = await response.json();
       console.log(data);
       return data;
@@ -92,13 +99,12 @@ const Settings = () => {
     } else {
       dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
     }
-  }, [username, data,dispatch]);
+  }, [username, data, dispatch]);
 
   const usernameReset = () => {
     if (isUsernameChanged) {
       return;
     }
-    Cookies.remove('username');
     let newUsername = prompt('Please enter a new username');
     const checkUsername = async () => {
       if (newUsername === null || newUsername === '') {
@@ -106,41 +112,37 @@ const Settings = () => {
         checkUsername();
       }
       const id = localStorage.getItem('userId');
-      const newUser = await saveUser(newUsername, score,id);
+      const newUser = await saveUser(newUsername, score, id);
       if (newUser.error) {
         newUsername = prompt(newUser.error);
         checkUsername();
       }
-      Cookies.set('username', newUsername, { secure: true });
       Cookies.set('isUsernameChanged', true, { secure: true });
-      dispatch(settingsActions.setUsername(Cookies.get('username')));
+      dispatch(settingsActions.setUsername(username));
       dispatch(settingsActions.setIsUsernameChanged(true));
-
     };
     checkUsername();
   };
-
 
   return (
     <>
       <div className="settings-container">
         <p>
-          Current ID:{' '}
+          Current ID:
           <span>
             <u>{userId}</u>
           </span>
         </p>
         <p>
-          Current User: <span>{username}</span>
+          Current User:
+          {username ? <span>{username}</span> : <span>Guest</span>}
         </p>
-        <p>
-          Current Score: <span>{score}</span>
-        </p>
-        <p>
-          Current Rank: <span>#{index === -1 ? 'N/A' : index + 1}</span>
-        </p>
+        <p>Current Score:{score ? <span>{score}</span> : <span>0</span>}</p>
+        <p>Current Rank: #{index === -1 ? 'N/A' : index + 1}</p>
         <div className="reset-container">
-          {isUsernameChanged ? null : (
+          {isUsernameChanged ? (
+            <p>Refresh to see changes</p>
+          ) : (
             <div>
               <p>Must set a username to see your leaderboard rank</p>
               <br />

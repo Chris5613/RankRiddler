@@ -13,7 +13,7 @@ const Howto = () => {
         <br />
         <p>Watch the clip and decide what rank the player is</p>
         <br />
-        Correct guesses are worth 2 point{' '}
+        Correct guesses are worth 2 points{' '}
         <img src={check} alt="check" width={30} />
         <br />
         Guesses within 1 rank are worth 1 point{' '}

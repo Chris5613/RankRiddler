@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Iron from '../../Assets/Val-Ranks/Iron.png';
 import Bronze from '../../Assets/Val-Ranks/Bronze.png';
 import Silver from '../../Assets/Val-Ranks/Sliver.png';
@@ -11,7 +12,6 @@ import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import { useEffect, useCallback } from 'react';
 import VideoPlayer from '../Youtube';
-import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
@@ -29,6 +29,8 @@ const Valorant = () => {
   const player = useSelector((state) => state.valorant.player);
   const score = useSelector((state) => state.valorant.score);
   const point = useSelector((state) => state.valorant.point);
+  const username = useSelector((state) => state.settings.username);
+  const userId = useSelector((state) => state.settings.userId);
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -63,58 +65,60 @@ const Valorant = () => {
       'https://rr-back-end.onrender.com/form/valdata'
     );
     const data = await response.json();
-  
-    // Define the number of consecutive same indices allowed
-    const MAX_CONSECUTIVE_SAME_INDICES = 5;
-  
-    // Create a circular buffer to store the previous selected indices
+    const MAX_CONSECUTIVE_SAME_INDICES = 10;
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
     buffer.fill(-1);
-  
-    // Find a random index that is not in the buffer
+
     let randomIndex = Math.floor(Math.random() * data.form.length);
     while (buffer.includes(randomIndex)) {
       randomIndex = Math.floor(Math.random() * data.form.length);
     }
-  
-    // Add the new index to the buffer
+
     buffer.push(randomIndex);
     buffer.shift();
-  
-    // Use the selected index to set the video URL, rank, and player info
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
   }, [dispatch]);
 
-useEffect(() => {
-  getYoutubeUrl();
-}, [getYoutubeUrl]);
+  useEffect(() => {
+    getYoutubeUrl();
+  }, [getYoutubeUrl]);
 
-const refresh = () => {
-  getYoutubeUrl();
-  dispatch(valorantActions.setSelectedRank(null));
-  dispatch(valorantActions.setIsButtonDisabled(true));
-  dispatch(valorantActions.hideShowModal());
-};
+  const refresh = () => {
+    getYoutubeUrl();
+    dispatch(valorantActions.setSelectedRank(null));
+    dispatch(valorantActions.setIsButtonDisabled(true));
+    dispatch(valorantActions.hideShowModal());
+  };
 
-  const updatePoints = async (updatedScore) => {
-    try {
-      const response = await fetch(
-        'https://rr-back-end.onrender.com/updatepoints',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: Cookies.get('username'),
-            points: updatedScore,
-          }),
-        }
-      );
+  useEffect(() => {
+    const getOneUser = async (uuid) => {
+      const response = await fetch(`http://localhost:3001/user/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
-      console.log(data);
+      dispatch(valorantActions.setScore(data.points));
+    };
+    getOneUser(userId);
+  }, [userId, dispatch]);
+
+  const updatePoints = async (point) => {
+    try {
+      const response = await fetch('http://localhost:3001/updatepoints', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          points: point,
+        }),
+      });
+      const data = await response.json();
     } catch (error) {
       console.error(error);
     }
@@ -128,35 +132,31 @@ const refresh = () => {
       'Gold',
       'Platinum',
       'Diamond',
-      'Master',
-      'Grandmaster',
-      'Challenger',
+      'Ascendant',
+      'Immortal',
+      'Radiant',
     ];
     const rankIndex = rankList.indexOf(rank);
     const selectedRankIndex = rankList.indexOf(selectedRank);
     const distance = Math.abs(rankIndex - selectedRankIndex);
 
-    let updatedScore = parseInt(Cookies.get('score') || '0');
-    let pointEarned = 0;
-
+    let newPoint = 0;
     if (rank === selectedRank) {
       dispatch(valorantActions.setResult(check));
-      pointEarned = 2;
-      updatedScore += 2;
+      newPoint = 2;
+      updatePoints(2);
     } else if (distance === 1) {
       dispatch(valorantActions.setResult(wrong));
-      pointEarned = 1;
-      updatedScore += 1;
+      newPoint = 1;
+      updatePoints(1);
     } else {
       dispatch(valorantActions.setResult(wrong));
-      pointEarned = -1;
-      updatedScore -= 1;
+      newPoint = -1;
+      updatePoints(-1);
     }
-
-    Cookies.set('score', updatedScore.toString());
-    dispatch(valorantActions.setScore(updatedScore));
-    dispatch(valorantActions.setPoint(pointEarned));
-    updatePoints(updatedScore);
+    const newScore = score + newPoint;
+    dispatch(valorantActions.setPoint(newPoint));
+    dispatch(valorantActions.setScore(newScore));
   };
 
   return (

@@ -1,9 +1,9 @@
 const User = require("../models/User");
 
 const getUserbyUsername = async (req, res) => {
-  const { userName } = req.params;
+  const { username } = req.params;
   try {
-    const user = await User.findOne({ userName });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -25,21 +25,20 @@ const getAllUsers = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, points,uuid } = req.body;
+  const { username, points, uuid } = req.body;
   const existingUser = await User.findOne({ username });
   if (existingUser) {
     return res.status(409).json({ error: "Username already exists" });
   }
 
-  //instantiates filter and checks usernames for profanities
-  let Filter = require("bad-words"), filter = new Filter()
-  const isUnclean = filter.isProfane(username)
-  //if username contains profanities then a response is sent declaring the username is not allowed
-  if(isUnclean){
-    return res.status(409).json({error: "Innapropriate username"})
+  let Filter = require("bad-words"),
+    filter = new Filter();
+  const isUnclean = filter.isProfane(username);
+  if (isUnclean) {
+    return res.status(409).json({ error: "Innapropriate username" });
   }
 
-  const user = new User({ username, points,uuid });
+  const user = new User({ username, points, uuid });
   try {
     await user.save();
     res.status(201).json(user);
@@ -48,30 +47,46 @@ const createUser = async (req, res) => {
   }
 };
 
-const updatePointByUsername = async (req, res) => {
-  const { username, points } = req.body;
-  console.log(username, points);
+const getOneUserByUuid = async (req, res) => {
+  const { uuid } = req.params;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ uuid });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
-    user.points = points;
-    await user.save();
-    console.log(user);
-    res.status(200).json({ message: 'Points updated successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
-
-
+const AddPointByUsername = async (req, res) => {
+  const { username, points } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    if (points === 2) {
+      user.points += 2;
+    } else if (points === 1) {
+      user.points += 1;
+    } else {
+      user.points -= 1;
+    }
+    await user.save();
+    res.status(200).json({ message: "Points updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 module.exports = {
   getUserbyUsername,
   getAllUsers,
   createUser,
-  updatePointByUsername,
+  AddPointByUsername,
+  getOneUserByUuid,
 };

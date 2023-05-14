@@ -1,4 +1,3 @@
-
 import { bugActions } from '../store/BugSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,15 +6,12 @@ function BugReportForm() {
   const title = useSelector((state) => state.nav.title);
   const description = useSelector((state) => state.nav.description);
 
-
   const handleTitleChange = (event) => {
     dispatch(bugActions.setTitle(event.target.value));
-
   };
 
   const handleDescriptionChange = (event) => {
     dispatch(bugActions.setDescription(event.target.value));
-
   };
 
   const submit = (event) => {

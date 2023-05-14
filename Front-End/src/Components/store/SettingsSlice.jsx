@@ -7,6 +7,7 @@ let initialState = {
   index: -1,
   username: Cookies.get('username') || 'Guest',
   isUsernameChanged: Cookies.get('isUsernameChanged') === 'true',
+  score: 0,
 };
 
 const settingsSlice = createSlice({
@@ -27,6 +28,9 @@ const settingsSlice = createSlice({
     },
     setIsUsernameChanged(state, action) {
       state.isUsernameChanged = action.payload;
+    },
+    setScore(state, action) {
+      state.score = action.payload;
     },
   },
 });

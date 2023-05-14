@@ -16,17 +16,14 @@ const Nav = () => {
   const dispatch = useDispatch();
   const showMenu = useSelector((state) => state.nav.showMenu);
 
-
   const toggleMenu = () => {
     dispatch(navActions.toggleMenu());
-
   };
   let menuRef = useRef(null);
   useEffect(() => {
     let handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
         dispatch(navActions.hideMenu());
-
       }
     };
     document.addEventListener('mousedown', handler);
@@ -95,7 +92,7 @@ const Nav = () => {
               className="bottom-links other-links"
               onClick={() => dispatch(navActions.hideMenu())}
             >
-              <NavLink to="/howto">How to play</NavLink>
+              <NavLink to="/howto">How to Play</NavLink>
             </li>
             <li
               className="bottom-links other-links"
