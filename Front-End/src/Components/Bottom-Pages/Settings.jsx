@@ -19,25 +19,24 @@ const Settings = () => {
   const score = Cookies.get('score') || 0;
 
   useEffect(() => {
-    if (!userId) {
+    const storedUserId = localStorage.getItem('userId');
+    if (!storedUserId) {
       const id = uuidv4();
       const shortUuid = id.slice(0, 8);
-      Cookies.set('userId', shortUuid, { secure: true });
+      localStorage.setItem('userId', shortUuid);
       dispatch(settingsActions.setUserId(shortUuid));
-
+    } else {
+      dispatch(settingsActions.setUserId(storedUserId));
     }
-
+  
     const storedUsername = Cookies.get('username') || 'Guest';
     dispatch(settingsActions.setUsername(storedUsername));
-
-
-    // If the stored username is "Guest", set isUsernameChanged to false
     dispatch(settingsActions.setIsUsernameChanged(storedUsername !== 'Guest'));
-
 
     const storedScore = Cookies.get('score') || 0;
     Cookies.set('score', storedScore, { secure: true });
-  }, [userId,dispatch]);
+  }, [dispatch]);
+  
 
   useEffect(() => {
     const fetchData = async () => {

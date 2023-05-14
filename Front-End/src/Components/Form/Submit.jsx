@@ -31,9 +31,7 @@ function Submit() {
         <span style={{ color: 'red' }}>REJECTED</span>
         <ul className="submission-list">
           <li>Must be from a ranked match</li>
-          <li>Must be from 30 seconds to 1 min long</li>
           <li>Must Submit Clips from Youtube Only</li>
-          <li>No Smurfing</li>
           <li>At least be 720p</li>
         </ul>
       </div>
@@ -116,8 +114,8 @@ function Form(props) {
         { value: 'Gold', label: 'Gold' },
         { value: 'Platinum', label: 'Platinum' },
         { value: 'Diamond', label: 'Diamond' },
-        { value: 'Immortal', label: 'Immortal' },
         { value: 'Ascendant', label: 'Ascendant' },
+        { value: 'Immortal', label: 'Immortal' },
         { value: 'Radiant', label: 'Radiant' },
       ],
     },
@@ -191,12 +189,6 @@ function Form(props) {
           </select>
         </div>
         <div className="form">
-          <label
-            htmlFor="checkbox"
-            style={{ color: 'white', marginLeft: '10px' }}
-          >
-            I agree to the terms and conditions
-          </label>
           <input
             type="checkbox"
             id="checkbox"
@@ -205,6 +197,12 @@ function Form(props) {
             onChange={handleCheckboxChange}
             required
           />
+          <label
+            htmlFor="checkbox"
+            style={{ color: 'white', marginLeft: '10px' }}
+          >
+            I agree to the terms and conditions
+          </label>
         </div>
         <button type="submit" disabled={!isChecked}>
           Submit
