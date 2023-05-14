@@ -31,15 +31,14 @@ const createUser = async (req, res) => {
     return res.status(409).json({ error: "Username already exists" });
   }
 
-  //instantiates filter and checks usernames for profanities
   let Filter = require("bad-words"), filter = new Filter()
   const isUnclean = filter.isProfane(username)
-  //if username contains profanities then a response is sent declaring the username is not allowed
   if(isUnclean){
     return res.status(409).json({error: "Innapropriate username"})
   }
 
   const user = new User({ username, points,uuid });
+  console.log(user);
   try {
     await user.save();
     res.status(201).json(user);
@@ -50,7 +49,6 @@ const createUser = async (req, res) => {
 
 const updatePointByUsername = async (req, res) => {
   const { username, points } = req.body;
-  console.log(username, points);
   try {
     const user = await User.findOne({ username });
     if (!user) {
@@ -66,12 +64,25 @@ const updatePointByUsername = async (req, res) => {
   }
 };
 
-
-
+const getOneUserByUuid = async (req, res) => {
+  const { uuid } = req.params;
+  console.log(uuid);
+  try {
+    const user = await User.findOne({ uuid });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 module.exports = {
   getUserbyUsername,
   getAllUsers,
   createUser,
   updatePointByUsername,
+  getOneUserByUuid,
 };

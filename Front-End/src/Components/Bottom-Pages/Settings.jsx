@@ -1,8 +1,8 @@
 import React, {  useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Cookies from 'js-cookie';
 import {useDispatch,useSelector} from "react-redux"
 import { settingsActions } from '../store/SettingsSlice';
+import Cookies from 'js-cookie';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -10,12 +10,27 @@ const Settings = () => {
   const data = useSelector((state) => state.settings.data);
   const index = useSelector((state) => state.settings.index);
   const username = useSelector((state) => state.settings.username);
-  const isUsernameChanged = useSelector(
-    (state) => state.settings.isUsernameChanged
-  );
+  const isUsernameChanged = useSelector((state) => state.settings.isUsernameChanged);
+  const score = useSelector((state) => state.settings.score);
 
+  useEffect(() => {
+    const getOneUser = async (uuid) => {
+      const response = await fetch(
+        `http://localhost:3001/user/${uuid}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
+      dispatch(settingsActions.setUsername(data.username));
+      dispatch(settingsActions.setScore(data.points));
+    };
+    getOneUser(userId);
+  }, [userId, dispatch]);
 
-  const score = Cookies.get('score') || 0;
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (!storedUserId) {
@@ -26,21 +41,22 @@ const Settings = () => {
     } else {
       dispatch(settingsActions.setUserId(storedUserId));
     }
-  
-    const storedUsername = Cookies.get('username') || 'Guest';
-    dispatch(settingsActions.setUsername(storedUsername));
-    dispatch(settingsActions.setIsUsernameChanged(storedUsername !== 'Guest'));
 
-    const storedScore = Cookies.get('score') || 0;
-    Cookies.set('score', storedScore, { secure: true });
-  }, [dispatch]);
-  
+    if(username === undefined){
+      dispatch(settingsActions.setIsUsernameChanged(false));
+    }
+
+  }, [dispatch,username]);
+
+  // console.log(username)
+  // console.log(isUsernameChanged)
+  // console.log(score)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://rr-back-end.onrender.com/allusers',
+          'http://localhost:3001/allusers',
           {
             method: 'GET',
             headers: {
@@ -53,7 +69,6 @@ const Settings = () => {
         }
         const userData = await response.json();
         dispatch(settingsActions.setData(userData))
-        // setData(userData);
       } catch (error) {
         console.error(error);
       }
@@ -64,7 +79,7 @@ const Settings = () => {
   const saveUser = async (username, score,uuid ) => {
     try {
       const response = await fetch(
-        'https://rr-back-end.onrender.com/saveuser',
+        'http://localhost:3001/saveuser',
         {
           method: 'POST',
           headers: {
@@ -98,7 +113,6 @@ const Settings = () => {
     if (isUsernameChanged) {
       return;
     }
-    Cookies.remove('username');
     let newUsername = prompt('Please enter a new username');
     const checkUsername = async () => {
       if (newUsername === null || newUsername === '') {
@@ -111,9 +125,8 @@ const Settings = () => {
         newUsername = prompt(newUser.error);
         checkUsername();
       }
-      Cookies.set('username', newUsername, { secure: true });
       Cookies.set('isUsernameChanged', true, { secure: true });
-      dispatch(settingsActions.setUsername(Cookies.get('username')));
+      dispatch(settingsActions.setUsername(username));
       dispatch(settingsActions.setIsUsernameChanged(true));
 
     };
