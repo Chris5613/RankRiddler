@@ -602,7 +602,6 @@ td,
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-
 }
 
 .report-align {
@@ -610,7 +609,6 @@ td,
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* flex-direction: column; */
   color: white;
   text-align: center;
 }
