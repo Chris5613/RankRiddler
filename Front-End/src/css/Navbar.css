@@ -282,6 +282,8 @@ header {
   align-items: center;
   margin-bottom: 1rem;
   flex-direction: column;
+  color: black;
+  margin-top: 2rem;
 }
 
 table {

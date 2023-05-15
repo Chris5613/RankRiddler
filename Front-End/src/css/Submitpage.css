@@ -18,6 +18,8 @@
     align-items: center;
     margin-bottom: 1rem;
     flex-direction: column;
+    margin-top: 2rem;
+    color: black;
   }
   
   .select {

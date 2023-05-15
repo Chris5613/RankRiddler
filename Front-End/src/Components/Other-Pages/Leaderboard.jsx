@@ -13,7 +13,7 @@ const Leaderboard = () => {
   return (
     <>
       <div className="leaderboard-container select-game">
-        <h2>Leaderboard</h2>
+        <h1 style={{color: 'white'}}>Point Leaderboard</h1>
         <select
           className="select"
           value={selection}
