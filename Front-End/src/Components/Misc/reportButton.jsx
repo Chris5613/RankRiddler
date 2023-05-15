@@ -8,14 +8,17 @@ const ReportButton = (props) => {
       reportedBy,
     };
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/form/report', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/form/report',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
 
-        body: JSON.stringify(reportData),
-      });
+          body: JSON.stringify(reportData),
+        }
+      );
 
       if (response.status === 201) {
         alert('Video reported successfully!');

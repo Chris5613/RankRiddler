@@ -17,12 +17,15 @@ const Settings = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(`https://rr-back-end.onrender.com/user/${uuid}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `https://rr-back-end.onrender.com/user/${uuid}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       const data = await response.json();
       dispatch(settingsActions.setUsername(data.username));
       dispatch(settingsActions.setScore(data.points));
@@ -53,12 +56,15 @@ const Settings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://rr-back-end.onrender.com/allusers', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await fetch(
+          'https://rr-back-end.onrender.com/allusers',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -73,17 +79,20 @@ const Settings = () => {
 
   const saveUser = async (username, score, uuid) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/saveuser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          points: score,
-          uuid: uuid,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/saveuser',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            points: score,
+            uuid: uuid,
+          }),
+        }
+      );
       const data = await response.json();
       console.log(data);
       return data;
@@ -144,7 +153,9 @@ const Settings = () => {
             <p>Refresh to see changes</p>
           ) : (
             <div>
-              <p>Must set a username to see your leaderboard rank and earn points</p>
+              <p>
+                Must set a username to see your leaderboard rank and earn points
+              </p>
               <br />
               <h5>
                 Can only be changed

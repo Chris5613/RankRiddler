@@ -93,12 +93,15 @@ const Csgo = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(`https://rr-back-end.onrender.com/user/${uuid}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `https://rr-back-end.onrender.com/user/${uuid}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       const data = await response.json();
       dispatch(csgoActions.setScore(data.points));
     };
@@ -107,16 +110,19 @@ const Csgo = () => {
 
   const updatePoints = async (point) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          points: point,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/updatepoints',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            points: point,
+          }),
+        }
+      );
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -160,7 +166,11 @@ const Csgo = () => {
 
   return (
     <>
-      <ReportButton youtubeLink={youtubeUrl} playerInfo={player} reportedBy={userId} />
+      <ReportButton
+        youtubeLink={youtubeUrl}
+        playerInfo={player}
+        reportedBy={userId}
+      />
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>
