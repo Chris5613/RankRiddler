@@ -15,6 +15,7 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ReportButton from '../Misc/reportButton';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -159,6 +160,7 @@ const Csgo = () => {
 
   return (
     <>
+      <ReportButton youtubeLink={youtubeUrl} playerInfo={player} reportedBy={userId} />
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>
