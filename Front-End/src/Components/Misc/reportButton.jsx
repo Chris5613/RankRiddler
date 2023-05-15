@@ -8,7 +8,7 @@ const ReportButton = (props) => {
       reportedBy,
     };
     try {
-      const response = await fetch('http://localhost:3001/form/report', {
+      const response = await fetch('https://rr-back-end.onrender.com/form/report', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
