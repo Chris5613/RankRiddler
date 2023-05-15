@@ -12,102 +12,51 @@ import { NavLink } from 'react-router-dom';
 import setting from '../../Assets/Nav-Icons/settings.png';
 import { navActions } from '../store/NavSlice';
 import { useSelector, useDispatch } from 'react-redux';
-const Nav = () => {
-  const dispatch = useDispatch();
-  const showMenu = useSelector((state) => state.nav.showMenu);
 
-  const toggleMenu = () => {
-    dispatch(navActions.toggleMenu());
-  };
-  let menuRef = useRef(null);
-  useEffect(() => {
-    let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
-        dispatch(navActions.hideMenu());
-      }
-    };
-    document.addEventListener('mousedown', handler);
-  });
+const Nav = () => {
 
   return (
     <>
-      <div className="app">
-        <button className="hamburger" onClick={toggleMenu}>
-          {showMenu ? null : (
-            <svg viewBox="0 0 100 80" width="40" height="40">
-              <rect width="90" height="10"></rect>
-              <rect y="30" width="90" height="10"></rect>
-              <rect y="60" width="90" height="10"></rect>
-            </svg>
-          )}
-        </button>
-        <div className={showMenu ? 'sidebar active' : 'sidebar'} ref={menuRef}>
-          <ul>
-            <GameLink
-              imgSrc={val}
-              altText="Valorant"
-              linkText="Valorant"
-              to="/valorant"
-              onClick={() => dispatch(navActions.hideMenu())}
-            />
-            <GameLink
-              imgSrc={lol}
-              altText="league"
-              linkText="League"
-              to="/league"
-              onClick={() => dispatch(navActions.hideMenu())}
-            />
-            <GameLink
-              imgSrc={csgo}
-              altText="csgo"
-              linkText="CSGO"
-              to="/csgo"
-              onClick={() => dispatch(navActions.hideMenu())}
-            />
-            <BottomLink
-              imgSrc={submit}
-              altText="movie-logo"
-              linkText="Submit a Clip"
-              to="/submit"
-              onClick={() => dispatch(navActions.hideMenu())}
-            />
-            <BottomLink
-              imgSrc={leader}
-              altText="movie-logo"
-              linkText="Leaderboard"
-              to="/leaderboard"
-              onClick={() => dispatch(navActions.hideMenu())}
-            />
-            <BottomLink
-              imgSrc={setting}
-              altText="movie-logo"
-              linkText="Settings"
-              to="/settings"
-              onClick={() => dispatch(navActions.hideMenu())}
-            />
-          </ul>
-          <hr />
-          <ul>
-            <li
-              className="bottom-links other-links"
-              onClick={() => dispatch(navActions.hideMenu())}
-            >
-              <NavLink to="/howto">How to Play</NavLink>
-            </li>
-            <li
-              className="bottom-links other-links"
-              onClick={() => dispatch(navActions.hideMenu())}
-            >
-              <NavLink to="/bug">Report a Bug</NavLink>
-            </li>
-          </ul>
+      <header className='header-section'>
+        <div>
+          <div>
+            <div>
+              <button>
+                <span></span>
+                  <svg>
+
+                  </svg>
+              </button>
+            </div>
+            <nav>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </nav>
+        {/* <div className="logo">
+              <a href="/">
+                <img src={logo} alt="logo" />
+              </a>
+            </div> */}
+            <div>
+              <ul>
+                <li></li>
+                <li></li>
+              </ul>
+              <div>
+                {/* button */}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="logo">
-        <a href="/">
-          <img src={logo} alt="logo" />
-        </a>
-      </div>
+      </header>
     </>
   );
 };

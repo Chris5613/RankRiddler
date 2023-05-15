@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <>
       <div className="gamecard">
-        <div>
+        {/* <div>
           <h1>Guess the Rank - Web Game</h1>
           <NavLink to="/valorant">
             <img
@@ -52,7 +52,7 @@ const Home = () => {
               here
             </NavLink>
           </p>
-        </div>
+        </div> */}
       </div>
     </>
   );

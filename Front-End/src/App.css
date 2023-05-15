@@ -6,126 +6,12 @@
 }
 
 html {
-  background-color: #292929;
+  background-color: rgba(66,91,153,.25);
 }
 
-.hamburger {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #fff;
-  background-color: transparent;
-  border: none;
-  z-index: 1;
-}
-@media screen and (min-width: 768px) {
-  .hamburger {
-    display: none;
-  }
-}
 
-h2,
-.tos {
-  color: white;
-  margin-top: 2rem;
-}
 
-.tos {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.sidebar {
-  position: absolute;
-  top: 0;
-  left: -300px;
-  height: 100%;
-  width: 260px;
-  background-color: rgb(31, 29, 29);
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.sidebar.active {
-  left: 0;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  margin: 30px;
-  padding: 0;
-}
-
-.sidebar a {
-  display: grid;
-  grid-template-columns: auto;
-  color: #fff;
-  text-decoration: none;
-}
-
-.links {
-  display: none;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.link {
-  font-size: 25px;
-  margin-left: 10px;
-}
-
-.images {
-  height: auto;
-  width: 75px;
-}
-
-.game-link {
-  align-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  font-size: clamp(0.2em, 4vw, 1rem);
-  gap: 0.2pc;
-  justify-content: flex-start;
-  min-height: 30px;
-  overflow: hidden;
-  padding: clamp(0px, 2vw, 10px) 0 clamp(0px, 2vw, 10px) clamp(0px, 2vw, 10px);
-  text-overflow: ellipsis;
-  -webkit-user-select: none;
-  user-select: none;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.home-link,
-.bottom-links {
-  display: flex;
-  align-items: center;
-  list-style: none;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media screen and (max-width: 768px) {
-  .logo img {
-    height: 50px;
-    width: 300px;
-    margin-left: 3rem;
-    margin-top: 1rem;
-  }
-}
-
+/* 
 h1 {
   color: white;
   text-align: center;
@@ -202,12 +88,6 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .sidebar.active {
-    z-index: 2;
   }
 }
 
@@ -578,7 +458,6 @@ td,
 }
 
 .home-instrutions-container {
-  /* make it a small box with a gray border */
   border: 2px solid gray;
   padding: 10px;
   width: 500px;
@@ -623,4 +502,4 @@ td,
   border-radius: 5px;
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: fit-content;
-}
+} */
