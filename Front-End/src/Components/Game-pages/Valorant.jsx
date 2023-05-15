@@ -15,7 +15,7 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
-import ReportButton from '../Misc/reportButton';
+import ReportButton from '../Other-Pages/reportButton';
 
 const Valorant = () => {
   const dispatch = useDispatch();

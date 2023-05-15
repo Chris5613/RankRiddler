@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
-import ReportButton from '../Misc/reportButton';
+import ReportButton from '../Other-Pages/reportButton';
 
 const League = () => {
   const dispatch = useDispatch();

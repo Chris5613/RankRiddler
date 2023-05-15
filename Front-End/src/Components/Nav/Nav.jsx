@@ -45,11 +45,25 @@ const Nav = () => {
               <ul>
                 <li>
                   <NavLink to="/submit" className='nav-link'>
-                    Submit Clips
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 3H3v18h18V3zm-4 12h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                  </svg>
+                  Submit Clips
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/settings" className='nav-link'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.5 1.5 0 0 1-1.4 1H18"/>
+                    <path d="M4.6 15a1.5 1.5 0 0 0 1.4 1H6"/>
+                    <path d="M19.4 9a1.5 1.5 0 0 0-1.4-1H18"/>
+                    <path d="M4.6 9a1.5 1.5 0 0 1-1.4-1H2"/>
+                    <path d="M15 22.4a1.5 1.5 0 0 1 0-2.8V18"/>
+                    <path d="M9 22.4a1.5 1.5 0 0 0 0-2.8V18"/>
+                    <path d="M20 4.6a1.5 1.5 0 0 1-2.8 0H15"/>
+                    <path d="M20 9.4a1.5 1.5 0 0 0-2.8 0H15"/>
+                  </svg>
                     Settings
                   </NavLink>
                 </li>

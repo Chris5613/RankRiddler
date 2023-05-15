@@ -10,7 +10,6 @@ function RankImage(props) {
       src={props.src}
       alt={rank}
       onClick={() => handleRankClick(rank)}
-      style={{ boxShadow: isSelected ? '0 0 10px gold' : '' }}
     />
   );
 }

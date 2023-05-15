@@ -1,0 +1,84 @@
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(10px, 4vw, 30px);
+    width: clamp(220px, 95%, 1000px);
+  }
+  
+  .form {
+    width: 400px;
+    padding: 20px;
+  }
+  
+  .select-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-direction: column;
+  }
+  
+  .select {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    font-size: clamp(0.9rem, 3vw, 1.3rem);
+    font-weight: 400;
+    height: clamp(30px, 4vw, 45px);
+    justify-content: flex-start;
+    max-width: 600px;
+  }
+  
+  .form-input,
+  option,
+  select,
+  textarea {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: var(--input-text-color);
+    font-size: clamp(0.8rem, 3vw, 1.1rem);
+    font-weight: 400;
+    height: clamp(30px, 4vw, 45px);
+    margin: initial;
+    outline: none;
+    padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .form-input,
+  option {
+    height: clamp(30px, 4vw, 45px);
+  }
+  
+  .form-label,
+  .text,
+  .login-text,
+  .error-message,
+  .howto {
+    color: white;
+  }
+  
+  .form-label {
+    margin-left: 5px;
+    margin-top: 1rem;
+  }
+  
+  .text {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .submission-list,
+  .form-checkbox,
+  .other-links {
+    margin-top: 1rem;
+  }

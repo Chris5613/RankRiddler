@@ -15,7 +15,7 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import ReportButton from '../Misc/reportButton';
+import ReportButton from '../Other-Pages/reportButton';
 
 const Csgo = () => {
   const dispatch = useDispatch();

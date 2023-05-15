@@ -4,8 +4,8 @@ const Home = () => {
   return (
     <>
       <div className="gamecard">
-        {/* <div>
-          <h1>Guess the Rank - Web Game</h1>
+        <div className='main-page-body'>
+          <h1 className='page-heading-1'>Choose a game</h1>
           <NavLink to="/valorant">
             <img
               className="main-images"
@@ -52,7 +52,7 @@ const Home = () => {
               here
             </NavLink>
           </p>
-        </div> */}
+        </div>
       </div>
     </>
   );
