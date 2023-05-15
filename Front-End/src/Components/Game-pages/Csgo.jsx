@@ -92,7 +92,7 @@ const Csgo = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(`http://localhost:3001/user/${uuid}`, {
+      const response = await fetch(`https://rr-back-end.onrender.com/user/${uuid}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ const Csgo = () => {
 
   const updatePoints = async (point) => {
     try {
-      const response = await fetch('http://localhost:3001/updatepoints', {
+      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
