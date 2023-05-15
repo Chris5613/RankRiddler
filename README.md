@@ -30,6 +30,11 @@ correct answers and a leaderboard system to track the top players, Have the know
 
 https://user-images.githubusercontent.com/24240227/236703892-e5c795cb-7a74-4b53-bdb8-007d612742b2.mp4
 
+![image](https://github.com/Sukhendu2002/RankRiddler/assets/76804228/b5f205c1-7282-41e7-9a81-7aeabe7ded55)
+
+![image](https://github.com/Sukhendu2002/RankRiddler/assets/76804228/8f751f93-2630-48ce-9de7-56a7b9416943)
+
+
 Players are required to create an account before accessing the game options available on the home screen.
 Once they have chosen a game, they can watch a clip and determine the rank of the player in the video.
 Depending on their answer, players can gain or lose points, and track their progress on the leaderboard,
