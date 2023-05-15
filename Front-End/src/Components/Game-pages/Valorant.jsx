@@ -15,6 +15,7 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
+import ReportButton from '../Misc/reportButton';
 
 const Valorant = () => {
   const dispatch = useDispatch();
@@ -161,6 +162,7 @@ const Valorant = () => {
 
   return (
     <>
+      <ReportButton youtubeLink={youtubeUrl} playerInfo={player} reportedBy={userId} />
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>

@@ -16,6 +16,7 @@ import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
+import ReportButton from '../Misc/reportButton';
 
 const League = () => {
   const dispatch = useDispatch();
@@ -162,6 +163,7 @@ const League = () => {
 
   return (
     <>
+    <ReportButton youtubeLink={youtubeUrl} playerInfo={player} reportedBy={userId} />
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>

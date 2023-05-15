@@ -596,3 +596,31 @@ td,
 .bottom-img {
   margin-right: 1rem;
 }
+
+.report-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.report-align {
+  width: 1000px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.report-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
+  width: fit-content;
+}
