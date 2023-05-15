@@ -20,7 +20,8 @@ html {
   border: none;
   z-index: 1;
 }
-@media screen and (min-width: 768px) {
+
+@media screen and (min-width: 768px) and (min-width: 1024px) {
   .hamburger {
     display: none;
   }
@@ -164,7 +165,7 @@ h1 {
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 769px) and (min-width: 1024px) {
   .sidebar {
     position: absolute;
     top: 0;
@@ -174,11 +175,12 @@ h1 {
     background-color: rgb(31, 29, 29);
     overflow-x: hidden;
     padding-top: 20px;
+    z-index: 9999; /* Display on top of everything */
   }
 }
 
 .video {
-  z-index: 1;
+  z-index: 0;
 }
 
 .youtube-wrapper {
