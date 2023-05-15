@@ -28,7 +28,7 @@ const Valorant = () => {
   const rank = useSelector((state) => state.valorant.rank);
   const result = useSelector((state) => state.valorant.result);
   const player = useSelector((state) => state.valorant.player);
-  const score = useSelector((state) => state.valorant.score);
+  const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
   const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);

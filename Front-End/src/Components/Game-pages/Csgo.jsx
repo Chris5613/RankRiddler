@@ -26,7 +26,7 @@ const Csgo = () => {
   const rank = useSelector((state) => state.csgo.rank);
   const result = useSelector((state) => state.csgo.result);
   const player = useSelector((state) => state.csgo.player);
-  const score = useSelector((state) => state.csgo.score);
+  const score = useSelector((state) => state.csgo.score) || 0;
   const point = useSelector((state) => state.csgo.point);
   const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);

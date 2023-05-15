@@ -144,7 +144,7 @@ const Settings = () => {
             <p>Refresh to see changes</p>
           ) : (
             <div>
-              <p>Must set a username to see your leaderboard rank</p>
+              <p>Must set a username to see your leaderboard rank and earn points</p>
               <br />
               <h5>
                 Can only be changed

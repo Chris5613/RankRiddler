@@ -29,7 +29,7 @@ const League = () => {
   const rank = useSelector((state) => state.league.rank);
   const result = useSelector((state) => state.league.result);
   const player = useSelector((state) => state.league.player);
-  const score = useSelector((state) => state.league.score);
+  const score = useSelector((state) => state.league.score) || 0;
   const point = useSelector((state) => state.league.point);
   const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);
