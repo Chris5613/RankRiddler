@@ -92,7 +92,7 @@ const Csgo = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(`https://rr-back-end.onrender.com/user/${uuid}`, {
+      const response = await fetch('https://rr-back-end.onrender.com/user/${uuid}', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
