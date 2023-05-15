@@ -53,7 +53,7 @@ const Settings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/allusers', {
+        const response = await fetch('https://rr-back-end.onrender.com/allusers', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const Settings = () => {
 
   const saveUser = async (username, score, uuid) => {
     try {
-      const response = await fetch('http://localhost:3001/saveuser', {
+      const response = await fetch('https://rr-back-end.onrender.com/saveuser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
