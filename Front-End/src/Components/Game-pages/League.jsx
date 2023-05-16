@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
-import ReportButton from '../Misc/reportButton';
+import ReportButton from '../Other-Pages/reportButton';
 
 const League = () => {
   const dispatch = useDispatch();
@@ -96,12 +96,15 @@ const League = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(`https://rr-back-end.onrender.com/user/${uuid}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `https://rr-back-end.onrender.com/user/${uuid}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       const data = await response.json();
       dispatch(leagueActions.setScore(data.points));
     };
@@ -110,16 +113,19 @@ const League = () => {
 
   const updatePoints = async (point) => {
     try {
-      const response = await fetch('https://rr-back-end.onrender.com/updatepoints', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          points: point,
-        }),
-      });
+      const response = await fetch(
+        'https://rr-back-end.onrender.com/updatepoints',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            points: point,
+          }),
+        }
+      );
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -163,7 +169,11 @@ const League = () => {
 
   return (
     <>
-    <ReportButton youtubeLink={youtubeUrl} playerInfo={player} reportedBy={userId} />
+      <ReportButton
+        youtubeLink={youtubeUrl}
+        playerInfo={player}
+        reportedBy={userId}
+      />
       <div>
         <VideoPlayer url={youtubeUrl} />
       </div>

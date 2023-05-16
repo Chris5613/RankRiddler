@@ -13,7 +13,7 @@ const Leaderboard = () => {
   return (
     <>
       <div className="leaderboard-container select-game">
-        <h2>Choose a Leaderboard to view top players</h2>
+        <h1 style={{color: 'white'}}>Point Leaderboard</h1>
         <select
           className="select"
           value={selection}
@@ -27,9 +27,6 @@ const Leaderboard = () => {
         {selection === 'alltime' && <AllTime />}
         {selection === 'weekly' && <Weekly />}
         {selection === 'monthly' && <Monthly />}
-      </div>
-      <div className="text">
-        Leaderboard refreshes in real time. Only shows top 10 players.
       </div>
     </>
   );
@@ -90,7 +87,7 @@ function AllTime() {
 function Weekly() {
   return (
     <>
-      <h2>In Progress</h2>
+      <h2 style={{color: "#fff"}}>In Progress</h2>
     </>
   );
 }
@@ -98,7 +95,7 @@ function Weekly() {
 function Monthly() {
   return (
     <>
-      <h2>In Progress</h2>
+      <h2 style={{color: "#fff"}}>In Progress</h2>
     </>
   );
 }
