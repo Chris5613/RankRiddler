@@ -27,6 +27,7 @@ header {
   margin: 0 auto;
 }
 
+
 .nav-container {
   display: flex;
   width: 100%;
@@ -224,48 +225,6 @@ header {
   }
 }
 
-/* Modal CSS */
-
-.modal-content {
-  margin: 9% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  background-color: rgb(39, 36, 36);
-  color: white;
-  height: auto;
-  width: 500px;
-}
-
-.modal-title {
-  text-align: center;
-}
-
-.modal-example {
-  border-width: 90%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  margin-left: 1.7rem;
-}
-
-.modal-example-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-example-rad {
-  margin-left: 1rem;
-}
-
-.modal-example-iron {
-  margin-left: 2rem;
-}
-
-.modal-example-wrong {
-  margin-top: 0.7rem;
-}
-
 .result-title {
   margin-bottom: 1rem;
 }
@@ -307,6 +266,7 @@ td {
   text-align: center;
   margin-top: 1rem;
   color: white;
+  border: none;
 }
 
 

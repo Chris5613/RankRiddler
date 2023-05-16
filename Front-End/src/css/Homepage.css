@@ -38,36 +38,18 @@
 }
 
 .game-card {
-  --grid-column-count: 4;
-  --grid-item--min-width: 220px;
   --gap-count: calc(var(4) - 1);
   --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(4));
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(max(var(--grid-item--min-width),var(--grid-item--max-width)),1fr));
+  grid-template-columns: repeat(auto-fill,minmax(max(var(--grid-item--min-width),var(220px)),1fr));
   grid-gap: var(--grid-layout-gap);
-}
-
-.main-images {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .home-section {
   position: relative;
   padding-top: 12px;
   padding-bottom: 12px;
-}
-
-.home-container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 80rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  height: auto;
 }
 
 .sm\:px-6 {
@@ -84,7 +66,6 @@
   }
 }
 
-
 .main-container {
   position: relative;
 }
@@ -92,15 +73,16 @@
 .main-images {
   height: 300px;
   width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.5rem;
-}
-
-.image-row {
   flex-basis: calc(33.333% - 1rem); 
 }
 
@@ -108,6 +90,12 @@
   display: flex;
   justify-content: center;
   color: white;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: auto;
 }
 
 .home-instrutions-container {

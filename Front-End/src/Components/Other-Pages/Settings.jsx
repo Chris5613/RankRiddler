@@ -136,6 +136,7 @@ const Settings = () => {
   return (
     <>
       <div className="settings-container">
+        <h1 style={{marginBottom: "20px"}}>Settings</h1>
         <p>
           Current ID:
           <span>

@@ -28,9 +28,6 @@ const Leaderboard = () => {
         {selection === 'weekly' && <Weekly />}
         {selection === 'monthly' && <Monthly />}
       </div>
-      <div className="text">
-        Leaderboard refreshes in real time. Only shows top 10 players.
-      </div>
     </>
   );
 };
@@ -90,7 +87,7 @@ function AllTime() {
 function Weekly() {
   return (
     <>
-      <h2>In Progress</h2>
+      <h2 style={{color: "#fff"}}>In Progress</h2>
     </>
   );
 }
@@ -98,7 +95,7 @@ function Weekly() {
 function Monthly() {
   return (
     <>
-      <h2>In Progress</h2>
+      <h2 style={{color: "#fff"}}>In Progress</h2>
     </>
   );
 }
