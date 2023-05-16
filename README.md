@@ -1,44 +1,31 @@
 # RankRiddler
 
 [![GitHub license](https://img.shields.io/github/license/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/issues)
-[![GitHub stars](https://img.shields.io/github/stars/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/stargazers)
 [![GitHub contributors](https://img.shields.io/github/contributors/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/pulls)
 
-RankRiddler is a fun and engaging game where players are presented with
-clips of gameplay and must use their knowledge and experience to accurately guess
-the rank of the player in the video.
-Whether you are a seasoned veteran of the game or just starting out, RankRiddler provides a
-fun and interactive way to test your knowledge of the game. RankRiddler has a point system that rewards
-correct answers and a leaderboard system to track the top players, Have the knownledge to be on top?
+RankRiddler is a fun and engaging game where players are presented with clips of gameplay and must use their knowledge and experience to accurately guess the rank of the player in the video. Whether you are a seasoned veteran of the game or just starting out, RankRiddler provides a fun and interactive way to test your knowledge of the game. RankRiddler has a point system that rewards correct answers and a leaderboard system to track the top players. Do you have the knowledge to be on top?
 
 ## Table of Contents
 
 - RankRiddler
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
   - [Contributing](#contributing)
   - [License](#license)
-  - [Contact](#contact)
 
 ## About The Project!
 
-https://user-images.githubusercontent.com/24240227/236703892-e5c795cb-7a74-4b53-bdb8-007d612742b2.mp4
+![229cd3f04327e1d5c1ab4f4af37a68ec](https://github.com/Chris5613/RankRiddler/assets/24240227/d62f3c8e-62e4-4bbd-b6d8-119907fae7c4)
+![cdb625ff224d669812c803db87582315](https://github.com/Chris5613/RankRiddler/assets/24240227/1516b89f-5335-412d-a6a4-7f35e73aaad2)
+![5655386166a30556e32d587a650108d1](https://github.com/Chris5613/RankRiddler/assets/24240227/86b9b2db-c0bf-4534-a16f-cd226c462613)
 
-![image](https://github.com/Sukhendu2002/RankRiddler/assets/76804228/b5f205c1-7282-41e7-9a81-7aeabe7ded55)
-
-![image](https://github.com/Sukhendu2002/RankRiddler/assets/76804228/8f751f93-2630-48ce-9de7-56a7b9416943)
-
-
-Players are required to create an account before accessing the game options available on the home screen.
-Once they have chosen a game, they can watch a clip and determine the rank of the player in the video.
-Depending on their answer, players can gain or lose points, and track their progress on the leaderboard,
-which displays the top 10 players.
+Players are not required to create an account but can set their username. Once they have chosen a game, they can watch a clip and determine the rank of the player in the video. Depending on their answer, players can gain or lose points and track their progress on the leaderboard, which displays the top 10 players.
 
 ### Prerequisites
 
@@ -49,7 +36,7 @@ which displays the top 10 players.
 
 Any user who would like to contribute can fork the repo and submit a issue first explaining what you want to change. After approval, you can submit a pull request
 
-## Local Setup
+## Installation
 
 Follow the instructions below to set up the project on your local machine:
 
@@ -90,6 +77,3 @@ Follow the instructions below to set up the project on your local machine:
 ## License
 
 RankRiddler is licensed under the MIT license. See [LICENSE](/LICENSE) for more information.
-
-
-  
