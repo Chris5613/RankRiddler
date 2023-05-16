@@ -153,7 +153,7 @@ const Settings = () => {
           {isUsernameChanged ? (
             <p>Refresh to see changes</p>
           ) : (
-            <div>
+            <div className='setting-bottom'>
               <p>
                 Must set a username to see your leaderboard rank and earn points
               </p>

@@ -1,10 +1,16 @@
 import { NavLink } from 'react-router-dom';
+import val from '../../Assets/HomePage-Icons/val.png';
+import csgo from '../../Assets/HomePage-Icons/csgo.png';
+import league from '../../Assets/HomePage-Icons/league.png';
+import valorantImage from '../../Assets/HomePage-Icons/valorantImage.png';
+import leagueImage from '../../Assets/HomePage-Icons/leagueImage.png';
+import csgoImage from '../../Assets/HomePage-Icons/csgoImage.png';
 
 const Home = () => {
   return (
     <>
       <main className='home-section'>
-        <div className='home-container sm\:px-6 lg\:px-8 '>
+        <div className='home-container'>
           <div className='main-container'>      
             <h1 className='page-heading-1'>Choose a game</h1>
             <p className='main-text'>Head over to{' '}
@@ -13,37 +19,34 @@ const Home = () => {
             </NavLink>{' '}
             to set your username
           </p>
-            <div className='image-row '>
-              <NavLink to="/valorant">
-                <img
-                  className="main-images width"
-                  src="https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/valtall_1200x1600-300d8e4cb9bee9dbb1166b574b3bdc93"
-                  alt="valorant"
-                />
-              </NavLink>
-              <NavLink to="/league">
-                <img
-                  className="main-images width"
-                  src="https://cdn1.epicgames.com/offer/24b9b5e323bc40eea252a10cdd3b2f10/LoL_1200x1600-15ad6c981af8d98f50e833eac7843986"
-                  alt="league"
-                />
-              </NavLink>
-              <NavLink to="/csgo">
-                <img
-                  className="main-images width"
-                  src="https://i.gyazo.com/49247bef6608e9c0004372c93bd966c1.png"
-                  alt="csgo"
-                />
-              </NavLink>
-              {/* <div className='coming-soon'>
-                <span className="image-title">Coming Soon</span>
+          <div className='image-row'>
+            <NavLink to="/valorant">
+              <div className="image-container">
+                <img className="width main-images" src={valorantImage} alt="valorant" />
+                <div className="overlay">
+                  <img src={val} alt="valorant"style={{ height: "70px", width: "80px" }} />
+                  <h2 className='val-text'>Valorant</h2>
+                </div>
               </div>
-              <div className='coming-soon'>
-                <span className="image-title">Coming Soon</span>
+            </NavLink>
+            <NavLink to="/league" className="width main-images">
+              <div className="image-container">
+                <img  className="width main-images" src={league} alt="league" />
+                <div className="overlay">
+                  <img src={leagueImage} alt="league-icon" style={{ height: "70px", width: "120px" }} />
+                  <h2 className='val-text'>League</h2>
+                </div>
               </div>
-              <div className='coming-soon'>
-                <span className="image-title">Coming Soon</span>
-              </div> */}
+            </NavLink>
+            <NavLink to="/csgo" className="width main-images">
+              <div className="image-container">
+                <img className="width main-images" src={csgoImage} alt="csgo" />
+                <div className="overlay">
+                  <img src={csgo} alt="csgo-img"style={{ height: "70px", width: "100px" }} />
+                  <h2 className='val-text'>CS:GO</h2>
+                </div>
+              </div>
+            </NavLink>
             </div>
           </div>
         </div>

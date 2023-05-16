@@ -9,7 +9,7 @@ html {
   font-size: 16px;
   line-height: 1.5;
   color: #f3f4f6;
-  background-color: #1f1d1d
+  background-color: #12131e;
 }
 
 header {
@@ -341,6 +341,10 @@ td {
 
 .settings-container p {
   margin-top: 1rem;
+}
+
+.setting-bottom {
+  margin-top: 2rem;
 }
 
 .reset-container {
