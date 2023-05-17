@@ -202,7 +202,7 @@ function Form(props) {
             I agree to the terms and conditions
           </label>
         </div>
-        <button type="submit" disabled={!isChecked}>
+        <button className="submit-button" type="submit" disabled={!isChecked}>
           Submit
         </button>
       </form>
