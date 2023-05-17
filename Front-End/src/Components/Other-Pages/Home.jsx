@@ -30,7 +30,7 @@ const Home = () => {
             />
             <ImageLink
               to="/league"
-              imageSrc={league}
+              imageSrc="https://i.gyazo.com/4a95cd329164de605f466eea4ba864c7.png"
               overlayImageSrc={leagueImage}
               overlayText="League"
             />
