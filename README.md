@@ -1,5 +1,6 @@
 # RankRiddler
 
+[![CodeFactor](https://www.codefactor.io/repository/github/chris5613/rankriddler/badge)](https://www.codefactor.io/repository/github/chris5613/rankriddler)
 [![GitHub license](https://img.shields.io/github/license/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/blob/main/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/graphs/contributors)
 [![GitHub stars](https://img.shields.io/github/stars/Chris5613/RankRiddler)](https://github.com/Chris5613/RankRiddler/stargazers)
