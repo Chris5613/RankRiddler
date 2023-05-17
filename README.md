@@ -44,29 +44,29 @@ Follow the instructions below to set up the project on your local machine:
 1. **Fork the repo:** Fork the project repository by clicking on the Fork button in the upper right corner of the repository page.
 
 2. **Clone the repo to your local machine:** Copy the URL of the forked repository and run the following command in your terminal:
-    ```
-    git clone <forked_repository_url>
-    ```
+   ```
+   git clone <forked_repository_url>
+   ```
 3. **Navigate to the Front-End directory:** Run the following command in your terminal:
-    ```
-    cd Front-End
-    ```
+   ```
+   cd Front-End
+   ```
 4. **Install dependencies:** Run the following command in your terminal to install the necessary dependencies:
-    ```
-    npm install
-    ```
+   ```
+   npm install
+   ```
 5. **Start the application:** Run the following command in your terminal to start the Front-End:
-    ```
-    npm start
-    ```
+   ```
+   npm start
+   ```
 6. **Open a new terminal:** Open a new terminal and navigate to the Back-End directory by running the following command:
-    ```
-    cd Back-End
-    ```
+   ```
+   cd Back-End
+   ```
 7. **Install dependencies:** Run the following command in your terminal to install the necessary dependencies:
-    ```
-    npm install
-    ```
+   ```
+   npm install
+   ```
 8. **Create a .env file:** Create a .env file in the root of the Back-End folder.
 9. **Add MongoDB URI to .env file:** Add MONGO=yourMongoDBURI to the .env file.
 10. **Add port number to .env file:** Add PORT=portNumber to the .env file, where portNumber is the port number you want to use.
