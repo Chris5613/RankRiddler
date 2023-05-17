@@ -137,7 +137,7 @@
 
 .main-images {
   height: auto;
-  width: 260px;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,17 +156,7 @@
   }
 }
 
-@media (min-width: 769px) and (max-width: 992px) {
-  .main-images {
-    height: 250px;
-  }
-}
 
-@media (min-width: 993px) {
-  .main-images {
-    height: 300px;
-  }
-}
 
 .main-images,
 .overlay {

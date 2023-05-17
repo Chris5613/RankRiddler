@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 const Howto = () => {
   return (
     <div className="modal-container">
-      <div className="modal-content">
+      <div className="how-modal-content ">
         <h2 className="modal-title">How to Play</h2>
         <br />
         <p>Watch the clip and decide what rank the player is</p>

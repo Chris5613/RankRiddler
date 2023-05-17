@@ -10,6 +10,16 @@
   width: 500px;
 }
 
+.how-modal-content {
+  margin: 3% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  background-color: rgb(39, 36, 36);
+  color: white;
+  height: auto;
+  width: 500px;
+}
+
 .modal-title {
   text-align: center;
 }
@@ -38,81 +48,5 @@
 
 .modal-example-wrong {
   margin-top: 0.7rem;
-}
-
-@media (max-width: 767px) {
-  .modal-content {
-    margin: 10% auto;
-    padding: 10px;
-    width: 90%;
-  }
-
-  .modal-title {
-    text-align: center;
-    font-size: 1.5rem;
-  }
-
-  .modal-example {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .modal-example-image {
-    width: 33.33%;
-    margin: 0.5rem;
-  }
-
-  .modal-example-rad {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-
-  .modal-example-iron {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  .modal-example-wrong {
-    margin-top: 0.5rem;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .modal-content {
-    margin: 8% auto;
-    padding: 15px;
-    width: 70%;
-  }
-
-  .modal-title {
-    text-align: center;
-    font-size: 1.8rem;
-  }
-
-  .modal-example {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    justify-items: center;
-  }
-
-  .modal-example-image {
-    width: 100%;
-  }
-
-  .modal-example-rad {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-
-  .modal-example-iron {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  .modal-example-wrong {
-    margin-top: 0.7rem;
-  }
 }
 
