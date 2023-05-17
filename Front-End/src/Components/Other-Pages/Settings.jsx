@@ -49,10 +49,6 @@ const Settings = () => {
     }
   }, [dispatch, username]);
 
-  // console.log(username)
-  // console.log(isUsernameChanged)
-  // console.log(score)
-
   useEffect(() => {
     const fetchData = async () => {
       try {
