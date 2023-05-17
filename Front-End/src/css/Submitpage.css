@@ -87,7 +87,6 @@ option {
 }
 
 .submit-button {
-  background-color: var(--button-color);
   border: none;
   border-radius: 5px;
   color: white;
