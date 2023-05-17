@@ -136,7 +136,7 @@ const Settings = () => {
   return (
     <>
       <div className="settings-container">
-        <h1 style={{marginBottom: "20px"}}>Settings</h1>
+        <h1 style={{ marginBottom: '20px' }}>Settings</h1>
         <p>
           Current ID:
           <span>
@@ -153,7 +153,7 @@ const Settings = () => {
           {isUsernameChanged ? (
             <p>Refresh to see changes</p>
           ) : (
-            <div className='setting-bottom'>
+            <div className="setting-bottom">
               <p>
                 Must set a username to see your leaderboard rank and earn points
               </p>

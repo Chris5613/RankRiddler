@@ -1,8 +1,3 @@
-.video {
-  z-index: 1;
-}
-
-
 .youtube-wrapper {
   display: flex;
   justify-content: center;
@@ -17,15 +12,15 @@
     margin-left: 0;
   }
 
-.video {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
+  .video {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
 }
 
 .game-container {

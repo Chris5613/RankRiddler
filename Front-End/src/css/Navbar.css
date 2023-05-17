@@ -27,7 +27,6 @@ header {
   margin: 0 auto;
 }
 
-
 .nav-container {
   display: flex;
   width: 100%;
@@ -54,10 +53,9 @@ header {
   text-decoration: none;
 }
 
-.main-svg{
+.main-svg {
   margin-right: 0.4rem;
 }
-
 
 .nav {
   display: flex;
@@ -65,7 +63,6 @@ header {
   align-items: center;
   justify-content: flex-start;
 }
-
 
 .nav ul {
   display: flex;
@@ -138,41 +135,8 @@ header {
   color: #f3f4f6;
 }
 
-/* Media Queries */
-
-@media (max-width: 768px) {
-  .header-container {
-    padding: 0 2rem;
-  }
-
-  .nav-link {
-    margin-left: 1.875rem;
-  }
-
-  .nav-container {
-    gap: 0.25rem;
-  }
-
-  .nav ul {
-    gap: 0.125rem;
-  }
-
-  .nav svg {
-    height: 0.75rem;
-  }
-
-  .actions ul {
-    gap: 0.125rem;
-  }
-
-  .actions li {
-    padding: 0.25rem 0.5rem;
-  }
-}
-
-
-/* Media queries for mobile-friendly adjustments */
 @media (max-width: 767px) {
+  /* Mobile Styles */
   .nav-container {
     display: flex;
     justify-content: space-between;
@@ -201,7 +165,47 @@ header {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet Styles */
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-link {
+    margin: 0 1rem;
+  }
+
+  .logo {
+    text-align: left;
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop Styles */
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+
   .nav ul {
     display: flex;
     justify-content: center;
@@ -268,7 +272,6 @@ td {
   color: white;
   border: none;
 }
-
 
 .submit-btn {
   background-color: #01ccff;
@@ -395,4 +398,4 @@ td {
   border-radius: 5px;
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: fit-content;
-} 
+}

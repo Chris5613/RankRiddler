@@ -13,7 +13,7 @@ const Leaderboard = () => {
   return (
     <>
       <div className="leaderboard-container select-game">
-        <h1 style={{color: 'white'}}>Point Leaderboard</h1>
+        <h1 style={{ color: 'white' }}>Point Leaderboard</h1>
         <select
           className="select"
           value={selection}
@@ -87,7 +87,7 @@ function AllTime() {
 function Weekly() {
   return (
     <>
-      <h2 style={{color: "#fff"}}>In Progress</h2>
+      <h2 style={{ color: '#fff' }}>In Progress</h2>
     </>
   );
 }
@@ -95,7 +95,7 @@ function Weekly() {
 function Monthly() {
   return (
     <>
-      <h2 style={{color: "#fff"}}>In Progress</h2>
+      <h2 style={{ color: '#fff' }}>In Progress</h2>
     </>
   );
 }

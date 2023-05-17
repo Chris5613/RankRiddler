@@ -13,7 +13,7 @@ function Submit() {
   return (
     <>
       <div className="select-game">
-        <h1 style={{color: 'white'}}>Submit a Clip</h1>
+        <h1 style={{ color: 'white' }}>Submit a Clip</h1>
         <select className="select" value={game} onChange={handleGameChange}>
           <option value="">-- Select a game --</option>
           <option value="lol">League of Legends</option>

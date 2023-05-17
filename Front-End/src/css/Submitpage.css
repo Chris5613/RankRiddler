@@ -6,8 +6,8 @@
   margin-top: clamp(10px, 4vw, 30px);
   width: clamp(220px, 95%, 1000px);
   border-collapse: collapse;
-  }
-  
+}
+
 .form {
   width: 400px;
   padding: 20px;
