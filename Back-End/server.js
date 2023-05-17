@@ -15,6 +15,7 @@ app.use(
       "https://rr-front-end.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
+      "https://rankriddler-test.onrender.com",
     ],
   })
 );
