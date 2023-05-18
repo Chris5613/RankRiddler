@@ -84,7 +84,7 @@ const Nav = () => {
                       <path d="M8.5 16h-2" />
                       <path d="M15.5 16h2" />
                     </svg>
-                    Multiplayer(Coming Soon)
+                    Multiplayer
                   </NavLink>
                 </li>
               </ul>

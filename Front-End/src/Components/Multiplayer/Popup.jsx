@@ -31,21 +31,21 @@ const Popup = ({ onClose,user1,user2 }) => {
     return { agent1, agent2 };
   }, [valAgents]);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCountdown((prevCountdown) => prevCountdown - 1);
-  //   }, 1000);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
 
-  //   return () => {
-  //     clearInterval(timer)
-  //   };
-  // }, []);
+    return () => {
+      clearInterval(timer)
+    };
+  }, []);
 
-  // useEffect(() => {
-  //   if (countdown === 0) {
-  //     onClose();
-  //   }
-  // }, [countdown, onClose]);
+  useEffect(() => {
+    if (countdown === 0) {
+      onClose();
+    }
+  }, [countdown, onClose]);
 
   return (
     <div className="popup-overlay">
