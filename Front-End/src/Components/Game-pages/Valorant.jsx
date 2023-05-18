@@ -277,7 +277,7 @@ const Valorant = () => {
           src={Radiant}
         />
       </div>
-      <div>
+      <div className="submit-btn-container">
         <button
           className="submit"
           onClick={() => {
