@@ -13,10 +13,7 @@ const findYoutubeCode = async (game, youtubeCode) => {
     switch (game) {
       case "csgo":
         const resCS = await csgo.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
-        console.log("csgo findYoutubeLink", youtubeCode, game);
-        console.log(resCS);
         if (resCS) {
-          console.log('csgo faliled - return true')
           return true;
         }
         return false;
@@ -52,15 +49,12 @@ const validations = async (game) => {
   if (matches) {
     try {
       if (await findYoutubeCode('csgo', matches[1])) {
-        console.log("csgo faliled")
         return false;
       }
       if (await findYoutubeCode('val', matches[1])) {
-        console.log("val faliled")
         return false;
       }
       if (await findYoutubeCode('league', matches[1])) {
-        console.log("league faliled")
         return false;
       }
 
@@ -91,8 +85,6 @@ const valForm = async (req, res) => {
 
 const leagueForm = async (req, res) => {
   try {
-    console.log("league form");
-    console.log(req.body);
     if (await validations(req.body)) {
       const form = new league(req.body);
       await form.save();
