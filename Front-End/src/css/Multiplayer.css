@@ -11,7 +11,7 @@
     font-weight: bold;
 }
 
-#findMatch {
+.findMatch {
     margin-top: 20px;
     width: 200px;
     height: 50px;
@@ -190,4 +190,32 @@
   .popup-footer p {
     font-size: 20px;
   }
+}
+
+.countdown {
+  margin-top: 2rem;
+}
+
+.box {
+  width: 50px;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.result-user-container h1{
+  margin-bottom: 1em;
+}
+
+.result-user-container p{
+  font-size: 5rem;
+}
+
+.result-user-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

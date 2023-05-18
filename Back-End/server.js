@@ -12,7 +12,6 @@ const io = require("socket.io")(3002, {
       "https://rr-front-end.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
-      "https://rankriddler-test.onrender.com"
     ],
   },
 });
@@ -54,7 +53,6 @@ app.use(
       "https://rr-front-end.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
-      "https://rankriddler-test.onrender.com"
     ],
   })
 );

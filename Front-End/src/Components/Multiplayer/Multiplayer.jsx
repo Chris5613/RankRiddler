@@ -1,60 +1,114 @@
+/* eslint-disable no-unused-vars */
 import { useState,useCallback,useEffect } from "react"
 import Popup from "./Popup"
 import VideoPlayer from '../Youtube';
+import RoundResults from "./RoundResults";
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:3002');
 
 const Multiplayer = () => {
   const [loading, setLoading] = useState(false);
   const [matchFound, setMatchFound] = useState(false);
   const [connected, setConnected] = useState(false);
+  const [countFinished, setCountFinished] = useState(false)
   const [showPopup, setShowPopup] = useState(true);
   const [rank, setRank] = useState('')
   const [url, setUrl] = useState('')
-  const [player, setPlayer] = useState('')
-  
-  const findMatch = () => {
-    setLoading(true);
-  };
-  
-  if (loading) {
-    setTimeout(() => {
-      setMatchFound(true);
-      setLoading(false);
-    }, 3000);
-  } else if (matchFound) {
-    setTimeout(() => {
-      setConnected(true);
-      setMatchFound(false);
-      handleOpenPopup();
-    }, 3000);
-  }
+  const [countdown2, setCountdown] = useState(30);
+  const [user, setUser] = useState('');
+  const [enemy, setEnemy] = useState('');
+  const [userId, setUserId] = useState(localStorage.getItem('userId'));
 
-  const handleOpenPopup = () => {
-    setShowPopup(true);
-  };
+  useEffect(() => {
+    const getOneUser = async (uuid) => {
+      const response = await fetch(
+        `http://localhost:3001/user/${uuid}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
+      setUser(data.username);
+    };
+    getOneUser(userId);
+  }, [userId]);
 
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
       'https://rr-back-end.onrender.com/form/valdata'
     );
     const data = await response.json();
-
     let randomIndex = Math.floor(Math.random() * data.form.length);
 
     setRank(data.form[randomIndex].rank)
     setUrl(data.form[randomIndex].youtubeLink)
-    setPlayer(data.form[randomIndex].playerInfo)
   }, []);
 
   useEffect(() => {
     getYoutubeUrl();
   }, [getYoutubeUrl]);
-  
+
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = useCallback(() => {
+    setShowPopup(false);
+  }, []);
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer)
+    };
+  }, []);
+
+  useEffect(() => {
+    if (countdown2 === 0) {
+      setCountdown(0)
+      setCountFinished(true)
+    }
+  }, [countdown2, handleClosePopup]);
+
+  function findMatch() {
+    socket.emit('findMatch',user);
+    setLoading(true);
+  }
+
+  function leaveQueue() {
+    socket.emit('leaveQueue',userId);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    socket.on('matchFound', (player1, player2) => {
+      setLoading(false);
+      setMatchFound(true);
+
+      setEnemy(player2)
+      console.log(player1, player2)
+    });
+
+    socket.on('connected', () => {
+      setConnected(true);
+      setMatchFound(false);
+    });
+  }, []);
+
+
+
+
   return (
-  <>
+<>
     <div className='multiplayer-container'>
       <br />
       <div>
@@ -68,6 +122,9 @@ const Multiplayer = () => {
               className='loading'
             />
             <p className="searching-txt">Searching for a match...</p>
+            <div className="btn-container">
+              <button className='findMatch' onClick={leaveQueue}>Leave Queue</button>
+            </div>
           </>
         ) : (
           <>
@@ -87,19 +144,30 @@ const Multiplayer = () => {
                 {connected ? (
                   <>
                     {showPopup && (
-                      <Popup user1="John" user2="Jane" onClose={handleClosePopup} />
+                      <Popup user1={user} user2={enemy} onClose={handleClosePopup} />
                     )}
-                    <br/>
-                    <div>
-                      <VideoPlayer url={url} />
-                    </div>
+                    <br />
+                    {countFinished ? (
+                      <>
+                        <RoundResults  user1={user} user2={enemy}/>
+                      </>
+                    ) : (
+                      <>
+                        <div>
+                          <VideoPlayer url={url} />
+                        </div>
+                        <h3 className="text countdown">
+                          You have {countdown2} seconds to watch the following clip
+                        </h3>
+                      </>
+                    )}
                   </>
                 ) : (
                   <>
                     <h1 id="multiplayer-title">1 on 1 Multiplayer</h1>
                     <div className="btn-container">
-                      <button id='findMatch' onClick={findMatch}>Find a Match</button>
-                      <button id='findMatch' style={{marginLeft: "30px"}} >Check Stats</button>
+                      <button className='findMatch' onClick={findMatch}>Find a Match</button>
+                      <button className='findMatch' style={{marginLeft: "30px"}} >Check Stats</button>
                     </div>
                   </>
                 )}
