@@ -68,7 +68,7 @@ const Nav = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="" className="nav-link disabled">
+                  <NavLink to="/multiplayer" className="nav-link">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"

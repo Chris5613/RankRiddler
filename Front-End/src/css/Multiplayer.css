@@ -1,0 +1,158 @@
+.multiplayer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.multiplayer-container h1 {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+#findMatch {
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #1e90ff;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searching-txt {
+  text-align: center;
+}
+
+.loading {
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .multiplayer-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  
+    .btn-container {
+      text-align: center;
+    }
+
+    .searching-txt {
+      font-size: 50px;
+      margin-top: 60px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .multiplayer-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  
+    .btn-container {
+      text-align: center;
+    }
+  
+    #multiplayer-title {
+      font-size: 42px;
+    }
+
+    .searching-txt {
+      font-size: 30px;
+      margin-top: 30px;
+    }
+  }
+
+@media (max-width: 480px) {
+  .searching-txt {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.popup-header h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 13rem;
+}
+
+.user1,
+.user2 {
+  flex-basis: 45%;
+  text-align: center;
+}
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Ensure the modal is on top of other content */
+}
+
+.popup {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 600px; /* Set a maximum width for the modal */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1; /* Ensure the modal content is on top of the overlay */
+  width: 900px;
+  height: 650px;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}

@@ -3,6 +3,7 @@ import './css/Submitpage.css';
 import './css/Gamepage.css';
 import './css/Homepage.css';
 import './css/Howtoplay.css';
+import './css/Multiplayer.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './Components/Nav/Nav';
 import Valorant from './Components/Game-pages/Valorant';
@@ -15,6 +16,7 @@ import Bug from './Components/Other-Pages/Bug';
 import Howto from './Components/Other-Pages/Howto';
 import Settings from './Components/Other-Pages/Settings';
 import Error from './Components/Error';
+import Multiplayer from './Components/Multiplayer/Multiplayer';
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
         <Route path="/howto" element={<Howto />} />
         <Route path="/settings" element={<Settings />} />
         <Route path='*' element={<Error />} />
+        <Route path="/multiplayer" element={<Multiplayer />} />
       </Routes>
     </BrowserRouter>
   );
