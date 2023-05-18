@@ -6,8 +6,46 @@ const userRoutes = require("./routers/users");
 const formRoutes = require("./routers/form");
 const cors = require("cors");
 const path = require("path");
+const io = require("socket.io")(3002, {
+  cors: {
+    origin: [
+      "https://rr-front-end.onrender.com",
+      "https://www.rankriddler.com",
+      "http://localhost:3000",
+    ],
+  },
+});
 
-// server file
+let playersQueue = [];
+
+io.on('connection', (socket) => {
+  socket.on('findMatch', (user) => {
+    playersQueue.push(user);
+
+    if (playersQueue.length >= 2) {
+      const player1 = playersQueue.shift();
+      const player2 = playersQueue.shift();
+      io.emit('matchFound');
+      io.emit('connected');
+    }
+
+    console.log('Players queue', playersQueue);
+  });
+
+  socket.on('leaveQueue', (user) => {
+    const index = playersQueue.indexOf(user);
+    if (index == -1) {
+      playersQueue.splice(index, 1);
+    }
+    console.log('Players queue', playersQueue);
+  });
+});
+
+
+
+
+
+
 const app = express();
 app.use(
   cors({
