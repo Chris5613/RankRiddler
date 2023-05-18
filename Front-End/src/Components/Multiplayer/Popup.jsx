@@ -17,7 +17,7 @@ import Skye from "../../Assets/Val-Battle/Skye.png";
 
 
 const Popup = ({ onClose,user1,user2 }) => {
-  const [countdown, setCountdown] = useState(15);
+  const [countdown, setCountdown] = useState(3);
   const [valAgents , setValAgents] = useState([Jett,Phoenix,Renya,Sage,Sova,Viper,Yoru,Breach,Brim,Cypher,Killjoy,Omen,Raze,Skye]);
 
   const randomAgents = useMemo(() => {
