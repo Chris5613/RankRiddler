@@ -98,7 +98,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
 }
 
 .popup-header {
@@ -111,13 +110,13 @@
 .popup-header h2 {
   margin: 0;
   text-align: center;
+  font-size: 40px;
 }
 
 .popup-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 13rem;
 }
 
 .user1,
@@ -125,6 +124,7 @@
   flex-basis: 45%;
   text-align: center;
 }
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -135,24 +135,60 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* Ensure the modal is on top of other content */
+  z-index: 9999;
 }
 
 .popup {
-  background-color: #ffffff;
-  width: 90%;
-  max-width: 600px; /* Set a maximum width for the modal */
+  background: url("https://static.vecteezy.com/system/resources/previews/003/484/555/non_2x/versus-background-logo-vs-letters-for-sports-and-fight-competition-free-vector.jpg");
+  background-size: cover;
+  background-position: center;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1; /* Ensure the modal content is on top of the overlay */
-  width: 900px;
-  height: 650px;
+  z-index: 1; 
+  width: 2000px;
+  height: 940px;
 }
 
 .popup-footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
 }
+
+.popup-footer p {
+  font-size: 25px;
+}
+
+@media (max-width: 768px) {
+  .popup {
+    width: 800px;
+    height: 820px;
+  }
+  .user1 img,
+  .user2 img {
+    width: 240px;
+  }
+
+  .popup-header h2 {
+    font-size: 20px;
+  }
+
+  .user1 h1,
+  .user2 h1 {
+    font-size: 20px;
+  }
+
+  .user1 h2,
+  .user2 h2 {
+    font-size: 15px;
+  }
+
+  .popup-content {
+    margin-top: 8rem;
+  }
+
+  .popup-footer p {
+    font-size: 20px;
+  }
+}
+

@@ -74,6 +74,7 @@ const Multiplayer = () => {
                     <h1 id="multiplayer-title">1 on 1 Multiplayer</h1>
                     <div className="btn-container">
                       <button id='findMatch' onClick={findMatch}>Find a Match</button>
+                      <button id='findMatch' style={{marginLeft: "30px"}}>Check Stats</button>
                     </div>
                   </>
                 )}
