@@ -32,7 +32,7 @@ function App() {
         <Route path="/bug" element={<Bug />} />
         <Route path="/howto" element={<Howto />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path='*' element={<Error />} />
+        <Route path="*" element={<Error />} />
         <Route path="/multiplayer" element={<Multiplayer />} />
       </Routes>
     </BrowserRouter>
