@@ -16,6 +16,8 @@ import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
 import ReportButton from '../Other-Pages/reportButton';
+import API from '../../api';
+
 
 const Valorant = () => {
   const dispatch = useDispatch();
@@ -63,7 +65,7 @@ const Valorant = () => {
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
-      'https://rr-back-end.onrender.com/form/valdata'
+      API.GetValorantData
     );
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
@@ -96,7 +98,7 @@ const Valorant = () => {
   useEffect(() => {
     const getOneUser = async (uuid) => {
       const response = await fetch(
-        `https://rr-back-end.onrender.com/user/${uuid}`,
+        `${API.GetUserByUuid}/${uuid}`,
         {
           method: 'GET',
           headers: {
@@ -113,7 +115,7 @@ const Valorant = () => {
   const updatePoints = async (point) => {
     try {
       const response = await fetch(
-        'https://rr-back-end.onrender.com/updatepoints',
+        API.UpdatePoints,
         {
           method: 'PUT',
           headers: {
@@ -277,7 +279,7 @@ const Valorant = () => {
           src={Radiant}
         />
       </div>
-      <div>
+      <div className="submit-btn-container">
         <button
           className="submit"
           onClick={() => {

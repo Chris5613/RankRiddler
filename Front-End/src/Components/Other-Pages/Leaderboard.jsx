@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { leaderboardActions } from '../store/LeaderboardSlice';
+import API from '../../api';
+import Loader from '../Loader/Loader';
 
 const Leaderboard = () => {
   const selection = useSelector((state) => state.leaderboard.selection);
@@ -34,12 +36,14 @@ const Leaderboard = () => {
 
 function AllTime() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
-          'https://rr-back-end.onrender.com/allusers',
+          API.GetAllUsers,
           {
             method: 'GET',
             headers: {
@@ -52,6 +56,7 @@ function AllTime() {
         }
         const userData = await response.json();
         setData(userData);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -61,25 +66,29 @@ function AllTime() {
 
   return (
     <div className="form-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data &&
-            data.map((data, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{data.username}</td>
-                <td>{data.points}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      {loading ? (
+        <Loader />
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Username</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data &&
+              data.map((data, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{data.username}</td>
+                  <td>{data.points}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

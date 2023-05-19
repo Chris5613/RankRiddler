@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/SubmitSlice';
+import API from '../../api';
 
 function Submit() {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ function Form(props) {
 
     try {
       const response = await fetch(
-        `https://rr-back-end.onrender.com/form/${props.game}`,
+        `${API.GameSubmit}/${props.game}`,
         {
           method: 'POST',
           headers: {
@@ -202,7 +203,7 @@ function Form(props) {
             I agree to the terms and conditions
           </label>
         </div>
-        <button type="submit" disabled={!isChecked}>
+        <button className="submit-button" type="submit" disabled={!isChecked}>
           Submit
         </button>
       </form>

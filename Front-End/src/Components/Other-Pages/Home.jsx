@@ -22,24 +22,24 @@ const Home = () => {
               to set your username
             </p>
             <div className="image-row">
-            <ImageLink
-              to="/valorant"
-              imageSrc={valorantImage}
-              overlayImageSrc={val}
-              overlayText="Valorant"
-            />
-            <ImageLink
-              to="/league"
-              imageSrc="https://i.gyazo.com/4a95cd329164de605f466eea4ba864c7.png"
-              overlayImageSrc={leagueImage}
-              overlayText="League"
-            />
-            <ImageLink
-              to="/csgo"
-              imageSrc={csgoImage}
-              overlayImageSrc={csgo}
-              overlayText="CS:GO"
-            />
+              <ImageLink
+                to="/valorant"
+                imageSrc={valorantImage}
+                overlayImageSrc={val}
+                overlayText="Valorant"
+              />
+              <ImageLink
+                to="/league"
+                imageSrc={league}
+                overlayImageSrc={leagueImage}
+                overlayText="League"
+              />
+              <ImageLink
+                to="/csgo"
+                imageSrc={csgoImage}
+                overlayImageSrc={csgo}
+                overlayText="CS:GO"
+              />
             </div>
           </div>
         </div>

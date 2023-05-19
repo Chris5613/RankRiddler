@@ -17,6 +17,7 @@ import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
 import ReportButton from '../Other-Pages/reportButton';
+import API from '../../api';
 
 const League = () => {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const League = () => {
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
-      'https://rr-back-end.onrender.com/form/leaguedata'
+      API.GetLeagueData
     );
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
@@ -97,7 +98,7 @@ const League = () => {
   useEffect(() => {
     const getOneUser = async (uuid) => {
       const response = await fetch(
-        `https://rr-back-end.onrender.com/user/${uuid}`,
+        `${API.GetUserByUuid}/${uuid}`,
         {
           method: 'GET',
           headers: {
@@ -114,7 +115,7 @@ const League = () => {
   const updatePoints = async (point) => {
     try {
       const response = await fetch(
-        'https://rr-back-end.onrender.com/updatepoints',
+        API.UpdatePoints,
         {
           method: 'PUT',
           headers: {

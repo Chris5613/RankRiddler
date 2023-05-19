@@ -85,3 +85,21 @@ option {
 .other-links {
   margin-top: 1rem;
 }
+
+.submit-button {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  font-weight: 400;
+  height: clamp(30px, 4vw, 45px);
+  margin-top: 1rem;
+  outline: none;
+  padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
+  width: 100%;
+}
+
+.grey {
+  background-color: grey;
+}

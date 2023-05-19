@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { settingsActions } from '../store/SettingsSlice';
 import Cookies from 'js-cookie';
+import API from '../../api';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Settings = () => {
   useEffect(() => {
     const getOneUser = async (uuid) => {
       const response = await fetch(
-        `https://rr-back-end.onrender.com/user/${uuid}`,
+        `${API.GetUserByUuid}/${uuid}`,
         {
           method: 'GET',
           headers: {
@@ -53,7 +54,7 @@ const Settings = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://rr-back-end.onrender.com/allusers',
+          API.GetAllUsers,
           {
             method: 'GET',
             headers: {
@@ -76,7 +77,7 @@ const Settings = () => {
   const saveUser = async (username, score, uuid) => {
     try {
       const response = await fetch(
-        'https://rr-back-end.onrender.com/saveuser',
+        API.SaveUser,
         {
           method: 'POST',
           headers: {
