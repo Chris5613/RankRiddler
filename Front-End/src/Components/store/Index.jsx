@@ -7,7 +7,6 @@ import bugSlice from './BugSlice';
 import leaderboardSlice from './LeaderboardSlice';
 import settingsSlice from './SettingsSlice';
 import submitSlice from './SubmitSlice';
-import multiplayerSlice from './MultiplayerSlice';
 
 const store = configureStore({
   reducer: {
@@ -19,7 +18,6 @@ const store = configureStore({
     leaderboard: leaderboardSlice.reducer,
     settings: settingsSlice.reducer,
     submit: submitSlice.reducer,
-    multiplayer: multiplayerSlice.reducer,
   },
 });
 
