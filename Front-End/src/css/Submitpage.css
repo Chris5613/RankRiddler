@@ -99,3 +99,7 @@ option {
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: 100%;
 }
+
+.grey {
+  background-color: grey;
+}

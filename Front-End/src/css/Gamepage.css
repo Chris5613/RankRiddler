@@ -28,7 +28,7 @@
 
 .ranks {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
