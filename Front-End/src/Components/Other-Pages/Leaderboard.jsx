@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { leaderboardActions } from '../store/LeaderboardSlice';
+import API from '../../api';
 
 const Leaderboard = () => {
   const selection = useSelector((state) => state.leaderboard.selection);
@@ -39,7 +40,7 @@ function AllTime() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://rr-back-end.onrender.com/allusers',
+          API.GetAllUsers,
           {
             method: 'GET',
             headers: {

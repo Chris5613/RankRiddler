@@ -16,6 +16,7 @@ import RankImage from './RankImage';
 import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
+import API from '../../api';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const Csgo = () => {
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
-      'https://rr-back-end.onrender.com/form/csgodata'
+      API.GetCsgoData
     );
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
@@ -94,7 +95,7 @@ const Csgo = () => {
   useEffect(() => {
     const getOneUser = async (uuid) => {
       const response = await fetch(
-        `https://rr-back-end.onrender.com/user/${uuid}`,
+        `${API.GetUserByUuid}/${uuid}`,
         {
           method: 'GET',
           headers: {
@@ -111,7 +112,7 @@ const Csgo = () => {
   const updatePoints = async (point) => {
     try {
       const response = await fetch(
-        'https://rr-back-end.onrender.com/updatepoints',
+        API.UpdatePoints,
         {
           method: 'PUT',
           headers: {

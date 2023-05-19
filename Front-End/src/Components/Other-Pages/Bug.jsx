@@ -1,3 +1,4 @@
+import API from '../../api';
 import { bugActions } from '../store/BugSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -22,7 +23,7 @@ function BugReportForm() {
     data.description = description;
 
     // eslint-disable-next-line no-unused-vars
-    const response = fetch('https://rr-back-end.onrender.com/form/bug', {
+    const response = fetch(API.BugSubmit, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

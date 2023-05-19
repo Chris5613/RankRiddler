@@ -18,6 +18,7 @@ const API = {
     SaveUser: `${root}/saveuser`,
     GetUserByUuid: `${root}/user`,
     UpdatePoints: `${root}/updatepoints`,
+    GameSubmit: `${root}/form`,
 }
 
 export default API;
