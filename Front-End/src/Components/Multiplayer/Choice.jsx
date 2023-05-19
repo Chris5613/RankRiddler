@@ -11,90 +11,94 @@ import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import RankImage from '../Game-pages/RankImage';
 import RoundResults from './RoundResults';
 
-const Choice = ({ rank, user, enemy }) => {
+const Choice = ({ rank, user1, user2 }) => {
   const [selectedRank, setSelectedRank] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState('');
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
   };
 
   const checkAnswer = () => {
+    setSubmitted(true);
     if (selectedRank === rank) {
-      return true;
+      setResult('win');
     } else {
-      return false;
+      setResult('lose');
     }
   };
 
-  let result = checkAnswer();
 
   return (
     <>
-      <h1>What's the rank?</h1>
-      <div className="ranks">
-        <RankImage
-          rank="Iron"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Iron}
-        />
-        <RankImage
-          rank="Bronze"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Bronze}
-        />
-        <RankImage
-          rank="Silver"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Silver}
-        />
-        <RankImage
-          rank="Gold"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Gold}
-        />
-        <RankImage
-          rank="Platinum"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Platinum}
-        />
-        <RankImage
-          rank="Diamond"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Diamond}
-        />
-        <RankImage
-          rank="Ascendant"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Ascendant}
-        />
-        <RankImage
-          rank="Immortal"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Immortal}
-        />
-        <RankImage
-          rank="Radiant"
-          selectedRank={selectedRank}
-          handleRankClick={handleRankClick}
-          src={Radiant}
-        />
-      </div>
-      <button
-        onClick={checkAnswer}
-        className="submit-button grey"
-        type="submit"
-      >
-        Submit
-      </button>
-      <RoundResults rank={rank} user1={user} user2={enemy} result={result} />
+      {!submitted && (
+        <>
+          <h1>What's the rank?</h1>
+          <div className="ranks">
+          <RankImage
+            rank="Iron"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Iron}
+          />
+          <RankImage
+            rank="Bronze"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Bronze}
+          />
+          <RankImage
+            rank="Silver"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Silver}
+          />
+          <RankImage
+            rank="Gold"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Gold}
+          />
+          <RankImage
+            rank="Platinum"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Platinum}
+          />
+          <RankImage
+            rank="Diamond"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Diamond}
+          />
+          <RankImage
+            rank="Ascendant"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Ascendant}
+          />
+          <RankImage
+            rank="Immortal"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Immortal}
+          />
+          <RankImage
+            rank="Radiant"
+            selectedRank={selectedRank}
+            handleRankClick={handleRankClick}
+            src={Radiant}
+          />
+          </div>
+          <button onClick={checkAnswer} className="submit-button grey" type="submit">
+            Submit
+          </button>
+        </>
+      )}
+      {submitted && (
+        <RoundResults rank={rank} user1={user1} user2={user2} result={result}/>
+      )}
     </>
   );
 };

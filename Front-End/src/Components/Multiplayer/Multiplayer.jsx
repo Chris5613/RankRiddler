@@ -1,25 +1,27 @@
 /* eslint-disable no-unused-vars */
-import { useState, useCallback, useEffect } from 'react';
+import {useCallback, useEffect,useState } from 'react';
 import Popup from './Popup';
 import VideoPlayer from '../Youtube';
-import RoundResults from './RoundResults';
 import { io } from 'socket.io-client';
 import Choice from './Choice';
+import {useSelector, useDispatch} from 'react-redux';
+import {MultiplayerActions} from '../store/MultiplayerSlice';
 
 const socket = io('http://localhost:3002');
 
 const Multiplayer = () => {
-  const [loading, setLoading] = useState(false);
-  const [matchFound, setMatchFound] = useState(false);
-  const [connected, setConnected] = useState(false);
-  const [countFinished, setCountFinished] = useState(false);
-  const [showPopup, setShowPopup] = useState(true);
-  const [rank, setRank] = useState('');
-  const [url, setUrl] = useState('');
-  const [countdown2, setCountdown] = useState(35);
-  const [user, setUser] = useState('');
-  const [enemy, setEnemy] = useState('');
-  const [userId, setUserId] = useState(localStorage.getItem('userId'));
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.multiplayer.loading);
+  const matchFound = useSelector((state) => state.multiplayer.matchFound);
+  const connected = useSelector((state) => state.multiplayer.connected);
+  const countFinished = useSelector((state) => state.multiplayer.countFinished);
+  const showPopup = useSelector((state) => state.multiplayer.showPopup);
+  const rank = useSelector((state) => state.multiplayer.rank);
+  const url = useSelector((state) => state.multiplayer.url);
+  const user = useSelector((state) => state.multiplayer.user);
+  const enemy = useSelector((state) => state.multiplayer.enemy);
+  const userId = useSelector((state) => state.multiplayer.userId);
+  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -30,10 +32,10 @@ const Multiplayer = () => {
         },
       });
       const data = await response.json();
-      setUser(data.username);
+      dispatch(MultiplayerActions.setUser(data.username));
     };
     getOneUser(userId);
-  }, [userId]);
+  }, [userId,dispatch]);
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
@@ -42,63 +44,61 @@ const Multiplayer = () => {
     const data = await response.json();
     let randomIndex = Math.floor(Math.random() * data.form.length);
 
-    setRank(data.form[randomIndex].rank);
-    setUrl(data.form[randomIndex].youtubeLink);
-  }, []);
+    dispatch(MultiplayerActions.setUrl(data.form[randomIndex].youtubeLink));
+    dispatch(MultiplayerActions.setRank(data.form[randomIndex].rank));
+  }, [dispatch]);
 
   useEffect(() => {
     getYoutubeUrl();
   }, [getYoutubeUrl]);
 
-  const handleOpenPopup = () => {
-    setShowPopup(true);
-  };
-
   const handleClosePopup = useCallback(() => {
-    setShowPopup(false);
-  }, []);
+    dispatch(MultiplayerActions.setShowPopup(false));
+  }, [dispatch]);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCountdown((prevCountdown) => prevCountdown - 1);
+      if (countdown > 0) {
+        setCountdown((prev) => prev - 1);
+      }
     }, 1000);
 
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [countdown]);
 
   useEffect(() => {
-    if (countdown2 === 0) {
-      setCountdown(0);
-      setCountFinished(true);
+    if (countdown === 0) {
+      dispatch(MultiplayerActions.setCountFinished(true));
+      setCountdown(10);
     }
-  }, [countdown2, handleClosePopup]);
+  }, [countdown, dispatch]);
+
 
   function findMatch() {
     socket.emit('findMatch', user);
-    setLoading(true);
+    dispatch(MultiplayerActions.setLoading(true));
   }
 
   function leaveQueue() {
     socket.emit('leaveQueue', userId);
-    setLoading(false);
+    dispatch(MultiplayerActions.setLoading(false));
   }
 
   useEffect(() => {
     socket.on('matchFound', (player1, player2) => {
-      setLoading(false);
-      setMatchFound(true);
-
-      setEnemy(player2);
-      console.log(player1, player2);
+      dispatch(MultiplayerActions.setShowPopup(true));
+      dispatch(MultiplayerActions.setLoading(false));
+      dispatch(MultiplayerActions.setMatchFound(true));
+      dispatch(MultiplayerActions.setEnemy(player2));
     });
 
     socket.on('connected', () => {
-      setConnected(true);
-      setMatchFound(false);
+      dispatch(MultiplayerActions.setConnected(true));
+      dispatch(MultiplayerActions.setMatchFound(false));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -156,7 +156,7 @@ const Multiplayer = () => {
                             <VideoPlayer url={url} />
                           </div>
                           <h3 className="text countdown">
-                            You have {countdown2} seconds to watch the following
+                            You have {countdown} seconds to watch the following
                             clip
                           </h3>
                         </>

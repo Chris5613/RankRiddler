@@ -16,7 +16,7 @@ import Raze from '../../Assets/Val-Battle/Raze.png';
 import Skye from '../../Assets/Val-Battle/Skye.png';
 
 const Popup = ({ onClose, user1, user2 }) => {
-  const [countdown, setCountdown] = useState(3);
+  const [countdown, setCountdown] = useState(10);
   const [valAgents, setValAgents] = useState([
     Jett,
     Phoenix,
@@ -61,6 +61,8 @@ const Popup = ({ onClose, user1, user2 }) => {
     }
   }, [countdown, onClose]);
 
+  
+
   return (
     <div className="popup-overlay">
       <div className="popup">
@@ -71,12 +73,12 @@ const Popup = ({ onClose, user1, user2 }) => {
           <div className="user1">
             <img width={400} src={randomAgents.agent1} alt="randomAgent1" />
             <h1>{user1}</h1>
-            <h2>1 - 5</h2>
+            <h2>0 - 0</h2>
           </div>
           <div className="user2">
             <img width={400} src={randomAgents.agent2} alt="randomAgent2" />
             <h1>{user2}</h1>
-            <h2>7 - 2</h2>
+            <h2>0 - 0</h2>
           </div>
         </div>
         <div className="popup-footer">
