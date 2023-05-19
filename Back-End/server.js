@@ -39,6 +39,10 @@ io.on("connection", (socket) => {
     }
     console.log("Players queue", playersQueue);
   });
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  }
+  );
 });
 
 const app = express();

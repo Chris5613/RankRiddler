@@ -21,7 +21,7 @@ const Multiplayer = () => {
   const user = useSelector((state) => state.multiplayer.user);
   const enemy = useSelector((state) => state.multiplayer.enemy);
   const userId = useSelector((state) => state.multiplayer.userId);
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(60);
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -71,7 +71,7 @@ const Multiplayer = () => {
   useEffect(() => {
     if (countdown === 0) {
       dispatch(MultiplayerActions.setCountFinished(true));
-      setCountdown(10);
+      setCountdown(60);
     }
   }, [countdown, dispatch]);
 

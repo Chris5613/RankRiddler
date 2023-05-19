@@ -11,7 +11,7 @@ import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import RankImage from '../Game-pages/RankImage';
 import RoundResults from './RoundResults';
 
-const Choice = ({ rank, user1, user2 }) => {
+const Choice = ({ rank, user, enemy }) => {
   const [selectedRank, setSelectedRank] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState('');
@@ -97,7 +97,7 @@ const Choice = ({ rank, user1, user2 }) => {
         </>
       )}
       {submitted && (
-        <RoundResults rank={rank} user1={user1} user2={user2} result={result}/>
+        <RoundResults rank={rank} user1={user} user2={enemy} result={result} />
       )}
     </>
   );
