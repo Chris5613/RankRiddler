@@ -1,3 +1,5 @@
+import API from "../../api";
+
 const ReportButton = (props) => {
   const { playerInfo, youtubeLink, reportedBy } = props;
 
@@ -9,7 +11,7 @@ const ReportButton = (props) => {
     };
     try {
       const response = await fetch(
-        'https://rr-back-end.onrender.com/form/report',
+        API.ReportSubmit,
         {
           method: 'POST',
           headers: {

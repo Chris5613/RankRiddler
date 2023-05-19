@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { leaderboardActions } from '../store/LeaderboardSlice';
+import API from '../../api';
 import Loader from '../Loader/Loader';
 
 const Leaderboard = () => {
@@ -42,7 +43,7 @@ function AllTime() {
       setLoading(true);
       try {
         const response = await fetch(
-          'https://rr-back-end.onrender.com/allusers',
+          API.GetAllUsers,
           {
             method: 'GET',
             headers: {
