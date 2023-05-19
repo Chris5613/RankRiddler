@@ -14,7 +14,6 @@ import RoundResults from './RoundResults';
 const Choice = ({ rank, user, enemy }) => {
   const [selectedRank, setSelectedRank] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [result, setResult] = useState('');
 
   const handleRankClick = (rank) => {
     setSelectedRank(rank);
@@ -22,11 +21,6 @@ const Choice = ({ rank, user, enemy }) => {
 
   const checkAnswer = () => {
     setSubmitted(true);
-    if (selectedRank === rank) {
-      setResult('win');
-    } else {
-      setResult('lose');
-    }
   };
 
 
@@ -97,7 +91,7 @@ const Choice = ({ rank, user, enemy }) => {
         </>
       )}
       {submitted && (
-        <RoundResults rank={rank} user1={user} user2={enemy} result={result} />
+        <RoundResults rank={rank} user={user} enemy={enemy} selected={selectedRank} />
       )}
     </>
   );

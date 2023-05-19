@@ -8,15 +8,11 @@ import Diamond from '../../Assets/Val-Ranks/Diamond.png';
 import Ascendant from '../../Assets/Val-Ranks/Ascendant.png';
 import Immortal from '../../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../../Assets/Val-Ranks/Radiant.png';
-import Wrong from '../../Assets/Modal-Icons/Wrong.png';
 
-const RoundResults = ({ user1, user2, result, rank }) => {
+const RoundResults = ({ user, enemy, rank,selected }) => {
   const [countdown1, setCountdown] = useState(30);
-  const [icons, setIcons] = useState([]);
   const [rankImage, setRankImage] = useState('');
-
-  const check =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/2048px-Eo_circle_light-green_checkmark.svg.png';
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -34,10 +30,6 @@ const RoundResults = ({ user1, user2, result, rank }) => {
     }
   }, [countdown1]);
 
-  useEffect(() => {
-    const newIcon = result === 'lose' ? Wrong : check;
-    setIcons((prevIcons) => [...prevIcons, newIcon]);
-  }, [result]);
 
   useEffect(() => {
     const rankImages = {
@@ -55,11 +47,22 @@ const RoundResults = ({ user1, user2, result, rank }) => {
     setRankImage(rankImage);
   }, [rank]);
 
+  useEffect(() => {
+    if (selected === rank) {
+      setPoints(prevPoints => prevPoints + 2);
+    } else {
+      setPoints(prevPoints => prevPoints - 1);
+    }
+  }, [selected, rank]);
+
+  console.log(points)
+
+
   return (
     <>
       <div className="result-user-container">
         <h1>
-          <u>Round {icons.length} Results</u>
+          <u>Round 1 Results</u>
         </h1>
         <h2>
           Correct Rank:{' '}
@@ -67,8 +70,8 @@ const RoundResults = ({ user1, user2, result, rank }) => {
         </h2>
         <div>
           <p>
-            {user1}:
-            {icons.map((icon, index) => {
+            {user}:{points}
+            {/* {icons.map((icon, index) => {
               return (
                 <img
                   key={index}
@@ -78,21 +81,10 @@ const RoundResults = ({ user1, user2, result, rank }) => {
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
                 />
               );
-            })}
+            })} */}
           </p>
           <p>
-            {user2}:
-            {icons.map((icon, index) => {
-              return (
-                <img
-                  key={index}
-                  src={icon}
-                  width={50}
-                  alt="Box"
-                  style={{ maxWidth: '100%', maxHeight: '100%' }}
-                />
-              );
-            })}
+            {enemy}:{points}
           </p>
         </div>
       </div>
