@@ -279,7 +279,7 @@ const League = () => {
           src={Challenger}
         />
       </div>
-      <div>
+      <div className="submit-btn-container">
         <button
           className="submit"
           onClick={() => {
