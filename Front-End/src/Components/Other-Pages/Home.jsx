@@ -49,6 +49,7 @@ const Home = () => {
                 to="/rainbow"
                 imageSrc={rainbowImage}
                 overlayImageSrc={rainbow}
+                text="COMING SOON"
               />
             </div>
             <div className="image-row margin-right">

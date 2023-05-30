@@ -8,7 +8,7 @@ const {
   getCsgoForm,
 } = require("../controllers/formControllers");
 
-const { bugForm, reportForm } = require("../controllers/bugController");
+const {reportForm } = require("../controllers/bugController");
 const rateLimit = require("express-rate-limit");
 
 const limiter = rateLimit({
@@ -26,7 +26,6 @@ router.get("/valdata", limiter, getForm);
 router.get("/leaguedata", limiter, getLeagueForm);
 router.get("/csgodata", limiter, getCsgoForm);
 
-router.post("/bug", limiter, bugForm);
 router.post("/report", limiter, reportForm);
 
 module.exports = router;
