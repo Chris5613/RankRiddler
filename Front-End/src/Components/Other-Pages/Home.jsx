@@ -49,29 +49,33 @@ const Home = () => {
                 to="/"
                 imageSrc={rainbowImage}
                 overlayImageSrc={rainbow}
-                text="COMING SOON"
+                overlayText="COMING SOON"
               />
             </div>
             <div className="image-row margin-right">
               <ImageLink
-                to="/apex"
+                to="/"
                 imageSrc="https://i.gyazo.com/810d909a139fa9b1353bd3848e167ac7.jpg"
                 overlayImageSrc={apex}
+                overlayText="COMING SOON"
               />
               <ImageLink
-                to="/overwatch"
+                to="/"
                 imageSrc={overwatchImage}
                 overlayImageSrc={overwatch}
+                overlayText="COMING SOON"
               />
               <ImageLink
-                to="/rocket"
+                to="/"
                 imageSrc={rocketImage}
                 overlayImageSrc={rocket}
+                overlayText="COMING SOON"
               />
               <ImageLink
-                to="/fortnite"
+                to="/"
                 imageSrc="https://i.gyazo.com/6e2d05a6423f905915152bcded55a99f.png"
                 overlayImageSrc={fortnite}
+                overlayText="COMING SOON"
               />
             </div>
           </div>
