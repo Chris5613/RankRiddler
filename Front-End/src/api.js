@@ -1,8 +1,8 @@
-//Production
-const root = 'https://rr-back-end.onrender.com';
+// //Production
+// const root = 'https://rr-back-end.onrender.com';
 
-//Development
-// const root = 'http://localhost:3001';
+// Development
+const root = 'http://localhost:3001';
 
 const API = {
     GetValorantData: `${root}/form/valdata`,

@@ -153,6 +153,7 @@ const Csgo = () => {
       dispatch(apexActions.setResult(wrong));
       newPoint = -1;
       updatePoints(-1);
+
     }
     const newScore = score + newPoint;
     dispatch(apexActions.setPoint(newPoint));

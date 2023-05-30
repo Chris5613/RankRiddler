@@ -70,12 +70,17 @@ const AddPointByUsername = async (req, res) => {
     }
     if (points === 2) {
       user.points += 2;
+      user.totalCorrect += 1;
+      user.totalRounds += 1;
     } else if (points === 1) {
       user.points += 1;
+      user.totalRounds += 1;
     } else {
       user.points -= 1;
+      user.totalRounds += 1;
     }
     await user.save();
+    console.log(user);
     res.status(200).json({ message: "Points updated successfully" });
   } catch (error) {
     console.error(error);

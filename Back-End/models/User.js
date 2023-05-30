@@ -13,6 +13,14 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  totalRounds: {
+    type: Number,
+    default: 0,
+  },
+  totalCorrect: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
