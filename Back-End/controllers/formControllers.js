@@ -189,7 +189,7 @@ const fortniteForm = async (req, res) => {
 const overwatchForm = async (req, res) => {
   try {
     if(await validations(req.body)){
-      const form = new overwatcg(req.body);
+      const form = new overwatch(req.body);
       await form.save();
       res.status(201).json({ form });
     } else {

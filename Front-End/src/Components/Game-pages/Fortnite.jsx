@@ -60,7 +60,7 @@ const Csgo = () => {
 
   const getYoutubeUrl = useCallback(async () => {
     const response = await fetch(
-      API.GetApexData
+      API.GetFortniteData
     );
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
