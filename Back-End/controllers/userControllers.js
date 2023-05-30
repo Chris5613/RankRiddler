@@ -16,7 +16,7 @@ const getUserbyUsername = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().sort({ points: -1 }).limit(10).exec();
+    const users = await User.find().sort({ points: -1 });
     res.json(users);
   } catch (err) {
     console.error(err);

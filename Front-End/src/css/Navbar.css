@@ -247,3 +247,24 @@ td {
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: fit-content;
 }
+
+.pagination-button {
+  background-color: #0772d6;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  font-weight: 400;
+  margin-top: 1rem;
+  outline: none;
+  padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}

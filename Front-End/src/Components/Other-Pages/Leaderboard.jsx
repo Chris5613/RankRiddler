@@ -37,6 +37,11 @@ const Leaderboard = () => {
 function AllTime() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,11 +69,27 @@ function AllTime() {
     fetchData();
   }, []);
 
+  const entriesPerPage = 10;
+  const startIndex = (currentPage - 1) * entriesPerPage;
+  const endIndex = startIndex + entriesPerPage;
+  const rowData = data.slice(startIndex, endIndex);
+  const maxDisplayedPages = 10;
+  const totalPages = Math.ceil(data.length / entriesPerPage);
+  const startPage = currentPage - Math.floor(maxDisplayedPages / 2);
+  const endPage = currentPage + Math.floor(maxDisplayedPages / 2);
+  const displayedPages = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  ).filter(
+    (page) => page >= startPage && page <= endPage && page <= totalPages
+  );
+
   return (
     <div className="form-container">
       {loading ? (
         <Loader />
       ) : (
+        <>
         <table>
           <thead>
             <tr>
@@ -78,16 +99,31 @@ function AllTime() {
             </tr>
           </thead>
           <tbody>
-            {data &&
-              data.map((data, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{data.username}</td>
-                  <td>{data.points}</td>
-                </tr>
-              ))}
+            {rowData.map((row, index) => (
+              <tr key={startIndex + index}>
+                <td>{startIndex + index + 1}</td>
+                <td>{row.username}</td>
+                <td>{row.points}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
+        <div className='button-container'>
+            {displayedPages.map((pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => handlePageChange(pageNumber)}
+                style={{
+                  fontWeight: pageNumber === currentPage ? 'bold' : 'normal',
+                }}
+                className='pagination-button margin-right'
+              >
+                {pageNumber}
+              </button>
+            )
+          )}
+        </div>
+        </>
       )}
     </div>
   );
