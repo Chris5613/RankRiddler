@@ -69,9 +69,10 @@ const Home = () => {
                 overlayImageSrc={rocket}
               />
               <ImageLink
-                to="/fortnite"
+                to="/"
                 imageSrc="https://i.gyazo.com/6e2d05a6423f905915152bcded55a99f.png"
                 overlayImageSrc={fortnite}
+                overlayText="COMING SOON"
               />
             </div>
           </div>
