@@ -1,6 +1,11 @@
 const val = require("../models/valForm");
 const league = require("../models/leagueForm");
 const csgo = require("../models/csgoForm");
+const apex = require("../models/apexForm");
+const fortnite = require("../models/fortniteForm");
+const overwatch = require("../models/overwatchForm");
+const rainbow = require("../models/rainbowForm");
+const rocket = require("../models/rocketForm");
 
 /**
  * 
@@ -146,7 +151,7 @@ const csgoForm = async (req, res) => {
       await form.save();
       res.status(201).json({ form });
     } else {
-      res.status(400).json({ error: "Invalid submition" });
+      res.status(400).json({ error: "Invalid submission" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -156,11 +161,11 @@ const csgoForm = async (req, res) => {
 const apexForm = async (req, res) => {
   try {
     if(await validations(req.body)){
-      const form = new csgo(req.body);
+      const form = new apex(req.body);
       await form.save();
       res.status(201).json({ form });
     } else {
-      res.status(400).json({ error: "Invalid submition" });
+      res.status(400).json({ error: "Invalid submission" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -170,11 +175,11 @@ const apexForm = async (req, res) => {
 const fortniteForm = async (req, res) => {
   try {
     if(await validations(req.body)){
-      const form = new csgo(req.body);
+      const form = new fortnite(req.body);
       await form.save();
       res.status(201).json({ form });
     } else {
-      res.status(400).json({ error: "Invalid submition" });
+      res.status(400).json({ error: "Invalid submission" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -184,11 +189,11 @@ const fortniteForm = async (req, res) => {
 const overwatchForm = async (req, res) => {
   try {
     if(await validations(req.body)){
-      const form = new csgo(req.body);
+      const form = new overwatcg(req.body);
       await form.save();
       res.status(201).json({ form });
     } else {
-      res.status(400).json({ error: "Invalid submition" });
+      res.status(400).json({ error: "Invalid submission" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -198,11 +203,11 @@ const overwatchForm = async (req, res) => {
 const rainbowForm = async (req, res) => {
   try {
     if(await validations(req.body)){
-      const form = new csgo(req.body);
+      const form = new rainbow(req.body);
       await form.save();
       res.status(201).json({ form });
     } else {
-      res.status(400).json({ error: "Invalid submition" });
+      res.status(400).json({ error: "Invalid submission" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -212,11 +217,11 @@ const rainbowForm = async (req, res) => {
 const rocketForm = async (req, res) => {
   try {
     if(await validations(req.body)){
-      const form = new csgo(req.body);
+      const form = new rocket(req.body);
       await form.save();
       res.status(201).json({ form });
     } else {
-      res.status(400).json({ error: "Invalid submition" });
+      res.status(400).json({ error: "Invalid submission" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });

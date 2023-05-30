@@ -175,3 +175,19 @@
 .margin-right {
   margin-right: 1rem;
 }
+
+.submit-button {
+  background-color: #fa4454;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: 0.5s;
+}
