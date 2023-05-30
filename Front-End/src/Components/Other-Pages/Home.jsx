@@ -27,7 +27,7 @@ const Home = () => {
               <NavLink className="home-text" to="/settings">
                 SETTINGS
               </NavLink>{' '}
-              to set your username to be tracked
+              to set your username.
             </p>
             <div className="image-row">
               <ImageLink
@@ -54,28 +54,24 @@ const Home = () => {
             </div>
             <div className="image-row margin-right">
               <ImageLink
-                to="/"
+                to="/apex"
                 imageSrc="https://i.gyazo.com/810d909a139fa9b1353bd3848e167ac7.jpg"
                 overlayImageSrc={apex}
-                overlayText="COMING SOON"
               />
               <ImageLink
-                to="/"
+                to="/overwatch"
                 imageSrc={overwatchImage}
                 overlayImageSrc={overwatch}
-                overlayText="COMING SOON"
               />
               <ImageLink
-                to="/"
+                to="/rocket"
                 imageSrc={rocketImage}
                 overlayImageSrc={rocket}
-                overlayText="COMING SOON"
               />
               <ImageLink
-                to="/"
+                to="/fortnite"
                 imageSrc="https://i.gyazo.com/6e2d05a6423f905915152bcded55a99f.png"
                 overlayImageSrc={fortnite}
-                overlayText="COMING SOON"
               />
             </div>
           </div>
