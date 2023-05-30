@@ -21,6 +21,7 @@ const API = {
     GetOverwatchData: `${root}/form/overwatchdata`,
     GetRainbowData: `${root}/form/rainbowdata`,
     GetRocketData: `${root}/form/rocketdata`,
+    GetUserProfile: `${root}/profile/`,
 }
 
 export default API;

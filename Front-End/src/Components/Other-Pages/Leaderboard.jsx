@@ -1,37 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { leaderboardActions } from '../store/LeaderboardSlice';
 import API from '../../api';
 import Loader from '../Loader/Loader';
 
 const Leaderboard = () => {
-  const selection = useSelector((state) => state.leaderboard.selection);
-  const dispatch = useDispatch();
-
-  const handleGameChange = (event) => {
-    dispatch(leaderboardActions.setSelection(event.target.value));
-  };
-
-  return (
-    <>
-      <div className="leaderboard-container select-game">
-        <h1 style={{ color: 'white' }}>Point Leaderboard</h1>
-        <select
-          className="select"
-          value={selection}
-          onChange={handleGameChange}
-        >
-          <option value="">-- Select a board --</option>
-          <option value="alltime">All Time</option>
-        </select>
-        {selection === 'alltime' && <AllTime />}
-      </div>
-    </>
-  );
-};
-
-function AllTime() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +41,7 @@ function AllTime() {
 
   const profileView = (index) => {
     const username = data[index].username;
+    console.log(index)
     navigate('/profile/'  + username);
   };
 
@@ -88,7 +61,10 @@ function AllTime() {
   );
 
   return (
-    <div className="form-container">
+    <>
+      <div className="leaderboard-container select-game">
+        <h1 style={{ color: 'white' }}>Point Leaderboard</h1>
+        <div className="form-container">
       {loading ? (
         <Loader />
       ) : (
@@ -108,7 +84,7 @@ function AllTime() {
                 <td>{startIndex + index + 1}</td>
                 <td>{row.username}</td>
                 <td>{row.points}</td>
-                <td><button id='stats-btn' onClick={() => profileView(index)}>See Stats</button></td>
+                <td><button id='stats-btn' onClick={() => profileView(startIndex + index)}>See Stats</button></td>
               </tr>
             ))}
           </tbody>
@@ -131,7 +107,9 @@ function AllTime() {
         </>
       )}
     </div>
+      </div>
+    </>
   );
-}
+};
 
 export default Leaderboard;

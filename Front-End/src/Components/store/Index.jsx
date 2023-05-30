@@ -4,7 +4,6 @@ import leagueSlice from './LeagueSlice';
 import valorantSlice from './ValorantSlice';
 import navSlice from './NavSlice';
 import bugSlice from './BugSlice';
-import leaderboardSlice from './LeaderboardSlice';
 import settingsSlice from './SettingsSlice';
 import submitSlice from './SubmitSlice';
 import apexSlice from './ApexSlice';
@@ -20,7 +19,6 @@ const store = configureStore({
     nav: navSlice.reducer,
     valorant: valorantSlice.reducer,
     bug: bugSlice.reducer,
-    leaderboard: leaderboardSlice.reducer,
     settings: settingsSlice.reducer,
     submit: submitSlice.reducer,
     apex: apexSlice.reducer,

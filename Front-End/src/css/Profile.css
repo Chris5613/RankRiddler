@@ -1,0 +1,17 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-container h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2rem;
+}
