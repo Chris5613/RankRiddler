@@ -101,17 +101,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  margin-top: 1rem;
 }
 
 .image-container {
   position: relative;
   overflow: hidden;
   width: 100%;
-}
-
-.main-images {
-  width: 100%;
-  height: 100%;
 }
 
 .overlay {
@@ -136,7 +132,7 @@
 }
 
 .main-images {
-  height: auto;
+  height: 360px;
   width: auto;
   display: flex;
   flex-direction: column;
@@ -152,7 +148,21 @@
 
 @media (max-width: 576px) {
   .main-images {
-    height: 150px;
+    height: 120px;
+    width: auto;
+  }
+
+  .main-overlay {
+    height: 40px;
+    width: auto;
+  }
+
+  .home-container {
+    max-width: 100%;
+  }
+
+  .margin-right {
+    margin-left: 1rem;
   }
 }
 
@@ -160,4 +170,8 @@
 .overlay {
   border-radius: 10px;
   margin-left: 0.5rem;
+}
+
+.margin-right {
+  margin-right: 1rem;
 }

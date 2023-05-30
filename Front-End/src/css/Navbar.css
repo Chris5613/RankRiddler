@@ -18,7 +18,8 @@ header {
 .nav-container {
   display: flex;
   justify-content: space-between;
-  margin-left: 14vw;
+  margin-left: 17vw;
+
 }
 
 .nav a {
