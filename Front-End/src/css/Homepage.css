@@ -142,13 +142,13 @@
 
 @media (max-width: 768px) {
   .main-images {
-    height: 250px;
+    height: 200px;
   }
 }
 
 @media (max-width: 576px) {
   .main-images {
-    height: 120px;
+    height: 110px;
     width: auto;
   }
 
@@ -164,6 +164,11 @@
   .margin-right {
     margin-left: 1rem;
   }
+
+  .main-text {
+  font-size: 1rem;
+    }
+  
 }
 
 .main-images,
