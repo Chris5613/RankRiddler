@@ -148,7 +148,7 @@
 
 @media (max-width: 576px) {
   .main-images {
-    height: 110px;
+    height: 100px;
     width: auto;
   }
 
@@ -166,9 +166,9 @@
   }
 
   .main-text {
-  font-size: 1rem;
-    }
-  
+  font-size: 12px;
+  margin: 0 auto;
+  }
 }
 
 .main-images,

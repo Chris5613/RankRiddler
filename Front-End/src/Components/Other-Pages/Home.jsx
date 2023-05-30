@@ -27,7 +27,7 @@ const Home = () => {
               <NavLink className="home-text" to="/settings">
                 SETTINGS
               </NavLink>{' '}
-              to set your username to be tracked on the leaderboard.
+              to set your username to be tracked
             </p>
             <div className="image-row">
               <ImageLink
