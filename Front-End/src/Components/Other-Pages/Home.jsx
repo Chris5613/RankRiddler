@@ -25,9 +25,9 @@ const Home = () => {
             <p className="main-text">
               Head over to{' '}
               <NavLink className="home-text" to="/settings">
-                settings
+                SETTINGS
               </NavLink>{' '}
-              to set your username
+              to set your username to be tracked on the leaderboard.
             </p>
             <div className="image-row">
               <ImageLink
@@ -46,7 +46,7 @@ const Home = () => {
                 overlayImageSrc={csgo}
               />
               <ImageLink
-                to="/rainbow"
+                to="/"
                 imageSrc={rainbowImage}
                 overlayImageSrc={rainbow}
                 text="COMING SOON"

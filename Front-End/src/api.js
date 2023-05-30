@@ -20,6 +20,10 @@ const API = {
     UpdatePoints: `${root}/updatepoints`,
     GameSubmit: `${root}/form`,
     GetApexData: `${root}/form/apexdata`,
+    GetFortniteData: `${root}/form/fortnitedata`,
+    GetOverwatchData: `${root}/form/overwatchdata`,
+    GetRainbowData: `${root}/form/rainbowdata`,
+    GetRocketData: `${root}/form/rocketdata`,
 }
 
 export default API;

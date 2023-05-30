@@ -16,6 +16,7 @@ import Howto from './Components/Other-Pages/Howto';
 import Settings from './Components/Other-Pages/Settings';
 import Error from './Components/Error';
 import Apex from './Components/Game-pages/Apex';
+import Rainbow from './Components/Game-pages/Rainbow';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Error />} />
         <Route path="/apex" element={<Apex />} />
+        <Route path="/rainbow" element={<Rainbow />} />
       </Routes>
     </BrowserRouter>
   );

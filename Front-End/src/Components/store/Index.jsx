@@ -8,6 +8,7 @@ import leaderboardSlice from './LeaderboardSlice';
 import settingsSlice from './SettingsSlice';
 import submitSlice from './SubmitSlice';
 import apexSlice from './ApexSlice';
+import rainbowSlice from './RainbowSlice';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     settings: settingsSlice.reducer,
     submit: submitSlice.reducer,
     apex: apexSlice.reducer,
+    rainbow: rainbowSlice.reducer,
   },
 });
 
