@@ -206,7 +206,9 @@ function Form(props) {
         { value: 'Gold', label: 'Gold' },
         { value: 'Platinum', label: 'Platinum' },
         { value: 'Diamond', label: 'Diamond' },
+        { value: 'Elite', label: 'Elite'},
         { value: 'Champion', label: 'Champion' },
+        { value: 'Unreal', label: 'Unreal'}
       ],
     },
   };

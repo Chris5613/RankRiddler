@@ -17,6 +17,9 @@ import Settings from './Components/Other-Pages/Settings';
 import Error from './Components/Error';
 import Apex from './Components/Game-pages/Apex';
 import Rainbow from './Components/Game-pages/Rainbow';
+import Overwatch from './Components/Game-pages/Overwatch';
+import Fortnite from './Components/Game-pages/Fortnite';
+import Rocket from './Components/Game-pages/Rocket';
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="/apex" element={<Apex />} />
         <Route path="/rainbow" element={<Rainbow />} />
+        <Route path="/overwatch" element={<Overwatch />} />
+        <Route path="/fortnite" element={<Fortnite />} />
+        <Route path="/rocket" element={<Rocket />} />
       </Routes>
     </BrowserRouter>
   );
