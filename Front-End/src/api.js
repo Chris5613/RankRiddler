@@ -19,6 +19,7 @@ const API = {
     GetUserByUuid: `${root}/user`,
     UpdatePoints: `${root}/updatepoints`,
     GameSubmit: `${root}/form`,
+    GetApexData: `${root}/form/apexdata`,
 }
 
 export default API;

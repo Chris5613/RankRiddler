@@ -20,10 +20,12 @@ function Submit() {
           <option value="lol">League of Legends</option>
           <option value="val">Valorant</option>
           <option value="csgo">CS:GO</option>
+          <option value="apex">Apex Legends</option>
         </select>
         {game === 'lol' && <Form game="league" />}
         {game === 'val' && <Form game="val" />}
         {game === 'csgo' && <Form game="csgo" />}
+        {game === 'apex' && <Form game="apex" />}
       </div>
       <div className="text">
         Clips must be submitted in the following format or will be{' '}
@@ -136,6 +138,18 @@ function Form(props) {
           label: 'Supreme Master First Class',
         },
         { value: 'Global Elite', label: 'Global Elite' },
+      ],
+    },
+    apex: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Master', label: 'Master' },
+        { value: 'Apex Predator', label: 'Apex Predator' },
       ],
     },
   };

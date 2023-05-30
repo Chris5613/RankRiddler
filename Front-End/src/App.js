@@ -15,6 +15,7 @@ import Bug from './Components/Other-Pages/Bug';
 import Howto from './Components/Other-Pages/Howto';
 import Settings from './Components/Other-Pages/Settings';
 import Error from './Components/Error';
+import Apex from './Components/Game-pages/Apex';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/howto" element={<Howto />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Error />} />
+        <Route path="/apex" element={<Apex />} />
       </Routes>
     </BrowserRouter>
   );
