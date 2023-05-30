@@ -11,6 +11,5 @@ const reportForm = async (req, res) => {
 };
 
 module.exports = {
-  bugForm,
   reportForm,
 };
