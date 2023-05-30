@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { leaderboardActions } from '../store/LeaderboardSlice';
 import API from '../../api';
@@ -23,12 +24,8 @@ const Leaderboard = () => {
         >
           <option value="">-- Select a board --</option>
           <option value="alltime">All Time</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
         </select>
         {selection === 'alltime' && <AllTime />}
-        {selection === 'weekly' && <Weekly />}
-        {selection === 'monthly' && <Monthly />}
       </div>
     </>
   );
@@ -38,6 +35,7 @@ function AllTime() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -69,6 +67,11 @@ function AllTime() {
     fetchData();
   }, []);
 
+  const profileView = (index) => {
+    const username = data[index].username;
+    navigate('/profile/'  + username);
+  };
+
   const entriesPerPage = 10;
   const startIndex = (currentPage - 1) * entriesPerPage;
   const endIndex = startIndex + entriesPerPage;
@@ -96,6 +99,7 @@ function AllTime() {
               <th>Rank</th>
               <th>Username</th>
               <th>Score</th>
+              <th>Stats</th>
             </tr>
           </thead>
           <tbody>
@@ -104,6 +108,7 @@ function AllTime() {
                 <td>{startIndex + index + 1}</td>
                 <td>{row.username}</td>
                 <td>{row.points}</td>
+                <td><button id='stats-btn' onClick={() => profileView(index)}>See Stats</button></td>
               </tr>
             ))}
           </tbody>
@@ -126,22 +131,6 @@ function AllTime() {
         </>
       )}
     </div>
-  );
-}
-
-function Weekly() {
-  return (
-    <>
-      <h2 style={{ color: '#fff' }}>In Progress</h2>
-    </>
-  );
-}
-
-function Monthly() {
-  return (
-    <>
-      <h2 style={{ color: '#fff' }}>In Progress</h2>
-    </>
   );
 }
 

@@ -80,7 +80,6 @@ const AddPointByUsername = async (req, res) => {
       user.totalRounds += 1;
     }
     await user.save();
-    console.log(user);
     res.status(200).json({ message: "Points updated successfully" });
   } catch (error) {
     console.error(error);

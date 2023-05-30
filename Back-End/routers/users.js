@@ -15,7 +15,7 @@ const limiter = rateLimit({
 });
 
 router.get("/allusers", limiter, getAllUsers);
-router.get("/user", limiter, getUserbyUsername);
+router.get("/user/:username", limiter, getUserbyUsername);
 router.post("/saveuser", limiter, createUser);
 router.get("/user/:uuid", limiter, getOneUserByUuid);
 
