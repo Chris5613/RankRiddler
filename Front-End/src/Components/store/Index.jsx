@@ -7,6 +7,11 @@ import bugSlice from './BugSlice';
 import leaderboardSlice from './LeaderboardSlice';
 import settingsSlice from './SettingsSlice';
 import submitSlice from './SubmitSlice';
+import apexSlice from './ApexSlice';
+import rainbowSlice from './RainbowSlice';
+import fortniteSlice from './FortniteSlice';
+import rocketSlice from './RocketSlice';
+import overwatchSlice from './OverwatchSlice';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +23,11 @@ const store = configureStore({
     leaderboard: leaderboardSlice.reducer,
     settings: settingsSlice.reducer,
     submit: submitSlice.reducer,
+    apex: apexSlice.reducer,
+    rainbow: rainbowSlice.reducer,
+    fortnite: fortniteSlice.reducer,
+    rocket: rocketSlice.reducer,
+    overwatch: overwatchSlice.reducer,
   },
 });
 
