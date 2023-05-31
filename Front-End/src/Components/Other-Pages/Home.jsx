@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import val from '../../Assets/HomePage-Icons/val.png';
 import csgo from '../../Assets/HomePage-Icons/csgo.png';
 import league from '../../Assets/HomePage-Icons/league.png';
@@ -22,13 +21,6 @@ const Home = () => {
         <div className="home-container">
           <div className="main-container">
             <h1 className="page-heading-1">Choose a game</h1>
-            <p className="main-text">
-              Head over to{' '}
-              <NavLink className="home-text" to="/settings">
-                SETTINGS
-              </NavLink>{' '}
-              to set your username.
-            </p>
             <div className="image-row">
               <ImageLink
                 to="/valorant"

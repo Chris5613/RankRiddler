@@ -89,7 +89,6 @@ th, td {
   margin-top: 1rem;
   outline: none;
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
-  width: 100%;
 }
 
 .button-container {

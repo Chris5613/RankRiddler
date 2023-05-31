@@ -22,10 +22,31 @@ import Fortnite from './Components/Game-pages/Fortnite';
 import Rocket from './Components/Game-pages/Rocket';
 import Profile from './Components/Other-Pages/Profile';
 import Main from './Components/Multiplayer/Main';
+import Overlay from './Components/Other-Pages/Overlay';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { settingsActions } from './Components/store/SettingsSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  const isUsernameChanged = useSelector(
+    (state) => state.settings.isUsernameChanged
+  );
+  const username = useSelector((state) => state.settings.username);
+
+  useEffect(() => {
+    if (username === 'Guest' || username === '') {
+      dispatch(settingsActions.setIsUsernameChanged(false));
+    }
+    dispatch(settingsActions.setIsUsernameChanged(true));
+  }, [username,dispatch]);
+
+  console.log(isUsernameChanged);
+
   return (
     <BrowserRouter>
+      {isUsernameChanged ? null : <Overlay />}
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />

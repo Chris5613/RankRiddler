@@ -204,3 +204,72 @@
   text-align: center;
   margin-bottom: 0.5rem;
 }
+
+.main-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.main-modal-content{
+  background-color: rgb(39, 36, 36);
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+}
+
+.main-modal-content h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.main-modal-content input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.main-modal-content button {
+  background-color: #38393a;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#video {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
