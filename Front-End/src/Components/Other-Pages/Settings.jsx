@@ -135,17 +135,16 @@ const Settings = () => {
       <div className="settings-container">
         <h1 style={{ marginBottom: '20px' }}>Settings</h1>
         <p>
-          Current ID:
+          ID:
           <span>
             <u>{userId}</u>
           </span>
         </p>
         <p>
-          Current User:
+          User:
           {username ? <span>{username}</span> : <span>Guest</span>}
         </p>
-        <p>Current Score:{score ? <span>{score}</span> : <span>0</span>}</p>
-        <p>Current Rank: #{index === -1 ? 'N/A' : index + 1}</p>
+        <p> Rank: #{index === -1 ? 'N/A' : index + 1}</p>
         <div className="reset-container">
           {isUsernameChanged ? (
             <p>Refresh to see changes</p>
