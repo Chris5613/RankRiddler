@@ -218,7 +218,7 @@
   z-index: 9999;
 }
 
-.main-modal-content{
+.main-modal-content {
   background-color: rgb(39, 36, 36);
   padding: 20px;
   text-align: center;
@@ -266,10 +266,4 @@
   width: 300px;
   margin-left: auto;
   margin-right: auto;
-}
-
-#video {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
 }
