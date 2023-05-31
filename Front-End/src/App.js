@@ -21,6 +21,7 @@ import Overwatch from './Components/Game-pages/Overwatch';
 import Fortnite from './Components/Game-pages/Fortnite';
 import Rocket from './Components/Game-pages/Rocket';
 import Profile from './Components/Other-Pages/Profile';
+import Main from './Components/Multiplayer/Main';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/fortnite" element={<Fortnite />} />
         <Route path="/rocket" element={<Rocket />} />
         <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/multiplayer" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );

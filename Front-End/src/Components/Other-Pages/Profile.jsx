@@ -29,8 +29,8 @@ const Profile = () => {
         setProfileData(data);
         setLoading(false);
 
-        const accuracy = (data.points / data.totalRounds * 100)
-        if(accuracy === Infinity){
+        const accuracy = (data.points / data.totalRounds * 100).toFixed(0)
+        if(accuracy === Infinity || isNaN(accuracy)){
           setAccuracy(0)
         }else{
           setAccuracy(accuracy)
