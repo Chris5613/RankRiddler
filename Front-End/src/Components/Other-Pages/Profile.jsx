@@ -29,9 +29,12 @@ const Profile = () => {
         setProfileData(data);
         setLoading(false);
 
-        // Calculate accuracy
-        const accuracy = (data.points / data.totalRounds * 100).toFixed(0)
-        setAccuracy(accuracy)
+        const accuracy = (data.points / data.totalRounds * 100)
+        if(accuracy === Infinity){
+          setAccuracy(0)
+        }else{
+          setAccuracy(accuracy)
+        }
       } catch (error) {
         console.error(error);
       }
@@ -41,7 +44,7 @@ const Profile = () => {
   }, [username]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='loading'>Loading...</div>;
   }
 
   return (

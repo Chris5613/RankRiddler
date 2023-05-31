@@ -84,7 +84,7 @@ const Leaderboard = () => {
                 <td>{startIndex + index + 1}</td>
                 <td>{row.username}</td>
                 <td>{row.points}</td>
-                <td><button id='stats-btn' onClick={() => profileView(startIndex + index)}>See Stats</button></td>
+                <td className='btn'><button className='stats-btn' onClick={() => profileView(startIndex + index)}>See Stats</button></td>
               </tr>
             ))}
           </tbody>
