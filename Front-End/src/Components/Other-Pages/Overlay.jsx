@@ -1,14 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from 'react-redux';
 import { settingsActions } from '../store/SettingsSlice';
 import API from '../../api';
+import React, { useEffect } from 'react';
 
 const Modal = () => {
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.settings.username);
+  const username = localStorage.getItem('username') || 'Guest';
   const isUsernameChanged = useSelector(
     (state) => state.settings.isUsernameChanged
   );
   const score = useSelector((state) => state.settings.score);
+
+  useEffect(() => {
+    if(username === 'Guest' ) {
+      dispatch(settingsActions.setIsUsernameChanged(true));
+    }
+    if(username !== 'Guest') {
+      dispatch(settingsActions.setIsUsernameChanged(false));
+    }
+  }, [username, dispatch]);
+
+  console.log(username)
 
   const saveUser = async (username, score, uuid) => {
     try {
@@ -35,9 +48,6 @@ const Modal = () => {
   };
 
   const usernameSet = () => {
-    if (isUsernameChanged) {
-      return;
-    }
     let newUsername = prompt('Please enter a new username');
     const checkUsername = async () => {
       if (newUsername === null || newUsername === '') {
@@ -50,23 +60,23 @@ const Modal = () => {
         newUsername = prompt(newUser.error);
         checkUsername();
       }
-      dispatch(settingsActions.setUsername(username));
-      dispatch(settingsActions.setIsUsernameChanged(true));
+      localStorage.setItem('username', newUsername);
+      dispatch(settingsActions.setIsUsernameChanged(false));
     };
     checkUsername();
   };
   
 
-  return (
+  return isUsernameChanged ? (
     <div className='main-modal'>
       <div className="main-modal-content">
         <h1>Username Setup</h1>
         <h3>Set your username to save your score and be tracked on the leaderboard.</h3>
-        <h3>one time setup</h3>
+        <h3>One-time setup</h3>
         <button className="submit-btn" onClick={usernameSet}>Set Username</button>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Modal;
