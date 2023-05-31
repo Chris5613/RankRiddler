@@ -1,7 +1,7 @@
-//Production
+// //Production
 const root = 'https://rr-back-end.onrender.com';
 
-//Development
+// Development
 // const root = 'http://localhost:3001';
 
 const API = {
@@ -21,6 +21,7 @@ const API = {
     GetOverwatchData: `${root}/form/overwatchdata`,
     GetRainbowData: `${root}/form/rainbowdata`,
     GetRocketData: `${root}/form/rocketdata`,
+    GetUserProfile: `${root}/profile/`,
 }
 
 export default API;

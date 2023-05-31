@@ -1,0 +1,41 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-container h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 100px;
+    background-color: #4A5568;
+    border-radius: 10px;
+}
+
+.stats {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-left: 2rem;
+    text-align: center;
+}

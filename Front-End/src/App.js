@@ -3,6 +3,7 @@ import './css/Submitpage.css';
 import './css/Gamepage.css';
 import './css/Homepage.css';
 import './css/Howtoplay.css';
+import './css/Profile.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './Components/Nav/Nav';
 import Valorant from './Components/Game-pages/Valorant';
@@ -20,6 +21,7 @@ import Rainbow from './Components/Game-pages/Rainbow';
 import Overwatch from './Components/Game-pages/Overwatch';
 import Fortnite from './Components/Game-pages/Fortnite';
 import Rocket from './Components/Game-pages/Rocket';
+import Profile from './Components/Other-Pages/Profile';
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
         <Route path="/overwatch" element={<Overwatch />} />
         <Route path="/fortnite" element={<Fortnite />} />
         <Route path="/rocket" element={<Rocket />} />
+        <Route path="/profile/:username" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
