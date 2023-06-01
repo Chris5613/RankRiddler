@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Cookies from 'js-cookie';
 
 let initialState = {
   userId: localStorage.getItem('userId') || '',
   data: [],
   index: -1,
-  username: Cookies.get('username') || 'Guest',
-  isUsernameChanged: Cookies.get('isUsernameChanged') === 'true',
+  username: '',
+  isUsernameChanged: false,
   score: 0,
 };
 

@@ -3,7 +3,6 @@ import csgoSlice from './CsgoSlice';
 import leagueSlice from './LeagueSlice';
 import valorantSlice from './ValorantSlice';
 import navSlice from './NavSlice';
-import bugSlice from './BugSlice';
 import settingsSlice from './SettingsSlice';
 import submitSlice from './SubmitSlice';
 import apexSlice from './ApexSlice';
@@ -18,7 +17,6 @@ const store = configureStore({
     league: leagueSlice.reducer,
     nav: navSlice.reducer,
     valorant: valorantSlice.reducer,
-    bug: bugSlice.reducer,
     settings: settingsSlice.reducer,
     submit: submitSlice.reducer,
     apex: apexSlice.reducer,
