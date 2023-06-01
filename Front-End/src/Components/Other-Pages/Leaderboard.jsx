@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
+import { useDispatch } from 'react-redux';
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -40,10 +42,10 @@ const Leaderboard = () => {
   }, []);
 
   const profileView = (index) => {
-    const username = data[index].username;
-    console.log(index)
-    navigate('/profile/'  + username);
+    const uuid = data[index].uuid;
+    navigate(`/profile/${uuid}`)
   };
+  
 
   const entriesPerPage = 10;
   const startIndex = (currentPage - 1) * entriesPerPage;

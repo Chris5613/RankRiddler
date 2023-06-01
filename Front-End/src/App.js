@@ -45,7 +45,7 @@ function App() {
         <Route path="/overwatch" element={<Overwatch />} />
         <Route path="/fortnite" element={<Fortnite />} />
         <Route path="/rocket" element={<Rocket />} />
-        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/profile/:uuid" element={<Profile />} />
         <Route path="/multiplayer" element={<Main />} />
       </Routes>
     </BrowserRouter>

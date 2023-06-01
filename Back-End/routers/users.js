@@ -18,7 +18,6 @@ router.get("/allusers", limiter, getAllUsers);
 router.get("/user", limiter, getUserbyUsername);
 router.post("/saveuser", limiter, createUser);
 router.get("/user/:uuid", limiter, getOneUserByUuid);
-router.get("/profile/:username",limiter, getUserbyUsername);
 
 router.put("/updatepoints/:uuid", limiter, AddPointByUsername);
 module.exports = router;

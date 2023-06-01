@@ -3,22 +3,21 @@ import { useParams } from 'react-router-dom';
 import API from '../../api';
 
 const Profile = () => {
-  const { username } = useParams();
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [accuracy , setAccuracy] = useState(0)
+  const { uuid } = useParams();
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
 
         const response = await fetch(
-          API.GetUserProfile + username,
+          `${API.GetUserByUuid}/` + uuid,
           {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'username': username
             },
           }
         );
@@ -41,15 +40,17 @@ const Profile = () => {
     };
 
     fetchProfileData();
-  }, [username]);
+  }, [uuid]);
 
   if (loading) {
-    return <div className='loading'>Loading...</div>;
+    return <div className='loading'>
+      Loading...
+    </div>;
   }
 
   return (
     <div className='profile-container'>
-      <h1>Hi I'm <span style={{color: 'skyblue'}}>{username}</span></h1>
+      <h1>Hi I'm <span style={{color: 'skyblue'}}>{profileData.username}</span></h1>
       <div className='stats-container'>
         <div className='stats'>
           <h2>Rounds</h2>
