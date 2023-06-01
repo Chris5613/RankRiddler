@@ -6,7 +6,9 @@ import React, { useEffect } from 'react';
 
 const Modal = () => {
   const dispatch = useDispatch();
-  const username = localStorage.getItem('username') || 'Guest';
+  const username = useSelector(
+    (state) => state.settings.username
+  ) || localStorage.getItem('username') || 'Guest';
   const isUsernameChanged = useSelector(
     (state) => state.settings.isUsernameChanged
   );
