@@ -14,9 +14,6 @@ const Modal = () => {
     (state) => state.settings.isUsernameChanged
   );
   const score = useSelector((state) => state.settings.score);
-  const userId = useSelector((state) => state.settings.userId);
-
-  console.log(userId);
 
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
@@ -79,6 +76,7 @@ const Modal = () => {
         checkUsername();
       }
       localStorage.setItem('username', newUsername);
+      dispatch(settingsActions.setUsername(newUsername));
       dispatch(settingsActions.setIsUsernameChanged(false));
     };
     checkUsername();

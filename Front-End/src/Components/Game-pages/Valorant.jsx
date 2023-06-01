@@ -32,8 +32,10 @@ const Valorant = () => {
   const player = useSelector((state) => state.valorant.player);
   const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
-  const username = useSelector((state) => state.settings.username);
+  const username = localStorage.getItem('username');
   const userId = useSelector((state) => state.settings.userId);
+
+  console.log(username);
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
