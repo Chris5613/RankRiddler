@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { settingsActions } from '../store/SettingsSlice';
 import API from '../../api';
 import React, { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,21 @@ const Modal = () => {
     (state) => state.settings.isUsernameChanged
   );
   const score = useSelector((state) => state.settings.score);
+  const userId = useSelector((state) => state.settings.userId);
+
+  console.log(userId);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (!storedUserId) {
+      const id = uuidv4();
+      const shortUuid = id.slice(0, 8);
+      localStorage.setItem('userId', shortUuid);
+      dispatch(settingsActions.setUserId(shortUuid));
+    } else {
+      dispatch(settingsActions.setUserId(storedUserId));
+    }
+  }, [dispatch, username]);
 
   useEffect(() => {
     if(username === 'Guest' ) {
