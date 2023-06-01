@@ -32,10 +32,7 @@ const Valorant = () => {
   const player = useSelector((state) => state.valorant.player);
   const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
-  const username = localStorage.getItem('username');
   const userId = useSelector((state) => state.settings.userId);
-
-  console.log(username);
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -114,17 +111,16 @@ const Valorant = () => {
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point) => {
+  const updatePoints = async (point,uuid) => {
     try {
       const response = await fetch(
-        API.UpdatePoints,
+        `${API.UpdatePoints}/${uuid}`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username: username,
             points: point,
           }),
         }
@@ -155,15 +151,15 @@ const Valorant = () => {
     if (rank === selectedRank) {
       dispatch(valorantActions.setResult(check));
       newPoint = 2;
-      updatePoints(2);
+      updatePoints(2, userId);
     } else if (distance === 1) {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1);
+      updatePoints(1, userId);
     } else {
       dispatch(valorantActions.setResult(wrong));
       newPoint = -1;
-      updatePoints(-1);
+      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(valorantActions.setPoint(newPoint));

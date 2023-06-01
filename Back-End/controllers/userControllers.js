@@ -76,9 +76,10 @@ const getOneUserByUuid = async (req, res) => {
 };
 
 const AddPointByUsername = async (req, res) => {
-  const { username, points } = req.body;
+  const {points } = req.body;
+  const { uuid } = req.params;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ uuid });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }

@@ -28,7 +28,6 @@ const Csgo = () => {
   const player = useSelector((state) => state.overwatch.player);
   const score = useSelector((state) => state.overwatch.score) || 0;
   const point = useSelector((state) => state.overwatch.point);
-  const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);
 
   const handleModal = () => {
@@ -107,17 +106,16 @@ const Csgo = () => {
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point) => {
+  const updatePoints = async (point,uuid) => {
     try {
       const response = await fetch(
-        API.UpdatePoints,
+        `${API.UpdatePoints}/${uuid}`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username: username,
             points: point,
           }),
         }
@@ -147,15 +145,15 @@ const Csgo = () => {
     if (rank === selectedRank) {
       dispatch(overwatchActions.setResult(check));
       newPoint = 2;
-      updatePoints(2);
+      updatePoints(2, userId);
     } else if (distance === 1) {
       dispatch(overwatchActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1);
+      updatePoints(1, userId);
     } else {
       dispatch(overwatchActions.setResult(wrong));
       newPoint = -1;
-      updatePoints(-1);
+      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(overwatchActions.setPoint(newPoint));
