@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../../api';
+import Loader from '../Loader/Loader';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [accuracy , setAccuracy] = useState(0)
   const { uuid } = useParams();
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -26,8 +31,6 @@ const Profile = () => {
         }
         const data = await response.json();
         setProfileData(data);
-        setLoading(false);
-
         const accuracy = (data.points / data.totalRounds * 100).toFixed(0)
         if(accuracy === Infinity || isNaN(accuracy)){
           setAccuracy(0)
@@ -43,9 +46,7 @@ const Profile = () => {
   }, [uuid]);
 
   if (loading) {
-    return <div className='loading'>
-      Loading...
-    </div>;
+    return <div className='profile-container'><Loader /></div>
   }
 
   return (

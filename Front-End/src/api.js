@@ -11,7 +11,6 @@ const API = {
     BugSubmit: `${root}/form/bug`,
     ReportSubmit: `${root}/form/report`,
     GetAllUsers: `${root}/allusers`,
-    GetUserByUsername: `${root}/user`,
     SaveUser: `${root}/saveuser`,
     GetUserByUuid: `${root}/user`,
     UpdatePoints: `${root}/updatepoints`,

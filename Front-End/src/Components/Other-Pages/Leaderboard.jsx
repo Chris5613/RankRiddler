@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
-import { useDispatch } from 'react-redux';
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -65,7 +63,7 @@ const Leaderboard = () => {
   return (
     <>
       <div className="leaderboard-container select-game">
-        <h1 style={{ color: 'white' }}>Point Leaderboard</h1>
+        <h1 style={{ color: 'white' }}>All Time Leaderboard</h1>
         <div className="form-container">
       {loading ? (
         <Loader />

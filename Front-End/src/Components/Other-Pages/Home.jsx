@@ -20,7 +20,7 @@ const Home = () => {
       <main className="home-section">
         <div className="home-container">
           <div className="main-container">
-            <h1 className="page-heading-1">Choose a game</h1>
+            <h1 className="page-heading-1">Guess The Rank Of Players Based Off Your Favorite Game</h1>
             <div className="image-row">
               <ImageLink
                 to="/valorant"

@@ -14,6 +14,7 @@
   color: rgb(255 255 255);
   margin-top: 1rem;
   margin-bottom: 1rem;
+  font-size: 20px;
 }
 
 .main-text {
@@ -24,12 +25,6 @@
   margin-bottom: 1rem;
 }
 
-@media (min-width: 1024px) {
-  .page-heading-1 {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-}
 
 .game-card {
   --gap-count: calc(var(4) - 1);

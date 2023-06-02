@@ -20,7 +20,7 @@ app.use(
 
 app.use(express.json());
 app.use((req, res, next) => {
-  console.log(req.path, res.method);
+  console.log(req.path);
   next();
 });
 
