@@ -1,4 +1,4 @@
-import API from "../../api";
+import API from '../../api';
 
 const ReportButton = (props) => {
   const { playerInfo, youtubeLink, reportedBy } = props;
@@ -10,17 +10,14 @@ const ReportButton = (props) => {
       reportedBy,
     };
     try {
-      const response = await fetch(
-        API.ReportSubmit,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch(API.ReportSubmit, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
 
-          body: JSON.stringify(reportData),
-        }
-      );
+        body: JSON.stringify(reportData),
+      });
 
       if (response.status === 201) {
         alert('Video reported successfully!');

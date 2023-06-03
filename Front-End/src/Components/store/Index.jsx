@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import csgoSlice from './CsgoSlice';
 import leagueSlice from './LeagueSlice';
 import valorantSlice from './ValorantSlice';
-import navSlice from './NavSlice';
 import settingsSlice from './SettingsSlice';
 import submitSlice from './SubmitSlice';
 import apexSlice from './ApexSlice';
@@ -15,7 +14,6 @@ const store = configureStore({
   reducer: {
     csgo: csgoSlice.reducer,
     league: leagueSlice.reducer,
-    nav: navSlice.reducer,
     valorant: valorantSlice.reducer,
     settings: settingsSlice.reducer,
     submit: submitSlice.reducer,

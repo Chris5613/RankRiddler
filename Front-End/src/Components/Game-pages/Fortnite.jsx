@@ -51,16 +51,14 @@ const Csgo = () => {
     Diamond: diamond,
     Elite: elite,
     Champion: champion,
-    'Unreal': unreal,
+    Unreal: unreal,
   };
 
   const pic = rankImages[rank];
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetFortniteData
-    );
+    const response = await fetch(API.GetFortniteData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
 
@@ -91,35 +89,29 @@ const Csgo = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(apexActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point,uuid) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        `${API.UpdatePoints}/${uuid}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -145,15 +137,15 @@ const Csgo = () => {
     if (rank === selectedRank) {
       dispatch(apexActions.setResult(check));
       newPoint = 2;
-      updatePoints(2,userId);
+      updatePoints(2, userId);
     } else if (distance === 1) {
       dispatch(apexActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1,userId);
+      updatePoints(1, userId);
     } else {
       dispatch(apexActions.setResult(wrong));
       newPoint = -1;
-      updatePoints(-1,userId);
+      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(apexActions.setPoint(newPoint));

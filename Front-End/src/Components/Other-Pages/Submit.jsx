@@ -80,16 +80,13 @@ function Form(props) {
     };
 
     try {
-      const response = await fetch(
-        `${API.GameSubmit}/${props.game}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API.GameSubmit}/${props.game}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         alert('Form submitted successfully!');
@@ -206,9 +203,9 @@ function Form(props) {
         { value: 'Gold', label: 'Gold' },
         { value: 'Platinum', label: 'Platinum' },
         { value: 'Diamond', label: 'Diamond' },
-        { value: 'Elite', label: 'Elite'},
+        { value: 'Elite', label: 'Elite' },
         { value: 'Champion', label: 'Champion' },
-        { value: 'Unreal', label: 'Unreal'}
+        { value: 'Unreal', label: 'Unreal' },
       ],
     },
   };

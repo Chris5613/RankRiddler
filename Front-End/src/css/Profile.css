@@ -1,43 +1,43 @@
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5%;
-    margin-bottom: 10%;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  width: 100%;
+  height: 100%;
 }
 
 .profile-container h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 2rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
 .stats-container {
-    display: flex;
-    flex-direction: center;
-    align-items: center;
-    justify-content: center;
-    width: 35%;
-    height: 100px;
-    background-color: #4A5568;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+  height: 100px;
+  background-color: #4a5568;
+  border-radius: 10px;
 }
 
 .stats {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .stats-container h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #fff;
-    margin-left: 2rem;
-    text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 2rem;
+  text-align: center;
 }
 
 .loading {
@@ -52,19 +52,19 @@
   .stats-btn {
     width: 100%;
   }
-  
+
   .button-container {
     width: 100%;
   }
-  
+
   .profile-container {
     text-align: center;
   }
-  
+
   .stats-container {
     width: 100%;
   }
-  
+
   .stats {
     margin-bottom: 10px;
   }
@@ -74,7 +74,8 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-th, td {
+th,
+td {
   border-bottom: 0.5px solid #3a3939;
 }
 
@@ -135,17 +136,13 @@ th, td {
   margin-bottom: 10px;
 }
 
-
 #main-h1 {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 5%;
   margin-bottom: 10%;
-  width: 100%;
-  height: 100%;
   font-size: 3rem;
   font-weight: 700;
-  color: #fff;
   flex-direction: column;
 }

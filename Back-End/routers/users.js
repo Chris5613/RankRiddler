@@ -1,6 +1,5 @@
 const express = require("express");
 const {
-  getUserbyUsername,
   getAllUsers,
   createUser,
   AddPointByUsername,
@@ -15,7 +14,6 @@ const limiter = rateLimit({
 });
 
 router.get("/allusers", limiter, getAllUsers);
-router.get("/user", limiter, getUserbyUsername);
 router.post("/saveuser", limiter, createUser);
 router.get("/user/:uuid", limiter, getOneUserByUuid);
 

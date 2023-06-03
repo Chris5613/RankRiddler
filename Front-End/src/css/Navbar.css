@@ -19,7 +19,6 @@ header {
   display: flex;
   justify-content: space-between;
   margin-left: 17vw;
-
 }
 
 .nav a {
@@ -96,19 +95,8 @@ header {
   margin-bottom: 1rem;
 }
 
-.leaderboard-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  flex-direction: column;
-  color: black;
-  margin-top: 2rem;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
+.margin-right {
+  margin-right: 1rem;
 }
 
 th,
@@ -144,10 +132,6 @@ td {
   width: 100%;
 }
 
-.howto {
-  cursor: pointer;
-}
-
 .modal-container {
   display: flex;
   justify-content: center;
@@ -178,19 +162,13 @@ td {
   }
 }
 
-.X {
-  cursor: pointer;
-}
-
 .settings-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 75vh;
-  color: white;
   font: 25px Helvetica, sans-serif;
-  text-align: center;
 }
 
 .settings-container span {
@@ -199,27 +177,6 @@ td {
 
 .settings-container p {
   margin-top: 1rem;
-}
-
-.setting-bottom {
-  margin-top: 2rem;
-}
-
-.reset-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 20vh;
-  color: white;
-  font: 25px Helvetica, sans-serif;
-  text-align: center;
-}
-
-.reset-text {
-  color: #ff0000;
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 .bottom-img {

@@ -18,7 +18,7 @@ const {
   rocketForm,
 } = require("../controllers/formControllers");
 
-const {reportForm } = require("../controllers/bugController");
+const { reportForm } = require("../controllers/bugController");
 const rateLimit = require("express-rate-limit");
 
 const limiter = rateLimit({

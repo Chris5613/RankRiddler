@@ -24,7 +24,6 @@ import Profile from './Components/Other-Pages/Profile';
 import Main from './Components/Multiplayer/Main';
 import Overlay from './Components/Other-Pages/Overlay';
 
-
 function App() {
   return (
     <BrowserRouter>

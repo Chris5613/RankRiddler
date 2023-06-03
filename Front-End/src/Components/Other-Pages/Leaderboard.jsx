@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
-import { useDispatch } from 'react-redux';
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -19,15 +17,12 @@ const Leaderboard = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          API.GetAllUsers,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = await fetch(API.GetAllUsers, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -43,9 +38,8 @@ const Leaderboard = () => {
 
   const profileView = (index) => {
     const uuid = data[index].uuid;
-    navigate(`/profile/${uuid}`)
+    navigate(`/profile/${uuid}`);
   };
-  
 
   const entriesPerPage = 10;
   const startIndex = (currentPage - 1) * entriesPerPage;
@@ -65,50 +59,57 @@ const Leaderboard = () => {
   return (
     <>
       <div className="leaderboard-container select-game">
-        <h1 style={{ color: 'white' }}>Point Leaderboard</h1>
+        <h1 style={{ color: 'white' }}>All Time Leaderboard</h1>
         <div className="form-container">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Score</th>
-              <th>Stats</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rowData.map((row, index) => (
-              <tr key={startIndex + index}>
-                <td>{startIndex + index + 1}</td>
-                <td>{row.username}</td>
-                <td>{row.points}</td>
-                <td className='btn'><button className='stats-btn' onClick={() => profileView(startIndex + index)}>See Stats</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className='button-container'>
-            {displayedPages.map((pageNumber) => (
-              <button
-                key={pageNumber}
-                onClick={() => handlePageChange(pageNumber)}
-                style={{
-                  fontWeight: pageNumber === currentPage ? 'bold' : 'normal',
-                }}
-                className='pagination-button margin-right'
-              >
-                {pageNumber}
-              </button>
-            )
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Stats</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rowData.map((row, index) => (
+                    <tr key={startIndex + index}>
+                      <td>{startIndex + index + 1}</td>
+                      <td>{row.username}</td>
+                      <td>{row.points}</td>
+                      <td className="btn">
+                        <button
+                          className="stats-btn"
+                          onClick={() => profileView(startIndex + index)}
+                        >
+                          See Stats
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="button-container">
+                {displayedPages.map((pageNumber) => (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    style={{
+                      fontWeight:
+                        pageNumber === currentPage ? 'bold' : 'normal',
+                    }}
+                    className="pagination-button margin-right"
+                  >
+                    {pageNumber}
+                  </button>
+                ))}
+              </div>
+            </>
           )}
         </div>
-        </>
-      )}
-    </div>
       </div>
     </>
   );
