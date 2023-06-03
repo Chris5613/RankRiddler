@@ -7,9 +7,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Modal = () => {
   const dispatch = useDispatch();
-  const username = useSelector(
-    (state) => state.settings.username
-  ) || localStorage.getItem('username') || 'Guest';
+  const username =
+    useSelector((state) => state.settings.username) ||
+    localStorage.getItem('username') ||
+    'Guest';
   const isUsernameChanged = useSelector(
     (state) => state.settings.isUsernameChanged
   );
@@ -28,32 +29,29 @@ const Modal = () => {
   }, [dispatch, username]);
 
   useEffect(() => {
-    if(username === 'Guest' ) {
+    if (username === 'Guest') {
       dispatch(settingsActions.setIsUsernameChanged(true));
     }
-    if(username !== 'Guest') {
+    if (username !== 'Guest') {
       dispatch(settingsActions.setIsUsernameChanged(false));
     }
   }, [username, dispatch]);
 
-  console.log(username)
+  console.log(username);
 
   const saveUser = async (username, score, uuid) => {
     try {
-      const response = await fetch(
-        API.SaveUser,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            points: score,
-            uuid: uuid,
-          }),
-        }
-      );
+      const response = await fetch(API.SaveUser, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          points: score,
+          uuid: uuid,
+        }),
+      });
       const data = await response.json();
       console.log(data);
       return data;
@@ -81,15 +79,19 @@ const Modal = () => {
     };
     checkUsername();
   };
-  
 
   return isUsernameChanged ? (
-    <div className='main-modal'>
+    <div className="main-modal">
       <div className="main-modal-content">
         <h1>Username Setup</h1>
-        <h3>Set your username to save your score and be tracked on the leaderboard.</h3>
+        <h3>
+          Set your username to save your score and be tracked on the
+          leaderboard.
+        </h3>
         <h3>One-time setup</h3>
-        <button className="submit-btn" onClick={usernameSet}>Set Username</button>
+        <button className="submit-btn" onClick={usernameSet}>
+          Set Username
+        </button>
       </div>
     </div>
   ) : null;

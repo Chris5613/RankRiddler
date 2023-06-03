@@ -1,93 +1,20 @@
-.main-page-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5rem;
-}
-
 .page-heading-1 {
   text-align: center;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: rgb(255 255 255);
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 20px;
 }
 
-.main-text {
-  text-align: center;
-  font-size: 25px;
-  line-height: 1.75rem;
-  color: rgb(255 255 255);
-  margin-bottom: 1rem;
-}
-
-
-.game-card {
-  --gap-count: calc(var(4) - 1);
-  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(4));
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(max(var(--grid-item--min-width), var(220px)), 1fr)
-  );
-  grid-gap: var(--grid-layout-gap);
-}
-
 .home-section {
-  position: relative;
   padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-.main-container {
-  position: relative;
-}
-
-.main-images {
-  border-radius: 1rem;
-  transition: 0.5s;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50%;
 }
 
 .home-container {
   display: flex;
   justify-content: center;
-  color: white;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 80rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  height: auto;
-}
-
-.home-instrutions-container {
-  width: 500px;
-  height: 40px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.home-text {
-  color: wheat;
-}
-
-.game-link {
-  position: relative;
-}
-
-.val-text {
-  color: #fa4454;
-  font-size: 19px;
 }
 
 .image-row {
@@ -127,12 +54,10 @@
 }
 
 .main-images {
-  height: 360px;
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (max-width: 768px) {
@@ -159,11 +84,6 @@
   .margin-right {
     margin-left: 1rem;
   }
-
-  .main-text {
-  font-size: 12px;
-  margin: 0 auto;
-  }
 }
 
 .main-images,
@@ -172,24 +92,12 @@
   margin-left: 0.5rem;
 }
 
-.margin-right {
-  margin-right: 1rem;
-}
-
 .submit-button {
   background-color: #fa4454;
-  border: none;
-  color: white;
   padding: 0.5rem 1rem;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 1rem;
-  border-radius: 0.5rem;
-  margin-top: 1rem;
   margin-bottom: 1rem;
-  cursor: pointer;
-  transition: 0.5s;
 }
 
 .overlayText {
@@ -223,7 +131,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;  
+  justify-content: center;
 }
 
 .main-modal-content h1 {

@@ -20,7 +20,9 @@ import API from '../../api';
 const Csgo = () => {
   const dispatch = useDispatch();
   const selectedRank = useSelector((state) => state.rocket.selectedRank);
-  const isButtonDisabled = useSelector((state) => state.rocket.isButtonDisabled);
+  const isButtonDisabled = useSelector(
+    (state) => state.rocket.isButtonDisabled
+  );
   const url = useSelector((state) => state.rocket.url);
   const showModal = useSelector((state) => state.rocket.showModal);
   const rank = useSelector((state) => state.rocket.rank);
@@ -58,9 +60,7 @@ const Csgo = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetRocketData
-    );
+    const response = await fetch(API.GetRocketData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
 
@@ -91,35 +91,29 @@ const Csgo = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(rocketActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point,uuid) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        `${API.UpdatePoints}/${uuid}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);

@@ -2,7 +2,6 @@ import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import Grandmaster from '../../Assets/League-Icons/GrandMaster.png';
 import Diamond from '../../Assets/League-Icons/Diamond.png';
-import leader from '../../Assets/Nav-Icons/leaderboard.png';
 import { NavLink } from 'react-router-dom';
 
 const Howto = () => {
@@ -25,7 +24,11 @@ const Howto = () => {
         <br />
         <p>
           Get enough points to top the leaderboard{' '}
-          <img src={leader} width={50} alt="board" />
+          <img
+            src="https://icons.veryicon.com/png/o/miscellaneous/monochrome-function-linear-icon/leaderboard-2.png"
+            width={50}
+            alt="board"
+          />
         </p>
         <br />
         <h3 className="modal-title">Example</h3>

@@ -8,58 +8,74 @@ const rainbow = require("../models/rainbowForm");
 const rocket = require("../models/rocketForm");
 
 /**
- * 
- * @param {String} game 
- * @param {String} youtubeCode 
- * @returns false if youtubeCode is not found in the database for the game 
+ *
+ * @param {String} game
+ * @param {String} youtubeCode
+ * @returns false if youtubeCode is not found in the database for the game
  */
 const findYoutubeCode = async (game, youtubeCode) => {
   try {
     switch (game) {
       case "csgo":
-        const resCS = await csgo.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resCS = await csgo.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resCS) {
           return true;
         }
         return false;
       case "val":
-        const resVal = await val.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resVal = await val.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resVal) {
           return true;
         }
         return false;
       case "league":
-        const resLeague = await league.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resLeague = await league.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resLeague) {
           return true;
         }
         return false;
       case "apex":
-        const resApex = await apex.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resApex = await apex.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resApex) {
           return true;
         }
         return false;
       case "fortnite":
-        const resFortnite = await fortnite.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resFortnite = await fortnite.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resFortnite) {
           return true;
         }
         return false;
       case "overwatch":
-        const resOverwatch = await overwatch.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resOverwatch = await overwatch.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resOverwatch) {
           return true;
         }
         return false;
       case "rainbow":
-        const resRainbow = await rainbow.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resRainbow = await rainbow.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resRainbow) {
           return true;
         }
         return false;
       case "rocket":
-        const resRocket = await rocket.findOne({ "youtubeLink": { $regex: youtubeCode, $options: 'i' } });
+        const resRocket = await rocket.findOne({
+          youtubeLink: { $regex: youtubeCode, $options: "i" },
+        });
         if (resRocket) {
           return true;
         }
@@ -70,51 +86,51 @@ const findYoutubeCode = async (game, youtubeCode) => {
   } catch (error) {
     return true;
   }
-}
+};
 
 /**
- * 
- * @param {{youtubeLink, playerInfo, rank}} game 
+ *
+ * @param {{youtubeLink, playerInfo, rank}} game
  * @returns true if passed all validations
  */
 const validations = async (game) => {
-  let ytRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
+  let ytRegex =
+    /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
   ytRegex = new RegExp(ytRegex);
   let matches = game.youtubeLink.match(ytRegex);
   if (matches) {
     try {
-      if (await findYoutubeCode('csgo', matches[1])) {
+      if (await findYoutubeCode("csgo", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('val', matches[1])) {
+      if (await findYoutubeCode("val", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('league', matches[1])) {
+      if (await findYoutubeCode("league", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('apex', matches[1])) {
+      if (await findYoutubeCode("apex", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('fortnite', matches[1])) {
+      if (await findYoutubeCode("fortnite", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('overwatch', matches[1])) {
+      if (await findYoutubeCode("overwatch", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('rainbow', matches[1])) {
+      if (await findYoutubeCode("rainbow", matches[1])) {
         return false;
       }
-      if (await findYoutubeCode('rocket', matches[1])) {
+      if (await findYoutubeCode("rocket", matches[1])) {
         return false;
       }
       return true;
-    }
-    catch (err) {
+    } catch (err) {
       return false;
     }
   }
   return false;
-}
+};
 
 const valForm = async (req, res) => {
   try {
@@ -146,7 +162,7 @@ const leagueForm = async (req, res) => {
 
 const csgoForm = async (req, res) => {
   try {
-    if(await validations(req.body)){
+    if (await validations(req.body)) {
       const form = new csgo(req.body);
       await form.save();
       res.status(201).json({ form });
@@ -160,7 +176,7 @@ const csgoForm = async (req, res) => {
 
 const apexForm = async (req, res) => {
   try {
-    if(await validations(req.body)){
+    if (await validations(req.body)) {
       const form = new apex(req.body);
       await form.save();
       res.status(201).json({ form });
@@ -174,7 +190,7 @@ const apexForm = async (req, res) => {
 
 const fortniteForm = async (req, res) => {
   try {
-    if(await validations(req.body)){
+    if (await validations(req.body)) {
       const form = new fortnite(req.body);
       await form.save();
       res.status(201).json({ form });
@@ -188,7 +204,7 @@ const fortniteForm = async (req, res) => {
 
 const overwatchForm = async (req, res) => {
   try {
-    if(await validations(req.body)){
+    if (await validations(req.body)) {
       const form = new overwatch(req.body);
       await form.save();
       res.status(201).json({ form });
@@ -202,7 +218,7 @@ const overwatchForm = async (req, res) => {
 
 const rainbowForm = async (req, res) => {
   try {
-    if(await validations(req.body)){
+    if (await validations(req.body)) {
       const form = new rainbow(req.body);
       await form.save();
       res.status(201).json({ form });
@@ -216,7 +232,7 @@ const rainbowForm = async (req, res) => {
 
 const rocketForm = async (req, res) => {
   try {
-    if(await validations(req.body)){
+    if (await validations(req.body)) {
       const form = new rocket(req.body);
       await form.save();
       res.status(201).json({ form });
@@ -227,7 +243,6 @@ const rocketForm = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
 
 const getForm = async (req, res) => {
   try {

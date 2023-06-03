@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { settingsActions } from '../store/SettingsSlice';
 import API from '../../api';
@@ -13,46 +12,27 @@ const Settings = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(settingsActions.setUsername(data.username));
-      dispatch(settingsActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
   useEffect(() => {
-    const storedUserId = localStorage.getItem('userId');
-    if (!storedUserId) {
-      const id = uuidv4();
-      const shortUuid = id.slice(0, 8);
-      localStorage.setItem('userId', shortUuid);
-      dispatch(settingsActions.setUserId(shortUuid));
-    } else {
-      dispatch(settingsActions.setUserId(storedUserId));
-    }
-  }, [dispatch, username]);
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          API.GetAllUsers,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        const response = await fetch(API.GetAllUsers, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -73,7 +53,6 @@ const Settings = () => {
       dispatch(settingsActions.setIndex(data.indexOf(foundUser)));
     }
   }, [username, data, dispatch]);
-
 
   return (
     <>

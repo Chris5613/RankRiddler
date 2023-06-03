@@ -48,7 +48,7 @@ const getOneUserByUuid = async (req, res) => {
 };
 
 const AddPointByUsername = async (req, res) => {
-  const {points } = req.body;
+  const { points } = req.body;
   const { uuid } = req.params;
   try {
     const user = await User.findOne({ uuid });

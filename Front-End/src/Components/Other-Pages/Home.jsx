@@ -20,7 +20,9 @@ const Home = () => {
       <main className="home-section">
         <div className="home-container">
           <div className="main-container">
-            <h1 className="page-heading-1">Guess The Rank Of Players Based Off Your Favorite Game</h1>
+            <h1 className="page-heading-1">
+              Guess The Rank Of Players Based Off Your Favorite Game
+            </h1>
             <div className="image-row">
               <ImageLink
                 to="/valorant"
@@ -44,7 +46,7 @@ const Home = () => {
                 overlayText="COMING SOON"
               />
             </div>
-            <div className="image-row margin-right">
+            <div className="image-row">
               <ImageLink
                 to="/apex"
                 imageSrc="https://i.gyazo.com/810d909a139fa9b1353bd3848e167ac7.jpg"

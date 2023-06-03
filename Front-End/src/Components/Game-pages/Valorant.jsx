@@ -18,7 +18,6 @@ import { valorantActions } from '../store/ValorantSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
 
-
 const Valorant = () => {
   const dispatch = useDispatch();
   const selectedRank = useSelector((state) => state.valorant.selectedRank);
@@ -63,9 +62,7 @@ const Valorant = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetValorantData
-    );
+    const response = await fetch(API.GetValorantData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
@@ -96,35 +93,29 @@ const Valorant = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(valorantActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point,uuid) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        `${API.UpdatePoints}/${uuid}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);

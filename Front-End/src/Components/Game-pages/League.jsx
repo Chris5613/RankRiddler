@@ -63,9 +63,7 @@ const League = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetLeagueData
-    );
+    const response = await fetch(API.GetLeagueData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
@@ -96,35 +94,29 @@ const League = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(leagueActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point,uuid) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        `${API.UpdatePoints}/${uuid}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);

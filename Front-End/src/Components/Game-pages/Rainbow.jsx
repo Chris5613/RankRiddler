@@ -19,7 +19,9 @@ import API from '../../api';
 const Csgo = () => {
   const dispatch = useDispatch();
   const selectedRank = useSelector((state) => state.rainbow.selectedRank);
-  const isButtonDisabled = useSelector((state) => state.rainbow.isButtonDisabled);
+  const isButtonDisabled = useSelector(
+    (state) => state.rainbow.isButtonDisabled
+  );
   const url = useSelector((state) => state.rainbow.url);
   const showModal = useSelector((state) => state.rainbow.showModal);
   const rank = useSelector((state) => state.rainbow.rank);
@@ -30,15 +32,15 @@ const Csgo = () => {
   const userId = useSelector((state) => state.settings.userId);
 
   const handleModal = () => {
-    dispatch((rainbowActions).toggleShowModal());
+    dispatch(rainbowActions.toggleShowModal());
   };
 
   useEffect(() => {
-    dispatch((rainbowActions).setIsButtonDisabled(selectedRank === null));
+    dispatch(rainbowActions.setIsButtonDisabled(selectedRank === null));
   }, [selectedRank, dispatch]);
 
   const handleRankClick = (rank) => {
-    dispatch((rainbowActions).setSelectedRank(rank));
+    dispatch(rainbowActions.setSelectedRank(rank));
   };
 
   const youtubeUrl = url;
@@ -56,9 +58,7 @@ const Csgo = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetRainbowData
-    );
+    const response = await fetch(API.GetRainbowData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
 
@@ -71,9 +71,9 @@ const Csgo = () => {
 
     buffer.push(randomIndex);
     buffer.shift();
-    dispatch((rainbowActions).setUrl(data.form[randomIndex].youtubeLink));
-    dispatch((rainbowActions).setRank(data.form[randomIndex].rank));
-    dispatch((rainbowActions).setPlayer(data.form[randomIndex].playerInfo));
+    dispatch(rainbowActions.setUrl(data.form[randomIndex].youtubeLink));
+    dispatch(rainbowActions.setRank(data.form[randomIndex].rank));
+    dispatch(rainbowActions.setPlayer(data.form[randomIndex].playerInfo));
   }, [dispatch]);
 
   useEffect(() => {
@@ -82,42 +82,36 @@ const Csgo = () => {
 
   const refresh = () => {
     getYoutubeUrl();
-    dispatch((rainbowActions).setSelectedRank(null));
-    dispatch((rainbowActions).setIsButtonDisabled(true));
-    dispatch((rainbowActions).hideShowModal());
+    dispatch(rainbowActions.setSelectedRank(null));
+    dispatch(rainbowActions.setIsButtonDisabled(true));
+    dispatch(rainbowActions.hideShowModal());
   };
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
-      dispatch((rainbowActions).setScore(data.points));
+      dispatch(rainbowActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point,uuid) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        `${API.UpdatePoints}/${uuid}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -140,21 +134,21 @@ const Csgo = () => {
 
     let newPoint = 0;
     if (rank === selectedRank) {
-      dispatch((rainbowActions).setResult(check));
+      dispatch(rainbowActions.setResult(check));
       newPoint = 2;
-      updatePoints(2,userId);
+      updatePoints(2, userId);
     } else if (distance === 1) {
-      dispatch((rainbowActions).setResult(wrong));
+      dispatch(rainbowActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1,userId);
+      updatePoints(1, userId);
     } else {
-      dispatch((rainbowActions).setResult(wrong));
+      dispatch(rainbowActions.setResult(wrong));
       newPoint = -1;
-      updatePoints(-1,userId);
+      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
-    dispatch((rainbowActions).setPoint(newPoint));
-    dispatch((rainbowActions).setScore(newScore));
+    dispatch(rainbowActions.setPoint(newPoint));
+    dispatch(rainbowActions.setScore(newScore));
   };
 
   return (
