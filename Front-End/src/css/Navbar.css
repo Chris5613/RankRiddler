@@ -212,13 +212,16 @@ td {
   }
 
   .logo {
-    width: 60px;
+    margin: -5px;
+    width: 200px;
     height: auto;
   }
 
+
   .nav a {
-    margin: 0 1rem;
-    font-size: 15px; 
+    margin: 0 12px;
+    font-size: 14px; 
+    
    }
 
   .button-container {
