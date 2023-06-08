@@ -8,6 +8,7 @@ const Nav = () => {
       <header>
         <div className="nav-container">
           <nav className="nav">
+        <i className="fa-solid fa-bars burgermenu-bar"></i>
             <ul>
               <li>
                 <NavLink to="/" className="nav-link">
@@ -24,6 +25,7 @@ const Nav = () => {
                   Multiplayer
                 </NavLink>
               </li>
+
               <a href="/">
                 <img src={logo} alt="logo" className="logo" />
               </a>
