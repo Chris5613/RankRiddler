@@ -15,6 +15,7 @@ import Bug from './Components/Other-Pages/Bug';
 import Howto from './Components/Other-Pages/Howto';
 import Settings from './Components/Other-Pages/Settings';
 import Error from './Components/Error';
+import Multiplayer from './Components/Other-Pages/Multiplayer';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/bug" element={<Bug />} />
         <Route path="/howto" element={<Howto />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/multiplayer" element={<Multiplayer />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

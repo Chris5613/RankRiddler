@@ -246,3 +246,47 @@ td {
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: fit-content;
 }
+
+.multiplayer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  color: white;
+  text-align: center;
+}
+
+.multiplayer-header {
+  font-size: 36px;
+}
+
+.multiplayer-btn-container {
+  display: flex;
+  margin-block: 4%;
+}
+
+.multiplayer-btn {
+  background-color: #443f3f;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-inline: 0.5rem;
+  outline: none;
+  width: 165px;
+  height: 50px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .multiplayer-btn-container {
+    display: contents;
+  }
+  .multiplayer-header {
+    font-size: 25px;
+  }
+}
