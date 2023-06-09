@@ -114,6 +114,27 @@ td {
   width: 40%;
 }
 
+.multiplayer-btn-container {
+  display: flex;
+  margin-block: 4%;
+}
+
+.multiplayer-btn {
+  background-color: #443f3f;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  font-weight: 400;
+  margin-top: 1rem;
+  margin-inline: 0.5rem;
+  outline: none;
+  width: 165px;
+  height: 50px;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .stats-btn {
     width: 100%;
@@ -121,6 +142,10 @@ td {
 
   .button-container {
     width: 100%;
+  }
+
+  .multiplayer-btn-container {
+    display: contents;
   }
 }
 
@@ -140,7 +165,7 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 20%;
   margin-bottom: 10%;
   font-size: 3rem;
   font-weight: 700;
