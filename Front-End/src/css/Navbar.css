@@ -308,11 +308,20 @@ body {
   .btn {
     width: 350px;
   }
+
+  .nav-bigger {
+    display: none;
+  }
+
 }
 
 @media (min-width: 481px) {
 
   .burgermenu-bar {
+    display: none;
+  }
+
+  .nav-smaller {
 display: none;
   }
 

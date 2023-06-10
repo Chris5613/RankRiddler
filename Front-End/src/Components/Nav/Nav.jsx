@@ -1,14 +1,22 @@
 /* eslint-disable no-unused-vars */
 import logo from '../../Assets/Nav-Icons/logo.png';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
+
 const Nav = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <header>
-        <div className="nav-container">
+        <div className="nav-container nav-bigger">
           <nav className="nav">
-        <i className="fa-solid fa-bars burgermenu-bar"></i>
             <ul>
               <li>
                 <NavLink to="/" className="nav-link">
@@ -45,6 +53,48 @@ const Nav = () => {
                 </NavLink>
               </li>
             </ul>
+          </nav>
+        </div>
+        <div className="nav-container nav-smaller">
+          <nav className="nav">
+                          <a href="/">
+                <img src={logo} alt="logo" className="logo" />
+              </a>
+        <i onClick={toggleMenu}className="fa-solid fa-bars burgermenu-bar"></i>
+        {isOpen && (
+            <ul>
+              <li>
+                <NavLink to="/" className="nav-link">
+                  Games
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/leaderboard" className="nav-link">
+                  Leaderboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/multiplayer" className="nav-link">
+                  Multiplayer
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/submit" className="nav-link">
+                  Submit Clips
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/settings" className="nav-link">
+                  Settings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/howto" className="nav-link">
+                  Help
+                </NavLink>
+              </li>
+            </ul>
+        )}
           </nav>
         </div>
       </header>
