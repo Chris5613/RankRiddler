@@ -19,6 +19,8 @@ const API = {
     GetUserByUuid: `${root}/user`,
     UpdatePoints: `${root}/updatepoints`,
     GameSubmit: `${root}/form`,
+    MultiplayerWon: `${root}/multiplayerwon`, // Needs username in body
+    MultiplayerLost: `${root}/multiplayerlost`, // Needs username in body
 }
 
 export default API;

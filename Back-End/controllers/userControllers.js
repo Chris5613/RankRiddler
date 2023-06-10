@@ -83,10 +83,44 @@ const AddPointByUsername = async (req, res) => {
   }
 };
 
+const multiplayerWon = async (req, res) => {
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.wins += 1;
+    await user.save();
+    res.status(200).json({ message: "Score updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+const multiplayerLost = async (req, res) => {
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.losses += 1;
+    await user.save();
+    res.status(200).json({ message: "Score updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 module.exports = {
   getUserbyUsername,
   getAllUsers,
   createUser,
   AddPointByUsername,
   getOneUserByUuid,
+  multiplayerWon,
+  multiplayerLost,
 };
