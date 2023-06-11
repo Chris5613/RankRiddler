@@ -5,6 +5,8 @@ const {
   createUser,
   AddPointByUsername,
   getOneUserByUuid,
+  multiplayerWon,
+  multiplayerLost,
 } = require("../controllers/userControllers");
 
 const router = express.Router();
@@ -20,4 +22,7 @@ router.post("/saveuser", limiter, createUser);
 router.get("/user/:uuid", limiter, getOneUserByUuid);
 
 router.put("/updatepoints", limiter, AddPointByUsername);
+router.put('/multiplayerwon', limiter, multiplayerWon);
+router.put('/multiplayerlost', limiter, multiplayerLost);
+
 module.exports = router;
