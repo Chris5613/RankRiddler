@@ -49,7 +49,7 @@ app.use(
   cors({
     origin: [
       "https://rr-front-end.onrender.com",
-      "https://test-server-rr.onrender.com/",
+      "https://test-server-rr.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
     ],
