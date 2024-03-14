@@ -23,9 +23,12 @@ import Rocket from './Components/Game-pages/Rocket';
 import Profile from './Components/Other-Pages/Profile';
 import Main from './Components/Multiplayer/Main';
 import Overlay from './Components/Other-Pages/Overlay';
+import Gamepage from './Components/Multiplayer/Gamepage';
+import { SocketProvider } from './Components/SocketContext';
 
 function App() {
   return (
+  <SocketProvider>
     <BrowserRouter>
       <Overlay />
       <Nav />
@@ -46,8 +49,10 @@ function App() {
         <Route path="/rocket" element={<Rocket />} />
         <Route path="/profile/:uuid" element={<Profile />} />
         <Route path="/multiplayer" element={<Main />} />
+        <Route path="/multiplayer/game" element={<Gamepage/>} />
       </Routes>
     </BrowserRouter>
+  </SocketProvider>
   );
 }
 

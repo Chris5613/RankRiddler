@@ -1,11 +1,44 @@
-import React from 'react';
+import {useEffect,useState} from 'react';
+import { useSocket } from '../SocketContext';
+import { useSelector } from 'react-redux';
+import API from '../../api';
+import { NavLink } from 'react-router-dom';
+
 
 const Main = () => {
+  const [username, setUsername] = useState('')
+  const userId = useSelector((state) => state.settings.userId);
+  const socket = useSocket();
+
+  useEffect(() => {
+    const getOneUser = async (uuid) => {
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setUsername(data.username)
+    };
+    getOneUser(userId);
+  }, [userId]);
+
+  const handlePlayClick = () => {
+    const playerName = username
+    socket.emit('playGame', { name: playerName });
+};
+
   return (
-    <div id="main-h1">
-      <h1>Coming Soon...</h1>
-      <br />
-      <h1>Multiplayer 1v1s</h1>
+    <div style={{ textAlign: 'center', marginTop: '20%' }}>
+      <div>      
+        <h1>Welcome to the Game</h1>
+        <button onClick={handlePlayClick}>
+          <NavLink to="/multiplayer/game" >
+            Search for a Game
+          </NavLink>
+        </button>
+      </div>
     </div>
   );
 };

@@ -37,8 +37,6 @@ const Modal = () => {
     }
   }, [username, dispatch]);
 
-  console.log(username);
-
   const saveUser = async (username, score, uuid) => {
     try {
       const response = await fetch(API.SaveUser, {
