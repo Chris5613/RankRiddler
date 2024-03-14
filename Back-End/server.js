@@ -17,6 +17,7 @@ const io = socketIo(server, {
       "https://rr-front-end.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
+      "https://test-server-rr.onrender.com",
     ], 
     methods: ["GET", "POST"],
     credentials: true
@@ -53,6 +54,7 @@ app.use(
       "https://www.rankriddler.com",
       "http://localhost:3000",
     ],
+    credentials: true,
   })
 );
 
