@@ -9,10 +9,6 @@ const Profile = () => {
   const [accuracy, setAccuracy] = useState(0);
   const { uuid } = useParams();
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 1000);
-
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -33,6 +29,8 @@ const Profile = () => {
         } else {
           setAccuracy(accuracy);
         }
+
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
