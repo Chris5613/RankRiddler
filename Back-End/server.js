@@ -26,24 +26,24 @@ const io = socketIo(server, {
 const playersWaiting = [];
 
 io.on('connection', (socket) => {
-
   socket.on('playGame', (data) => {
     const playerName = data.name;
-    playersWaiting.push(playerName);
-    console.log(`${playerName} wants to play a game`)
+    // Store both the player's name and their socket ID
+    playersWaiting.push({ name: playerName, id: socket.id });
+    console.log(`${playerName} wants to play a game`);
 
     if (playersWaiting.length >= 2) {
       const player1 = playersWaiting.shift();
       const player2 = playersWaiting.shift();
 
-      io.to(player1).emit('matchFound', { opponent: player2 });
-      io.to(player2).emit('matchFound', { opponent: player1 });
-      socket.emit('matchFound', { opponent: player2 })
+      // Emit 'matchFound' event to both players, using their socket IDs
+      io.to(player1.id).emit('matchFound', { opponent: player2.name });
+      io.to(player2.id).emit('matchFound', { opponent: player1.name });
 
-      console.log(player1, player2)
+      console.log(`${player1.name} and ${player2.name} are matched`);
     }
   });
-})
+});
 
 app.use(
   cors({

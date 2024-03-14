@@ -1,14 +1,17 @@
 import { useSocket } from '../SocketContext';
 import {useEffect,useState} from 'react';
+import Loader from '../Loader/Loader';
 
 
 const Gamepage = () => {
   const [opponent, setOpponent] = useState('');
+  const [loading, setLoading] = useState(true);
   const socket = useSocket();
 
     useEffect(() => {
     socket.on('matchFound', (data) => {
       setOpponent(data.opponent)
+      setLoading(false)
     }); 
     return () => {
       socket.off('matchFound');
@@ -17,7 +20,15 @@ const Gamepage = () => {
 
   console.log(opponent)
   return (
-    <div>{opponent}</div>
+    <div>
+      {loading ? (
+            <Loader />
+          ) : (
+            <>
+              {opponent}
+            </>
+          )}
+    </div>
   )
 }
 
