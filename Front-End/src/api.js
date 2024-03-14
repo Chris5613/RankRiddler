@@ -1,5 +1,5 @@
 // //Production
-const root = 'https://rr-back-end.onrender.com';
+const root = 'https://rankriddler-test-backend.onrender.com';
 
 // Development
 // const root = 'http://localhost:3001';

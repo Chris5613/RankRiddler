@@ -54,9 +54,6 @@ app.use(
       "https://www.rankriddler.com",
       "http://localhost:3000",
     ],
-    credentials: true, // Allowing credentials is important for sessions/cookies
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type,Authorization'
   })
 );
 
