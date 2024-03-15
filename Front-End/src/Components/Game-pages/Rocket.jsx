@@ -16,6 +16,7 @@ import { rocketActions } from '../store/RocketSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import BackButton from '../Other-Pages/BackButton';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -144,10 +145,6 @@ const Csgo = () => {
       dispatch(rocketActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    } else {
-      dispatch(rocketActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(rocketActions.setPoint(newPoint));
@@ -156,6 +153,7 @@ const Csgo = () => {
 
   return (
     <>
+      <BackButton/>
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

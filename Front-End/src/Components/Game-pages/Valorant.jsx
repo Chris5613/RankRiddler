@@ -17,6 +17,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import { useNavigate } from 'react-router-dom';
+import BackButton from '../Other-Pages/BackButton';
 
 const Valorant = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,11 @@ const Valorant = () => {
   const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
   const userId = useSelector((state) => state.settings.userId);
+
+  const navigate = useNavigate();
+  const goback = () => {
+    navigate("/selection");
+  };
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -147,11 +154,7 @@ const Valorant = () => {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    } else {
-      dispatch(valorantActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
-    }
+    } 
     const newScore = score + newPoint;
     dispatch(valorantActions.setPoint(newPoint));
     dispatch(valorantActions.setScore(newScore));
@@ -159,6 +162,7 @@ const Valorant = () => {
 
   return (
     <>
+      <BackButton/>
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

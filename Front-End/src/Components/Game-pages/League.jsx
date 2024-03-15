@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import BackButton from '../Other-Pages/BackButton';
 
 const League = () => {
   const dispatch = useDispatch();
@@ -148,11 +149,7 @@ const League = () => {
       dispatch(leagueActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    } else {
-      dispatch(leagueActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
-    }
+    } 
     const newScore = score + newPoint;
     dispatch(leagueActions.setPoint(newPoint));
     dispatch(leagueActions.setScore(newScore));
@@ -160,6 +157,7 @@ const League = () => {
 
   return (
     <>
+      <BackButton/>
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

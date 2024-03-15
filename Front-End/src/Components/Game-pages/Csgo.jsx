@@ -17,6 +17,7 @@ import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,10 @@ const Csgo = () => {
   const score = useSelector((state) => state.csgo.score) || 0;
   const point = useSelector((state) => state.csgo.point);
   const userId = useSelector((state) => state.settings.userId);
+  const navigate = useNavigate();
+  const goback = () => {
+    navigate("/selection");
+  };
 
   const handleModal = () => {
     dispatch(csgoActions.toggleShowModal());
@@ -145,10 +150,6 @@ const Csgo = () => {
       dispatch(csgoActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    } else {
-      dispatch(csgoActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(csgoActions.setPoint(newPoint));
@@ -157,6 +158,18 @@ const Csgo = () => {
 
   return (
     <>
+      <button
+        style={{
+          padding: '10px',
+          backgroundColor: '#2d3436',
+          color: '#fff',
+          fontSize: '18px',
+          cursor: 'pointer',
+        }}
+        onClick={goback}
+        >
+        Go back
+      </button>
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
