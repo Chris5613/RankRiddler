@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
+import BackButton from './BackButton';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [accuracy, setAccuracy] = useState(0);
   const { uuid } = useParams();
+  const navigate = useNavigate();
+  const goback = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -48,6 +54,19 @@ const Profile = () => {
   }
 
   return (
+    <>
+      <button
+        style={{
+          padding: '10px',
+          backgroundColor: '#2d3436',
+          color: '#fff',
+          fontSize: '18px',
+          cursor: 'pointer',
+        }}
+        onClick={goback}
+      >
+        Go back
+      </button>
     <div className="profile-container">
       <h1>
         Hi I'm <span style={{ color: 'skyblue' }}>{profileData.username}</span>
@@ -67,6 +86,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

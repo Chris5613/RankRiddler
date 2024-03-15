@@ -49,7 +49,7 @@ const Loadingpage = () => {
         <div className="loading-container loading">      
             <Loader />
             <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
-              <NavLink to='/multiplayer' className='navlink'>
+              <NavLink to='/' className='navlink'>
                 Leave Queue
               </NavLink>
             </button>

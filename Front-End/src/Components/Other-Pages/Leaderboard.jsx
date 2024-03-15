@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
+import BackButton from './BackButton';
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
@@ -58,6 +59,7 @@ const Leaderboard = () => {
 
   return (
     <>
+      <BackButton/>
       <div className="leaderboard-container select-game">
         <h1 style={{ color: 'white' }}>All Time Leaderboard</h1>
         <div className="form-container">

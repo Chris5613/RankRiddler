@@ -46,6 +46,11 @@ const Main = () => {
             Multiplayer
           </NavLink>
         </button>
+        <button onClick={handlePlayClick} className='game-btn'>
+          <NavLink to={`/leaderboard`} className='navlink-btn'>
+            Leaderboard
+          </NavLink>
+        </button>
       </div>
     </div>   
   );
