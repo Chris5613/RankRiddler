@@ -2,7 +2,7 @@ import React, { createContext, useContext } from 'react';
 import io from 'socket.io-client';
 
 // Create a socket instance
-const socket = io('https://rankriddler-test-backend.onrender.com');
+const socket = io('http://localhost:3001');
 
 // Create a Context
 const SocketContext = createContext();

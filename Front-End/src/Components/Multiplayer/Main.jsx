@@ -1,9 +1,9 @@
 import {useEffect,useState} from 'react';
-import { useSocket } from '../SocketContext';
+import { SocketProvider, useSocket } from '../SocketContext';
 import { useSelector } from 'react-redux';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
-
+import '../../css/multi.css'
 
 const Main = () => {
   const [username, setUsername] = useState('')
@@ -29,18 +29,13 @@ const Main = () => {
     socket.emit('playGame', { name: playerName });
 };
 
-  const roomId = Math.floor(Math.random() * 5000);
-
   return (
-    <div style={{ textAlign: 'center', marginTop: '20%' }}>
-      <div>      
-        <h1>Welcome to the Game</h1>
-        <button onClick={handlePlayClick}>
-          <NavLink to={`/multiplayer/${roomId}`} >
-            Search for a Game
-          </NavLink>
-        </button>
-      </div>
+    <div className='multiplayer-container'>    
+      <button onClick={handlePlayClick}>
+        <NavLink to={`/multiplayer/game`} className='game-btn' >
+          Search for a game
+        </NavLink>
+      </button>
     </div>
   );
 };

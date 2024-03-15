@@ -1,0 +1,46 @@
+.game-btn {
+  background-color: white; /* Sets the background color of the button to white */
+  border-radius: 10px;     /* Gives the button rounded corners. Adjust the value as needed */
+  border: 1px solid gray;  /* Optional: adds a border to the button. You can adjust color and size */
+  padding: 10px 20px;      /* Optional: adds some padding inside the button for better appearance */
+  font-size: 16px;         /* Optional: adjusts the font size */
+  text-decoration: none; 
+  color: black;
+}
+
+.multiplayer-container {
+  display: flex;          /* Enables flexbox layout */
+  flex-direction: column; /* Arranges children (the buttons) in a column */
+  justify-content: center; /* Centers the buttons vertically */
+  align-items: center;    /* Centers the buttons horizontally */
+  gap: 10px;              /* Adds space between the buttons */
+  height: 100vh;          /* Sets the container's height to fill the viewport height */
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 20px; 
+}
+
+.leave-queue-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4d4d; /* A red color for the leave button */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none; /* Remove the outline to make it look better */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.leave-queue-btn:hover {
+  background-color: #cc0000; /* Darker shade of red on hover */
+}
+
+.navlink {
+  text-decoration: none;
+  color: black;
+}

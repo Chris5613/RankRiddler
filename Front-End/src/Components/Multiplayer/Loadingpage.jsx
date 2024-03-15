@@ -3,9 +3,9 @@ import {useEffect,useState} from 'react';
 import Loader from '../Loader/Loader';
 import {useSelector } from 'react-redux';
 import API from '../../api';
+import { NavLink } from 'react-router-dom';
 
-const Gamepage = () => {
-  
+const Loadingpage = () => {
   const [opponent, setOpponent] = useState('');
   const [loading, setLoading] = useState(true);
   const socket = useSocket();
@@ -36,21 +36,29 @@ const Gamepage = () => {
       };
   }, [socket]);
 
+  const handleLeaveQueueClick = () => {
+    socket.emit('disconnectPlayer')
+    setLoading(false)
+  }
+
   return (
-    <div>
-      <div >
+    <div >
         {loading ? (
-        <div className='loading'>
-          <Loader />      
-        </div>
-        ) : (
-          <div>
-            {username} vs {opponent}
+        <div className="loading-container loading">      
+            <Loader />
+            <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
+              <NavLink to='/multiplayer' className='navlink'>
+                Leave Queue
+              </NavLink>
+            </button>
           </div>
-        )}
-      </div>  
-    </div>
+          ) : (
+        <div>
+          {username} vs {opponent}
+        </div>
+          )}
+    </div>  
   )
 }
 
-export default Gamepage
+export default Loadingpage
