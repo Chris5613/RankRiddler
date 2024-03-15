@@ -44,3 +44,32 @@
   text-decoration: none;
   color: black;
 }
+
+/* GamePage.css */
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85vh;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.top-info {
+  display: flex; /* Aligns children in a row */
+  width: 100%; /* Adjust the width as needed */
+  padding: 15px;
+  justify-content: space-around; /* This will space the child elements evenly */
+}
+
+.youtube-wrapper .video {
+  width: 1000px;
+  height: 550px;
+}
+
+.spacing-div {
+  height: 100px;
+}
+
+

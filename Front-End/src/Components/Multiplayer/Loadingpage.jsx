@@ -4,6 +4,8 @@ import Loader from '../Loader/Loader';
 import {useSelector } from 'react-redux';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
+import Gamepage from './Gamepage';
+import '../../css/multi.css'
 
 const Loadingpage = () => {
   const [opponent, setOpponent] = useState('');
@@ -54,7 +56,7 @@ const Loadingpage = () => {
           </div>
           ) : (
         <div>
-          {username} vs {opponent}
+          <Gamepage username={username} opponent={opponent}/>
         </div>
           )}
     </div>  

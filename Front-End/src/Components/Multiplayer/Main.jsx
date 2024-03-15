@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import { SocketProvider, useSocket } from '../SocketContext';
+import { useSocket } from '../SocketContext';
 import { useSelector } from 'react-redux';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
@@ -32,7 +32,7 @@ const Main = () => {
   return (
     <div className='multiplayer-container'>    
       <button onClick={handlePlayClick}>
-        <NavLink to={`/multiplayer/game`} className='game-btn' >
+        <NavLink to={`/multiplayer/loading`} className='game-btn' >
           Search for a game
         </NavLink>
       </button>

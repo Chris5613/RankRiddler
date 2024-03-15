@@ -25,6 +25,7 @@ import Main from './Components/Multiplayer/Main';
 import Overlay from './Components/Other-Pages/Overlay';
 import Loadingpage from './Components/Multiplayer/Loadingpage';
 import { SocketProvider } from './Components/SocketContext';
+import Gamepage from './Components/Multiplayer/Gamepage';
 
 function App() {
   return (
@@ -49,7 +50,8 @@ function App() {
         <Route path="/rocket" element={<Rocket />} />
         <Route path="/profile/:uuid" element={<Profile />} />
         <Route path="/multiplayer" element={<Main />} />
-        <Route path="/multiplayer/game" element={<Loadingpage/>} />
+        <Route path="/multiplayer/loading" element={<Loadingpage/>} />
+        <Route path="/multiplayer/valorant" element={<Gamepage/>} />
       </Routes>
     </BrowserRouter>
   </SocketProvider>

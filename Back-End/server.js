@@ -55,8 +55,9 @@ io.on('connection', (socket) => {
     console.log(`${playerName} wants to play a game`);
 
     // Check if the player is already in the queue
-    const isPlayerInQueue = playersWaiting.some(player => player.name === playerName);
-
+    // const isPlayerInQueue = playersWaiting.some(player => player.name === playerName);
+// 
+    const isPlayerInQueue = false
     if (!isPlayerInQueue) {
       // Add the player to the waiting list if they're not already in it
       playersWaiting.push({ name: playerName, id: socket.id });
@@ -66,8 +67,6 @@ io.on('connection', (socket) => {
       startQueueResetTimer();
     } else {
       console.log(`${playerName} is already in the queue.`);
-      // Optionally, send a message back to the player to inform them they're already in the queue
-      io.to(socket.id).emit('alreadyInQueue', { message: 'You are already waiting in the queue.' });
     }
 
     // Check if we have at least two players waiting
@@ -93,15 +92,9 @@ io.on('connection', (socket) => {
   socket.on('disconnectPlayer', () => {
     // Remove the disconnected player from the queue
     playersWaiting = playersWaiting.filter(player => player.id !== socket.id);
-
     console.log(`A player has disconnected. Updated queue length: ${playersWaiting.length}`);
-
-    // If necessary, reset the queue timer here as well, based on your game's logic
-    // This could depend on whether you want the timer to restart only when players actively join
   });
 });
-
-
 
 app.use(
   cors({
