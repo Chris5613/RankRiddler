@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 const BackButton = () => {
   const navigate = useNavigate();
   const goback = () => {
-    navigate("/selection");
+    navigate('/selection');
   };
-  
+
   return (
     <div>
       <button
@@ -17,11 +17,11 @@ const BackButton = () => {
           cursor: 'pointer',
         }}
         onClick={goback}
-        >
+      >
         Go back
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default BackButton
+export default BackButton;

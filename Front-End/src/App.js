@@ -29,32 +29,32 @@ import Gamepage from './Components/Multiplayer/Gamepage';
 
 function App() {
   return (
-  <SocketProvider>
-    <BrowserRouter>
-      <Overlay />
-      {/* <Nav /> */}
-      <Routes>        
-        <Route path="/" element={<Main />} />
-        <Route path="/selection" element={<GameSelect />} />
-        <Route path="/valorant" element={<Valorant />} />
-        <Route path="/league" element={<League />} />
-        <Route path="/csgo" element={<Csgo />} />
-        <Route path="/submit" element={<Submit />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/howto" element={<Howto />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="*" element={<Error />} />
-        <Route path="/apex" element={<Apex />} />
-        <Route path="/rainbow" element={<Rainbow />} />
-        <Route path="/overwatch" element={<Overwatch />} />
-        <Route path="/fortnite" element={<Fortnite />} />
-        <Route path="/rocket" element={<Rocket />} />
-        <Route path="/profile/:uuid" element={<Profile />} />
-        <Route path="/multiplayer/loading" element={<Loadingpage/>} />
-        <Route path="/multiplayer/valorant" element={<Gamepage/>} />
-      </Routes>
-    </BrowserRouter>
-  </SocketProvider>
+    <SocketProvider>
+      <BrowserRouter>
+        <Overlay />
+        {/* <Nav /> */}
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/selection" element={<GameSelect />} />
+          <Route path="/valorant" element={<Valorant />} />
+          <Route path="/league" element={<League />} />
+          <Route path="/csgo" element={<Csgo />} />
+          <Route path="/submit" element={<Submit />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/howto" element={<Howto />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="*" element={<Error />} />
+          <Route path="/apex" element={<Apex />} />
+          <Route path="/rainbow" element={<Rainbow />} />
+          <Route path="/overwatch" element={<Overwatch />} />
+          <Route path="/fortnite" element={<Fortnite />} />
+          <Route path="/rocket" element={<Rocket />} />
+          <Route path="/profile/:uuid" element={<Profile />} />
+          <Route path="/multiplayer/loading" element={<Loadingpage />} />
+          <Route path="/multiplayer/valorant" element={<Gamepage />} />
+        </Routes>
+      </BrowserRouter>
+    </SocketProvider>
   );
 }
 

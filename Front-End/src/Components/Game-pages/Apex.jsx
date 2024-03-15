@@ -15,7 +15,7 @@ import { apexActions } from '../store/ApexSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
-import BackButton from '../Other-Pages/BackButton'
+import BackButton from '../Other-Pages/BackButton';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -148,7 +148,7 @@ const Csgo = () => {
 
   return (
     <>
-      <BackButton/>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

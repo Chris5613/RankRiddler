@@ -3,9 +3,7 @@ import logo from '../../Assets/Nav-Icons/logo.png';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-
 const Nav = () => {
-
   return (
     <>
       <header>
@@ -51,9 +49,9 @@ const Nav = () => {
         </div>
         <div className="nav-container nav-smaller">
           <nav className="nav">
-              <a href="/">
-                <img src={logo} alt="logo" className="logo" />
-              </a>
+            <a href="/">
+              <img src={logo} alt="logo" className="logo" />
+            </a>
             <ul>
               <li>
                 <NavLink to="/" className="nav-link">

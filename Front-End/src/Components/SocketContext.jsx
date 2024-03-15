@@ -10,7 +10,5 @@ const SocketContext = createContext();
 export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => (
-  <SocketContext.Provider value={socket}>
-    {children}
-  </SocketContext.Provider>
+  <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
 );

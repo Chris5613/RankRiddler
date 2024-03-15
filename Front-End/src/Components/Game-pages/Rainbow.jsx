@@ -150,7 +150,7 @@ const Csgo = () => {
 
   return (
     <>
-      <BackButton/>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

@@ -149,7 +149,7 @@ const League = () => {
       dispatch(leagueActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    } 
+    }
     const newScore = score + newPoint;
     dispatch(leagueActions.setPoint(newPoint));
     dispatch(leagueActions.setScore(newScore));
@@ -157,7 +157,7 @@ const League = () => {
 
   return (
     <>
-      <BackButton/>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

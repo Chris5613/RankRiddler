@@ -37,7 +37,7 @@ const Valorant = () => {
 
   const navigate = useNavigate();
   const goback = () => {
-    navigate("/selection");
+    navigate('/selection');
   };
 
   const handleModal = () => {
@@ -154,7 +154,7 @@ const Valorant = () => {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    } 
+    }
     const newScore = score + newPoint;
     dispatch(valorantActions.setPoint(newPoint));
     dispatch(valorantActions.setScore(newScore));
@@ -162,7 +162,7 @@ const Valorant = () => {
 
   return (
     <>
-      <BackButton/>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

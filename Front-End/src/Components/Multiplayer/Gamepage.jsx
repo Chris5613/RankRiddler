@@ -9,9 +9,9 @@ const Gamepage = ({ username, opponent }) => {
   // Function to handle wrong answers
   const onWrongAnswer = (player) => {
     if (player === 'user') {
-      setUserHearts(prev => prev - 1);
+      setUserHearts((prev) => prev - 1);
     } else {
-      setOpponentHearts(prev => prev - 1);
+      setOpponentHearts((prev) => prev - 1);
     }
   };
 
@@ -19,7 +19,17 @@ const Gamepage = ({ username, opponent }) => {
   const renderHearts = (numHearts) => {
     let hearts = [];
     for (let i = 0; i < 3; i++) {
-      hearts.push(i < numHearts ? <img src={fullHeart} width={80} alt="Full Heart" /> : <img src="https://cdn3.iconfinder.com/data/icons/retro-game-items/100/retro-12-512.png" width={80} alt="Empty Heart" />);
+      hearts.push(
+        i < numHearts ? (
+          <img src={fullHeart} width={80} alt="Full Heart" />
+        ) : (
+          <img
+            src="https://cdn3.iconfinder.com/data/icons/retro-game-items/100/retro-12-512.png"
+            width={80}
+            alt="Empty Heart"
+          />
+        )
+      );
     }
     return hearts;
   };
@@ -27,11 +37,15 @@ const Gamepage = ({ username, opponent }) => {
   return (
     <div className="game-container">
       <div className="top-info">
-        <div className="username">{username}: {renderHearts(userHearts)}</div>
-        <div className="opponent">{opponent}: {renderHearts(opponentHearts)}</div>
+        <div className="username">
+          {username}: {renderHearts(userHearts)}
+        </div>
+        <div className="opponent">
+          {opponent}: {renderHearts(opponentHearts)}
+        </div>
       </div>
       <div className="youtube-wrapper">
-      <iframe
+        <iframe
           className="video"
           src="https://www.youtube.com/embed/K0MuhfWdNhs?si=PQyYtc2J4pJdoiX0"
           title="YouTube video player"
@@ -42,9 +56,11 @@ const Gamepage = ({ username, opponent }) => {
       <div className="spacing-div"></div>
       {/* Example buttons to simulate wrong answers */}
       <button onClick={() => onWrongAnswer('user')}>User Wrong Answer</button>
-      <button onClick={() => onWrongAnswer('opponent')}>Opponent Wrong Answer</button>
+      <button onClick={() => onWrongAnswer('opponent')}>
+        Opponent Wrong Answer
+      </button>
     </div>
   );
-}
+};
 
 export default Gamepage;

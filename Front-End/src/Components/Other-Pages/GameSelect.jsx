@@ -18,24 +18,24 @@ import { useNavigate } from 'react-router-dom';
 const GameSelect = () => {
   const navigate = useNavigate();
   const home = () => {
-    navigate("/");
+    navigate('/');
   };
-  
+
   return (
     <>
       <main className="home-section">
-      <button
-        style={{
-          padding: '10px',
-          backgroundColor: '#2d3436',
-          color: '#fff',
-          fontSize: '18px',
-          cursor: 'pointer',
-        }}
-        onClick={home}
+        <button
+          style={{
+            padding: '10px',
+            backgroundColor: '#2d3436',
+            color: '#fff',
+            fontSize: '18px',
+            cursor: 'pointer',
+          }}
+          onClick={home}
         >
-        Home
-      </button>
+          Home
+        </button>
         <div className="home-container">
           <div className="main-container">
             <h1 className="page-heading-1">

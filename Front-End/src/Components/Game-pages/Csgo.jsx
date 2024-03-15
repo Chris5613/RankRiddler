@@ -33,7 +33,7 @@ const Csgo = () => {
   const userId = useSelector((state) => state.settings.userId);
   const navigate = useNavigate();
   const goback = () => {
-    navigate("/selection");
+    navigate('/selection');
   };
 
   const handleModal = () => {
@@ -167,7 +167,7 @@ const Csgo = () => {
           cursor: 'pointer',
         }}
         onClick={goback}
-        >
+      >
         Go back
       </button>
       <ReportButton

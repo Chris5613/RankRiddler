@@ -66,25 +66,26 @@ const Profile = () => {
       >
         Go back
       </button>
-    <div className="profile-container">
-      <h1>
-        Hi I'm <span style={{ color: 'skyblue' }}>{profileData.username}</span>
-      </h1>
-      <div className="stats-container">
-        <div className="stats">
-          <h2>Rounds</h2>
-          <h2>{profileData.totalRounds}</h2>
-        </div>
-        <div className="stats">
-          <h2>Points</h2>
-          <h2>{profileData.points}</h2>
-        </div>
-        <div className="stats">
-          <h2>Accuracy</h2>
-          <h2>{accuracy}%</h2>
+      <div className="profile-container">
+        <h1>
+          Hi I'm{' '}
+          <span style={{ color: 'skyblue' }}>{profileData.username}</span>
+        </h1>
+        <div className="stats-container">
+          <div className="stats">
+            <h2>Rounds</h2>
+            <h2>{profileData.totalRounds}</h2>
+          </div>
+          <div className="stats">
+            <h2>Points</h2>
+            <h2>{profileData.points}</h2>
+          </div>
+          <div className="stats">
+            <h2>Accuracy</h2>
+            <h2>{accuracy}%</h2>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

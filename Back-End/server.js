@@ -6,29 +6,29 @@ const userRoutes = require("./routers/users");
 const formRoutes = require("./routers/form");
 const cors = require("cors");
 const path = require("path");
-const http = require('http');
-const socketIo = require('socket.io');
+const http = require("http");
+const socketIo = require("socket.io");
 const app = express();
-const server = http.createServer(app); 
+const server = http.createServer(app);
 
-const io = socketIo(server, { 
+const io = socketIo(server, {
   cors: {
     origin: [
       "https://rr-front-end.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
       "https://test-server-rr.onrender.com",
-    ], 
+    ],
     methods: ["GET", "POST"],
-    credentials: true
-  }
+    credentials: true,
+  },
 });
 
 let playersWaiting = [];
 let queueResetTimer = null;
 
 const resetQueue = () => {
-  console.log('Resetting queue due to insufficient players.');
+  console.log("Resetting queue due to insufficient players.");
   playersWaiting = []; // Clear the players waiting queue
 };
 
@@ -49,15 +49,15 @@ const startQueueResetTimer = () => {
   }, 60000); // 1 minutes in milliseconds
 };
 
-io.on('connection', (socket) => {
-  socket.on('playGame', (data) => {
+io.on("connection", (socket) => {
+  socket.on("playGame", (data) => {
     const playerName = data.name;
     console.log(`${playerName} wants to play a game`);
 
     // Check if the player is already in the queue
     // const isPlayerInQueue = playersWaiting.some(player => player.name === playerName);
-// 
-    const isPlayerInQueue = false
+    //
+    const isPlayerInQueue = false;
     if (!isPlayerInQueue) {
       // Add the player to the waiting list if they're not already in it
       playersWaiting.push({ name: playerName, id: socket.id });
@@ -81,18 +81,20 @@ io.on('connection', (socket) => {
       const [player1, player2] = playersWaiting.splice(0, 2);
 
       // Emit 'matchFound' event to both players
-      io.to(player1.id).emit('matchFound', { opponent: player2.name });
-      io.to(player2.id).emit('matchFound', { opponent: player1.name });
+      io.to(player1.id).emit("matchFound", { opponent: player2.name });
+      io.to(player2.id).emit("matchFound", { opponent: player1.name });
 
       console.log(`${player1.name} and ${player2.name} are matched`);
     }
   });
 
   // Handle player disconnection
-  socket.on('disconnectPlayer', () => {
+  socket.on("disconnectPlayer", () => {
     // Remove the disconnected player from the queue
-    playersWaiting = playersWaiting.filter(player => player.id !== socket.id);
-    console.log(`A player has disconnected. Updated queue length: ${playersWaiting.length}`);
+    playersWaiting = playersWaiting.filter((player) => player.id !== socket.id);
+    console.log(
+      `A player has disconnected. Updated queue length: ${playersWaiting.length}`
+    );
   });
 });
 
