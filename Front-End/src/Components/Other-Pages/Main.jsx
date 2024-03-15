@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
 import '../../css/multi.css'
+import logo from '../../Assets/Nav-Icons/logo.png';
 
 const Main = () => {
   const [username, setUsername] = useState('')
@@ -30,13 +31,23 @@ const Main = () => {
 };
 
   return (
-    <div className='multiplayer-container'>    
-      <button onClick={handlePlayClick}>
-        <NavLink to={`/multiplayer/loading`} className='game-btn' >
-          Search for a game
-        </NavLink>
-      </button>
-    </div>
+    <div className="content-container">
+      <a href="/">
+        <img src={logo} alt="logo" className="home-logo" />
+      </a>
+      <div className='multiplayer-container'>
+        <button className='game-btn'>
+          <NavLink to={`/selection`} className='navlink-btn'> 
+            Singleplayer
+          </NavLink>
+        </button>  
+        <button onClick={handlePlayClick} className='game-btn'>
+          <NavLink to={`/multiplayer/loading`} className='navlink-btn'>
+            Multiplayer
+          </NavLink>
+        </button>
+      </div>
+    </div>   
   );
 };
 

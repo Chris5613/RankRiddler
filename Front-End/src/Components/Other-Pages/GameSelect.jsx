@@ -14,7 +14,7 @@ import rainbow from '../../Assets/HomePage-Icons/rainbow.png';
 import fortnite from '../../Assets/HomePage-Icons/fortnite.png';
 import rainbowImage from '../../Assets/HomePage-Icons/rainbowImage.png';
 
-const Home = () => {
+const GameSelect = () => {
   return (
     <>
       <main className="home-section">
@@ -76,4 +76,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default GameSelect;

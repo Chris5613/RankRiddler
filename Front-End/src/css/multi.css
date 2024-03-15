@@ -1,11 +1,24 @@
 .game-btn {
   background-color: white; /* Sets the background color of the button to white */
-  border-radius: 10px;     /* Gives the button rounded corners. Adjust the value as needed */
-  border: 1px solid gray;  /* Optional: adds a border to the button. You can adjust color and size */
+  border-radius: 15px;     /* Gives the button rounded corners. Adjust the value as needed */
   padding: 10px 20px;      /* Optional: adds some padding inside the button for better appearance */
-  font-size: 16px;         /* Optional: adjusts the font size */
+  font-size: 20px;         /* Optional: adjusts the font size */
   text-decoration: none; 
   color: black;
+  margin-top: 2rem;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; 
+  height: 100vh; 
+}
+
+.home-logo {
+  width:700px; 
 }
 
 .multiplayer-container {
@@ -14,7 +27,6 @@
   justify-content: center; /* Centers the buttons vertically */
   align-items: center;    /* Centers the buttons horizontally */
   gap: 10px;              /* Adds space between the buttons */
-  height: 100vh;          /* Sets the container's height to fill the viewport height */
 }
 
 .loading-container {
@@ -72,4 +84,7 @@
   height: 100px;
 }
 
-
+.navlink-btn {
+  text-decoration: none;
+  color: black;
+}
