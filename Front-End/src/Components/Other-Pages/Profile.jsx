@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
-import BackButton from './BackButton';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {

@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
-import BackButton from './BackButton';
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const goback = () => {
+    navigate(-1);
+  };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -59,7 +61,18 @@ const Leaderboard = () => {
 
   return (
     <>
-      <BackButton/>
+      <button
+        style={{
+          padding: '10px',
+          backgroundColor: '#2d3436',
+          color: '#fff',
+          fontSize: '18px',
+          cursor: 'pointer',
+        }}
+        onClick={goback}
+      >
+        Go back
+      </button>
       <div className="leaderboard-container select-game">
         <h1 style={{ color: 'white' }}>All Time Leaderboard</h1>
         <div className="form-container">
