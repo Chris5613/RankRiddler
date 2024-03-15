@@ -27,16 +27,15 @@ const Gamepage = () => {
   }, [userId])
 
     useEffect(() => {
-    socket.on('matchFound', (data) => {
-      setOpponent(data.opponent)
-      setLoading(false)
-    }); 
-    return () => {
-      socket.off('matchFound');
-    };
+      socket.on('matchFound', (data) => {
+        setOpponent(data.opponent)
+        setLoading(false)
+      }); 
+      return () => {
+        socket.off('matchFound');
+      };
   }, [socket]);
 
-  console.log(opponent)
   return (
     <div>
       <div >
@@ -45,9 +44,9 @@ const Gamepage = () => {
           <Loader />      
         </div>
         ) : (
-          <>
+          <div>
             {username} vs {opponent}
-          </>
+          </div>
         )}
       </div>  
     </div>

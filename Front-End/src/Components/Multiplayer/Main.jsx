@@ -29,12 +29,14 @@ const Main = () => {
     socket.emit('playGame', { name: playerName });
 };
 
+  const roomId = Math.floor(Math.random() * 5000);
+
   return (
     <div style={{ textAlign: 'center', marginTop: '20%' }}>
       <div>      
         <h1>Welcome to the Game</h1>
         <button onClick={handlePlayClick}>
-          <NavLink to="/multiplayer/game" >
+          <NavLink to={`/multiplayer/${roomId}`} >
             Search for a Game
           </NavLink>
         </button>

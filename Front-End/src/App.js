@@ -49,7 +49,7 @@ function App() {
         <Route path="/rocket" element={<Rocket />} />
         <Route path="/profile/:uuid" element={<Profile />} />
         <Route path="/multiplayer" element={<Main />} />
-        <Route path="/multiplayer/game" element={<Gamepage/>} />
+        <Route path="/multiplayer/:id" element={<Gamepage/>} />
       </Routes>
     </BrowserRouter>
   </SocketProvider>
