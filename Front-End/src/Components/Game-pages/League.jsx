@@ -149,6 +149,8 @@ const League = () => {
       dispatch(leagueActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
+    }else {
+      dispatch(leagueActions.setResult(wrong));
     }
     const newScore = score + newPoint;
     dispatch(leagueActions.setPoint(newPoint));

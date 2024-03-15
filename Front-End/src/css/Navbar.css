@@ -114,8 +114,10 @@ td {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 75vh;
-  font: 25px Helvetica, sans-serif;
+  height: 40vh;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .settings-container span {
