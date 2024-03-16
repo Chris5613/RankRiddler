@@ -26,7 +26,7 @@ const SettingWheel = () => {
       <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 512 512"
         className="nav-item nav-setting"
         height="1em"

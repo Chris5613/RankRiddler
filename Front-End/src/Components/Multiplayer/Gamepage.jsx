@@ -3,8 +3,8 @@ import '../../css/multi.css';
 import fullHeart from './heart.png';
 
 const Gamepage = ({ username, opponent }) => {
-  const [userHearts, setUserHearts] = useState(3); // Let's assume each player starts with 3 hearts
-  const [opponentHearts, setOpponentHearts] = useState(3);
+  const [userHearts, setUserHearts] = useState(5); // Let's assume each player starts with 3 hearts
+  const [opponentHearts, setOpponentHearts] = useState(5);
 
   // Function to handle wrong answers
   const onWrongAnswer = (player) => {
@@ -18,14 +18,14 @@ const Gamepage = ({ username, opponent }) => {
   // Function to render hearts
   const renderHearts = (numHearts) => {
     let hearts = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       hearts.push(
         i < numHearts ? (
-          <img src={fullHeart} width={80} alt="Full Heart" />
+          <img src={fullHeart} width={35} alt="Full Heart" />
         ) : (
           <img
-            src="https://cdn3.iconfinder.com/data/icons/retro-game-items/100/retro-12-512.png"
-            width={80}
+            src="https://icones.pro/wp-content/uploads/2021/02/icone-de-coeur-gris.png"
+            width={35}
             alt="Empty Heart"
           />
         )

@@ -73,7 +73,7 @@ const Leaderboard = () => {
       >
         Go back
       </button>
-      <div className="leaderboard-container select-game">
+      <div className="select-game">
         <h1 style={{ color: 'white' }}>All Time Leaderboard</h1>
         <div className="form-container">
           {loading ? (

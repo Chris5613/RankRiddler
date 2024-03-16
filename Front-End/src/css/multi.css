@@ -18,7 +18,7 @@
 }
 
 .home-logo {
-  width: 700px;
+  width: 800px;
 }
 
 .multiplayer-container {
@@ -64,7 +64,6 @@
   align-items: center;
   height: 85vh;
   justify-content: space-between;
-  margin-top: 3rem;
 }
 
 .top-info {
