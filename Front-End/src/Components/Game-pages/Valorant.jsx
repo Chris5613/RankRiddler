@@ -18,6 +18,8 @@ import { valorantActions } from '../store/ValorantSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
 import BackButton from '../Other-Pages/BackButton';
+import VoteBarChart from '../Other-Pages/VoteBarChart';
+import { useSocket } from '../SocketContext';
 
 const Valorant = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ const Valorant = () => {
   const [index, setIndex] = useState(0);
   const [videoId, setVideoId] = useState('')
   const [votes, setVotes] = useState({})
+  const socket = useSocket();
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -84,14 +87,6 @@ const Valorant = () => {
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
     setIndex(randomIndex)
   }, [dispatch]);
-
-
-  const refresh = () => {
-    getYoutubeUrl();
-    dispatch(valorantActions.setSelectedRank(null));
-    dispatch(valorantActions.setIsButtonDisabled(true));
-    dispatch(valorantActions.hideShowModal());
-  };
 
   useEffect(() => {
     dispatch(valorantActions.setIsButtonDisabled(selectedRank === null));
@@ -183,7 +178,7 @@ const Valorant = () => {
             votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0';
           });
   
-          console.log("votes",votePercentages); // Contains percentages for each rank
+          setVotes(votePercentages)
         } else {
           console.log("No votes data found at the specified index.");
         }
@@ -217,6 +212,24 @@ const Valorant = () => {
       console.error('Error voting:', error);
     }
   };
+
+  useEffect(() => {
+    socket.on('vote update', (updatedVotes) => {
+      console.log('Received vote update:', updatedVotes);
+      
+      const totalVotes = Object.values(updatedVotes).reduce((acc, count) => acc + count, 0);
+      const votePercentages = {};
+      Object.entries(updatedVotes).forEach(([rank, count]) => {
+        votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0';
+      });
+      
+      setVotes(votePercentages); 
+    });
+
+    return () => {
+      socket.off('vote update');
+    };
+  }, [socket]);
 
   const updatePoints = async (point, uuid) => {
     try {
@@ -269,6 +282,14 @@ const Valorant = () => {
     dispatch(valorantActions.setScore(newScore));
   };
 
+  const refresh = () => {
+    getYoutubeUrl();
+    dispatch(valorantActions.setSelectedRank(null));
+    dispatch(valorantActions.setIsButtonDisabled(true));
+    dispatch(valorantActions.hideShowModal());
+  };
+
+
   return (
     <>
       <BackButton />
@@ -316,9 +337,11 @@ const Valorant = () => {
             </div>
             <br />
             <br />
+            <h2>How Everyone Else Guessed</h2>
+            <VoteBarChart votePercentages={votes} />  
+            <br />         
             <p className="text">You currently have {score} points</p>
-            <br />
-            <p className="text">Credit: {player}</p>
+            <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
