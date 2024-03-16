@@ -13,6 +13,6 @@ const limiter = rateLimit({
 router.get('/', limiter,videoController.getAllVideos);
 router.post('/create',limiter, videoController.createVideoVote);
 router.put('/vote',limiter,videoController.videoVote)
-router.get('/votes',limiter, videoController.getVotesByValFormId);
+router.get('/votes/:valFormId', videoController.getVotesByValFormId);
 
 module.exports = router;

@@ -60,13 +60,30 @@ exports.createVideoVote = async (req, res) => {
 };
 
 exports.getVotesByValFormId = async (req, res) => {
+  const { valFormId } = req.params; // Extract valFormId from URL parameters
 
   try {
-    const video = await videoVote.find({});
+    // Find the video by valFormId instead of fetching all videos
+    const video = await videoVote.findOne({ valFormId: valFormId });
+
     if (!video) {
       return res.status(404).json({ message: 'No votes found for the provided valFormId' });
     }
-    res.json(video);
+
+    const votes = video.votes; 
+    const totalVotes = Object.values(votes).reduce((acc, count) => acc + count, 0);
+    
+    const votePercentages = {};
+    for (const [rank, count] of Object.entries(votes)) {
+      votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0%';
+    }
+
+    // Respond with the video object including the calculated vote percentages
+    res.json({
+      ...video.toObject(),
+      votes: votePercentages,
+    });
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching votes', error: error.message });

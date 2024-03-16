@@ -4,13 +4,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routers/users");
 const formRoutes = require("./routers/form");
+const videoRoutes = require('./routers/videoRoutes');
 const cors = require("cors");
 const path = require("path");
 const http = require("http");
 const socketIo = require("socket.io");
 const app = express();
 const server = http.createServer(app);
-const videoRoutes = require('./routers/videoRoutes');
 
 const io = socketIo(server, {
   cors: {
@@ -138,4 +138,3 @@ server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-module.exports = io;
