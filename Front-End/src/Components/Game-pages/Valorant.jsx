@@ -19,7 +19,6 @@ import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
 import BackButton from '../Other-Pages/BackButton';
 import VoteBarChart from '../Other-Pages/VoteBarChart';
-import { useSocket } from '../SocketContext';
 
 const Valorant = () => {
   const dispatch = useDispatch();
@@ -38,7 +37,6 @@ const Valorant = () => {
   const [index, setIndex] = useState(0);
   const [videoId, setVideoId] = useState('')
   const [votes, setVotes] = useState({})
-  const socket = useSocket();
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -154,7 +152,7 @@ const Valorant = () => {
   useEffect(() => {
     const fetchVotes = async () => {
       try {
-        const url = `${API.GetVotes}`; 
+        const url = `http://localhost:3001/videos/votes/${videoId}`; 
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -165,30 +163,14 @@ const Valorant = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        setVotes(data.votes)
+        console.log(videoId, data.votes)
 
-        const videoVotes = data[index]?.votes; 
-        if (videoVotes) {
-          setVotes(videoVotes);
-  
-          const totalVotes = Object.values(videoVotes).reduce((acc, count) => acc + count, 0);
-          
-          // Calculate and log vote percentages for each rank
-          const votePercentages = {};
-          Object.entries(videoVotes).forEach(([rank, count]) => {
-            votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0';
-          });
-  
-          setVotes(votePercentages)
-        } else {
-          console.log("No votes data found at the specified index.");
-        }
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
     };
-    if (videoId) {
-      fetchVotes();
-    }
+    fetchVotes();
   }, [videoId, index]);
   
 
@@ -212,24 +194,6 @@ const Valorant = () => {
       console.error('Error voting:', error);
     }
   };
-
-  useEffect(() => {
-    socket.on('vote update', (updatedVotes) => {
-      console.log('Received vote update:', updatedVotes);
-      
-      const totalVotes = Object.values(updatedVotes).reduce((acc, count) => acc + count, 0);
-      const votePercentages = {};
-      Object.entries(updatedVotes).forEach(([rank, count]) => {
-        votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0';
-      });
-      
-      setVotes(votePercentages); 
-    });
-
-    return () => {
-      socket.off('vote update');
-    };
-  }, [socket]);
 
   const updatePoints = async (point, uuid) => {
     try {
@@ -338,8 +302,10 @@ const Valorant = () => {
             <br />
             <br />
             <h2>How Everyone Else Guessed</h2>
+            <br /> 
+            <br />
             <VoteBarChart votePercentages={votes} />  
-            <br />         
+            <br />        
             <p className="text">You currently have {score} points</p>
             <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">

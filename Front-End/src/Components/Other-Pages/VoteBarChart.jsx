@@ -27,7 +27,7 @@ const VoteBarChart = ({ votePercentages }) => {
     datasets: [
       {
         label: 'Vote Percentages',
-        data: Object.values(votePercentages),
+        data: Object.values(votePercentages).map(value => parseFloat(value)),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -53,23 +53,32 @@ const VoteBarChart = ({ votePercentages }) => {
 
   const chartOptions = {
     scales: {
-      x: { display: true },
-      y: { display: false, beginAtZero: true },
+      x: { display: true }, 
+      y: {
+        display: false, 
+        beginAtZero: true,
+        suggestedMax: 100, 
+        ticks: {
+          callback: function(value) {
+            return value + '%';
+          }
+        }
+      },
     },
     plugins: {
-      legend: { display: false },
+      legend: { display: false }, 
       datalabels: {
-        color: '#fff',
+        color: '#fff', 
         anchor: 'end',
         align: 'top',
         formatter: (value) => {
-          return value + '%'; 
+          return value + '%';
         },
       },
     },
     layout: {
       padding: {
-        top: 30, 
+        top:25, 
       },
     },
   };
