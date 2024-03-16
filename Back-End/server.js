@@ -137,3 +137,5 @@ const port = process.env.PORT || 3004;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+module.exports = io;

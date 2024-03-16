@@ -35,6 +35,7 @@ const Valorant = () => {
   const userId = useSelector((state) => state.settings.userId);
   const [index, setIndex] = useState(0);
   const [videoId, setVideoId] = useState('')
+  const [votes, setVotes] = useState({})
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -147,7 +148,6 @@ const Valorant = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('created',videoId)
       } catch (error) {
         console.error('Error creating video vote:', error);
       }
@@ -155,6 +155,47 @@ const Valorant = () => {
 
     createRecord();
   }, [videoId]);
+
+  useEffect(() => {
+    const fetchVotes = async () => {
+      try {
+        const url = `${API.GetVotes}`; 
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        const videoVotes = data[index]?.votes; 
+        if (videoVotes) {
+          setVotes(videoVotes);
+  
+          const totalVotes = Object.values(videoVotes).reduce((acc, count) => acc + count, 0);
+          
+          // Calculate and log vote percentages for each rank
+          const votePercentages = {};
+          Object.entries(videoVotes).forEach(([rank, count]) => {
+            votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0';
+          });
+  
+          console.log("votes",votePercentages); // Contains percentages for each rank
+        } else {
+          console.log("No votes data found at the specified index.");
+        }
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
+    if (videoId) {
+      fetchVotes();
+    }
+  }, [videoId, index]);
+  
 
   const videoVote = async () => {
     try {
@@ -168,17 +209,14 @@ const Valorant = () => {
           rank: selectedRank,
         }),
       });
-  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log('done',videoId)
     } catch (error) {
       console.error('Error voting:', error);
     }
   };
-
 
   const updatePoints = async (point, uuid) => {
     try {

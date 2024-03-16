@@ -23,6 +23,7 @@ const API = {
   GetAllVideos: `${root}/videos`,
   VoteVideo: `${root}/videos/vote`,
   CreateVideoRecord: `${root}/videos/create`,
+  GetVotes: `${root}/videos/votes`,
 };
 
 export default API;

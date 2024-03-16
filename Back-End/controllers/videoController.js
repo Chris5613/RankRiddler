@@ -14,7 +14,6 @@ exports.getAllVideos = async (req, res) => {
 
 exports.videoVote = async (req, res) => {
   const { id, rank } = req.body; 
-  console.log(id)
   try {
     const video = await videoVote.findOne({valFormId: id})
     if (!video) {
@@ -57,5 +56,19 @@ exports.createVideoVote = async (req, res) => {
       return res.status(409).json({ message: 'Duplicate entry', error: error.message });
     }
     res.status(500).json({ message: 'Failed to create video vote', error: error.message });
+  }
+};
+
+exports.getVotesByValFormId = async (req, res) => {
+
+  try {
+    const video = await videoVote.find({});
+    if (!video) {
+      return res.status(404).json({ message: 'No votes found for the provided valFormId' });
+    }
+    res.json(video);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching votes', error: error.message });
   }
 };
