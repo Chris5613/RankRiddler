@@ -251,6 +251,11 @@ const Valorant = () => {
     dispatch(valorantActions.setSelectedRank(null));
     dispatch(valorantActions.setIsButtonDisabled(true));
     dispatch(valorantActions.hideShowModal());
+    setVotes({})
+    setVideoId('')
+    setIndex(0)
+
+    window.location.reload();
   };
 
 
