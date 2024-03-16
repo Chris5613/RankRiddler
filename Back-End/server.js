@@ -10,6 +10,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const app = express();
 const server = http.createServer(app);
+const videoRoutes = require('./routers/videoRoutes');
 
 const io = socketIo(server, {
   cors: {
@@ -130,6 +131,7 @@ app.get("/", (req, res) => {
 });
 app.use("/", userRoutes);
 app.use("/form", formRoutes);
+app.use('/videos', videoRoutes);
 
 const port = process.env.PORT || 3004;
 server.listen(port, () => {

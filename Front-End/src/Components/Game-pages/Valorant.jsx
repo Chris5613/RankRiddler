@@ -10,7 +10,7 @@ import Immortal from '../../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback,useState } from 'react';
 import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
@@ -33,6 +33,8 @@ const Valorant = () => {
   const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
   const userId = useSelector((state) => state.settings.userId);
+  const [index, setIndex] = useState(0);
+  const [videoId, setVideoId] = useState('')
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -79,11 +81,9 @@ const Valorant = () => {
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
+    setIndex(randomIndex)
   }, [dispatch]);
 
-  useEffect(() => {
-    getYoutubeUrl();
-  }, [getYoutubeUrl]);
 
   const refresh = () => {
     getYoutubeUrl();
@@ -93,6 +93,23 @@ const Valorant = () => {
   };
 
   useEffect(() => {
+    dispatch(valorantActions.setIsButtonDisabled(selectedRank === null));
+    
+    const fetchVideos = async () => {
+      const response = await fetch(`${API.GetAllVideos}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setVideoId(data[index]._id); 
+    };
+  
+    if (index >= 0) {
+      fetchVideos();
+    }
+  
     const getOneUser = async (uuid) => {
       const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
         method: 'GET',
@@ -103,8 +120,65 @@ const Valorant = () => {
       const data = await response.json();
       dispatch(valorantActions.setScore(data.points));
     };
-    getOneUser(userId);
-  }, [userId, dispatch]);
+  
+    if (userId) {
+      getOneUser(userId);
+    }
+  }, [selectedRank, dispatch, index, userId]);
+
+  useEffect(() => {
+    getYoutubeUrl();
+  }, [getYoutubeUrl]);
+
+  useEffect(() => {
+    const createRecord = async () => {
+      if (!videoId) return; 
+      try {
+        const response = await fetch(`${API.CreateVideoRecord}`, { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            valFormId: videoId, 
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('created',videoId)
+      } catch (error) {
+        console.error('Error creating video vote:', error);
+      }
+    };
+
+    createRecord();
+  }, [videoId]);
+
+  const videoVote = async () => {
+    try {
+      const response = await fetch(`${API.VoteVideo}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: videoId,
+          rank: selectedRank,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log('done',videoId)
+    } catch (error) {
+      console.error('Error voting:', error);
+    }
+  };
+
 
   const updatePoints = async (point, uuid) => {
     try {
@@ -269,12 +343,13 @@ const Valorant = () => {
           src={Radiant}
         />
       </div>
-      <div className="submit-btn-container">
+      <div className="submit-btn-container" onClick={videoVote}>
         <button
           className="submit"
           onClick={() => {
             handleModal();
             checkAnswer();
+            
           }}
           disabled={isButtonDisabled}
         >

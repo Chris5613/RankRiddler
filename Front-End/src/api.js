@@ -20,6 +20,9 @@ const API = {
   GetLeagueData: `${root}/form/leaguedata`,
   GetCsgoData: `${root}/form/csgodata`,
   GetRocketData: `${root}/form/rocketdata`,
+  GetAllVideos: `${root}/videos`,
+  VoteVideo: `${root}/videos/vote`,
+  CreateVideoRecord: `${root}/videos/create`,
 };
 
 export default API;
