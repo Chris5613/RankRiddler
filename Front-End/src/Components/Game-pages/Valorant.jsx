@@ -223,8 +223,6 @@ const Valorant = () => {
         }
         const data = await response.json();
         setVotes(data.votes)
-        console.log(videoId, data.votes)
-
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
