@@ -1,8 +1,8 @@
 // Server Test
-const root = 'https://rankriddler-test-backend.onrender.com';
+// const root = 'https://rankriddler-test-backend.onrender.com';
 
 // Development
-// const root = 'http://localhost:3001';
+const root = 'http://localhost:3001';
 
 const API = {
   BugSubmit: `${root}/form/bug`,
