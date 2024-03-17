@@ -35,8 +35,8 @@ const Valorant = () => {
   const point = useSelector((state) => state.valorant.point);
   const userId = useSelector((state) => state.settings.userId);
   const [index, setIndex] = useState(0);
-  const [videoId, setVideoId] = useState('')
-  const [votes, setVotes] = useState({})
+  const [videoId, setVideoId] = useState('');
+  const [votes, setVotes] = useState({});
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -87,8 +87,35 @@ const Valorant = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(valorantActions.setIsButtonDisabled(selectedRank === null));
-    
+    getYoutubeUrl();
+  }, [getYoutubeUrl]);
+
+  const refresh = () => {
+    getYoutubeUrl();
+    dispatch(valorantActions.setSelectedRank(null));
+    dispatch(valorantActions.setIsButtonDisabled(true));
+    dispatch(valorantActions.hideShowModal());
+    setVotes({});
+    setVideoId('');
+    setIndex(0);
+  };
+
+  useEffect(() => {
+    const getOneUser = async (uuid) => {
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      dispatch(valorantActions.setScore(data.points));
+    };
+    getOneUser(userId);
+  }, [userId, dispatch]);
+
+
+  useEffect(() => {
     const fetchVideos = async () => {
       const response = await fetch(`${API.GetAllVideos}`, {
         method: 'GET',
@@ -103,26 +130,58 @@ const Valorant = () => {
     if (index >= 0) {
       fetchVideos();
     }
-  
-    const getOneUser = async (uuid) => {
-      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
-        method: 'GET',
+  }, [index]);
+
+  const updatePoints = async (point, uuid) => {
+    try {
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          points: point,
+        }),
       });
       const data = await response.json();
-      dispatch(valorantActions.setScore(data.points));
-    };
-  
-    if (userId) {
-      getOneUser(userId);
+    } catch (error) {
+      console.error(error);
     }
-  }, [selectedRank, dispatch, index, userId]);
+  };
 
-  useEffect(() => {
-    getYoutubeUrl();
-  }, [getYoutubeUrl]);
+  const checkAnswer = () => {
+    const rankList = [
+      'Iron',
+      'Bronze',
+      'Silver',
+      'Gold',
+      'Platinum',
+      'Diamond',
+      'Ascendant',
+      'Immortal',
+      'Radiant',
+    ];
+    const rankIndex = rankList.indexOf(rank);
+    const selectedRankIndex = rankList.indexOf(selectedRank);
+    const distance = Math.abs(rankIndex - selectedRankIndex);
+
+    let newPoint = 0;
+    if (rank === selectedRank) {
+      dispatch(valorantActions.setResult(check));
+      newPoint = 2;
+      updatePoints(2, userId);
+    } else if (distance === 1) {
+      dispatch(valorantActions.setResult(wrong));
+      newPoint = 1;
+      updatePoints(1, userId);
+    }
+    else {
+      dispatch(valorantActions.setResult(wrong));
+    }
+    const newScore = score + newPoint;
+    dispatch(valorantActions.setPoint(newPoint));
+    dispatch(valorantActions.setScore(newScore));
+  };
 
   useEffect(() => {
     const createRecord = async () => {
@@ -194,70 +253,6 @@ const Valorant = () => {
       console.error('Error voting:', error);
     }
   };
-
-  const updatePoints = async (point, uuid) => {
-    try {
-      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          points: point,
-        }),
-      });
-      const data = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const checkAnswer = () => {
-    const rankList = [
-      'Iron',
-      'Bronze',
-      'Silver',
-      'Gold',
-      'Platinum',
-      'Diamond',
-      'Ascendant',
-      'Immortal',
-      'Radiant',
-    ];
-    const rankIndex = rankList.indexOf(rank);
-    const selectedRankIndex = rankList.indexOf(selectedRank);
-    const distance = Math.abs(rankIndex - selectedRankIndex);
-
-    let newPoint = 0;
-    if (rank === selectedRank) {
-      dispatch(valorantActions.setResult(check));
-      newPoint = 2;
-      updatePoints(2, userId);
-    } else if (distance === 1) {
-      dispatch(valorantActions.setResult(wrong));
-      newPoint = 1;
-      updatePoints(1, userId);
-    }
-    else {
-      dispatch(valorantActions.setResult(wrong));
-    }
-    const newScore = score + newPoint;
-    dispatch(valorantActions.setPoint(newPoint));
-    dispatch(valorantActions.setScore(newScore));
-  };
-
-  const refresh = () => {
-    getYoutubeUrl();
-    dispatch(valorantActions.setSelectedRank(null));
-    dispatch(valorantActions.setIsButtonDisabled(true));
-    dispatch(valorantActions.hideShowModal());
-    setVotes({})
-    setVideoId('')
-    setIndex(0)
-
-    window.location.reload();
-  };
-
 
   return (
     <>
