@@ -24,8 +24,8 @@ const API = {
   VoteVideo: `${root}/videos/vote`,
   CreateVideoRecord: `${root}/videos/create`,
   GetVotesByID: `${root}/videos/votes`,
-};
-
-
+  MultiplayerWon: `${root}/multiplayerwon`, // Needs username in body
+  MultiplayerLost: `${root}/multiplayerlost`, // Needs username in body
+}
 
 export default API;
