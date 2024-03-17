@@ -1,4 +1,4 @@
-// //Production
+// Server Test
 const root = 'https://rankriddler-test-backend.onrender.com';
 
 // Development
@@ -23,6 +23,9 @@ const API = {
   GetAllVideos: `${root}/videos`,
   VoteVideo: `${root}/videos/vote`,
   CreateVideoRecord: `${root}/videos/create`,
+  GetVotesByID: `${root}/videos/votes`,
 };
+
+
 
 export default API;

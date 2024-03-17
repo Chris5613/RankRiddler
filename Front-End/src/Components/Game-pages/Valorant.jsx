@@ -211,7 +211,7 @@ const Valorant = () => {
   useEffect(() => {
     const fetchVotes = async () => {
       try {
-        const url = `http://localhost:3001/videos/votes/${videoId}`; 
+        const url = `${API.GetVotesByID}/${videoId}`; 
         const response = await fetch(url, {
           method: 'GET',
           headers: {
