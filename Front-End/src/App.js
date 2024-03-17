@@ -5,7 +5,6 @@ import './css/Homepage.css';
 import './css/Howtoplay.css';
 import './css/Profile.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Nav from './Components/Nav/Nav';
 import Valorant from './Components/Game-pages/Valorant';
 import GameSelect from './Components/Other-Pages/GameSelect';
 import League from './Components/Game-pages/League';
@@ -32,7 +31,6 @@ function App() {
     <SocketProvider>
       <BrowserRouter>
         <Overlay />
-        {/* <Nav /> */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/selection" element={<GameSelect />} />
