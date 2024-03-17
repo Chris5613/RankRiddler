@@ -13,9 +13,9 @@ const limiter = rateLimit({
   max: 400,
 });
 
-router.get("/allusers", getAllUsers);
-router.post("/saveuser", createUser);
-router.get("/user/:uuid", getOneUserByUuid);
+router.get("/allusers",limiter, getAllUsers);
+router.post("/saveuser", limiter,createUser);
+router.get("/user/:uuid", limiter,getOneUserByUuid);
 
-router.put("/updatepoints/:uuid", AddPointByUsername);
+router.put("/updatepoints/:uuid",limiter, AddPointByUsername);
 module.exports = router;
