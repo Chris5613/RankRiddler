@@ -53,17 +53,21 @@ const VoteBarChart = ({ votePercentages }) => {
 
   const chartOptions = {
     scales: {
-      x: { display: true }, 
-      y: {
-        display: false, 
-        beginAtZero: true,
-        suggestedMax: 100, 
-        ticks: {
-          callback: function(value) {
-            return value + '%';
-          }
-        }
+      x: {
+        grid: {
+          display: false, // This will remove the X axis lines
+          drawBorder: false, // Optional: remove the axis border as well
+        },
       },
+      y: {
+        grid: {
+          display: false, // This will remove the Y axis lines
+          drawBorder: false, // Optional: remove the axis border as well
+        },
+        ticks: {
+          display: false // Optional: hide the Y axis ticks (labels)
+        }
+      }
     },
     plugins: {
       legend: { display: false }, 
