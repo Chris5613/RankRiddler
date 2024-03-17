@@ -1,22 +1,8 @@
 const User = require("../models/User");
 
-const getUserbyUsername = async (req, res) => {
-  const { username } = req.params;
-  try {
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.json(user);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error" });
-  }
-};
-
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().sort({ points: -1 }).limit(10).exec();
+    const users = await User.find().sort({ points: -1 });
     res.json(users);
   } catch (err) {
     console.error(err);
@@ -62,18 +48,20 @@ const getOneUserByUuid = async (req, res) => {
 };
 
 const AddPointByUsername = async (req, res) => {
-  const { username, points } = req.body;
+  const { points } = req.body;
+  const { uuid } = req.params;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ uuid });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     if (points === 2) {
       user.points += 2;
+      user.totalCorrect += 1;
+      user.totalRounds += 1;
     } else if (points === 1) {
       user.points += 1;
-    } else {
-      user.points -= 1;
+      user.totalRounds += 1;
     }
     await user.save();
     res.status(200).json({ message: "Points updated successfully" });
@@ -116,7 +104,6 @@ const multiplayerLost = async (req, res) => {
 }
 
 module.exports = {
-  getUserbyUsername,
   getAllUsers,
   createUser,
   AddPointByUsername,

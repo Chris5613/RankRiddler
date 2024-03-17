@@ -3,7 +3,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: clamp(10px, 4vw, 30px);
   width: clamp(220px, 95%, 1000px);
   border-collapse: collapse;
 }
@@ -19,7 +18,6 @@
   align-items: center;
   margin-bottom: 1rem;
   flex-direction: column;
-  margin-top: 2rem;
   color: black;
 }
 
@@ -62,8 +60,7 @@ option {
 .form-label,
 .text,
 .login-text,
-.error-message,
-.howto {
+.error-message {
   color: white;
 }
 
@@ -98,8 +95,4 @@ option {
   outline: none;
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
   width: 100%;
-}
-
-.grey {
-  background-color: grey;
 }

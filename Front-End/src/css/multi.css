@@ -1,0 +1,140 @@
+.game-btn {
+  background-color: white; 
+  border-radius: 15px; 
+  padding: 10px 20px; 
+  font-size: 20px; 
+  text-decoration: none;
+  color: black;
+  margin-top: 2rem;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 75vh;
+}
+
+.home-logo {
+  width: 800px;
+}
+
+.multiplayer-container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.leave-queue-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4d4d; 
+  font-size: 16px;
+  cursor: pointer;
+  outline: none; 
+  transition: background-color 0.3s;
+}
+
+.leave-queue-btn:hover {
+  background-color: #cc0000; 
+}
+
+.navlink {
+  text-decoration: none;
+  color: black;
+}
+
+/* GamePage.css */
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85vh;
+  justify-content: space-between;
+}
+
+.top-info {
+  display: flex; 
+  width: 100%; 
+  padding: 15px;
+  justify-content: space-around;
+}
+
+.youtube-wrapper .video {
+  width: 1000px;
+  height: 550px;
+}
+
+.spacing-div {
+  height: 100px;
+}
+
+.navlink-btn {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-item {
+  cursor: pointer;
+  width: 45px;
+  height: 50px;
+}
+
+.setting-wheel {
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000; 
+}
+
+
+@media (max-width: 768px) {
+  .home-logo {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-logo {
+    width: 20vw;
+  }
+}
+
+.setting-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.modal-example-image {
+  margin-left: 0.9rem;
+}
+
+.modal-example-wrong {
+  margin-right:3rem;
+}

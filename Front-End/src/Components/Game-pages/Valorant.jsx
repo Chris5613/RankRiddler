@@ -10,14 +10,15 @@ import Immortal from '../../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback,useState } from 'react';
 import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { valorantActions } from '../store/ValorantSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
-
+import BackButton from '../Other-Pages/BackButton';
+import VoteBarChart from '../Other-Pages/VoteBarChart';
 
 const Valorant = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,10 @@ const Valorant = () => {
   const player = useSelector((state) => state.valorant.player);
   const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
-  const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);
+  const [index, setIndex] = useState(0);
+  const [videoId, setVideoId] = useState('');
+  const [votes, setVotes] = useState({});
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -64,9 +67,7 @@ const Valorant = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetValorantData
-    );
+    const response = await fetch(API.GetValorantData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
@@ -82,6 +83,7 @@ const Valorant = () => {
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
+    setIndex(randomIndex)
   }, [dispatch]);
 
   useEffect(() => {
@@ -93,40 +95,54 @@ const Valorant = () => {
     dispatch(valorantActions.setSelectedRank(null));
     dispatch(valorantActions.setIsButtonDisabled(true));
     dispatch(valorantActions.hideShowModal());
+    setVotes({});
+    setVideoId('');
+    setIndex(0);
   };
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(valorantActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point) => {
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const response = await fetch(`${API.GetAllVideos}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setVideoId(data[index]._id); 
+    };
+  
+    if (index >= 0) {
+      fetchVideos();
+    }
+  }, [index]);
+
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        API.UpdatePoints,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -153,23 +169,92 @@ const Valorant = () => {
     if (rank === selectedRank) {
       dispatch(valorantActions.setResult(check));
       newPoint = 2;
-      updatePoints(2);
+      updatePoints(2, userId);
     } else if (distance === 1) {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1);
-    } else {
+      updatePoints(1, userId);
+    }
+    else {
       dispatch(valorantActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1);
     }
     const newScore = score + newPoint;
     dispatch(valorantActions.setPoint(newPoint));
     dispatch(valorantActions.setScore(newScore));
   };
 
+  useEffect(() => {
+    const createRecord = async () => {
+      if (!videoId) return; 
+      try {
+        const response = await fetch(`${API.CreateVideoRecord}`, { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            valFormId: videoId, 
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error creating video vote:', error);
+      }
+    };
+
+    createRecord();
+  }, [videoId]);
+
+  useEffect(() => {
+    const fetchVotes = async () => {
+      try {
+        const url = `${API.GetVotesByID}/${videoId}`; 
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setVotes(data.votes)
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
+    fetchVotes();
+  }, [videoId, index]);
+  
+
+  const videoVote = async () => {
+    try {
+      const response = await fetch(`${API.VoteVideo}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: videoId,
+          rank: selectedRank,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error voting:', error);
+    }
+  };
+
   return (
     <>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
@@ -214,9 +299,13 @@ const Valorant = () => {
             </div>
             <br />
             <br />
-            <p className="text">You currently have {score} points</p>
+            <h2>How Everyone Else Guessed</h2>
+            <br /> 
             <br />
-            <p className="text">Credit: {player}</p>
+            <VoteBarChart votePercentages={votes} />  
+            <br />        
+            <p className="text">You currently have {score} points</p>
+            <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -279,12 +368,13 @@ const Valorant = () => {
           src={Radiant}
         />
       </div>
-      <div className="submit-btn-container">
+      <div className="submit-btn-container" onClick={videoVote}>
         <button
           className="submit"
           onClick={() => {
             handleModal();
             checkAnswer();
+            
           }}
           disabled={isButtonDisabled}
         >

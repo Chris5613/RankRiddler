@@ -22,9 +22,9 @@ RankRiddler is a fun and engaging game where players are presented with clips of
 
 ## About The Project!
 
-![229cd3f04327e1d5c1ab4f4af37a68ec](https://github.com/Chris5613/RankRiddler/assets/24240227/d62f3c8e-62e4-4bbd-b6d8-119907fae7c4)
-![cdb625ff224d669812c803db87582315](https://github.com/Chris5613/RankRiddler/assets/24240227/1516b89f-5335-412d-a6a4-7f35e73aaad2)
-![5655386166a30556e32d587a650108d1](https://github.com/Chris5613/RankRiddler/assets/24240227/86b9b2db-c0bf-4534-a16f-cd226c462613)
+![7c849c0003b40aa2ce72cdc05a6b7888](https://github.com/Chris5613/RankRiddler/assets/24240227/cda300e6-734e-4282-9b21-52fc9f1b4529)
+![6f4f1840d8dbd881e85f566a380109ff](https://github.com/Chris5613/RankRiddler/assets/24240227/866a6bcb-fa70-475c-aefa-7a8e633d5560)
+![7ef48457e20dc3324d9aabcec97ed185](https://github.com/Chris5613/RankRiddler/assets/24240227/90ac6cca-c746-4a28-842b-73bce7ac1812)
 
 Players are not required to create an account but can set their username. Once they have chosen a game, they can watch a clip and determine the rank of the player in the video. Depending on their answer, players can gain or lose points and track their progress on the leaderboard, which displays the top 10 players.
 

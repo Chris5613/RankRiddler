@@ -11,6 +11,22 @@ const userSchema = new mongoose.Schema({
   },
   points: {
     type: Number,
+    default: 100,
+  },
+  totalRounds: {
+    type: Number,
+    default: 0,
+  },
+  totalCorrect: {
+    type: Number,
+    default: 0,
+  },
+  Wins: {
+    type: Number,
+    default: 0,
+  },
+  Losses: {
+    type: Number,
     default: 0,
   },
   wins: {

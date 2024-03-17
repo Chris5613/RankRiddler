@@ -17,6 +17,7 @@ import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,11 @@ const Csgo = () => {
   const player = useSelector((state) => state.csgo.player);
   const score = useSelector((state) => state.csgo.score) || 0;
   const point = useSelector((state) => state.csgo.point);
-  const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);
+  const navigate = useNavigate();
+  const goback = () => {
+    navigate('/selection');
+  };
 
   const handleModal = () => {
     dispatch(csgoActions.toggleShowModal());
@@ -61,9 +65,7 @@ const Csgo = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetCsgoData
-    );
+    const response = await fetch(API.GetCsgoData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
 
@@ -94,36 +96,29 @@ const Csgo = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(csgoActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        API.UpdatePoints,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -150,15 +145,13 @@ const Csgo = () => {
     if (rank === selectedRank) {
       dispatch(csgoActions.setResult(check));
       newPoint = 2;
-      updatePoints(2);
+      updatePoints(2, userId);
     } else if (distance === 1) {
       dispatch(csgoActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1);
-    } else {
+      updatePoints(1, userId);
+    }    else {
       dispatch(csgoActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1);
     }
     const newScore = score + newPoint;
     dispatch(csgoActions.setPoint(newPoint));
@@ -167,6 +160,18 @@ const Csgo = () => {
 
   return (
     <>
+      <button
+        style={{
+          padding: '10px',
+          backgroundColor: '#2d3436',
+          color: '#fff',
+          fontSize: '18px',
+          cursor: 'pointer',
+        }}
+        onClick={goback}
+      >
+        Go back
+      </button>
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
@@ -276,7 +281,7 @@ const Csgo = () => {
           src={ge}
         />
       </div>
-      <div>
+      <div className="submit-btn-container">
         <button
           className="submit"
           onClick={() => {

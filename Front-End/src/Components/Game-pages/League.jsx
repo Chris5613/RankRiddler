@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import BackButton from '../Other-Pages/BackButton';
 
 const League = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const League = () => {
   const player = useSelector((state) => state.league.player);
   const score = useSelector((state) => state.league.score) || 0;
   const point = useSelector((state) => state.league.point);
-  const username = useSelector((state) => state.settings.username);
   const userId = useSelector((state) => state.settings.userId);
 
   const handleModal = () => {
@@ -64,9 +64,7 @@ const League = () => {
   const submittedRank = rankImages[selectedRank];
 
   const getYoutubeUrl = useCallback(async () => {
-    const response = await fetch(
-      API.GetLeagueData
-    );
+    const response = await fetch(API.GetLeagueData);
     const data = await response.json();
     const MAX_CONSECUTIVE_SAME_INDICES = 10;
     const buffer = new Array(MAX_CONSECUTIVE_SAME_INDICES);
@@ -97,36 +95,29 @@ const League = () => {
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
-      const response = await fetch(
-        `${API.GetUserByUuid}/${uuid}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await fetch(`${API.GetUserByUuid}/${uuid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       dispatch(leagueActions.setScore(data.points));
     };
     getOneUser(userId);
   }, [userId, dispatch]);
 
-  const updatePoints = async (point) => {
+  const updatePoints = async (point, uuid) => {
     try {
-      const response = await fetch(
-        API.UpdatePoints,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            points: point,
-          }),
-        }
-      );
+      const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          points: point,
+        }),
+      });
       const data = await response.json();
     } catch (error) {
       console.error(error);
@@ -153,15 +144,13 @@ const League = () => {
     if (rank === selectedRank) {
       dispatch(leagueActions.setResult(check));
       newPoint = 2;
-      updatePoints(2);
+      updatePoints(2, userId);
     } else if (distance === 1) {
       dispatch(leagueActions.setResult(wrong));
       newPoint = 1;
-      updatePoints(1);
-    } else {
+      updatePoints(1, userId);
+    }else {
       dispatch(leagueActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1);
     }
     const newScore = score + newPoint;
     dispatch(leagueActions.setPoint(newPoint));
@@ -170,6 +159,7 @@ const League = () => {
 
   return (
     <>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
@@ -279,7 +269,7 @@ const League = () => {
           src={Challenger}
         />
       </div>
-      <div>
+      <div className="submit-btn-container">
         <button
           className="submit"
           onClick={() => {

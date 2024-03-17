@@ -20,10 +20,20 @@ function Submit() {
           <option value="lol">League of Legends</option>
           <option value="val">Valorant</option>
           <option value="csgo">CS:GO</option>
+          <option value="apex">Apex Legends</option>
+          <option value="rainbow">Rainbow Six</option>
+          <option value="overwatch">Overwatch</option>
+          <option value="rocket">Rocket League</option>
+          <option value="fortnite">Fortnite</option>
         </select>
         {game === 'lol' && <Form game="league" />}
         {game === 'val' && <Form game="val" />}
         {game === 'csgo' && <Form game="csgo" />}
+        {game === 'apex' && <Form game="apex" />}
+        {game === 'rainbow' && <Form game="rainbow" />}
+        {game === 'overwatch' && <Form game="overwatch" />}
+        {game === 'rocket' && <Form game="rocket" />}
+        {game === 'fortnite' && <Form game="fortnite" />}
       </div>
       <div className="text">
         Clips must be submitted in the following format or will be{' '}
@@ -70,16 +80,13 @@ function Form(props) {
     };
 
     try {
-      const response = await fetch(
-        `${API.GameSubmit}/${props.game}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API.GameSubmit}/${props.game}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         alert('Form submitted successfully!');
@@ -136,6 +143,69 @@ function Form(props) {
           label: 'Supreme Master First Class',
         },
         { value: 'Global Elite', label: 'Global Elite' },
+      ],
+    },
+    apex: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Master', label: 'Master' },
+        { value: 'Apex Predator', label: 'Apex Predator' },
+      ],
+    },
+    rainbow: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Copper', label: 'Copper' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Champion', label: 'Champion' },
+      ],
+    },
+    overwatch: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Master', label: 'Master' },
+        { value: 'Grandmaster', label: 'Grandmaster' },
+        { value: 'Top 500', label: 'Top 500' },
+      ],
+    },
+    rocket: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Champion', label: 'Champion' },
+        { value: 'Grand Champion', label: 'Grand Champion' },
+        { value: 'Supersonic Legend', label: 'Supersonic Legend' },
+      ],
+    },
+    fortnite: {
+      ranks: [
+        { value: '', label: 'Select a rank' },
+        { value: 'Bronze', label: 'Bronze' },
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+        { value: 'Elite', label: 'Elite' },
+        { value: 'Champion', label: 'Champion' },
+        { value: 'Unreal', label: 'Unreal' },
       ],
     },
   };
