@@ -4,6 +4,8 @@ const {
   createUser,
   AddPointByUsername,
   getOneUserByUuid,
+  multiplayerWon,
+  multiplayerLost,
 } = require("../controllers/userControllers");
 
 const router = express.Router();
@@ -13,9 +15,12 @@ const limiter = rateLimit({
   max: 400,
 });
 
-router.get("/allusers", getAllUsers);
-router.post("/saveuser", createUser);
-router.get("/user/:uuid", getOneUserByUuid);
+router.get("/allusers",limiter, getAllUsers);
+router.post("/saveuser", limiter,createUser);
+router.get("/user/:uuid", limiter,getOneUserByUuid);
 
-router.put("/updatepoints/:uuid", AddPointByUsername);
+router.put("/updatepoints", limiter, AddPointByUsername);
+router.put('/multiplayerwon', limiter, multiplayerWon);
+router.put('/multiplayerlost', limiter, multiplayerLost);
+
 module.exports = router;

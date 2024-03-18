@@ -1,8 +1,8 @@
 // Server Test
-const root = 'https://rankriddler-test-backend.onrender.com';
+// const root = 'https://rankriddler-test-backend.onrender.com';
 
 // Development
-// const root = 'http://localhost:3001';
+const root = 'http://localhost:3001';
 
 const API = {
   BugSubmit: `${root}/form/bug`,
@@ -42,9 +42,8 @@ const API = {
   RecordOverwatchVotes:`${root}/videos/overwatch/record`,
   GetAllOverwatchVotes:`${root}/videos/overwatch/getvotes`,
 
-
-};
-
-
+  MultiplayerWon: `${root}/multiplayerwon`, // Needs username in body
+  MultiplayerLost: `${root}/multiplayerlost`, // Needs username in body
+}
 
 export default API;

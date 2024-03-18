@@ -12,24 +12,29 @@ exports.getValVideos = async (req, res) => {
 };
 
 exports.videoVote = async (req, res) => {
-  const { id, rank } = req.body; 
+  const { id, rank } = req.body;
   try {
-    const video = await videoVote.findOne({valFormId: id})
+    const video = await videoVote.findOne({ valFormId: id });
     if (!video) {
-      return res.status(404)
+      return res.status(404).send('Video not found');
     }
-    if (video.votes[rank] !== undefined) {
-      video.votes[rank] += 1;
+
+    const currentVotes = video.votes.get(rank);
+    if (currentVotes !== undefined) {
+      video.votes.set(rank, currentVotes + 1);
     } else {
       return res.status(400).send('Invalid rank specified');
     }
+    
+    video.markModified('votes');
     console.log(video)
     await video.save();
+    res.status(200).send('Vote updated successfully');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error updating vote');
   }
-};
+}
 
 
 exports.createVideoVote = async (req, res) => {
@@ -39,15 +44,14 @@ exports.createVideoVote = async (req, res) => {
   }
 
   try {
-
     const existingId = await videoVote.findOne({valFormId})
     if (existingId) {
       return res.status(500)
     }
     const newVideoVote = new videoVote({ valFormId });
     const savedVideoVote = await newVideoVote.save();
-
     res.status(201).json(savedVideoVote);
+
   } catch (error) {
     console.error(error);
     if (error.code === 11000) {
@@ -74,12 +78,12 @@ exports.getVotesByValFormId = async (req, res) => {
       votePercentages[rank] = totalVotes > 0 ? ((count / totalVotes) * 100).toFixed(2) : '0%';
     }
     res.json({
-      ...video.toObject(),
+      valFormId: video.valFormId,
       votes: votePercentages,
     });
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching votes', error: error.message });
   }
 };
+
