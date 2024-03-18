@@ -1,11 +1,11 @@
-const val = require("../models/valForm");
-const league = require("../models/leagueForm");
-const csgo = require("../models/csgoForm");
-const apex = require("../models/apexForm");
-const fortnite = require("../models/fortniteForm");
-const overwatch = require("../models/overwatchForm");
-const rainbow = require("../models/rainbowForm");
-const rocket = require("../models/rocketForm");
+const val = require("../models/formModels/valForm");
+const league = require("../models/formModels/leagueForm");
+const csgo = require("../models/formModels/csgoForm");
+const apex = require("../models/formModels/apexForm");
+const fortnite = require("../models/formModels/fortniteForm");
+const overwatch = require("../models/formModels/overwatchForm");
+const rainbow = require("../models/formModels/rainbowForm");
+const rocket = require("../models/formModels/rocketForm");
 
 /**
  *
