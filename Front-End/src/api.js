@@ -37,6 +37,11 @@ const API = {
   RecordLeagueVotes:`${root}/videos/league/record`,
   GetAllLeagueVotes:`${root}/videos/league/getvotes`,
 
+  GetOverwatchVideo:`${root}/videos/overwatch`,
+  CreateOverwatchVoteRecord:`${root}/videos/overwatch/create`,
+  RecordOverwatchVotes:`${root}/videos/overwatch/record`,
+  GetAllOverwatchVotes:`${root}/videos/overwatch/getvotes`,
+
 
 };
 
