@@ -114,24 +114,6 @@ const Valorant = () => {
     getOneUser(userId);
   }, [userId, dispatch]);
 
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      const response = await fetch(`${API.GetAllVideos}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      setVideoId(data[index]._id); 
-    };
-  
-    if (index >= 0) {
-      fetchVideos();
-    }
-  }, [index]);
-
   const updatePoints = async (point, uuid) => {
     try {
       const response = await fetch(`${API.UpdatePoints}/${uuid}`, {
@@ -182,6 +164,24 @@ const Valorant = () => {
     dispatch(valorantActions.setPoint(newPoint));
     dispatch(valorantActions.setScore(newScore));
   };
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const response = await fetch(`${API.GetAllVideos}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setVideoId(data[index]._id); 
+    };
+  
+    if (index >= 0) {
+      fetchVideos();
+    }
+  }, [index]);
+
 
   useEffect(() => {
     const createRecord = async () => {

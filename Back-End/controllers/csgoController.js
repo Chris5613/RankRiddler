@@ -1,9 +1,9 @@
-const val = require('../models/formModels/valForm');
-const videoVote = require('../models/voteModels/videoVote');
+const csgo = require('../models/formModels/csgoForm');
+const csgoVote = require('../models/voteModels/csgoVote');
 
-exports.getValVideos = async (req, res) => {
+exports.getCsgoVideos = async (req, res) => {
   try {
-    const videos = await val.find({});
+    const videos = await csgo.find({});
     res.json(videos);
   } catch (error) {
     console.error('Failed to fetch videos:', error);
@@ -11,13 +11,39 @@ exports.getValVideos = async (req, res) => {
   }
 };
 
-exports.videoVote = async (req, res) => {
-  const { id, rank } = req.body; 
+exports.csgoCreateVoteRecord = async (req, res) => {
+  const { valFormId } = req.body;
+  if (!valFormId) {
+    return res.status(400).json({ message: 'valFormId must be provided and cannot be null.' });
+  }
   try {
-    const video = await videoVote.findOne({valFormId: id})
+    const existingId = await csgoVote.findOne({valFormId})
+    if (existingId) {
+      return res.status(500)
+    }
+    const newVideoVote = new csgoVote({ valFormId });
+    const savedVideoVote = await newVideoVote.save();
+
+    console.log(savedVideoVote)
+    res.status(201).json(savedVideoVote);
+  } catch (error) {
+    console.error(error);
+    if (error.code === 11000) {
+      return res.status(409).json({ message: 'Duplicate entry', error: error.message });
+    }
+    res.status(500).json({ message: 'Failed to create video vote', error: error.message });
+  }
+};
+
+
+exports.csgoVideoVote = async (req, res) => {
+  const { id, rank } = req.body; 
+  console.log(rank)
+  try {
+    const video = await csgoVote.findOne({valFormId: id})
     if (!video) {
       return res.status(404)
-    }
+    } 
     if (video.votes[rank] !== undefined) {
       video.votes[rank] += 1;
     } else {
@@ -32,35 +58,10 @@ exports.videoVote = async (req, res) => {
 };
 
 
-exports.createVideoVote = async (req, res) => {
-  const { valFormId } = req.body;
-  if (!valFormId) {
-    return res.status(400).json({ message: 'valFormId must be provided and cannot be null.' });
-  }
-
-  try {
-
-    const existingId = await videoVote.findOne({valFormId})
-    if (existingId) {
-      return res.status(500)
-    }
-    const newVideoVote = new videoVote({ valFormId });
-    const savedVideoVote = await newVideoVote.save();
-
-    res.status(201).json(savedVideoVote);
-  } catch (error) {
-    console.error(error);
-    if (error.code === 11000) {
-      return res.status(409).json({ message: 'Duplicate entry', error: error.message });
-    }
-    res.status(500).json({ message: 'Failed to create video vote', error: error.message });
-  }
-};
-
-exports.getVotesByValFormId = async (req, res) => {
+exports.getCsgoVotesByValFormId = async (req, res) => {
   const { valFormId } = req.params; 
   try {
-    const video = await videoVote.findOne({ valFormId: valFormId });
+    const video = await csgoVote.findOne({ valFormId: valFormId });
 
     if (!video) {
       return res.status(404).json({ message: 'No votes found for the provided valFormId' });

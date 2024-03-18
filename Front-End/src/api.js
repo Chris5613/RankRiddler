@@ -1,8 +1,8 @@
 // Server Test
-const root = 'https://rankriddler-test-backend.onrender.com';
+// const root = 'https://rankriddler-test-backend.onrender.com';
 
 // Development
-// const root = 'http://localhost:3001';
+const root = 'http://localhost:3001';
 
 const API = {
   BugSubmit: `${root}/form/bug`,
@@ -20,10 +20,17 @@ const API = {
   GetLeagueData: `${root}/form/leaguedata`,
   GetCsgoData: `${root}/form/csgodata`,
   GetRocketData: `${root}/form/rocketdata`,
-  GetAllVideos: `${root}/videos`,
+  GetValVideos: `${root}/videos`,
   VoteVideo: `${root}/videos/vote`,
   CreateVideoRecord: `${root}/videos/create`,
   GetVotesByID: `${root}/videos/votes`,
+
+  GetCsgoVideo:`${root}/videos/csgo`,
+  CreateCsgoVoteRecord:`${root}/videos/csgo/create`,
+  RecordCsgoVotes:`${root}/videos/csgo/record`,
+  GetAllCsgoVotes:`${root}/videos/csgo/getvotes`,
+
+
 };
 
 
