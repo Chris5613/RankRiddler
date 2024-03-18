@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import bronze from '../../Assets/Overwatch-Icons/bronze.png';
@@ -17,10 +17,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
 import BackButton from '../Other-Pages/BackButton';
+import VoteBarChart from '../Other-Pages/VoteBarChart';
+
 
 const Csgo = () => {
   const dispatch = useDispatch();
-  const selectedRank = useSelector((state) => state.overwatch.selectedRank);
+  let selectedRank = useSelector((state) => state.overwatch.selectedRank);
   const isButtonDisabled = useSelector(
     (state) => state.overwatch.isButtonDisabled
   );
@@ -32,6 +34,9 @@ const Csgo = () => {
   const score = useSelector((state) => state.overwatch.score) || 0;
   const point = useSelector((state) => state.overwatch.point);
   const userId = useSelector((state) => state.settings.userId);
+  const [index, setIndex] = useState(0);
+  const [videoId, setVideoId] = useState('');
+  const [votes, setVotes] = useState({});
 
   const handleModal = () => {
     dispatch(overwatchActions.toggleShowModal());
@@ -77,6 +82,7 @@ const Csgo = () => {
     dispatch(overwatchActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(overwatchActions.setRank(data.form[randomIndex].rank));
     dispatch(overwatchActions.setPlayer(data.form[randomIndex].playerInfo));
+    setIndex(randomIndex)
   }, [dispatch]);
 
   useEffect(() => {
@@ -88,6 +94,9 @@ const Csgo = () => {
     dispatch(overwatchActions.setSelectedRank(null));
     dispatch(overwatchActions.setIsButtonDisabled(true));
     dispatch(overwatchActions.hideShowModal());
+    setVotes({});
+    setVideoId('');
+    setIndex(0);
   };
 
   useEffect(() => {
@@ -153,6 +162,97 @@ const Csgo = () => {
     dispatch(overwatchActions.setScore(newScore));
   };
 
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const response = await fetch(`${API.GetOverwatchVideo}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setVideoId(data[index]._id); 
+    };
+  
+    if (index >= 0) {
+      fetchVideos();
+    }
+  }, [index]);
+
+
+  useEffect(() => {
+    const createRecord = async () => {
+      if (!videoId) return; 
+      try {
+        const response = await fetch(`${API.CreateOverwatchVoteRecord}`, { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            valFormId: videoId, 
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error creating video vote:', error);
+      }
+    };
+    createRecord();
+  }, [videoId]);
+
+  useEffect(() => {
+    const fetchVotes = async () => {
+      try {
+        const url = `${API.GetAllOverwatchVotes}/${videoId}`; 
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setVotes(data.votes)
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
+    fetchVotes();
+  }, [videoId, index]);
+  
+
+  const videoVote = async () => {
+    const rankMapping = {
+      "Top 500": "Top500",
+    };
+  
+    selectedRank = rankMapping[selectedRank] || selectedRank;
+    try {
+      const response = await fetch(`${API.RecordOverwatchVotes}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: videoId,
+          rank: selectedRank,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error voting:', error);
+    }
+  };
+
   return (
     <>
       <BackButton />
@@ -200,9 +300,13 @@ const Csgo = () => {
             </div>
             <br />
             <br />
-            <p className="text">You currently have {score} points</p>
+            <h2>How Everyone Else Guessed</h2>
+            <br /> 
             <br />
-            <p className="text">Credit: {player}</p>
+            <VoteBarChart votePercentages={votes} />  
+            <br />        
+            <p className="text">You currently have {score} points</p>
+            <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -259,7 +363,7 @@ const Csgo = () => {
           handleRankClick={handleRankClick}
         />
       </div>
-      <div className="submit-btn-container">
+      <div className="submit-btn-container" onClick={videoVote}>
         <button
           className="submit"
           onClick={() => {
