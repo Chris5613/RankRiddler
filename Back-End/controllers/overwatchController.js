@@ -24,7 +24,6 @@ exports.overwatchCreateVoteRecord = async (req, res) => {
     const newVideoVote = new overwatchVote({ valFormId });
     const savedVideoVote = await newVideoVote.save();
 
-    console.log(savedVideoVote)
     res.status(201).json(savedVideoVote);
   } catch (error) {
     console.error(error);
@@ -48,7 +47,6 @@ exports.overwatchVideoVote = async (req, res) => {
     } else {
       return res.status(400).send('Invalid rank specified');
     }
-    console.log(video)
     await video.save();
   } catch (error) {
     console.error(error);
