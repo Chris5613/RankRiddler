@@ -167,7 +167,7 @@ const Valorant = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const response = await fetch(`${API.GetAllVideos}`, {
+      const response = await fetch(`${API.GetValVideos}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

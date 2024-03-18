@@ -1,9 +1,9 @@
-const csgo = require('../models/formModels/csgoForm');
-const csgoVote = require('../models/voteModels/csgoVote');
+const league = require('../models/formModels/leagueForm');
+const leagueVote = require('../models/voteModels/leagueVote');
 
-exports.getCsgoVideos = async (req, res) => {
+exports.getLeagueVideos = async (req, res) => {
   try {
-    const videos = await csgo.find({});
+    const videos = await league.find({});
     res.json(videos);
   } catch (error) {
     console.error('Failed to fetch videos:', error);
@@ -11,19 +11,20 @@ exports.getCsgoVideos = async (req, res) => {
   }
 };
 
-exports.csgoCreateVoteRecord = async (req, res) => {
+exports.leagueCreateVoteRecord = async (req, res) => {
   const { valFormId } = req.body;
   if (!valFormId) {
     return res.status(400).json({ message: 'valFormId must be provided and cannot be null.' });
   }
   try {
-    const existingId = await csgoVote.findOne({valFormId})
+    const existingId = await leagueVote.findOne({valFormId})
     if (existingId) {
       return res.status(500)
     }
-    const newVideoVote = new csgoVote({ valFormId });
+    const newVideoVote = new leagueVote({ valFormId });
     const savedVideoVote = await newVideoVote.save();
 
+    console.log(savedVideoVote)
     res.status(201).json(savedVideoVote);
   } catch (error) {
     console.error(error);
@@ -35,10 +36,10 @@ exports.csgoCreateVoteRecord = async (req, res) => {
 };
 
 
-exports.csgoVideoVote = async (req, res) => {
+exports.leagueVideoVote = async (req, res) => {
   const { id, rank } = req.body; 
   try {
-    const video = await csgoVote.findOne({valFormId: id})
+    const video = await leagueVote.findOne({valFormId: id})
     if (!video) {
       return res.status(404)
     } 
@@ -47,6 +48,7 @@ exports.csgoVideoVote = async (req, res) => {
     } else {
       return res.status(400).send('Invalid rank specified');
     }
+    console.log(video)
     await video.save();
   } catch (error) {
     console.error(error);
@@ -55,10 +57,10 @@ exports.csgoVideoVote = async (req, res) => {
 };
 
 
-exports.getCsgoVotesByValFormId = async (req, res) => {
+exports.getLeagueVotesByValFormId = async (req, res) => {
   const { valFormId } = req.params; 
   try {
-    const video = await csgoVote.findOne({ valFormId: valFormId });
+    const video = await leagueVote.findOne({ valFormId: valFormId });
 
     if (!video) {
       return res.status(404).json({ message: 'No votes found for the provided valFormId' });
