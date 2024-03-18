@@ -14,7 +14,6 @@ router.get('/',limiter,videoController.getValVideos);
 router.post('/create',limiter, videoController.createVideoVote);
 router.put('/vote',limiter,videoController.videoVote)
 router.get('/votes/:valFormId', limiter,videoController.getVotesByValFormId);
-const rateLimit = require("express-rate-limit");
 
 router.get('/csgo',limiter,csgoController.getCsgoVideos);
 router.post('/csgo/create',limiter,csgoController.csgoCreateVoteRecord);
