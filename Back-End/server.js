@@ -49,28 +49,24 @@ const startQueueResetTimer = () => {
 io.on("connection", (socket) => {
   socket.on("playGame", (data) => {
     const playerName = data.name;
+    const isPlayerInQueue = playersWaiting.some(player => player.name === playerName)
 
-    const isPlayerInQueue = false;
     if (!isPlayerInQueue) {
       playersWaiting.push({ name: playerName, id: socket.id });
       console.log(`${playerName} added to the queue.`);
-
       startQueueResetTimer();
     } else {
       console.log(`${playerName} is already in the queue.`);
     }
 
     if (playersWaiting.length >= 2) {
-
       if (queueResetTimer !== null) {
         clearTimeout(queueResetTimer);
         queueResetTimer = null;
       }
-
       const [player1, player2] = playersWaiting.splice(0, 2);
       io.to(player1.id).emit("matchFound", { opponent: player2.name });
       io.to(player2.id).emit("matchFound", { opponent: player1.name });
-
       console.log(`${player1.name} and ${player2.name} are matched`);
     }
   });

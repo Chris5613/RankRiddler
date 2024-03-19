@@ -6,6 +6,7 @@ import API from '../../api';
 import { NavLink } from 'react-router-dom';
 import Gamepage from './Gamepage';
 import '../../css/multi.css';
+import { useNavigate } from 'react-router-dom';
 
 const Loadingpage = () => {
   const [opponent, setOpponent] = useState('');
@@ -13,6 +14,8 @@ const Loadingpage = () => {
   const socket = useSocket();
   const userId = useSelector((state) => state.settings.userId);
   const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -40,8 +43,7 @@ const Loadingpage = () => {
 
   const handleLeaveQueueClick = () => {
     socket.emit('disconnectPlayer');
-    setLoading(false);
-    console.log(loading)
+    navigate('/');
   };
 
   return (
