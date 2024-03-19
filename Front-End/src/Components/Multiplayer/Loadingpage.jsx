@@ -41,6 +41,7 @@ const Loadingpage = () => {
   const handleLeaveQueueClick = () => {
     socket.emit('disconnectPlayer');
     setLoading(false);
+    console.log(loading)
   };
 
   return (
