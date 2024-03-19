@@ -22,7 +22,7 @@ const SettingWheel = () => {
   }, []);
 
   return (
-    <div className='setting-wheel' onClick={handleModal}>
+    <div onClick={handleModal}>
       <svg
         stroke="currentColor"
         fill="currentColor"

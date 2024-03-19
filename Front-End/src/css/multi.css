@@ -93,15 +93,6 @@
   height: 50px;
 }
 
-.setting-wheel {
-  position: fixed; 
-  top: 0; 
-  right: 0; 
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1000; 
-}
-
 
 @media (max-width: 768px) {
   .home-logo {
@@ -137,4 +128,34 @@
 
 .modal-example-wrong {
   margin-right:3rem;
+}
+
+.top-right-container {
+  position: fixed; 
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center; 
+  gap: 10px;
+}
+
+.navlink-submit-btn {
+  background-color: white; 
+  border-radius: 15px; 
+  padding: 5px; 
+  font-size: 20px; 
+  text-decoration: none;
+  color: black;
+}
+
+.back-submit {
+  display: flex;
+  justify-content: space-between; /* Adjusts children to each side */
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0; /* Extend the container across the top */
+  margin: 10px;
+  gap: 10px;
 }

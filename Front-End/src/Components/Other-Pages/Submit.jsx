@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/SubmitSlice';
 import API from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 function Submit() {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.submit.game);
+  const navigate = useNavigate();
+  const home = () => {
+    navigate('/');
+  };
+
 
   const handleGameChange = (event) => {
     dispatch(submitActions.setGame(event.target.value));
@@ -14,6 +20,20 @@ function Submit() {
   return (
     <>
       <div className="select-game">
+        <div className='back-submit'>
+          <button
+            style={{
+              padding: '10px',
+              backgroundColor: '#2d3436',
+              color: '#fff',
+              fontSize: '18px',
+              cursor: 'pointer',
+            }}
+            onClick={home}
+          >
+            Home
+          </button>
+        </div>
         <h1 style={{ color: 'white' }}>Submit a Clip</h1>
         <select className="select" value={game} onChange={handleGameChange}>
           <option value="">-- Select a game --</option>
