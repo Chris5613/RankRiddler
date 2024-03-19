@@ -15,7 +15,7 @@ const Loadingpage = () => {
   const userId = useSelector((state) => state.settings.userId);
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
-
+  const [timeLeft, setTimeLeft] = useState(59);
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -46,11 +46,30 @@ const Loadingpage = () => {
     navigate('/');
   };
 
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      socket.emit('disconnectPlayer');
+      navigate('/');
+
+    };
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [timeLeft,navigate,socket]);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
   return (
     <div>
       {loading ? (
         <div className="loading-container loading">
           <Loader />
+          <p>{formatTime(timeLeft)}</p>
           <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
             <NavLink to="/" className="navlink">
               Leave Queue
