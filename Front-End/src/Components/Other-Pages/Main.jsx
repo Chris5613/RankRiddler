@@ -52,11 +52,11 @@ const Main = () => {
             Singleplayer
           </NavLink>
         </button>
-        <button onClick={handlePlayClick} className="game-btn">
           <NavLink to={`/multiplayer/loading`} className="navlink-btn">
+            <button onClick={handlePlayClick} className="game-btn">
             Multiplayer
+            </button>
           </NavLink>
-        </button>
         <button className="game-btn">
           <NavLink to={`/leaderboard`} className="navlink-btn">
             Leaderboard

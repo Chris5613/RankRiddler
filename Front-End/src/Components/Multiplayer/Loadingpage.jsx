@@ -8,6 +8,7 @@ import '../../css/multi.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {multiplayerActions} from '../store/MultiplayerSlice'
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Loadingpage = () => {
   const dispatch = useDispatch();
@@ -28,45 +29,77 @@ const Loadingpage = () => {
         },
       });
       const data = await response.json();
-      dispatch(multiplayerActions.setUsername(data.username))
+      dispatch(multiplayerActions.setUsername(data.username));
     };
     getOneUser(userId);
-  }, [userId,dispatch]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     socket.on('matchFound', (data) => {
-      dispatch(multiplayerActions.setOpponent(data.opponent))
-      dispatch(multiplayerActions.setLoading(false))
+      dispatch(multiplayerActions.setOpponent(data.opponent));
+      dispatch(multiplayerActions.setLoading(false));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      
+      Toast.fire({
+        icon: "success",
+        title: "Match Found"
+      });
     });
     return () => {
       socket.off('matchFound');
     };
-  }, [socket,dispatch]);
-
-  const handleLeaveQueueClick = () => {
-    socket.emit('disconnectPlayer');
-    dispatch(multiplayerActions.setLoading(false))
-    navigate('/');
-  };
+  }, [socket, dispatch]);
 
   useEffect(() => {
     if (timeLeft <= 0) {
       socket.emit('disconnectPlayer');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      
+      Toast.fire({
+        icon: "error",
+        title: "Can't find a match.. Returning to menu"
+      });
       navigate('/');
-    };
-    
+    }
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [timeLeft,navigate,socket]);
+  }, [timeLeft, navigate, socket]);
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
   };
+
+  const handleLeaveQueueClick = () => {
+    socket.emit('disconnectPlayer');
+    dispatch(multiplayerActions.setLoading(true)); 
+    dispatch(multiplayerActions.setOpponent('')); 
+    navigate('/');
+  };
+
 
   return (
     <div>
@@ -80,7 +113,7 @@ const Loadingpage = () => {
             </NavLink>
           </button>
         </div>
-      ) : (
+      ) :(
         <div>
           <Gamepage username={username} opponent={opponent} />
         </div>
