@@ -6,6 +6,7 @@ import API from '../../api';
 import { NavLink } from 'react-router-dom';
 import Gamepage from './Gamepage';
 import '../../css/multi.css';
+import { useNavigate } from 'react-router-dom';
 
 const Loadingpage = () => {
   const [opponent, setOpponent] = useState('');
@@ -13,6 +14,8 @@ const Loadingpage = () => {
   const socket = useSocket();
   const userId = useSelector((state) => state.settings.userId);
   const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+  const [timeLeft, setTimeLeft] = useState(59);
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -40,7 +43,25 @@ const Loadingpage = () => {
 
   const handleLeaveQueueClick = () => {
     socket.emit('disconnectPlayer');
-    setLoading(false);
+    navigate('/');
+  };
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      socket.emit('disconnectPlayer');
+      navigate('/');
+
+    };
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [timeLeft,navigate,socket]);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   return (
@@ -48,6 +69,7 @@ const Loadingpage = () => {
       {loading ? (
         <div className="loading-container loading">
           <Loader />
+          <p>{formatTime(timeLeft)}</p>
           <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
             <NavLink to="/" className="navlink">
               Leave Queue

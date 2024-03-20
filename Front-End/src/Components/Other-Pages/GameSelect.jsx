@@ -23,7 +23,7 @@ const GameSelect = () => {
 
   return (
     <>
-      <main className="home-section">
+      <main>
         <button
           style={{
             padding: '10px',
