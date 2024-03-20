@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSocket } from '../SocketContext';
-import { useSelector } from 'react-redux';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
 import '../../css/multi.css';
 import logo from '../../Assets/Nav-Icons/logo.png';
 import SettingWheel from './Settingwheel';
+import {multiplayerActions} from '../store/MultiplayerSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
 const Main = () => {
-  const [username, setUsername] = useState('');
+  const username = useSelector((state) => state.multiplayer.username);
   const userId = useSelector((state) => state.settings.userId);
   const socket = useSocket();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -21,10 +23,10 @@ const Main = () => {
         },
       });
       const data = await response.json();
-      setUsername(data.username);
+      dispatch(multiplayerActions.setUsername(data.username))
     };
     getOneUser(userId);
-  }, [userId]);
+  }, [userId,dispatch]);
 
   const handlePlayClick = () => {
     const playerName = username;

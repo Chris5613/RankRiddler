@@ -1,18 +1,20 @@
 import { useSocket } from '../SocketContext';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Loader from '../Loader/Loader';
-import { useSelector } from 'react-redux';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
 import Gamepage from './Gamepage';
 import '../../css/multi.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {multiplayerActions} from '../store/MultiplayerSlice'
 
 const Loadingpage = () => {
-  const [opponent, setOpponent] = useState('');
-  const [loading, setLoading] = useState(true);
-  const socket = useSocket();
+  const dispatch = useDispatch();
+  const opponent = useSelector((state) => state.multiplayer.opponent);
+  const loading = useSelector((state) => state.multiplayer.loading);
+  const username = useSelector((state) => state.multiplayer.username);
   const userId = useSelector((state) => state.settings.userId);
-  const [username, setUsername] = useState('');
+  const socket = useSocket();
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -23,24 +25,24 @@ const Loadingpage = () => {
         },
       });
       const data = await response.json();
-      setUsername(data.username);
+      dispatch(multiplayerActions.setUsername(data.username))
     };
     getOneUser(userId);
-  }, [userId]);
+  }, [userId,dispatch]);
 
   useEffect(() => {
     socket.on('matchFound', (data) => {
-      setOpponent(data.opponent);
-      setLoading(false);
+      dispatch(multiplayerActions.setOpponent(data.opponent))
+      dispatch(multiplayerActions.setLoading(false))
     });
     return () => {
       socket.off('matchFound');
     };
-  }, [socket]);
+  }, [socket,dispatch]);
 
   const handleLeaveQueueClick = () => {
     socket.emit('disconnectPlayer');
-    setLoading(false);
+    dispatch(multiplayerActions.setLoading(false))
   };
 
   return (

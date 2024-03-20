@@ -35,9 +35,10 @@ const League = () => {
   const score = useSelector((state) => state.league.score) || 0;
   const point = useSelector((state) => state.league.point);
   const userId = useSelector((state) => state.settings.userId);
-  const [index, setIndex] = useState(0);
-  const [videoId, setVideoId] = useState('');
-  const [votes, setVotes] = useState({});
+  const index = useSelector((state) => state.league.index)
+  const videoId = useSelector((state) => state.league.videoId)
+  const votes = useSelector((state) => state.league.votes)
+
 
   const handleModal = () => {
     dispatch(leagueActions.toggleShowModal());
@@ -84,7 +85,7 @@ const League = () => {
     dispatch(leagueActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(leagueActions.setRank(data.form[randomIndex].rank));
     dispatch(leagueActions.setPlayer(data.form[randomIndex].playerInfo));
-    setIndex(randomIndex)
+    dispatch(leagueActions.setIndex(randomIndex));
   }, [dispatch]);
 
   useEffect(() => {
@@ -96,9 +97,9 @@ const League = () => {
     dispatch(leagueActions.setSelectedRank(null));
     dispatch(leagueActions.setIsButtonDisabled(true));
     dispatch(leagueActions.hideShowModal());
-    setVotes({});
-    setVideoId('');
-    setIndex(0);
+    dispatch(leagueActions.setVotes({}))
+    dispatch(leagueActions.setVideoId(''));
+    dispatch(leagueActions.setIndex(0));
   };
 
   useEffect(() => {
@@ -174,13 +175,13 @@ const League = () => {
         },
       });
       const data = await response.json();
-      setVideoId(data[index]._id); 
+      dispatch(leagueActions.setVideoId(data[index]._id));
     };
   
     if (index >= 0) {
       fetchVideos();
     }
-  }, [index]);
+  }, [index,dispatch]);
 
 
   useEffect(() => {
@@ -221,14 +222,13 @@ const League = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setVotes(data.votes)
-        console.log(data.votes)
+        dispatch(leagueActions.setVotes(data.votes));
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
     };
     fetchVotes();
-  }, [videoId, index]);
+  }, [videoId, index,dispatch]);
   
 
   const videoVote = async () => {
