@@ -22,9 +22,10 @@ const Gamepage = ({ username, opponent }) => {
     for (let i = 0; i < 5; i++) {
       hearts.push(
         i < numHearts ? (
-          <img src={fullHeart} width={35} alt="Full Heart" />
+          <img key={`fullHeart-${i}`} src={fullHeart} width={35} alt="Full Heart" />
         ) : (
           <img
+            key={`emptyHeart-${i}`}
             src="https://icones.pro/wp-content/uploads/2021/02/icone-de-coeur-gris.png"
             width={35}
             alt="Empty Heart"

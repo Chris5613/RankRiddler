@@ -7,6 +7,7 @@ import Gamepage from './Gamepage';
 import '../../css/multi.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {multiplayerActions} from '../store/MultiplayerSlice'
+import { useNavigate } from 'react-router-dom';
 
 const Loadingpage = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ const Loadingpage = () => {
   const loading = useSelector((state) => state.multiplayer.loading);
   const username = useSelector((state) => state.multiplayer.username);
   const userId = useSelector((state) => state.settings.userId);
+  const [timeLeft, setTimeLeft] = useState(59);
   const socket = useSocket();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getOneUser = async (uuid) => {
@@ -43,6 +46,26 @@ const Loadingpage = () => {
   const handleLeaveQueueClick = () => {
     socket.emit('disconnectPlayer');
     dispatch(multiplayerActions.setLoading(false))
+    navigate('/');
+  };
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      socket.emit('disconnectPlayer');
+      navigate('/');
+    };
+    
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [timeLeft,navigate,socket]);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
   };
 
   return (
@@ -50,6 +73,7 @@ const Loadingpage = () => {
       {loading ? (
         <div className="loading-container loading">
           <Loader />
+          <p>{formatTime(timeLeft)}</p>
           <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
             <NavLink to="/" className="navlink">
               Leave Queue
