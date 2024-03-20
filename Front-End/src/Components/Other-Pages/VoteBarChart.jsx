@@ -18,7 +18,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels // Register the plugin
+  ChartDataLabels 
 );
 
 const VoteBarChart = ({ votePercentages }) => {

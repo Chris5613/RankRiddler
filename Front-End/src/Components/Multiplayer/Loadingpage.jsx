@@ -1,5 +1,5 @@
 import { useSocket } from '../SocketContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
 import API from '../../api';
 import { NavLink } from 'react-router-dom';
