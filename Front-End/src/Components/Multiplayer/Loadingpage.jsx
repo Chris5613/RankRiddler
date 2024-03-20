@@ -63,6 +63,22 @@ const Loadingpage = () => {
   useEffect(() => {
     if (timeLeft <= 0) {
       socket.emit('disconnectPlayer');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+      
+      Toast.fire({
+        icon: "error",
+        title: "Can't find a match.. Returning to menu"
+      });
       navigate('/');
     }
     const intervalId = setInterval(() => {
@@ -83,6 +99,7 @@ const Loadingpage = () => {
     dispatch(multiplayerActions.setOpponent('')); 
     navigate('/');
   };
+
 
   return (
     <div>
