@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
 import '../../css/multi.css';
 import fullHeart from './heart.png';
+import { useDispatch, useSelector } from 'react-redux';
+import {multiplayerActions} from '../store/MultiplayerSlice'
 
 const Gamepage = ({ username, opponent }) => {
-  const [userHearts, setUserHearts] = useState(5); // Let's assume each player starts with 3 hearts
-  const [opponentHearts, setOpponentHearts] = useState(5);
+  const dispatch = useDispatch();
+  const userHearts = useSelector((state) => state.multiplayer.userHearts);
+  const opponentHearts = useSelector((state) => state.multiplayer.opponentHearts);
 
-  // Function to handle wrong answers
   const onWrongAnswer = (player) => {
     if (player === 'user') {
-      setUserHearts((prev) => prev - 1);
+      dispatch(multiplayerActions.setUserHearts((prev) => prev - 1));
+
     } else {
-      setOpponentHearts((prev) => prev - 1);
+      dispatch(multiplayerActions.setOpponentHearts((prev) => prev - 1));
     }
   };
 
