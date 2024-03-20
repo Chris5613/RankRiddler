@@ -3,7 +3,6 @@ import './css/Submitpage.css';
 import './css/Gamepage.css';
 import './css/Homepage.css';
 import './css/Howtoplay.css';
-
 import './css/Profile.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Valorant from './Components/Game-pages/Valorant';

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/SubmitSlice';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 function Submit() {
   const dispatch = useDispatch();
@@ -12,14 +13,13 @@ function Submit() {
     navigate('/');
   };
 
-
   const handleGameChange = (event) => {
     dispatch(submitActions.setGame(event.target.value));
   };
 
   return (
     <>
-      <div className="select-game">
+      <div className="submit-game">
         <div className='back-submit'>
           <button
             style={{
@@ -73,9 +73,17 @@ function Form(props) {
   const [playerInfo, setPlayerInfo] = useState('');
   const [selectedRank, setSelectedRank] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const [isYoutubeLinkValid, setIsYoutubeLinkValid] = useState(true);
+
+  const validateYoutubeLink = (url) => {
+    const pattern = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+    return pattern.test(url);
+  };
 
   const handleYoutubeLinkChange = (event) => {
-    setYoutubeLink(event.target.value);
+    const url = event.target.value;
+    setYoutubeLink(url);
+    setIsYoutubeLinkValid(validateYoutubeLink(url)); // Validate the link on change
   };
 
   const handlePlayerInfoChange = (event) => {
@@ -92,6 +100,15 @@ function Form(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!isYoutubeLinkValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter a valid YouTube link!',
+      });
+      return; 
+    }
 
     const formData = {
       youtubeLink: youtubeLink,
@@ -230,6 +247,17 @@ function Form(props) {
     },
   };
 
+  const successAlert = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Your clip has been submitted",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -293,7 +321,7 @@ function Form(props) {
             I agree to the terms and conditions
           </label>
         </div>
-        <button className="submit-button" type="submit" disabled={!isChecked}>
+        <button className="submit-button" type="submit" disabled={!isChecked || !isYoutubeLinkValid} onClick={successAlert}>
           Submit
         </button>
       </form>
