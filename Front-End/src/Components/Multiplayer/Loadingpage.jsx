@@ -8,6 +8,7 @@ import '../../css/multi.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {multiplayerActions} from '../store/MultiplayerSlice'
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Loadingpage = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,21 @@ const Loadingpage = () => {
     socket.on('matchFound', (data) => {
       dispatch(multiplayerActions.setOpponent(data.opponent))
       dispatch(multiplayerActions.setLoading(false))
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Match Found"
+      })
     });
     return () => {
       socket.off('matchFound');
