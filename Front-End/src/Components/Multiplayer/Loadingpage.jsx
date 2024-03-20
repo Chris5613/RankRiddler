@@ -29,15 +29,15 @@ const Loadingpage = () => {
         },
       });
       const data = await response.json();
-      dispatch(multiplayerActions.setUsername(data.username))
+      dispatch(multiplayerActions.setUsername(data.username));
     };
     getOneUser(userId);
-  }, [userId,dispatch]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     socket.on('matchFound', (data) => {
-      dispatch(multiplayerActions.setOpponent(data.opponent))
-      dispatch(multiplayerActions.setLoading(false))
+      dispatch(multiplayerActions.setOpponent(data.opponent));
+      dispatch(multiplayerActions.setLoading(false));
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -45,43 +45,43 @@ const Loadingpage = () => {
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        }
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
       });
+      
       Toast.fire({
         icon: "success",
         title: "Match Found"
-      })
+      });
     });
     return () => {
       socket.off('matchFound');
     };
-  }, [socket,dispatch]);
-
-  const handleLeaveQueueClick = () => {
-    socket.emit('disconnectPlayer');
-    dispatch(multiplayerActions.setLoading(false))
-    navigate('/');
-  };
+  }, [socket, dispatch]);
 
   useEffect(() => {
     if (timeLeft <= 0) {
       socket.emit('disconnectPlayer');
       navigate('/');
-    };
-    
+    }
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [timeLeft,navigate,socket]);
+  }, [timeLeft, navigate, socket]);
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
 
+  const handleLeaveQueueClick = () => {
+    socket.emit('disconnectPlayer');
+    dispatch(multiplayerActions.setLoading(true)); 
+    dispatch(multiplayerActions.setOpponent('')); 
+    navigate('/');
   };
 
   return (
@@ -96,7 +96,7 @@ const Loadingpage = () => {
             </NavLink>
           </button>
         </div>
-      ) : (
+      ) :(
         <div>
           <Gamepage username={username} opponent={opponent} />
         </div>
