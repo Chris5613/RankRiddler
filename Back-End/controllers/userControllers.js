@@ -12,14 +12,18 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { username, points, uuid } = req.body;
-  const existingUser = await User.findOne({ username });
+
+  const existingUser = await User.findOne({
+    username: { $regex: new RegExp("^" + username + "$", "i") }
+  });
+
   if (existingUser) {
     return res.status(409).json({ error: "Username already exists" });
   }
 
   let Filter = require("bad-words"),
     filter = new Filter();
-  const isUnclean = filter.isProfane(username);
+  const isUnclean = filter.isProfane(username.toLowerCase());
   if (isUnclean) {
     return res.status(409).json({ error: "Innapropriate username" });
   }
