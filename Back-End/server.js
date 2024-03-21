@@ -53,6 +53,8 @@ io.on("connection", (socket) => {
 
     if (!isPlayerInQueue) {
       playersWaiting.push({ name: playerName, id: socket.id });
+
+      console.log(playerName + " has been added to queue")
       startQueueResetTimer();
     }
 
@@ -60,6 +62,7 @@ io.on("connection", (socket) => {
       const [player1, player2] = playersWaiting.splice(0, 2);
       io.to(player1.id).emit("matchFound", { opponent: player2.name });
       io.to(player2.id).emit("matchFound", { opponent: player1.name });
+      console.log(player1 + " has been match with " + player2)
     }
   });
 
