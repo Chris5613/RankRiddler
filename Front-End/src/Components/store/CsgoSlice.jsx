@@ -12,7 +12,7 @@ let initialState = {
   point: 0,
   index: 0,
   videoId: '',
-  votes: {}
+  votes: {},
 };
 
 const csgoSlice = createSlice({

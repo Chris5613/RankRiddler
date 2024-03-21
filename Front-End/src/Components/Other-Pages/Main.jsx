@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import '../../css/multi.css';
 import logo from '../../Assets/Nav-Icons/logo.png';
 import SettingWheel from './Settingwheel';
-import {multiplayerActions} from '../store/MultiplayerSlice'
+import { multiplayerActions } from '../store/MultiplayerSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Main = () => {
@@ -23,10 +23,10 @@ const Main = () => {
         },
       });
       const data = await response.json();
-      dispatch(multiplayerActions.setUsername(data.username))
+      dispatch(multiplayerActions.setUsername(data.username));
     };
     getOneUser(userId);
-  }, [userId,dispatch]);
+  }, [userId, dispatch]);
 
   const handlePlayClick = () => {
     const playerName = username;
@@ -35,13 +35,13 @@ const Main = () => {
 
   return (
     <div className="content-container">
-      <div className='top-right-container'>
+      <div className="top-right-container">
         <button className="navlink-submit-btn">
           <NavLink to={`/submit`} className="navlink-submit-btn">
-            🎬Submit 
+            🎬Submit
           </NavLink>
         </button>
-        <SettingWheel/>
+        <SettingWheel />
       </div>
       <a href="/">
         <img src={logo} alt="logo" className="home-logo" />
@@ -52,11 +52,11 @@ const Main = () => {
             Singleplayer
           </NavLink>
         </button>
-          <NavLink to={`/multiplayer/loading`} className="navlink-btn">
-            <button onClick={handlePlayClick} className="game-btn">
+        <NavLink to={`/multiplayer/loading`} className="navlink-btn">
+          <button onClick={handlePlayClick} className="game-btn">
             Multiplayer
-            </button>
-          </NavLink>
+          </button>
+        </NavLink>
         <button className="game-btn">
           <NavLink to={`/leaderboard`} className="navlink-btn">
             Leaderboard

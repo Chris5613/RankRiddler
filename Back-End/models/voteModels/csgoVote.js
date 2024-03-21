@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const csgoVideoSchema = new Schema({
   valFormId: {
     type: String,
-    unique: true, 
-    required: [true, "valFormId is required"]
+    unique: true,
+    required: [true, "valFormId is required"],
   },
   votes: {
     Silver: { type: Number, default: 0 },
@@ -18,7 +18,7 @@ const csgoVideoSchema = new Schema({
     LE: { type: Number, default: 0 },
     Supreme: { type: Number, default: 0 },
     Global: { type: Number, default: 0 },
-  }
+  },
 });
 
 const csgoVote = mongoose.model("csgoVote", csgoVideoSchema);

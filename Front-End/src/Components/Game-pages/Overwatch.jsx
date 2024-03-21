@@ -19,7 +19,6 @@ import API from '../../api';
 import BackButton from '../Other-Pages/BackButton';
 import VoteBarChart from '../Other-Pages/VoteBarChart';
 
-
 const Csgo = () => {
   const dispatch = useDispatch();
   let selectedRank = useSelector((state) => state.overwatch.selectedRank);
@@ -34,9 +33,9 @@ const Csgo = () => {
   const score = useSelector((state) => state.overwatch.score) || 0;
   const point = useSelector((state) => state.overwatch.point);
   const userId = useSelector((state) => state.settings.userId);
-  const index = useSelector((state) => state.overwatch.index)
-  const videoId = useSelector((state) => state.overwatch.videoId)
-  const votes = useSelector((state) => state.overwatch.votes)
+  const index = useSelector((state) => state.overwatch.index);
+  const videoId = useSelector((state) => state.overwatch.videoId);
+  const votes = useSelector((state) => state.overwatch.votes);
 
   const handleModal = () => {
     dispatch(overwatchActions.toggleShowModal());
@@ -94,7 +93,7 @@ const Csgo = () => {
     dispatch(overwatchActions.setSelectedRank(null));
     dispatch(overwatchActions.setIsButtonDisabled(true));
     dispatch(overwatchActions.hideShowModal());
-    dispatch(overwatchActions.setVotes({}))
+    dispatch(overwatchActions.setVotes({}));
     dispatch(overwatchActions.setVideoId(''));
     dispatch(overwatchActions.setIndex(0));
   };
@@ -154,7 +153,7 @@ const Csgo = () => {
       dispatch(overwatchActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }else {
+    } else {
       dispatch(overwatchActions.setResult(wrong));
     }
     const newScore = score + newPoint;
@@ -173,24 +172,23 @@ const Csgo = () => {
       const data = await response.json();
       dispatch(overwatchActions.setVideoId(data[index]._id));
     };
-  
+
     if (index >= 0) {
       fetchVideos();
     }
-  }, [index,dispatch]);
-
+  }, [index, dispatch]);
 
   useEffect(() => {
     const createRecord = async () => {
-      if (!videoId) return; 
+      if (!videoId) return;
       try {
-        const response = await fetch(`${API.CreateOverwatchVoteRecord}`, { 
+        const response = await fetch(`${API.CreateOverwatchVoteRecord}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            valFormId: videoId, 
+            valFormId: videoId,
           }),
         });
         if (!response.ok) {
@@ -207,7 +205,7 @@ const Csgo = () => {
   useEffect(() => {
     const fetchVotes = async () => {
       try {
-        const url = `${API.GetAllOverwatchVotes}/${videoId}`; 
+        const url = `${API.GetAllOverwatchVotes}/${videoId}`;
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -224,14 +222,13 @@ const Csgo = () => {
       }
     };
     fetchVotes();
-  }, [videoId, index,dispatch]);
-  
+  }, [videoId, index, dispatch]);
 
   const videoVote = async () => {
     const rankMapping = {
-      "Top 500": "Top500",
+      'Top 500': 'Top500',
     };
-  
+
     selectedRank = rankMapping[selectedRank] || selectedRank;
     try {
       const response = await fetch(`${API.RecordOverwatchVotes}`, {
@@ -301,12 +298,12 @@ const Csgo = () => {
             <br />
             <br />
             <h2>How Everyone Else Guessed</h2>
-            <br /> 
             <br />
-            <VoteBarChart votePercentages={votes} />  
-            <br />        
+            <br />
+            <VoteBarChart votePercentages={votes} />
+            <br />
             <p className="text">You currently have {score} points</p>
-            <p className="text">Credit: {player}</p>          
+            <p className="text">Credit: {player}</p>
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { submitActions } from '../store/SubmitSlice';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 function Submit() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function Submit() {
   return (
     <>
       <div className="submit-game">
-        <div className='back-submit'>
+        <div className="back-submit">
           <button
             style={{
               padding: '10px',
@@ -107,7 +107,7 @@ function Form(props) {
         title: 'Oops...',
         text: 'Please enter a valid YouTube link!',
       });
-      return; 
+      return;
     }
 
     const formData = {
@@ -249,14 +249,13 @@ function Form(props) {
 
   const successAlert = () => {
     Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Your clip has been submitted",
+      position: 'center',
+      icon: 'success',
+      title: 'Your clip has been submitted',
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
-  }
-
+  };
 
   return (
     <div className="form-container">
@@ -321,7 +320,12 @@ function Form(props) {
             I agree to the terms and conditions
           </label>
         </div>
-        <button className="submit-button" type="submit" disabled={!isChecked || !isYoutubeLinkValid} onClick={successAlert}>
+        <button
+          className="submit-button"
+          type="submit"
+          disabled={!isChecked || !isYoutubeLinkValid}
+          onClick={successAlert}
+        >
           Submit
         </button>
       </form>

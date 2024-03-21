@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Settings from './Settings';
 
 const SettingWheel = () => {
@@ -36,14 +36,12 @@ const SettingWheel = () => {
       {showModal && (
         <div className="setting-modal modal">
           <div className="modal-content">
-            <Settings/>
+            <Settings />
           </div>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default SettingWheel;
-
-

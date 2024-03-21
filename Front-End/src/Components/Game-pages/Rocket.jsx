@@ -145,7 +145,7 @@ const Csgo = () => {
       dispatch(rocketActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }else {
+    } else {
       dispatch(rocketActions.setResult(wrong));
     }
     const newScore = score + newPoint;

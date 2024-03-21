@@ -20,7 +20,6 @@ import API from '../../api';
 import BackButton from '../Other-Pages/BackButton';
 import VoteBarChart from '../Other-Pages/VoteBarChart';
 
-
 const Csgo = () => {
   const dispatch = useDispatch();
   let selectedRank = useSelector((state) => state.csgo.selectedRank);
@@ -33,9 +32,9 @@ const Csgo = () => {
   const score = useSelector((state) => state.csgo.score) || 0;
   const point = useSelector((state) => state.csgo.point);
   const userId = useSelector((state) => state.settings.userId);
-  const index = useSelector((state) => state.csgo.index)
-  const videoId = useSelector((state) => state.csgo.videoId)
-  const votes = useSelector((state) => state.csgo.votes)
+  const index = useSelector((state) => state.csgo.index);
+  const videoId = useSelector((state) => state.csgo.videoId);
+  const votes = useSelector((state) => state.csgo.votes);
 
   const handleModal = () => {
     dispatch(csgoActions.toggleShowModal());
@@ -51,14 +50,14 @@ const Csgo = () => {
 
   const youtubeUrl = url;
   const rankImages = {
-    'Silver': silver,
+    Silver: silver,
     'Silver Elite': se,
     'Gold Nova': nova,
     'Master Guardian': mg,
     'Distinguished Master Guardian': dmg,
     'Legendary Eagle': le,
     'Master Guardian Elite': mge,
-    'Supreme': smfc,
+    Supreme: smfc,
     'Global Elite': ge,
   };
 
@@ -94,7 +93,7 @@ const Csgo = () => {
     dispatch(csgoActions.setSelectedRank(null));
     dispatch(csgoActions.setIsButtonDisabled(true));
     dispatch(csgoActions.hideShowModal());
-    dispatch(csgoActions.setVotes({}))
+    dispatch(csgoActions.setVotes({}));
     dispatch(csgoActions.setVideoId(''));
     dispatch(csgoActions.setIndex(0));
   };
@@ -135,12 +134,12 @@ const Csgo = () => {
       'Silver',
       'Silver Elite',
       'Gold Nova',
-      'Master Guardian' ,
-      'Distinguished Master Guardian' ,
-      'Legendary Eagle' ,
-      'Master Guardian Elite' ,
-      'Supreme' ,
-      'Global Elite' 
+      'Master Guardian',
+      'Distinguished Master Guardian',
+      'Legendary Eagle',
+      'Master Guardian Elite',
+      'Supreme',
+      'Global Elite',
     ];
     const rankIndex = rankList.indexOf(rank);
     const selectedRankIndex = rankList.indexOf(selectedRank);
@@ -155,7 +154,7 @@ const Csgo = () => {
       dispatch(csgoActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }    else {
+    } else {
       dispatch(csgoActions.setResult(wrong));
     }
     const newScore = score + newPoint;
@@ -174,24 +173,23 @@ const Csgo = () => {
       const data = await response.json();
       dispatch(csgoActions.setVideoId(data[index]._id));
     };
-  
+
     if (index >= 0) {
       fetchVideos();
     }
-  }, [index,dispatch]);
-
+  }, [index, dispatch]);
 
   useEffect(() => {
     const createRecord = async () => {
-      if (!videoId) return; 
+      if (!videoId) return;
       try {
-        const response = await fetch(`${API.CreateCsgoVoteRecord}`, { 
+        const response = await fetch(`${API.CreateCsgoVoteRecord}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            valFormId: videoId, 
+            valFormId: videoId,
           }),
         });
         if (!response.ok) {
@@ -208,7 +206,7 @@ const Csgo = () => {
   useEffect(() => {
     const fetchVotes = async () => {
       try {
-        const url = `${API.GetAllCsgoVotes}/${videoId}`; 
+        const url = `${API.GetAllCsgoVotes}/${videoId}`;
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -225,20 +223,19 @@ const Csgo = () => {
       }
     };
     fetchVotes();
-  }, [videoId, index,dispatch]);
-  
+  }, [videoId, index, dispatch]);
 
   const videoVote = async () => {
     const rankMapping = {
-      "Silver Elite": "SE",
-      "Gold Nova": "Nova",
-      "Master Guardian": "MG",
-      "Master Guardian Elite": "MGE",
-      "Distinguished Master Guardian": "DMG",
-      "Legendary Eagle": "LE",
-      "Global Elite": "Global"
+      'Silver Elite': 'SE',
+      'Gold Nova': 'Nova',
+      'Master Guardian': 'MG',
+      'Master Guardian Elite': 'MGE',
+      'Distinguished Master Guardian': 'DMG',
+      'Legendary Eagle': 'LE',
+      'Global Elite': 'Global',
     };
-  
+
     selectedRank = rankMapping[selectedRank] || selectedRank;
     try {
       const response = await fetch(`${API.RecordCsgoVotes}`, {
@@ -262,7 +259,7 @@ const Csgo = () => {
 
   return (
     <>
-      <BackButton/>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
@@ -308,12 +305,12 @@ const Csgo = () => {
             <br />
             <br />
             <h2>How Everyone Else Guessed</h2>
-            <br /> 
             <br />
-            <VoteBarChart votePercentages={votes} />  
-            <br />        
+            <br />
+            <VoteBarChart votePercentages={votes} />
+            <br />
             <p className="text">You currently have {score} points</p>
-            <p className="text">Credit: {player}</p>          
+            <p className="text">Credit: {player}</p>
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -376,7 +373,7 @@ const Csgo = () => {
           src={ge}
         />
       </div>
-      <div className="submit-btn-container" onClick={videoVote} >
+      <div className="submit-btn-container" onClick={videoVote}>
         <button
           className="submit"
           onClick={() => {

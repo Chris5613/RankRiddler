@@ -9,7 +9,7 @@ import rainbowSlice from './RainbowSlice';
 import fortniteSlice from './FortniteSlice';
 import rocketSlice from './RocketSlice';
 import overwatchSlice from './OverwatchSlice';
-import multiplayerSlice from './MultiplayerSlice'
+import multiplayerSlice from './MultiplayerSlice';
 
 const store = configureStore({
   reducer: {
@@ -23,7 +23,7 @@ const store = configureStore({
     fortnite: fortniteSlice.reducer,
     rocket: rocketSlice.reducer,
     overwatch: overwatchSlice.reducer,
-    multiplayer: multiplayerSlice.reducer
+    multiplayer: multiplayerSlice.reducer,
   },
 });
 

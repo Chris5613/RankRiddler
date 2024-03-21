@@ -10,7 +10,7 @@ import Immortal from '../../Assets/Val-Ranks/Immortal.png';
 import Radiant from '../../Assets/Val-Ranks/Radiant.png';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
-import { useEffect, useCallback,useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,10 +34,9 @@ const Valorant = () => {
   const score = useSelector((state) => state.valorant.score) || 0;
   const point = useSelector((state) => state.valorant.point);
   const userId = useSelector((state) => state.settings.userId);
-  const index = useSelector((state) => state.valorant.index)
-  const videoId = useSelector((state) => state.valorant.videoId)
-  const votes = useSelector((state) => state.valorant.votes)
-
+  const index = useSelector((state) => state.valorant.index);
+  const videoId = useSelector((state) => state.valorant.videoId);
+  const votes = useSelector((state) => state.valorant.votes);
 
   const handleModal = () => {
     dispatch(valorantActions.toggleShowModal());
@@ -96,7 +95,7 @@ const Valorant = () => {
     dispatch(valorantActions.setSelectedRank(null));
     dispatch(valorantActions.setIsButtonDisabled(true));
     dispatch(valorantActions.hideShowModal());
-    dispatch(valorantActions.setVotes({}))
+    dispatch(valorantActions.setVotes({}));
     dispatch(valorantActions.setVideoId(''));
     dispatch(valorantActions.setIndex(0));
   };
@@ -157,8 +156,7 @@ const Valorant = () => {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }
-    else {
+    } else {
       dispatch(valorantActions.setResult(wrong));
     }
     const newScore = score + newPoint;
@@ -177,24 +175,23 @@ const Valorant = () => {
       const data = await response.json();
       dispatch(valorantActions.setVideoId(data[index]._id));
     };
-  
+
     if (index >= 0) {
       fetchVideos();
     }
-  }, [index,dispatch]);
-
+  }, [index, dispatch]);
 
   useEffect(() => {
     const createRecord = async () => {
-      if (!videoId) return; 
+      if (!videoId) return;
       try {
-        const response = await fetch(`${API.CreateVideoRecord}`, { 
+        const response = await fetch(`${API.CreateVideoRecord}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            valFormId: videoId, 
+            valFormId: videoId,
           }),
         });
         if (!response.ok) {
@@ -212,7 +209,7 @@ const Valorant = () => {
   useEffect(() => {
     const fetchVotes = async () => {
       try {
-        const url = `${API.GetVotesByID}/${videoId}`; 
+        const url = `${API.GetVotesByID}/${videoId}`;
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -229,8 +226,7 @@ const Valorant = () => {
       }
     };
     fetchVotes();
-  }, [videoId, index,dispatch]);
-  
+  }, [videoId, index, dispatch]);
 
   const videoVote = async () => {
     try {
@@ -301,12 +297,12 @@ const Valorant = () => {
             <br />
             <br />
             <h2>How Everyone Else Guessed</h2>
-            <br /> 
             <br />
-            <VoteBarChart votePercentages={votes} />  
-            <br />        
+            <br />
+            <VoteBarChart votePercentages={votes} />
+            <br />
             <p className="text">You currently have {score} points</p>
-            <p className="text">Credit: {player}</p>          
+            <p className="text">Credit: {player}</p>
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -375,7 +371,6 @@ const Valorant = () => {
           onClick={() => {
             handleModal();
             checkAnswer();
-            
           }}
           disabled={isButtonDisabled}
         >

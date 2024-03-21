@@ -15,12 +15,12 @@ const limiter = rateLimit({
   max: 400,
 });
 
-router.get("/allusers",limiter, getAllUsers);
-router.post("/saveuser", limiter,createUser);
-router.get("/user/:uuid", limiter,getOneUserByUuid);
+router.get("/allusers", limiter, getAllUsers);
+router.post("/saveuser", limiter, createUser);
+router.get("/user/:uuid", limiter, getOneUserByUuid);
 
 router.put("/updatepoints", limiter, AddPointByUsername);
-router.put('/multiplayerwon', limiter, multiplayerWon);
-router.put('/multiplayerlost', limiter, multiplayerLost);
+router.put("/multiplayerwon", limiter, multiplayerWon);
+router.put("/multiplayerlost", limiter, multiplayerLost);
 
 module.exports = router;

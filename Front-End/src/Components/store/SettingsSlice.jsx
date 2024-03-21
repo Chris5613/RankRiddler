@@ -5,7 +5,7 @@ let initialState = {
   data: [],
   index: -1,
   username: '',
-  isUsernameChanged: localStorage.getItem('isUsernameChanged') === 'true', 
+  isUsernameChanged: localStorage.getItem('isUsernameChanged') === 'true',
   score: 0,
 };
 

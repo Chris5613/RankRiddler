@@ -115,7 +115,7 @@ td {
   align-items: center;
   flex-direction: column;
   height: 40vh;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 25px;
 }
@@ -319,4 +319,3 @@ td {
     display: none;
   }
 }
-

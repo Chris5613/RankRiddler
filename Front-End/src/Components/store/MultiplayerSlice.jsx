@@ -5,7 +5,7 @@ let initialState = {
   opponentHearts: 5,
   opponent: '',
   loading: true,
-  username: ''
+  username: '',
 };
 
 const multiplayerSlice = createSlice({
@@ -26,7 +26,7 @@ const multiplayerSlice = createSlice({
     },
     setUsername(state, action) {
       state.username = action.payload;
-    }
+    },
   },
 });
 

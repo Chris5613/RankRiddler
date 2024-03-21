@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import Gamepage from './Gamepage';
 import '../../css/multi.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {multiplayerActions} from '../store/MultiplayerSlice'
+import { multiplayerActions } from '../store/MultiplayerSlice';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -40,7 +40,7 @@ const Loadingpage = () => {
       dispatch(multiplayerActions.setLoading(false));
       const Toast = Swal.mixin({
         toast: true,
-        position: "top-end",
+        position: 'top-end',
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
@@ -49,10 +49,10 @@ const Loadingpage = () => {
           toast.addEventListener('mouseleave', Swal.resumeTimer);
         },
       });
-      
+
       Toast.fire({
-        icon: "success",
-        title: "Match Found"
+        icon: 'success',
+        title: 'Match Found',
       });
     });
     return () => {
@@ -65,7 +65,7 @@ const Loadingpage = () => {
       socket.emit('disconnectPlayer');
       const Toast = Swal.mixin({
         toast: true,
-        position: "top-end",
+        position: 'top-end',
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
@@ -74,10 +74,10 @@ const Loadingpage = () => {
           toast.addEventListener('mouseleave', Swal.resumeTimer);
         },
       });
-      
+
       Toast.fire({
-        icon: "error",
-        title: "Can't find a match.. Returning to menu"
+        icon: 'error',
+        title: "Can't find a match.. Returning to menu",
       });
       navigate('/');
     }
@@ -95,11 +95,10 @@ const Loadingpage = () => {
 
   const handleLeaveQueueClick = () => {
     socket.emit('disconnectPlayer');
-    dispatch(multiplayerActions.setLoading(true)); 
-    dispatch(multiplayerActions.setOpponent('')); 
+    dispatch(multiplayerActions.setLoading(true));
+    dispatch(multiplayerActions.setOpponent(''));
     navigate('/');
   };
-
 
   return (
     <div>
@@ -113,7 +112,7 @@ const Loadingpage = () => {
             </NavLink>
           </button>
         </div>
-      ) :(
+      ) : (
         <div>
           <Gamepage username={username} opponent={opponent} />
         </div>

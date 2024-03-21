@@ -18,7 +18,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels 
+  ChartDataLabels
 );
 
 const VoteBarChart = ({ votePercentages }) => {
@@ -27,7 +27,7 @@ const VoteBarChart = ({ votePercentages }) => {
     datasets: [
       {
         label: 'Vote Percentages',
-        data: Object.values(votePercentages).map(value => parseFloat(value)),
+        data: Object.values(votePercentages).map((value) => parseFloat(value)),
         backgroundColor: [
           '#5d5b65',
           '#804a00',
@@ -35,11 +35,11 @@ const VoteBarChart = ({ votePercentages }) => {
           '#da9100',
           '#0f2f4f',
           '#733380',
-          '#44895b', 
-          '#6e0202', 
-          '#797f03', 
+          '#44895b',
+          '#6e0202',
+          '#797f03',
         ],
-      }
+      },
     ],
   };
 
@@ -57,14 +57,14 @@ const VoteBarChart = ({ votePercentages }) => {
           drawBorder: false, // Optional: remove the axis border as well
         },
         ticks: {
-          display: false // Optional: hide the Y axis ticks (labels)
-        }
-      }
+          display: false, // Optional: hide the Y axis ticks (labels)
+        },
+      },
     },
     plugins: {
-      legend: { display: false }, 
+      legend: { display: false },
       datalabels: {
-        color: '#fff', 
+        color: '#fff',
         anchor: 'end',
         align: 'top',
         formatter: (value) => {
@@ -74,11 +74,10 @@ const VoteBarChart = ({ votePercentages }) => {
     },
     layout: {
       padding: {
-        top:25, 
+        top: 25,
       },
     },
   };
-
 
   return <Bar data={chartData} options={chartOptions} />;
 };
