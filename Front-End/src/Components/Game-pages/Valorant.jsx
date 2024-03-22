@@ -84,7 +84,6 @@ const Valorant = () => {
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
-    dispatch(valorantActions.setIndex(randomIndex));
   }, [dispatch]);
 
   useEffect(() => {
@@ -96,9 +95,6 @@ const Valorant = () => {
     dispatch(valorantActions.setSelectedRank(null));
     dispatch(valorantActions.setIsButtonDisabled(true));
     dispatch(valorantActions.hideShowModal());
-    dispatch(valorantActions.setVotes({}))
-    dispatch(valorantActions.setVideoId(''));
-    dispatch(valorantActions.setIndex(0));
   };
 
   useEffect(() => {
@@ -157,10 +153,7 @@ const Valorant = () => {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }
-    else {
-      dispatch(valorantActions.setResult(wrong));
-    }
+    } 
     const newScore = score + newPoint;
     dispatch(valorantActions.setPoint(newPoint));
     dispatch(valorantActions.setScore(newScore));

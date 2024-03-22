@@ -56,6 +56,7 @@ const AddPointByUsername = async (req, res) => {
   const { uuid } = req.params;
   try {
     const user = await User.findOne({ uuid });
+    console.log(user)
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
