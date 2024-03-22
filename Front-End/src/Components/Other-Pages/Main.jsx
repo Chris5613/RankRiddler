@@ -37,20 +37,13 @@ const Main = () => {
   return (
     <div className="content-container">
       <div className='top-right-container'>
-        <SpinningCoin/>
-        <button className="navlink-submit-btn">
-          <NavLink to={`/submit`} className="navlink-submit-btn">
-            🎬Submit 
-          </NavLink>
-        </button>
-        <div className='top-right-container'>
+        <SpinningCoin/>   
         <button className="navlink-submit-btn">
           <NavLink to={`/submit`} className="navlink-submit-btn">
             🎬Submit 
           </NavLink>
         </button>
         <SettingWheel/>
-      </div>
       </div>
       <a href="/">
         <img src={logo} alt="logo" className="home-logo" />
