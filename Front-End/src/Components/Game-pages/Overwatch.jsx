@@ -19,7 +19,7 @@ import API from '../../api';
 import BackButton from '../Other-Pages/BackButton';
 import VoteBarChart from '../Other-Pages/VoteBarChart';
 
-const Csgo = () => {
+const Overwatch = () => {
   const dispatch = useDispatch();
   let selectedRank = useSelector((state) => state.overwatch.selectedRank);
   const isButtonDisabled = useSelector(
@@ -292,7 +292,7 @@ const Csgo = () => {
                   alt="wrong"
                   width={70}
                 />
-                <p className="modal-example-wrong">{point} Point</p>
+                <p className="modal-example-wrong">{point} Coin</p>
               </div>
             </div>
             <br />
@@ -300,10 +300,10 @@ const Csgo = () => {
             <h2>How Everyone Else Guessed</h2>
             <br />
             <br />
-            <VoteBarChart votePercentages={votes} />
-            <br />
+            <VoteBarChart votePercentages={votes} />  
+            <br />        
             <p className="text">You currently have {score} points</p>
-            <p className="text">Credit: {player}</p>
+            <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -376,4 +376,4 @@ const Csgo = () => {
   );
 };
 
-export default Csgo;
+export default Overwatch;

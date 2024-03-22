@@ -37,7 +37,6 @@ const startQueueResetTimer = () => {
   if (queueResetTimer !== null) {
     clearTimeout(queueResetTimer);
   }
-
   queueResetTimer = setTimeout(() => {
     if (playersWaiting.length < 2) {
       resetQueue();
@@ -74,7 +73,7 @@ io.on("connection", (socket) => {
       playersWaiting.splice(index, 1);
     }
   });
-});
+});;
 
 app.use(
   cors({

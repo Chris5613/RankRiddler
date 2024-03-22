@@ -118,7 +118,7 @@ const Leaderboard = () => {
                   <tr>
                     <th>#</th>
                     <th>Username</th>
-                    <th>Score</th>
+                    <th>Coins</th>
                     <th>Stats</th>
                   </tr>
                 </thead>

@@ -7,6 +7,7 @@ import logo from '../../Assets/Nav-Icons/logo.png';
 import SettingWheel from './Settingwheel';
 import { multiplayerActions } from '../store/MultiplayerSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import SpinningCoin from './SpinningCoin'
 
 const Main = () => {
   const username = useSelector((state) => state.multiplayer.username);
@@ -35,7 +36,8 @@ const Main = () => {
 
   return (
     <div className="content-container">
-      <div className="top-right-container">
+      <div className='top-right-container'>
+        <SpinningCoin/>   
         <button className="navlink-submit-btn">
           <NavLink to={`/submit`} className="navlink-submit-btn">
             🎬Submit
