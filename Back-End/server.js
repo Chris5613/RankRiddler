@@ -30,74 +30,48 @@ let queueResetTimer = null;
 
 const resetQueue = () => {
   console.log("Resetting queue due to insufficient players.");
-  playersWaiting = []; // Clear the players waiting queue
+  playersWaiting = []; 
 };
 
 const startQueueResetTimer = () => {
-  // Check if a timer is already running, clear it first to avoid multiple timers
   if (queueResetTimer !== null) {
     clearTimeout(queueResetTimer);
   }
-
-  // Set a new timer for 3 minutes (180000 milliseconds)
   queueResetTimer = setTimeout(() => {
-    // Check if the queue has fewer than 2 players when the timer expires
     if (playersWaiting.length < 2) {
       resetQueue();
     }
-    // After the action, clear the timer variable as it's no longer needed
     queueResetTimer = null;
-  }, 60000); // 1 minutes in milliseconds
+  }, 60000); 
 };
 
 io.on("connection", (socket) => {
   socket.on("playGame", (data) => {
     const playerName = data.name;
-    console.log(`${playerName} wants to play a game`);
+    const isPlayerInQueue = playersWaiting.some(player => player.name === playerName);
 
-    // Check if the player is already in the queue
-    // const isPlayerInQueue = playersWaiting.some(player => player.name === playerName);
-    //
-    const isPlayerInQueue = false;
     if (!isPlayerInQueue) {
-      // Add the player to the waiting list if they're not already in it
       playersWaiting.push({ name: playerName, id: socket.id });
-      console.log(`${playerName} added to the queue.`);
 
-      // Start or reset the queue reset timer every time a new player joins
+      console.log(playerName + " has been added to queue")
       startQueueResetTimer();
-    } else {
-      console.log(`${playerName} is already in the queue.`);
     }
 
-    // Check if we have at least two players waiting
     if (playersWaiting.length >= 2) {
-      // Immediately match players without waiting for the timer if there are enough players
-      // Also, stop the reset timer as it's not needed anymore
-      if (queueResetTimer !== null) {
-        clearTimeout(queueResetTimer);
-        queueResetTimer = null;
-      }
-
       const [player1, player2] = playersWaiting.splice(0, 2);
-
-      // Emit 'matchFound' event to both players
       io.to(player1.id).emit("matchFound", { opponent: player2.name });
       io.to(player2.id).emit("matchFound", { opponent: player1.name });
-
-      console.log(`${player1.name} and ${player2.name} are matched`);
+      console.log(player1 + " has been match with " + player2)
     }
   });
 
-  // Handle player disconnection
   socket.on("disconnectPlayer", () => {
-    // Remove the disconnected player from the queue
-    playersWaiting = playersWaiting.filter((player) => player.id !== socket.id);
-    console.log(
-      `A player has disconnected. Updated queue length: ${playersWaiting.length}`
-    );
+    const index = playersWaiting.findIndex(player => player.id === socket.id);
+    if (index !== -1) {
+      playersWaiting.splice(index, 1);
+    }
   });
-});
+});;
 
 app.use(
   cors({
@@ -106,6 +80,7 @@ app.use(
       "https://test-server-rr.onrender.com",
       "https://www.rankriddler.com",
       "http://localhost:3000",
+      "https://rankriddler-test.onrender.com",
     ],
   })
 );

@@ -1,5 +1,5 @@
-const val = require('../models/valForm');
-const videoVote = require('../models/videoVote');
+const val = require('../models/formModels/valForm');
+const videoVote = require('../models/voteModels/videoVote');
 
 exports.getAllVideos = async (req, res) => {
   try {
