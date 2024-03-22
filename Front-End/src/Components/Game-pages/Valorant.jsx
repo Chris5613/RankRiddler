@@ -84,7 +84,7 @@ const Valorant = () => {
     dispatch(valorantActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(valorantActions.setRank(data.form[randomIndex].rank));
     dispatch(valorantActions.setPlayer(data.form[randomIndex].playerInfo));
-    setIndex(randomIndex)
+    dispatch(valorantActions.setIndex(randomIndex));
   }, [dispatch]);
 
   useEffect(() => {
@@ -96,9 +96,9 @@ const Valorant = () => {
     dispatch(valorantActions.setSelectedRank(null));
     dispatch(valorantActions.setIsButtonDisabled(true));
     dispatch(valorantActions.hideShowModal());
-    setVotes({});
-    setVideoId('');
-    setIndex(0);
+    dispatch(valorantActions.setVotes({}));
+    dispatch(valorantActions.setVideoId(''));
+    dispatch(valorantActions.setIndex(0));
   };
 
   useEffect(() => {
