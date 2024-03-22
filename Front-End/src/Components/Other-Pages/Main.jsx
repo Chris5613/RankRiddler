@@ -43,7 +43,14 @@ const Main = () => {
             🎬Submit 
           </NavLink>
         </button>
+        <div className='top-right-container'>
+        <button className="navlink-submit-btn">
+          <NavLink to={`/submit`} className="navlink-submit-btn">
+            🎬Submit 
+          </NavLink>
+        </button>
         <SettingWheel/>
+      </div>
       </div>
       <a href="/">
         <img src={logo} alt="logo" className="home-logo" />

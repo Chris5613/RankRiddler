@@ -45,5 +45,3 @@ const SettingWheel = () => {
 }
 
 export default SettingWheel;
-
-

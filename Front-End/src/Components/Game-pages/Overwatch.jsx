@@ -20,7 +20,7 @@ import BackButton from '../Other-Pages/BackButton';
 import VoteBarChart from '../Other-Pages/VoteBarChart';
 
 
-const Csgo = () => {
+const Overwatch = () => {
   const dispatch = useDispatch();
   let selectedRank = useSelector((state) => state.overwatch.selectedRank);
   const isButtonDisabled = useSelector(
@@ -379,4 +379,4 @@ const Csgo = () => {
   );
 };
 
-export default Csgo;
+export default Overwatch;
