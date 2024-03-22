@@ -19,6 +19,17 @@
   margin-bottom: 1rem;
   flex-direction: column;
   color: black;
+  margin-top: 3rem;
+}
+
+.submit-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-direction: column;
+  color: black;
+  margin-top: 5rem;
 }
 
 .select {

@@ -33,7 +33,14 @@ const Main = () => {
 
   return (
     <div className="content-container">
-      <SettingWheel/>
+      <div className='top-right-container'>
+        <button className="navlink-submit-btn">
+          <NavLink to={`/submit`} className="navlink-submit-btn">
+            🎬Submit 
+          </NavLink>
+        </button>
+        <SettingWheel/>
+      </div>
       <a href="/">
         <img src={logo} alt="logo" className="home-logo" />
       </a>
@@ -43,12 +50,12 @@ const Main = () => {
             Singleplayer
           </NavLink>
         </button>
-        <button onClick={handlePlayClick} className="game-btn">
           <NavLink to={`/multiplayer/loading`} className="navlink-btn">
+            <button onClick={handlePlayClick} className="game-btn">
             Multiplayer
+            </button>
           </NavLink>
-        </button>
-        <button onClick={handlePlayClick} className="game-btn">
+        <button className="game-btn">
           <NavLink to={`/leaderboard`} className="navlink-btn">
             Leaderboard
           </NavLink>
