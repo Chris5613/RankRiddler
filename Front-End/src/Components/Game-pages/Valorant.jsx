@@ -96,7 +96,7 @@ const Valorant = () => {
     dispatch(valorantActions.setSelectedRank(null));
     dispatch(valorantActions.setIsButtonDisabled(true));
     dispatch(valorantActions.hideShowModal());
-    dispatch(valorantActions.setVotes({}))
+    dispatch(valorantActions.setVotes({}));
     dispatch(valorantActions.setVideoId(''));
     dispatch(valorantActions.setIndex(0));
   };
@@ -157,10 +157,7 @@ const Valorant = () => {
       dispatch(valorantActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }
-    else {
-      dispatch(valorantActions.setResult(wrong));
-    }
+    } 
     const newScore = score + newPoint;
     dispatch(valorantActions.setPoint(newPoint));
     dispatch(valorantActions.setScore(newScore));
@@ -295,7 +292,7 @@ const Valorant = () => {
                   alt="wrong"
                   width={70}
                 />
-                <p className="modal-example-wrong">{point} Point</p>
+                <p className="modal-example-wrong">{point} Coin</p>
               </div>
             </div>
             <br />
@@ -305,7 +302,7 @@ const Valorant = () => {
             <br />
             <VoteBarChart votePercentages={votes} />  
             <br />        
-            <p className="text">You currently have {score} points</p>
+            <p className="text">You currently have {score} Coins</p>
             <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video

@@ -1,7 +1,7 @@
 const val = require('../models/formModels/valForm');
 const videoVote = require('../models/voteModels/videoVote');
 
-exports.getAllVideos = async (req, res) => {
+exports.getValVideos = async (req, res) => {
   try {
     const videos = await val.find({});
     res.json(videos);
@@ -10,7 +10,6 @@ exports.getAllVideos = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch videos', error: error.message });
   }
 };
-
 
 exports.videoVote = async (req, res) => {
   const { id, rank } = req.body;
@@ -28,7 +27,6 @@ exports.videoVote = async (req, res) => {
     }
     
     video.markModified('votes');
-    console.log(video)
     await video.save();
     res.status(200).send('Vote updated successfully');
   } catch (error) {
@@ -66,7 +64,7 @@ exports.getVotesByValFormId = async (req, res) => {
   const { valFormId } = req.params;
 
   try {
-    const video = await videoVote.findOne({ valFormId });
+    const video = await videoVote.findOne({ valFormId:valFormId  });
     if (!video) {
       return res.status(404).json({ message: 'No votes found for the provided valFormId' });
     }
@@ -90,4 +88,3 @@ exports.getVotesByValFormId = async (req, res) => {
     res.status(500).json({ message: 'Error fetching votes', error: error.message });
   }
 };
-

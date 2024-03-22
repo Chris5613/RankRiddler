@@ -1,7 +1,6 @@
 import API from '../../api';
 import Swal from 'sweetalert2';
 
-
 const ReportButton = (props) => {
   const { playerInfo, youtubeLink, reportedBy } = props;
 

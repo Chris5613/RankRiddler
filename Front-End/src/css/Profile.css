@@ -109,7 +109,7 @@ td {
   font-size: clamp(0.8rem, 3vw, 1.1rem);
   font-weight: 400;
   height: 28px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   outline: none;
   width: 40%;
 }

@@ -12,14 +12,18 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { username, points, uuid } = req.body;
-  const existingUser = await User.findOne({ username });
+
+  const existingUser = await User.findOne({
+    username: { $regex: new RegExp("^" + username + "$", "i") }
+  });
+
   if (existingUser) {
     return res.status(409).json({ error: "Username already exists" });
   }
 
   let Filter = require("bad-words"),
     filter = new Filter();
-  const isUnclean = filter.isProfane(username);
+  const isUnclean = filter.isProfane(username.toLowerCase());
   if (isUnclean) {
     return res.status(409).json({ error: "Innapropriate username" });
   }
@@ -52,6 +56,7 @@ const AddPointByUsername = async (req, res) => {
   const { uuid } = req.params;
   try {
     const user = await User.findOne({ uuid });
+    console.log(user)
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -71,9 +76,43 @@ const AddPointByUsername = async (req, res) => {
   }
 };
 
+const multiplayerWon = async (req, res) => {
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.wins += 1;
+    await user.save();
+    res.status(200).json({ message: "Score updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+const multiplayerLost = async (req, res) => {
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.losses += 1;
+    await user.save();
+    res.status(200).json({ message: "Score updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 module.exports = {
   getAllUsers,
   createUser,
   AddPointByUsername,
   getOneUserByUuid,
+  multiplayerWon,
+  multiplayerLost,
 };

@@ -30,7 +30,7 @@ let queueResetTimer = null;
 
 const resetQueue = () => {
   console.log("Resetting queue due to insufficient players.");
-  playersWaiting = []; 
+  playersWaiting = [];
 };
 
 const startQueueResetTimer = () => {
@@ -72,6 +72,7 @@ io.on("connection", (socket) => {
     }
   });
 });;
+
 
 app.use(
   cors({
