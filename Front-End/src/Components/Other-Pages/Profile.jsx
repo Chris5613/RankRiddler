@@ -31,16 +31,18 @@ const Profile = () => {
         const accuracy = ((data.points / data.totalRounds) * 100).toFixed(0);
         if (accuracy === Infinity || isNaN(accuracy)) {
           setAccuracy(0);
-        } else {
+        } 
+        else if (accuracy > 100) {
+          setAccuracy(100)
+        }
+        else {
           setAccuracy(accuracy);
         }
-
         setLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchProfileData();
   }, [uuid]);
 
