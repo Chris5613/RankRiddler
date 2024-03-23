@@ -80,7 +80,7 @@ td {
 }
 
 .pagination-button {
-  background-color: #0772d6;
+  background-color: #384c5f;
   border: none;
   border-radius: 5px;
   color: white;
@@ -90,6 +90,7 @@ td {
   margin-top: 1rem;
   outline: none;
   padding: clamp(1px, 1vw, 6px) clamp(3px, 2vw, 15px);
+  margin-left: 20px;
 }
 
 .button-container {
@@ -109,7 +110,7 @@ td {
   font-size: clamp(0.8rem, 3vw, 1.1rem);
   font-weight: 400;
   height: 28px;
-  margin-top: 1rem;
+  margin-top: 0.4rem;
   outline: none;
   width: 40%;
 }
