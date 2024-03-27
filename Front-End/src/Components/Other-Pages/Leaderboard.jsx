@@ -151,23 +151,24 @@ const Leaderboard = () => {
                   ))}
                 </tbody>
               </table>
-          <div className="pagination-container">
-            <button
-              className="pagination-button"
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-            >
-              Prev
-            </button>
-            {renderedPageNumbers}
-            <button
-              className="pagination-button"
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
-          </div>
+              <div className="pagination-container">
+                {currentPage !== 1 && (
+                  <button
+                    className="pagination-button"
+                    onClick={handlePrevPage}
+                  >
+                    Prev
+                  </button>
+                )}
+                {renderedPageNumbers}
+                <button
+                  className="pagination-button"
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
         </>
     )}
     </div>
