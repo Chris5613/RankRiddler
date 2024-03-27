@@ -295,7 +295,7 @@ const Valorant = () => {
                   alt="wrong"
                   width={70}
                 />
-                <p className="modal-example-wrong">{point} Point</p>
+                <p className="modal-example-wrong">{point} Coin</p>
               </div>
             </div>
             <br />
@@ -305,7 +305,7 @@ const Valorant = () => {
             <br />
             <VoteBarChart votePercentages={votes} />  
             <br />        
-            <p className="text">You currently have {score} points</p>
+            <p className="text">You currently have {score} Coins</p>
             <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
