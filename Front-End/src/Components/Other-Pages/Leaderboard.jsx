@@ -7,6 +7,7 @@ const Leaderboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isCoinsLeaderboard, setIsCoinsLeaderboard] = useState(true);
   const navigate = useNavigate();
   const goback = () => {
     navigate(-1);
@@ -107,9 +108,19 @@ const Leaderboard = () => {
         Go back
       </button>
       <div className="select-game">
-        <h1 style={{ color: 'white' }}>Top 100 Leaderboard</h1>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={isCoinsLeaderboard}
+            onChange={() => setIsCoinsLeaderboard(!isCoinsLeaderboard)}
+          />
+          <div className="slider round">
+            <span className="on">Coins</span>
+            <span className="off">Wins</span>
+          </div>
+        </label>
         <div className="form-container">
-          {loading ? (
+        {loading ? (
             <Loader />
           ) : (
             <>
@@ -118,7 +129,7 @@ const Leaderboard = () => {
                   <tr>
                     <th>#</th>
                     <th>Username</th>
-                    <th>Coins</th>
+                    {isCoinsLeaderboard ? <th>Coins</th> : <><th>Wins</th><th>Losses</th></>}
                     <th>Stats</th>
                   </tr>
                 </thead>
@@ -127,7 +138,7 @@ const Leaderboard = () => {
                     <tr key={index}>
                       <td>{(currentPage - 1) * entriesPerPage + index + 1}</td>
                       <td>{row.username}</td>
-                      <td>{row.points}</td>
+                      {isCoinsLeaderboard ? <td>{row.points}</td> : <><td>{row.Wins}</td><td>{row.Losses}</td></>}
                       <td className="btn">
                         <button
                           className="stats-btn"
@@ -140,24 +151,24 @@ const Leaderboard = () => {
                   ))}
                 </tbody>
               </table>
-      <div className="pagination-container">
-        <button
-          className="pagination-button"
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
-        {renderedPageNumbers}
-        <button
-          className="pagination-button"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
-    </>
+          <div className="pagination-container">
+            <button
+              className="pagination-button"
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </button>
+            {renderedPageNumbers}
+            <button
+              className="pagination-button"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        </>
     )}
     </div>
   </div>
