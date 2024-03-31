@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const leagueVideoSchema = new Schema({
   valFormId: {
     type: String,
-    unique: true, 
-    required: [true, "valFormId is required"]
+    unique: true,
+    required: [true, "valFormId is required"],
   },
   votes: {
     Iron: { type: Number, default: 0 },
@@ -18,7 +18,7 @@ const leagueVideoSchema = new Schema({
     Master: { type: Number, default: 0 },
     Grandmaster: { type: Number, default: 0 },
     Challenger: { type: Number, default: 0 },
-  }
+  },
 });
 
 const leagueVote = mongoose.model("leagueVote", leagueVideoSchema);

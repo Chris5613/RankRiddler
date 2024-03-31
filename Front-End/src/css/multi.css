@@ -1,8 +1,8 @@
 .game-btn {
-  background-color: white; 
-  border-radius: 15px; 
-  padding: 10px 20px; 
-  font-size: 20px; 
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 20px;
   text-decoration: none;
   color: black;
   margin-top: 2rem;
@@ -23,10 +23,10 @@
 
 .multiplayer-container {
   display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  gap: 10px; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .loading-container {
@@ -40,15 +40,15 @@
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #ff4d4d; 
+  background-color: #ff4d4d;
   font-size: 16px;
   cursor: pointer;
-  outline: none; 
+  outline: none;
   transition: background-color 0.3s;
 }
 
 .leave-queue-btn:hover {
-  background-color: #cc0000; 
+  background-color: #cc0000;
 }
 
 .navlink {
@@ -67,8 +67,8 @@
 }
 
 .top-info {
-  display: flex; 
-  width: 100%; 
+  display: flex;
+  width: 100%;
   padding: 15px;
   justify-content: space-around;
 }
@@ -95,7 +95,6 @@
   margin-right: 1rem;
 }
 
-
 @media (max-width: 768px) {
   .home-logo {
     width: 90vw;
@@ -120,7 +119,7 @@
 
 .modal-content {
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
 
@@ -129,23 +128,23 @@
 }
 
 .modal-example-wrong {
-  margin-right:3rem;
+  margin-right: 3rem;
 }
 
 .top-right-container {
-  position: fixed; 
+  position: fixed;
   top: 0;
   right: 0;
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 10px;
 }
 
 .navlink-submit-btn {
-  background-color: white; 
-  border-radius: 15px; 
-  padding: 5px; 
-  font-size: 20px; 
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 20px;
   text-decoration: none;
   color: black;
 }

@@ -1,7 +1,6 @@
 import API from '../../api';
 import Swal from 'sweetalert2';
 
-
 const ReportButton = (props) => {
   const { playerInfo, youtubeLink, reportedBy } = props;
 
@@ -24,7 +23,7 @@ const ReportButton = (props) => {
       if (response.status === 201) {
         const Toast = Swal.mixin({
           toast: true,
-          position: "top-end",
+          position: 'top-end',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
@@ -33,15 +32,15 @@ const ReportButton = (props) => {
             toast.addEventListener('mouseleave', Swal.resumeTimer);
           },
         });
-        
+
         Toast.fire({
-          icon: "success",
-          title: "Video reported successfully!"
+          icon: 'success',
+          title: 'Video reported successfully!',
         });
       } else {
         const Toast = Swal.mixin({
           toast: true,
-          position: "top-end",
+          position: 'top-end',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
@@ -50,10 +49,10 @@ const ReportButton = (props) => {
             toast.addEventListener('mouseleave', Swal.resumeTimer);
           },
         });
-        
+
         Toast.fire({
-          icon: "error",
-          title: "Error reporting video. Please try again later!"
+          icon: 'error',
+          title: 'Error reporting video. Please try again later!',
         });
       }
     } catch (error) {

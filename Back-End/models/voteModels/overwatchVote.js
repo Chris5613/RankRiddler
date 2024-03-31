@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const overwatchSchema = new Schema({
   valFormId: {
     type: String,
-    unique: true, 
-    required: [true, "valFormId is required"], 
+    unique: true,
+    required: [true, "valFormId is required"],
   },
   votes: {
     Bronze: { type: Number, default: 0 },
@@ -17,7 +17,7 @@ const overwatchSchema = new Schema({
     Master: { type: Number, default: 0 },
     Grandmaster: { type: Number, default: 0 },
     Top500: { type: Number, default: 0 },
-  }
+  },
 });
 
 const overwatchVote = mongoose.model("overwatchVote", overwatchSchema);

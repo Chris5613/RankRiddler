@@ -7,15 +7,18 @@ import Swal from 'sweetalert2';
 
 const Modal = () => {
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.settings.username) || localStorage.getItem('username') || 'Guest';
+  const username =
+    useSelector((state) => state.settings.username) ||
+    localStorage.getItem('username') ||
+    'Guest';
   const userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage
 
   const saveUser = async (username, score, uuid) => {
     try {
       const response = await fetch(API.SaveUser, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, points: score, uuid}),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, points: score, uuid }),
       });
       return await response.json();
     } catch (error) {
@@ -33,17 +36,18 @@ const Modal = () => {
       allowOutsideClick: false,
       preConfirm: (username) => {
         const trimmedUsername = username.trim().toLowerCase();
-        const prohibitedUsernames = ["admin", "administrator", "moderator",];
+        const prohibitedUsernames = ['admin', 'administrator', 'moderator'];
         if (!username) {
-  
           Swal.showValidationMessage(`Please enter a username`);
           return false;
         } else if (prohibitedUsernames.includes(trimmedUsername)) {
-          Swal.showValidationMessage(`This username is not allowed. Please choose another.`);
+          Swal.showValidationMessage(
+            `This username is not allowed. Please choose another.`
+          );
           return false;
         }
 
-        return saveUser(username, 0, userId).then(result => {
+        return saveUser(username, 0, userId).then((result) => {
           if (result && result.error) {
             Swal.showValidationMessage(`Error: ${result.error}`);
             return false;
@@ -59,7 +63,6 @@ const Modal = () => {
       }
     });
   };
-  
 
   useEffect(() => {
     if (username === 'Guest' || !username) {

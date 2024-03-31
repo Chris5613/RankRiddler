@@ -35,10 +35,9 @@ const League = () => {
   const score = useSelector((state) => state.league.score) || 0;
   const point = useSelector((state) => state.league.point);
   const userId = useSelector((state) => state.settings.userId);
-  const index = useSelector((state) => state.league.index)
-  const videoId = useSelector((state) => state.league.videoId)
-  const votes = useSelector((state) => state.league.votes)
-
+  const index = useSelector((state) => state.league.index);
+  const videoId = useSelector((state) => state.league.videoId);
+  const votes = useSelector((state) => state.league.votes);
 
   const handleModal = () => {
     dispatch(leagueActions.toggleShowModal());
@@ -97,7 +96,7 @@ const League = () => {
     dispatch(leagueActions.setSelectedRank(null));
     dispatch(leagueActions.setIsButtonDisabled(true));
     dispatch(leagueActions.hideShowModal());
-    dispatch(leagueActions.setVotes({}))
+    dispatch(leagueActions.setVotes({}));
     dispatch(leagueActions.setVideoId(''));
     dispatch(leagueActions.setIndex(0));
   };
@@ -158,7 +157,7 @@ const League = () => {
       dispatch(leagueActions.setResult(wrong));
       newPoint = 1;
       updatePoints(1, userId);
-    }else {
+    } else {
       dispatch(leagueActions.setResult(wrong));
     }
     const newScore = score + newPoint;
@@ -177,24 +176,23 @@ const League = () => {
       const data = await response.json();
       dispatch(leagueActions.setVideoId(data[index]._id));
     };
-  
+
     if (index >= 0) {
       fetchVideos();
     }
-  }, [index,dispatch]);
-
+  }, [index, dispatch]);
 
   useEffect(() => {
     const createRecord = async () => {
-      if (!videoId) return; 
+      if (!videoId) return;
       try {
-        const response = await fetch(`${API.CreateLeagueVoteRecord}`, { 
+        const response = await fetch(`${API.CreateLeagueVoteRecord}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            valFormId: videoId, 
+            valFormId: videoId,
           }),
         });
         if (!response.ok) {
@@ -211,7 +209,7 @@ const League = () => {
   useEffect(() => {
     const fetchVotes = async () => {
       try {
-        const url = `${API.GetAllLeagueVotes}/${videoId}`; 
+        const url = `${API.GetAllLeagueVotes}/${videoId}`;
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -228,8 +226,7 @@ const League = () => {
       }
     };
     fetchVotes();
-  }, [videoId, index,dispatch]);
-  
+  }, [videoId, index, dispatch]);
 
   const videoVote = async () => {
     try {
@@ -300,12 +297,12 @@ const League = () => {
             <br />
             <br />
             <h2>How Everyone Else Guessed</h2>
-            <br /> 
             <br />
-            <VoteBarChart votePercentages={votes} />  
-            <br />        
+            <br />
+            <VoteBarChart votePercentages={votes} />
+            <br />
             <p className="text">You currently have {score} points</p>
-            <p className="text">Credit: {player}</p>          
+            <p className="text">Credit: {player}</p>
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>

@@ -26,24 +26,24 @@ const API = {
   VoteVideo: `${root}/videos/vote`,
   CreateVideoRecord: `${root}/videos/create`,
   GetVotesByID: `${root}/videos/votes`,
-  
-  GetCsgoVideo:`${root}/videos/csgo`,
-  CreateCsgoVoteRecord:`${root}/videos/csgo/create`,
-  RecordCsgoVotes:`${root}/videos/csgo/record`,
-  GetAllCsgoVotes:`${root}/videos/csgo/getvotes`,
 
-  GetLeagueVideo:`${root}/videos/league`,
-  CreateLeagueVoteRecord:`${root}/videos/league/create`,
-  RecordLeagueVotes:`${root}/videos/league/record`,
-  GetAllLeagueVotes:`${root}/videos/league/getvotes`,
+  GetCsgoVideo: `${root}/videos/csgo`,
+  CreateCsgoVoteRecord: `${root}/videos/csgo/create`,
+  RecordCsgoVotes: `${root}/videos/csgo/record`,
+  GetAllCsgoVotes: `${root}/videos/csgo/getvotes`,
 
-  GetOverwatchVideo:`${root}/videos/overwatch`,
-  CreateOverwatchVoteRecord:`${root}/videos/overwatch/create`,
-  RecordOverwatchVotes:`${root}/videos/overwatch/record`,
-  GetAllOverwatchVotes:`${root}/videos/overwatch/getvotes`,
+  GetLeagueVideo: `${root}/videos/league`,
+  CreateLeagueVoteRecord: `${root}/videos/league/create`,
+  RecordLeagueVotes: `${root}/videos/league/record`,
+  GetAllLeagueVotes: `${root}/videos/league/getvotes`,
+
+  GetOverwatchVideo: `${root}/videos/overwatch`,
+  CreateOverwatchVoteRecord: `${root}/videos/overwatch/create`,
+  RecordOverwatchVotes: `${root}/videos/overwatch/record`,
+  GetAllOverwatchVotes: `${root}/videos/overwatch/getvotes`,
 
   MultiplayerWon: `${root}/multiplayerwon`, // Needs username in body
   MultiplayerLost: `${root}/multiplayerlost`, // Needs username in body
-}
+};
 
 export default API;

@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routers/users");
 const formRoutes = require("./routers/form");
-const videoRoutes = require('./routers/videoRoutes');
+const videoRoutes = require("./routers/videoRoutes");
 const cors = require("cors");
 const path = require("path");
 const http = require("http");
@@ -30,7 +30,7 @@ let queueResetTimer = null;
 
 const resetQueue = () => {
   console.log("Resetting queue due to insufficient players.");
-  playersWaiting = []; 
+  playersWaiting = [];
 };
 
 const startQueueResetTimer = () => {
@@ -42,18 +42,20 @@ const startQueueResetTimer = () => {
       resetQueue();
     }
     queueResetTimer = null;
-  }, 60000); 
+  }, 60000);
 };
 
 io.on("connection", (socket) => {
   socket.on("playGame", (data) => {
     const playerName = data.name;
-    const isPlayerInQueue = playersWaiting.some(player => player.name === playerName);
+    const isPlayerInQueue = playersWaiting.some(
+      (player) => player.name === playerName
+    );
 
     if (!isPlayerInQueue) {
       playersWaiting.push({ name: playerName, id: socket.id });
 
-      console.log(playerName + " has been added to queue")
+      console.log(playerName + " has been added to queue");
       startQueueResetTimer();
     }
 
@@ -61,17 +63,17 @@ io.on("connection", (socket) => {
       const [player1, player2] = playersWaiting.splice(0, 2);
       io.to(player1.id).emit("matchFound", { opponent: player2.name });
       io.to(player2.id).emit("matchFound", { opponent: player1.name });
-      console.log(player1 + " has been match with " + player2)
+      console.log(player1 + " has been match with " + player2);
     }
   });
 
   socket.on("disconnectPlayer", () => {
-    const index = playersWaiting.findIndex(player => player.id === socket.id);
+    const index = playersWaiting.findIndex((player) => player.id === socket.id);
     if (index !== -1) {
       playersWaiting.splice(index, 1);
     }
   });
-});;
+});
 
 app.use(
   cors({
@@ -106,10 +108,9 @@ app.get("/", (req, res) => {
 });
 app.use("/", userRoutes);
 app.use("/form", formRoutes);
-app.use('/videos', videoRoutes);
+app.use("/videos", videoRoutes);
 
 const port = process.env.PORT || 3004;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
