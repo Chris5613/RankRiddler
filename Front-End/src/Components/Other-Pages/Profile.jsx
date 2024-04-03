@@ -67,27 +67,67 @@ const Profile = () => {
         Go back
       </button>
       <div className="profile-container">
-        <h1>
-          Hi I'm{' '}
-          <span style={{ color: 'skyblue' }}>{profileData.username}</span>
-        </h1>
-        <div className="stats-container">
-          <div className="stats">
-            <h2>Rounds</h2>
-            <h2>{profileData.totalRounds}</h2>
-          </div>
-          <div className="stats">
-            <h2>Points</h2>
-            <h2>{profileData.points}</h2>
-          </div>
-          <div className="stats">
-            <h2>Accuracy</h2>
-            <h2>{accuracy}%</h2>
+        <div className='profile-right-container'>
+          <h1>
+            Hi I'm{' '}
+            <span style={{ color: 'skyblue' }}>{profileData.username}</span>
+          </h1>
+          <div className="stats-container">
+            <div className="stats">
+              <h2>Rounds</h2>
+              <h2>{profileData.totalRounds}</h2>
+            </div>
+            <div className="stats">
+              <h2>Points</h2>
+              <h2>{profileData.points}</h2>
+            </div>
+            <div className="stats">
+              <h2>Accuracy</h2>
+              <h2>{accuracy}%</h2>
+            </div>
           </div>
         </div>
+        <div className='profile-bottom-left'>
+          <h1>Game Statistics </h1>
+          <div className="game-stats-grid">
+            <div className="stat-box">
+              <img  src="https://m.media-amazon.com/images/M/MV5BNmNhM2NjMTgtNmIyZC00ZmVjLTk4YWItZmZjNGY2NThiNDhkXkEyXkFqcGdeQXVyODU4MDU1NjU@._V1_FMjpg_UX1000_.jpg" alt="valorant_logo" />
+              <h3>Valorant</h3>
+            </div>
+            <div className="stat-box">
+              <img  src="https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Overwatch_cover_art.jpg/220px-Overwatch_cover_art.jpg" alt="overwatch" />
+              <h3>Overwatch</h3>
+            </div>
+            <div className="stat-box">
+              <img  src="https://howlongtobeat.com/games/5203_League_of_Legends.jpg" alt="league" />
+              <h3>League</h3>
+            </div>
+            <div className="stat-box">
+              <img  src="https://static.displate.com/270x380/displate/2023-06-12/6e217abc7f5bb5d0dc56e68752193a11_5c51574f5f2f216f9ef25a0d08fa6400.jpg" alt="csgo" />
+              <h3>CS2</h3>
+            </div>
+          </div>
+        </div>
+          {/* <div className="game-stats-container">
+                <div className="stats">
+                  <h2>Rounds</h2>
+                  <h2>{profileData.totalRounds}</h2>
+                </div>
+                <div className="stats">
+                  <h2>Points</h2>
+                  <h2>{profileData.points}</h2>
+                </div>
+                <div className="stats">
+                  <h2>Accuracy</h2>
+                  <h2>{accuracy}%</h2>
+                </div>
+              </div> */}
       </div>
     </>
   );
 };
 
+
+
 export default Profile;
+
