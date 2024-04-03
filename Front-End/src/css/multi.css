@@ -48,7 +48,7 @@
 }
 
 .leave-queue-btn:hover {
-  background-color: #cc0000;
+  background-color: #c00;
 }
 
 .navlink {
@@ -56,7 +56,6 @@
   color: black;
 }
 
-/* GamePage.css */
 
 .game-container {
   display: flex;
@@ -185,8 +184,7 @@
       drop-shadow(0 0 7.5px rgba(255, 255, 255, 0.045))
       drop-shadow(0 0 10px rgba(255, 255, 255, 0.025));
   }
-  25%,
-  75% {
+  25%, 75% {
     filter: blur(1px) brightness(50%)
       drop-shadow(0 0 2.5px rgba(255, 255, 255, 0.1))
       drop-shadow(0 0 5px rgba(255, 255, 255, 0.075))
