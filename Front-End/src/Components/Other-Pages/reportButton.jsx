@@ -1,4 +1,5 @@
 import API from '../../api';
+import Swal from 'sweetalert2';
 
 const ReportButton = (props) => {
   const { playerInfo, youtubeLink, reportedBy } = props;
@@ -20,17 +21,42 @@ const ReportButton = (props) => {
       });
 
       if (response.status === 201) {
-        alert('Video reported successfully!');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Video reported successfully!',
+        });
       } else {
-        alert(
-          'There was a problem reporting this video. Please try again later. Sorry for the inconvenience :)'
-        );
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'error',
+          title: 'Error reporting video. Please try again later!',
+        });
       }
     } catch (error) {
       console.error(error);
-      alert(
-        'There was a problem reporting this video. Please try again later. Sorry for the inconvenience :)'
-      );
     }
   };
 

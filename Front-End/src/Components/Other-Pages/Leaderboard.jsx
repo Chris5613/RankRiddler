@@ -7,10 +7,10 @@ const Leaderboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isCoinsLeaderboard, setIsCoinsLeaderboard] = useState(true);
   const navigate = useNavigate();
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const goback = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -34,34 +34,93 @@ const Leaderboard = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [currentPage]); 
 
-  const profileView = (index) => {
-    const uuid = data[index].uuid;
+  const entriesPerPage = 10;
+  const totalPages = Math.ceil(data.length / entriesPerPage);
+  const rowData = data.slice(
+    (currentPage - 1) * entriesPerPage,
+    currentPage * entriesPerPage
+  );
+
+  const maxPageNumberLimit = 5;
+  const minPageNumberLimit = 0;
+  const [pageNumberLimit, setPageNumberLimit] = useState(maxPageNumberLimit);
+  const [minPageNumber, setMinPageNumber] = useState(minPageNumberLimit);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      if (currentPage + 1 > pageNumberLimit) {
+        setPageNumberLimit(pageNumberLimit + maxPageNumberLimit);
+        setMinPageNumber(minPageNumber + maxPageNumberLimit);
+      }
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      if ((currentPage - 1) % maxPageNumberLimit === 0) {
+        setPageNumberLimit(pageNumberLimit - maxPageNumberLimit);
+        setMinPageNumber(minPageNumber - maxPageNumberLimit);
+      }
+    }
+  };
+
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+
+  const renderedPageNumbers = pages.map((number) => {
+    if (number < pageNumberLimit + 1 && number > minPageNumber) {
+      return (
+        <button
+          key={number}
+          onClick={() => setCurrentPage(number)}
+          className={`pagination-button ${currentPage === number ? "active" : null}`}
+        >
+          {number}
+        </button>
+      );
+    } else {
+      return null;
+    }
+  });
+
+  const profileView = (uuid) => {
     navigate(`/profile/${uuid}`);
   };
 
-  const entriesPerPage = 10;
-  const startIndex = (currentPage - 1) * entriesPerPage;
-  const endIndex = startIndex + entriesPerPage;
-  const rowData = data.slice(startIndex, endIndex);
-  const maxDisplayedPages = 10;
-  const totalPages = Math.ceil(data.length / entriesPerPage);
-  const startPage = currentPage - Math.floor(maxDisplayedPages / 2);
-  const endPage = currentPage + Math.floor(maxDisplayedPages / 2);
-  const displayedPages = Array.from(
-    { length: totalPages },
-    (_, index) => index + 1
-  ).filter(
-    (page) => page >= startPage && page <= endPage && page <= totalPages
-  );
-
   return (
     <>
-      <div className="leaderboard-container select-game">
-        <h1 style={{ color: 'white' }}>All Time Leaderboard</h1>
+      <button
+        style={{
+          padding: '10px',
+          backgroundColor: '#2d3436',
+          color: '#fff',
+          fontSize: '18px',
+          cursor: 'pointer',
+        }}
+        onClick={goback}
+      >
+        Go back
+      </button>
+      <div className="select-game">
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={isCoinsLeaderboard}
+            onChange={() => setIsCoinsLeaderboard(!isCoinsLeaderboard)}
+          />
+          <div className="slider round">
+            <span className="on">Coins</span>
+            <span className="off">Wins</span>
+          </div>
+        </label>
         <div className="form-container">
-          {loading ? (
+        {loading ? (
             <Loader />
           ) : (
             <>
@@ -70,20 +129,20 @@ const Leaderboard = () => {
                   <tr>
                     <th>#</th>
                     <th>Username</th>
-                    <th>Score</th>
+                    {isCoinsLeaderboard ? <th>Coins</th> : <><th>Wins</th><th>Losses</th></>}
                     <th>Stats</th>
                   </tr>
                 </thead>
                 <tbody>
                   {rowData.map((row, index) => (
-                    <tr key={startIndex + index}>
-                      <td>{startIndex + index + 1}</td>
+                    <tr key={index}>
+                      <td>{(currentPage - 1) * entriesPerPage + index + 1}</td>
                       <td>{row.username}</td>
-                      <td>{row.points}</td>
+                      {isCoinsLeaderboard ? <td>{row.points}</td> : <><td>{row.Wins}</td><td>{row.Losses}</td></>}
                       <td className="btn">
                         <button
                           className="stats-btn"
-                          onClick={() => profileView(startIndex + index)}
+                          onClick={() => profileView(row.uuid)}
                         >
                           See Stats
                         </button>
@@ -92,26 +151,29 @@ const Leaderboard = () => {
                   ))}
                 </tbody>
               </table>
-              <div className="button-container">
-                {displayedPages.map((pageNumber) => (
+              <div className="pagination-container">
+                {currentPage !== 1 && (
                   <button
-                    key={pageNumber}
-                    onClick={() => handlePageChange(pageNumber)}
-                    style={{
-                      fontWeight:
-                        pageNumber === currentPage ? 'bold' : 'normal',
-                    }}
-                    className="pagination-button margin-right"
+                    className="pagination-button"
+                    onClick={handlePrevPage}
                   >
-                    {pageNumber}
+                    Prev
                   </button>
-                ))}
+                )}
+                {renderedPageNumbers}
+                <button
+                  className="pagination-button"
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
               </div>
-            </>
-          )}
-        </div>
-      </div>
-    </>
+        </>
+    )}
+    </div>
+  </div>
+</>
   );
 };
 

@@ -3,9 +3,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: clamp(10px, 4vw, 30px);
   width: clamp(220px, 95%, 1000px);
   border-collapse: collapse;
+  margin-top: 1rem;
 }
 
 .form {
@@ -19,8 +19,18 @@
   align-items: center;
   margin-bottom: 1rem;
   flex-direction: column;
-  margin-top: 2rem;
   color: black;
+  margin-top: 3rem;
+}
+
+.submit-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-direction: column;
+  color: black;
+  margin-top: 5rem;
 }
 
 .select {

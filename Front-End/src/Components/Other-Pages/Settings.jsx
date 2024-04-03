@@ -45,6 +45,7 @@ const Settings = () => {
     fetchData();
   }, [dispatch]);
 
+  // find user Rank #
   useEffect(() => {
     const foundUser = data.find((user) => user.username === username);
     if (foundUser) {

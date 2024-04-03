@@ -16,6 +16,7 @@ import { apexActions } from '../store/ApexSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import BackButton from '../Other-Pages/BackButton';
 
 const Csgo = () => {
   const dispatch = useDispatch();
@@ -144,8 +145,6 @@ const Csgo = () => {
       updatePoints(1, userId);
     } else {
       dispatch(apexActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(apexActions.setPoint(newPoint));
@@ -154,6 +153,7 @@ const Csgo = () => {
 
   return (
     <>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}

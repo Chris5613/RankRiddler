@@ -8,7 +8,7 @@ import Diamond from '../../Assets/League-Icons/Diamond.png';
 import Master from '../../Assets/League-Icons/Master.png';
 import Grandmaster from '../../Assets/League-Icons/GrandMaster.png';
 import Challenger from '../../Assets/League-Icons/Challenger.png';
-import { useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import VideoPlayer from '../Youtube';
@@ -18,6 +18,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import BackButton from '../Other-Pages/BackButton';
+import VoteBarChart from '../Other-Pages/VoteBarChart';
 
 const League = () => {
   const dispatch = useDispatch();
@@ -33,6 +35,9 @@ const League = () => {
   const score = useSelector((state) => state.league.score) || 0;
   const point = useSelector((state) => state.league.point);
   const userId = useSelector((state) => state.settings.userId);
+  const index = useSelector((state) => state.league.index);
+  const videoId = useSelector((state) => state.league.videoId);
+  const votes = useSelector((state) => state.league.votes);
 
   const handleModal = () => {
     dispatch(leagueActions.toggleShowModal());
@@ -79,6 +84,7 @@ const League = () => {
     dispatch(leagueActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(leagueActions.setRank(data.form[randomIndex].rank));
     dispatch(leagueActions.setPlayer(data.form[randomIndex].playerInfo));
+    dispatch(leagueActions.setIndex(randomIndex));
   }, [dispatch]);
 
   useEffect(() => {
@@ -90,6 +96,9 @@ const League = () => {
     dispatch(leagueActions.setSelectedRank(null));
     dispatch(leagueActions.setIsButtonDisabled(true));
     dispatch(leagueActions.hideShowModal());
+    dispatch(leagueActions.setVotes({}));
+    dispatch(leagueActions.setVideoId(''));
+    dispatch(leagueActions.setIndex(0));
   };
 
   useEffect(() => {
@@ -150,16 +159,99 @@ const League = () => {
       updatePoints(1, userId);
     } else {
       dispatch(leagueActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(leagueActions.setPoint(newPoint));
     dispatch(leagueActions.setScore(newScore));
   };
 
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const response = await fetch(`${API.GetLeagueVideo}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      dispatch(leagueActions.setVideoId(data[index]._id));
+    };
+
+    if (index >= 0) {
+      fetchVideos();
+    }
+  }, [index, dispatch]);
+
+  useEffect(() => {
+    const createRecord = async () => {
+      if (!videoId) return;
+      try {
+        const response = await fetch(`${API.CreateLeagueVoteRecord}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            valFormId: videoId,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error creating video vote:', error);
+      }
+    };
+    createRecord();
+  }, [videoId]);
+
+  useEffect(() => {
+    const fetchVotes = async () => {
+      try {
+        const url = `${API.GetAllLeagueVotes}/${videoId}`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        dispatch(leagueActions.setVotes(data.votes));
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
+    fetchVotes();
+  }, [videoId, index, dispatch]);
+
+  const videoVote = async () => {
+    try {
+      const response = await fetch(`${API.RecordLeagueVotes}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: videoId,
+          rank: selectedRank,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error voting:', error);
+    }
+  };
+
   return (
     <>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
@@ -199,14 +291,17 @@ const League = () => {
                   alt="wrong"
                   width={70}
                 />
-                <p className="modal-example-wrong">{point} Point</p>
+                <p className="modal-example-wrong">{point} Coin</p>
               </div>
             </div>
             <br />
             <br />
-            <p className="text">You currently have {score} points</p>
+            <h2>How Everyone Else Guessed</h2>
             <br />
-            <p className="text">Credit: {player}</p>
+            <VoteBarChart votePercentages={votes} />  
+            <br />        
+            <p className="text">You currently have {score} Coins</p>
+            <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -269,7 +364,7 @@ const League = () => {
           src={Challenger}
         />
       </div>
-      <div className="submit-btn-container">
+      <div className="submit-btn-container" onClick={videoVote}>
         <button
           className="submit"
           onClick={() => {

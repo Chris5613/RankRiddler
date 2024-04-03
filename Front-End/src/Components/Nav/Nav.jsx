@@ -3,15 +3,7 @@ import logo from '../../Assets/Nav-Icons/logo.png';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-
 const Nav = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <>
       <header>
@@ -57,11 +49,9 @@ const Nav = () => {
         </div>
         <div className="nav-container nav-smaller">
           <nav className="nav">
-                          <a href="/">
-                <img src={logo} alt="logo" className="logo" />
-              </a>
-        <i onClick={toggleMenu}className="fa-solid fa-bars burgermenu-bar"></i>
-        {isOpen && (
+            <a href="/">
+              <img src={logo} alt="logo" className="logo" />
+            </a>
             <ul>
               <li>
                 <NavLink to="/" className="nav-link">
@@ -94,7 +84,6 @@ const Nav = () => {
                 </NavLink>
               </li>
             </ul>
-        )}
           </nav>
         </div>
       </header>

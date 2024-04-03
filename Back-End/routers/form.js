@@ -23,7 +23,7 @@ const rateLimit = require("express-rate-limit");
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 500,
 });
 
 const router = express.Router();
@@ -46,6 +46,6 @@ router.get("/overwatchdata", limiter, getOverwatchForm);
 router.get("/rainbowdata", limiter, getRainbowForm);
 router.get("/rocketdata", limiter, getRocketForm);
 
-router.post("/report", limiter, reportForm);
+router.post("/report", reportForm);
 
 module.exports = router;

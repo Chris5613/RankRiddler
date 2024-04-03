@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import check from '../../Assets/Modal-Icons/Check.png';
 import wrong from '../../Assets/Modal-Icons/Wrong.png';
 import silver from '../../Assets/Csgo-Icons/Silver.png';
@@ -17,10 +17,12 @@ import { csgoActions } from '../store/CsgoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ReportButton from '../Other-Pages/reportButton';
 import API from '../../api';
+import BackButton from '../Other-Pages/BackButton';
+import VoteBarChart from '../Other-Pages/VoteBarChart';
 
 const Csgo = () => {
   const dispatch = useDispatch();
-  const selectedRank = useSelector((state) => state.csgo.selectedRank);
+  let selectedRank = useSelector((state) => state.csgo.selectedRank);
   const isButtonDisabled = useSelector((state) => state.csgo.isButtonDisabled);
   const url = useSelector((state) => state.csgo.url);
   const showModal = useSelector((state) => state.csgo.showModal);
@@ -30,6 +32,9 @@ const Csgo = () => {
   const score = useSelector((state) => state.csgo.score) || 0;
   const point = useSelector((state) => state.csgo.point);
   const userId = useSelector((state) => state.settings.userId);
+  const index = useSelector((state) => state.csgo.index);
+  const videoId = useSelector((state) => state.csgo.videoId);
+  const votes = useSelector((state) => state.csgo.votes);
 
   const handleModal = () => {
     dispatch(csgoActions.toggleShowModal());
@@ -76,6 +81,7 @@ const Csgo = () => {
     dispatch(csgoActions.setUrl(data.form[randomIndex].youtubeLink));
     dispatch(csgoActions.setRank(data.form[randomIndex].rank));
     dispatch(csgoActions.setPlayer(data.form[randomIndex].playerInfo));
+    dispatch(csgoActions.setIndex(randomIndex));
   }, [dispatch]);
 
   useEffect(() => {
@@ -87,6 +93,9 @@ const Csgo = () => {
     dispatch(csgoActions.setSelectedRank(null));
     dispatch(csgoActions.setIsButtonDisabled(true));
     dispatch(csgoActions.hideShowModal());
+    dispatch(csgoActions.setVotes({}));
+    dispatch(csgoActions.setVideoId(''));
+    dispatch(csgoActions.setIndex(0));
   };
 
   useEffect(() => {
@@ -147,16 +156,110 @@ const Csgo = () => {
       updatePoints(1, userId);
     } else {
       dispatch(csgoActions.setResult(wrong));
-      newPoint = -1;
-      updatePoints(-1, userId);
     }
     const newScore = score + newPoint;
     dispatch(csgoActions.setPoint(newPoint));
     dispatch(csgoActions.setScore(newScore));
   };
 
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const response = await fetch(`${API.GetCsgoVideo}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      dispatch(csgoActions.setVideoId(data[index]._id));
+    };
+
+    if (index >= 0) {
+      fetchVideos();
+    }
+  }, [index, dispatch]);
+
+  useEffect(() => {
+    const createRecord = async () => {
+      if (!videoId) return;
+      try {
+        const response = await fetch(`${API.CreateCsgoVoteRecord}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            valFormId: videoId,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error creating video vote:', error);
+      }
+    };
+    createRecord();
+  }, [videoId]);
+
+  useEffect(() => {
+    const fetchVotes = async () => {
+      try {
+        const url = `${API.GetAllCsgoVotes}/${videoId}`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        dispatch(csgoActions.setVotes(data.votes));
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
+    fetchVotes();
+  }, [videoId, index, dispatch]);
+
+  const videoVote = async () => {
+    const rankMapping = {
+      'Silver Elite': 'SE',
+      'Gold Nova': 'Nova',
+      'Master Guardian': 'MG',
+      'Master Guardian Elite': 'MGE',
+      'Distinguished Master Guardian': 'DMG',
+      'Legendary Eagle': 'LE',
+      'Global Elite': 'Global',
+    };
+
+    selectedRank = rankMapping[selectedRank] || selectedRank;
+    try {
+      const response = await fetch(`${API.RecordCsgoVotes}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: videoId,
+          rank: selectedRank,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error voting:', error);
+    }
+  };
+
   return (
     <>
+      <BackButton />
       <ReportButton
         youtubeLink={youtubeUrl}
         playerInfo={player}
@@ -175,7 +278,7 @@ const Csgo = () => {
                 <img
                   className="modal-example-image"
                   src={pic}
-                  alt="Radiant"
+                  alt="rank"
                   width={100}
                 />
               </div>
@@ -196,14 +299,18 @@ const Csgo = () => {
                   alt="wrong"
                   width={70}
                 />
-                <p className="modal-example-wrong">{point} Point</p>
+                <p className="modal-example-wrong">{point} Coin</p>
               </div>
             </div>
             <br />
             <br />
-            <p className="text">You currently have {score} points</p>
+            <h2>How Everyone Else Guessed</h2>
             <br />
-            <p className="text">Credit: {player}</p>
+            <br />
+            <VoteBarChart votePercentages={votes} />  
+            <br />        
+            <p className="text">You currently have {score} Coins</p>
+            <p className="text">Credit: {player}</p>          
             <button onClick={refresh} className="submit-btn">
               Next Video
             </button>
@@ -266,7 +373,7 @@ const Csgo = () => {
           src={ge}
         />
       </div>
-      <div className="submit-btn-container">
+      <div className="submit-btn-container" onClick={videoVote}>
         <button
           className="submit"
           onClick={() => {

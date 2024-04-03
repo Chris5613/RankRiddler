@@ -10,6 +10,9 @@ let initialState = {
   player: '',
   score: null,
   point: 0,
+  index: 0,
+  videoId: '',
+  votes: {},
 };
 
 const leagueSlice = createSlice({
@@ -45,6 +48,15 @@ const leagueSlice = createSlice({
     },
     setPoint(state, action) {
       state.point = action.payload;
+    },
+    setIndex(state, action) {
+      state.index = action.payload;
+    },
+    setVideoId(state, action) {
+      state.videoId = action.payload;
+    },
+    setVotes(state, action) {
+      state.votes = action.payload;
     },
   },
 });
