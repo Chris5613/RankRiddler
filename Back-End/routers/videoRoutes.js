@@ -30,6 +30,7 @@ router.post("/league/create", limiter, leagueController.leagueCreateVoteRecord);
 router.put("/league/record", limiter, leagueController.leagueVideoVote);
 router.get(
   "/league/getvotes/:valFormId",
+  limiter,
   leagueController.getLeagueVotesByValFormId
 );
 
