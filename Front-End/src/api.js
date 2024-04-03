@@ -1,8 +1,8 @@
 // Server Testt
-const root = 'https://rankriddler-test-backend.onrender.com';
+// const root = process.env.REACT_APP_SOCKET_URL
 
 // Development
-//  const root = 'http://localhost:3001';
+  const root = 'http://localhost:3001';
 
 const API = {
   BugSubmit: `${root}/form/bug`,
