@@ -21,8 +21,5 @@ router.get("/user/:uuid", limiter, getOneUserByUuid);
 router.post("/createStats", limiter, userGameStatsController.addGameRound);
 router.get("/stats", limiter, userGameStatsController.getUserStats);
 
-
-
-
 router.put("/updatepoints/:uuid", limiter, AddPointByUsername);
 module.exports = router;

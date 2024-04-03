@@ -2,7 +2,6 @@ const UserGameStats = require("../models/userGameStats");
 
 exports.addGameRound = async (req, res) => {
   const { game, username, correctGuess } = req.body;
-
   try {
     let stats = await UserGameStats.findOne({ game, username });
 
