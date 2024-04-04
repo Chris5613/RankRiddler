@@ -148,18 +148,46 @@ const Overwatch = () => {
     if (rank === selectedRank) {
       dispatch(overwatchActions.setResult(check));
       newPoint = 2;
+      let correct = true
       updatePoints(2, userId);
+      updateUserStats(correct)
     } else if (distance === 1) {
       dispatch(overwatchActions.setResult(wrong));
       newPoint = 1;
+      let correct = false
       updatePoints(1, userId);
+      updateUserStats(correct)
     } else {
       dispatch(overwatchActions.setResult(wrong));
+      let correct = false
+      updateUserStats(correct)
     }
     const newScore = score + newPoint;
     dispatch(overwatchActions.setPoint(newPoint));
     dispatch(overwatchActions.setScore(newScore));
   };
+
+  const updateUserStats = async (correctGuess) => {
+    try {
+      const response = await fetch (`${API.CreateStats}` , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          game: 'overwatch',
+          username: localStorage.getItem('username'),
+          correctGuess: correctGuess
+        }),
+    })
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
     const fetchVideos = async () => {

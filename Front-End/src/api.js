@@ -44,6 +44,9 @@ const API = {
 
   MultiplayerWon: `${root}/multiplayerwon`, // Needs username in body
   MultiplayerLost: `${root}/multiplayerlost`, // Needs username in body
+
+  CreateStats: `${root}/createStats`,
+  GetStats:  `${root}/stats`,
 };
 
 export default API;

@@ -173,7 +173,7 @@ const Valorant = () => {
 
   const updateUserStats = async (correctGuess) => {
     try {
-      const response = await fetch ("http://localhost:3001/createStats" , {
+      const response = await fetch (`${API.CreateStats}` , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

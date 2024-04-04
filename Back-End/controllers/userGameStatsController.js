@@ -33,16 +33,27 @@ exports.addGameRound = async (req, res) => {
 
 
 exports.getUserStats = async (req, res) => {
-  const { game, username } = req.query;
+  const { username } = req.params;
+  const games = ['valorant', 'csgo', 'overwatch', 'league'];
 
   try {
-    const stats = await UserGameStats.findOne({ game, username });
+    const statsPromises = games.map(game =>
+      UserGameStats.findOne({ game, username })
+    );
 
-    if (!stats) {
+    const statsResults = await Promise.all(statsPromises);
+    const stats = statsResults.filter(stat => stat !== null);
+
+    if (stats.length === 0) {
       return res.status(404).json({ message: "Stats not found" });
     }
 
-    res.json(stats);
+    const aggregatedStats = stats.reduce((acc, currentStat) => {
+      acc[currentStat.game] = currentStat;
+      return acc;
+    }, {});
+
+    res.json(aggregatedStats);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
