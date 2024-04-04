@@ -18,6 +18,26 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    const fetchUserStats = async () => {
+      try {
+        const response = await fetch(`${API.GetStats}/${username}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const stats = await response.json();
+        setUserStats(stats);
+      } catch (error) {
+        console.error('Failed to load user stats:', error);
+      }
+    };
+
+    fetchUserStats();
+  }, [username]);
+
+
+  useEffect(() => {
     const fetchProfileData = async () => {
       try {
         const response = await fetch(`${API.GetUserByUuid}/` + uuid, {
@@ -46,33 +66,15 @@ const Profile = () => {
     fetchProfileData();
   }, [uuid]);
 
-  useEffect(() => {
-    const fetchUserStats = async () => {
-      try {
-        const response = await fetch(`${API.GetStats}/${username}`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (!response.ok) throw new Error('Failed to fetch data');
-        const stats = await response.json();
-        setUserStats(stats);
-        console.log(stats)
-      } catch (error) {
-        console.error('Failed to load user stats:', error);
-      }
-    };
-
-    fetchUserStats();
-  }, [username]);
-
   if (loading) {
     return (
-      <div className="profile-container">
+      <div className="loader-container">
         <Loader />
       </div>
     );
   }
+
+  console.log(userStats)
 
   return (
     <>
@@ -115,9 +117,9 @@ const Profile = () => {
             <GameStatBox 
               src="https://m.media-amazon.com/images/M/MV5BNmNhM2NjMTgtNmIyZC00ZmVjLTk4YWItZmZjNGY2NThiNDhkXkEyXkFqcGdeQXVyODU4MDU1NjU@._V1_FMjpg_UX1000_.jpg"
               game="Val" 
-              roundsPlayed={userStats.valorant.roundsPlayed} 
-              accuracy={userStats.valorant.accuracy} 
-              correctGuesses={userStats.valorant.correctGuesses}
+              roundsPlayed={userStats.valorant?.roundsPlayed} 
+              accuracy={userStats.valorant?.accuracy} 
+              correctGuesses={userStats.valorant?.correctGuesses}
             />
             <GameStatBox 
               src="https://howlongtobeat.com/games/5203_League_of_Legends.jpg" 
