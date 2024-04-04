@@ -281,4 +281,7 @@ input:checked + .slider .off
   border-radius: 50%;}
 
 
-
+.stats-h2 {
+  margin-top: 4rem;
+  margin-right: 30rem;
+}

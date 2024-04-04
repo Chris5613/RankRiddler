@@ -42,16 +42,11 @@ exports.getUserStats = async (req, res) => {
     );
 
     const statsResults = await Promise.all(statsPromises);
-    const stats = statsResults.filter(stat => stat !== null);
+    const aggregatedStats = {};
 
-    if (stats.length === 0) {
-      return res.status(404).json({ message: "Stats not found" });
-    }
-
-    const aggregatedStats = stats.reduce((acc, currentStat) => {
-      acc[currentStat.game] = currentStat;
-      return acc;
-    }, {});
+    statsResults.forEach((stat, index) => {
+      aggregatedStats[games[index]] = stat || null;
+    });
 
     res.json(aggregatedStats);
   } catch (error) {
