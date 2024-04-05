@@ -299,10 +299,10 @@ input:checked + .slider .off
 
 .toggle-container {
   position: relative;
-  width: 700px; /* Total width */
-  height: 50px; /* Total height */
-  border-radius: 25px; /* Rounded corners */
-  overflow: hidden; /* Ensures overflow content is not visible */
+  width: 700px; 
+  height: 50px; 
+  border-radius: 25px; 
+  overflow: hidden; 
   cursor: pointer;
   display: flex;
 }
@@ -314,8 +314,8 @@ input:checked + .slider .off
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s ease;
-  font-size: 20px; /* Adjust as needed */
-  color: white; /* Text color */
+  font-size: 20px; 
+  color: white; 
   width: 50%;
 }
 
@@ -338,3 +338,54 @@ input:checked + .slider .off
   background-color: #ffffff; 
   color: black;
 }
+
+.match-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 620px;
+  margin-top: 4rem;
+}
+
+.match-box  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centers items vertically */
+  width: 90%; 
+  background-color: #211e25;
+  height: 90px;
+  border-radius: 25px;
+}
+
+.match-box h2 {
+  margin-left: 1rem;
+}
+
+.match-participant, .match-score, .match-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-participant {
+  justify-content: flex-start; /* Aligns 'Admin vs Mao' to the left */
+  flex-grow: 1; /* Allows this div to grow and occupy available space */
+}
+
+.match-score {
+  flex-grow: 1; /* Allows the score to occupy the middle space */
+  justify-content: center; /* Centers '1 - 10' horizontally */
+  width: 20%;
+}
+
+.match-result {
+  flex-grow: 1; /* Allows 'LOSS' to grow and align to the far right */
+  justify-content: flex-end; /* Aligns 'LOSS' to the right */
+  color: red; /* Makes the text color red */
+  margin-right: 3rem;
+}
+
+
+/* #efd9d7 */
+/* #e3ede7 */

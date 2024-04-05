@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Loader from '../Loader/Loader';
 import GameStatBox from './GameStatBox';
+import MatchHistoryBox from './MatchHistoryBox';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -46,9 +47,9 @@ const Profile = () => {
   }, [uuid]);
 
   useEffect(() => {
-    if (username) { // Ensure username is not empty
+    if (username) { 
       const fetchUserStats = async () => {
-        setLoadingStats(true); // Start loading user stats
+        setLoadingStats(true); 
         try {
           const response = await fetch(`${API.GetStats}/${username}`, {
             headers: {
@@ -61,7 +62,7 @@ const Profile = () => {
         } catch (error) {
           console.error('Failed to load user stats:', error);
         } finally {
-          setLoadingStats(false); // Finish loading user stats
+          setLoadingStats(false); 
         }
       };
 
@@ -69,13 +70,15 @@ const Profile = () => {
     }
   }, [username]);
 
-  if (loading || loadingStats) { // Check both loading states
+  if (loading || loadingStats) { 
     return (
       <div className="loader-container">
         <Loader />
       </div>
     );
   }
+
+  console.log(profileData)
 
   return (
     <>
@@ -153,17 +156,23 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div class="top-right">
+      <div className="top-right">
         <div className="toggle-container">
           <div className={`toggle-button one ${!isToggled ? 'active' : ''}`} onClick={() => setIsToggled(false)}>Match History</div>
           <div className={`toggle-button two ${isToggled ? 'active' : ''}`} onClick={() => setIsToggled(true)}>Wins</div>
         </div>
         {!isToggled ? (
 
-            <p>Match History</p>
-            ) : 
-            <p>hello1</p>
-            }
+          <div className="match-box-container" >
+            <MatchHistoryBox/>
+            <MatchHistoryBox/>
+            <MatchHistoryBox/>
+            <MatchHistoryBox/>
+            <MatchHistoryBox/>
+          </div>
+          ) : 
+          <p>hello1</p>
+        }
       </div>
     </>
   );
