@@ -162,12 +162,13 @@ const Profile = () => {
           <div className={`toggle-button two ${isToggled ? 'active' : ''}`} onClick={() => setIsToggled(true)}>Wins</div>
         </div>
         {!isToggled ? (
-
           <div className="match-box-container" >
-            <MatchHistoryBox username={username}/>
+            <MatchHistoryBox username={username} toggle={isToggled}/>
           </div>
           ) : 
-          <p>hello1</p>
+          <div className="match-box-container" >
+            <MatchHistoryBox username={username} toggle={isToggled}/>
+          </div>
         }
       </div>
     </>

@@ -26,7 +26,8 @@ const getUserHistory = async (req, res) => {
 };
 
 const getUserWins = async (req, res) => {
-  const { username } = req.body;
+  const { username } = req.params;
+  ;
   try {
     const matches = await match.find({winner: username});
     res.json(matches);

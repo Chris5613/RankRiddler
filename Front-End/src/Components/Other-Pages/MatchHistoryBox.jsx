@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import API from '../../api';
 
-const MatchHistoryBox = ({ username }) => {
+const MatchHistoryBox = ({ username, toggle }) => {
   const [matchStats, setMatchStats] = useState([]);
+  const [userWins, setUserWins] = useState([]);
 
   const gameImageUrls = {
     valorant: require('../../Assets/Match-History-Icons/tiny_val_logo.png'), 
@@ -49,25 +50,70 @@ const MatchHistoryBox = ({ username }) => {
     fetchMatchHistory();
   }, [username]);
 
+  useEffect(() => {
+    const fetchUserWins = async () => {
+      try {
+        const response = await fetch(`${API.UserWins}/${username}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        const sortedMatches = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 5);
+        setUserWins(sortedMatches);
+      } catch (error) {
+        console.error("Failed to fetch match history:", error);
+      }
+    }
+    fetchUserWins()
+  }, [username]);
 
   return (
     <>
-      {matchStats.map((match, index) => (
-        <div key={index} className='match-box'>
-          <div className='match-participant'>
-            <h2>Vs</h2>
-            <h2>{match.opponent}</h2>
-          </div>
-          <img src={gameImageUrls[match.game]} alt={`${match.game} logo`} width={100}/>
-          <div className='match-result'>
-            <h2 style={{ color: match.winner === username ? 'green' : 'red' }}>
-              {match.winner === username ? 'WIN' : 'LOSS'}
-            </h2>
-          </div>
-        </div>
-      ))}
+      {toggle ? (
+        <>
+          {userWins.length > 0 ? (
+            userWins.map((match, index) => (
+              <div key={index} className='match-box'>
+                <div className='match-participant'>
+                  <h2>Vs</h2>
+                  <h2>{match.player1 === username ? match.player2 : match.player1}</h2>
+                </div>
+                <img src={gameImageUrls[match.game]} alt={`${match.game} logo`} width={100}/>
+                <div className='match-result'>
+                  <h2 style={{ color: 'green' }}>WIN</h2>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h2 className='stats-h2'>User has no wins.</h2>
+          )}
+        </>
+      ) : (
+        <>
+          {matchStats.length > 0 ? (
+            matchStats.map((match, index) => (
+              <div key={index} className='match-box'>
+                <div className='match-participant'>
+                  <h2>Vs</h2>
+                  <h2>{match.player1 === username ? match.player2 : match.player1}</h2>
+                </div>
+                <img src={gameImageUrls[match.game]} alt={`${match.game} logo`} width={100}/>
+                <div className='match-result'>
+                  <h2 style={{ color: match.winner === username ? 'green' : 'red' }}>
+                    {match.winner === username ? 'WIN' : 'LOSS'}
+                  </h2>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h2 className='stats-h2'>User has no history.</h2>
+          )}
+        </>
+      )}
     </>
   );
-};
+}
 
 export default MatchHistoryBox;

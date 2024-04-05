@@ -31,7 +31,7 @@ router.put("/updatepoints/:uuid", limiter, AddPointByUsername);
 
 router.get("/matches", limiter, getAllMatches);
 router.get("/history/:username", limiter, getUserHistory);
-router.get("/wins", limiter, getUserWins);
+router.get("/wins/:username", limiter, getUserWins);
 router.post("/recordMatch", limiter, recordMatchWinner);
 
 

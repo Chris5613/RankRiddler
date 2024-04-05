@@ -342,20 +342,20 @@ input:checked + .slider .off
 .match-box-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  height: 620px;
-  margin-top: 4rem;
+  height: 500px;
+  margin-top: 2rem;
 }
 
 .match-box  {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Centers items vertically */
+  align-items: center; 
   width: 90%; 
   background-color: #211e25;
   height: 90px;
   border-radius: 25px;
+  margin-top: 2rem;
 }
 
 .match-box h2 {
