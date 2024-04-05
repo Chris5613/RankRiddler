@@ -29,7 +29,6 @@ exports.videoVote = async (req, res) => {
     }
 
     video.markModified("votes");
-    console.log(video);
     await video.save();
     res.status(200).send("Vote updated successfully");
   } catch (error) {

@@ -1,14 +1,23 @@
 .profile-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 5%;
-  margin-bottom: 10%;
   width: 100%;
   height: 100%;
-  text-align: center;
 }
 
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-right-container {
+  margin-top: 2rem;
+  margin-left: 1rem;
+}
 
 .profile-container h1 {
   font-size: 3rem;
@@ -22,18 +31,12 @@
   flex-direction: center;
   align-items: center;
   justify-content: center;
-  width: 35%;
+  width: 25%;
   height: 100px;
-  background-color: #4a5568;
+  background-color: #2a2d31;
   border-radius: 10px;
 }
 
-.stats {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
 
 .stats-container h2 {
   font-size: 2rem;
@@ -42,6 +45,55 @@
   margin-left: 2rem;
   text-align: center;
 }
+
+.profile-bottom-left .game-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  max-width: 1000px; 
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.profile-bottom-left .stat-box {
+  flex: 1 1 calc(50% - 20px);
+  height: 230px;
+  background-color: #211e25;
+  color: #fff;
+  display: flex;
+  border-radius: 8px;
+}
+
+.stat-box p {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  font-size: 20px;
+}
+
+.profile-bottom-left h1 {
+  font-size: 28px;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.game-stat-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a2d31;
+  text-align: center;
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 4rem;
+  height: 80px;
+}
+
+.game-stat-container h3 {
+  margin-left: 1rem;
+}
+
+
 
 .loading {
   display: flex;
@@ -70,6 +122,11 @@
 
   .stats {
     margin-bottom: 10px;
+  }
+
+  .stats-h2 {
+    margin-bottom: 4rem;
+    margin-left: 10rem;
   }
 }
 
@@ -229,4 +286,103 @@ input:checked + .slider .off
   border-radius: 50%;}
 
 
+.stats-h2 {
+  margin-top: 4rem;
+  margin-right: 30rem;
+}
+
+.top-right {
+  position: fixed;
+  top: 90px;
+  right: 60px;
+}
+
+.toggle-container {
+  position: relative;
+  width: 700px; 
+  height: 50px; 
+  border-radius: 25px; 
+  overflow: hidden; 
+  cursor: pointer;
+  display: flex;
+}
+
+.toggle-button {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  font-size: 20px; 
+  color: white; 
+  width: 50%;
+}
+
+.toggle-button.one.active {
+  background-color: #262926; 
+  color: white;
+}
+
+.toggle-button.one {
+  background-color: #ffffff; 
+  color: black;
+}
+
+.toggle-button.two.active {
+  background-color: #262926;
+  color: white;
+}
+
+.toggle-button.two {
+  background-color: #ffffff; 
+  color: black;
+}
+
+.match-box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  margin-top: 2rem;
+}
+
+.match-box  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  width: 90%; 
+  background-color: #211e25;
+  height: 90px;
+  border-radius: 25px;
+  margin-top: 2rem;
+}
+
+.match-box h2 {
+  margin-left: 1rem;
+}
+
+.match-participant, .match-score, .match-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-participant {
+  justify-content: flex-start; 
+  flex-grow: 1; 
+}
+
+.match-score {
+  flex-grow: 1; 
+  justify-content: center; 
+  width: 20%;
+}
+
+.match-result {
+  flex-grow: 1; 
+  justify-content: flex-end; 
+  color: red; 
+  margin-right: 3rem;
+}
 

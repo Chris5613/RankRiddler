@@ -12,10 +12,11 @@ const getAllMatches = async (req, res) => {
 }
 
 const getUserHistory = async (req, res) => {
-  const { user } = req.body;
+  const { username } = req.params;
+
   try {
     const matches = await match.find({
-      $or: [{ player1: user }, { player2: user }]
+      $or: [{ player1: username }, { player2: username }]
     });
     res.json(matches);
   } catch (err) {
@@ -25,9 +26,10 @@ const getUserHistory = async (req, res) => {
 };
 
 const getUserWins = async (req, res) => {
-  const { user } = req.body;
+  const { username } = req.params;
+  ;
   try {
-    const matches = await match.find({winner: user});
+    const matches = await match.find({winner: username});
     res.json(matches);
   } catch (err) {
     console.log(err);
@@ -36,12 +38,13 @@ const getUserWins = async (req, res) => {
 };
 
 const recordMatchWinner = async (req, res) => {
-  const { username, opponent, winner } = req.body;
+  const { username, opponent, winner,game } = req.body;
   try {
     const newRecord = new match({
       player1: username,
       player2: opponent,
-      winner: winner
+      winner: winner,
+      game: game
     });
     const savedRecord = await newRecord.save();
     res.status(201).json(savedRecord);

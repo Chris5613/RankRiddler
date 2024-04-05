@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   },
   points: {
     type: Number,
-    default: 100,
+    default: 0,
   },
   totalRounds: {
     type: Number,

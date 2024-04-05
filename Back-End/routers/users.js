@@ -11,6 +11,7 @@ const {
   getUserWins,
   recordMatchWinner,
 } = require("../controllers/matchController")
+const userGameStatsController = require("../controllers/userGameStatsController")
 
 const router = express.Router();
 const rateLimit = require("express-rate-limit");
@@ -23,11 +24,14 @@ router.get("/allusers", limiter, getAllUsers);
 router.post("/saveuser", limiter, createUser);
 router.get("/user/:uuid", limiter, getOneUserByUuid);
 
+router.post("/createStats", limiter, userGameStatsController.addGameRound);
+router.get("/stats/:username", limiter, userGameStatsController.getUserStats);
+
 router.put("/updatepoints/:uuid", limiter, AddPointByUsername);
 
 router.get("/matches", limiter, getAllMatches);
-router.get("/history", limiter, getUserHistory);
-router.get("/wins", limiter, getUserWins);
+router.get("/history/:username", limiter, getUserHistory);
+router.get("/wins/:username", limiter, getUserWins);
 router.post("/recordMatch", limiter, recordMatchWinner);
 
 
