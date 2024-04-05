@@ -164,11 +164,7 @@ const Profile = () => {
         {!isToggled ? (
 
           <div className="match-box-container" >
-            <MatchHistoryBox/>
-            <MatchHistoryBox/>
-            <MatchHistoryBox/>
-            <MatchHistoryBox/>
-            <MatchHistoryBox/>
+            <MatchHistoryBox username={username}/>
           </div>
           ) : 
           <p>hello1</p>

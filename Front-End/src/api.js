@@ -47,6 +47,8 @@ const API = {
 
   CreateStats: `${root}/createStats`,
   GetStats:  `${root}/stats`,
+
+  UserMatchHistory: `${root}/history`,
 };
 
 export default API;

@@ -3,15 +3,15 @@ const mongoose = require("mongoose");
 const matchHistory = new mongoose.Schema({
   player1: {
     type: String,
-    unique: true,
   },
   player2: {
-    type: Number,
-    unique: true
+    type: String,
   },
   winner: {
-    type: Number,
-    unique: true
+    type: String,
+  },
+  game: {
+    type: String,
   },
   createdAt: { type: Date, default: Date.now },
 });

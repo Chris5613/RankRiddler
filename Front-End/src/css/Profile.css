@@ -369,23 +369,20 @@ input:checked + .slider .off
 }
 
 .match-participant {
-  justify-content: flex-start; /* Aligns 'Admin vs Mao' to the left */
-  flex-grow: 1; /* Allows this div to grow and occupy available space */
+  justify-content: flex-start; 
+  flex-grow: 1; 
 }
 
 .match-score {
-  flex-grow: 1; /* Allows the score to occupy the middle space */
-  justify-content: center; /* Centers '1 - 10' horizontally */
+  flex-grow: 1; 
+  justify-content: center; 
   width: 20%;
 }
 
 .match-result {
-  flex-grow: 1; /* Allows 'LOSS' to grow and align to the far right */
-  justify-content: flex-end; /* Aligns 'LOSS' to the right */
-  color: red; /* Makes the text color red */
+  flex-grow: 1; 
+  justify-content: flex-end; 
+  color: red; 
   margin-right: 3rem;
 }
 
-
-/* #efd9d7 */
-/* #e3ede7 */
