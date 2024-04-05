@@ -66,7 +66,7 @@
 }
 
 .stat-box p {
-  margin-left: 1rem;
+  margin-left: 2rem;
   margin-top: 1rem;
   font-size: 20px;
 }
@@ -122,6 +122,11 @@
 
   .stats {
     margin-bottom: 10px;
+  }
+
+  .stats-h2 {
+    margin-bottom: 4rem;
+    margin-left: 10rem;
   }
 }
 
@@ -284,4 +289,52 @@ input:checked + .slider .off
 .stats-h2 {
   margin-top: 4rem;
   margin-right: 30rem;
+}
+
+.top-right {
+  position: fixed;
+  top: 90px;
+  right: 60px;
+}
+
+.toggle-container {
+  position: relative;
+  width: 700px; /* Total width */
+  height: 50px; /* Total height */
+  border-radius: 25px; /* Rounded corners */
+  overflow: hidden; /* Ensures overflow content is not visible */
+  cursor: pointer;
+  display: flex;
+}
+
+.toggle-button {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  font-size: 20px; /* Adjust as needed */
+  color: white; /* Text color */
+  width: 50%;
+}
+
+.toggle-button.one.active {
+  background-color: #262926; 
+  color: white;
+}
+
+.toggle-button.one {
+  background-color: #ffffff; 
+  color: black;
+}
+
+.toggle-button.two.active {
+  background-color: #262926;
+  color: white;
+}
+
+.toggle-button.two {
+  background-color: #ffffff; 
+  color: black;
 }

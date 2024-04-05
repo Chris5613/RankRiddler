@@ -11,6 +11,7 @@ const Profile = () => {
   const [accuracy, setAccuracy] = useState(0);
   const [userStats, setUserStats] = useState(null); 
   const [username, setUsername] = useState('');
+  const [isToggled, setIsToggled] = useState(false);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const goback = () => {
@@ -117,7 +118,6 @@ const Profile = () => {
             {userStats.valorant ? (
               <GameStatBox 
                 src="https://m.media-amazon.com/images/M/MV5BNmNhM2NjMTgtNmIyZC00ZmVjLTk4YWItZmZjNGY2NThiNDhkXkEyXkFqcGdeQXVyODU4MDU1NjU@._V1_FMjpg_UX1000_.jpg"
-                game="Val" 
                 roundsPlayed={userStats.valorant.roundsPlayed} 
                 accuracy={userStats.valorant.accuracy} 
                 correctGuesses={userStats.valorant.correctGuesses}
@@ -126,7 +126,6 @@ const Profile = () => {
             {userStats.league ? (
               <GameStatBox 
                 src="https://howlongtobeat.com/games/5203_League_of_Legends.jpg" 
-                game="LoL" 
                 roundsPlayed={userStats.league.roundsPlayed} 
                 accuracy={userStats.league.accuracy} 
                 correctGuesses={userStats.league.correctGuesses}
@@ -134,8 +133,7 @@ const Profile = () => {
             ) : null}
             {userStats.overwatch ? (
               <GameStatBox 
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Overwatch_cover_art.jpg/220px-Overwatch_cover_art.jpg" 
-                game="OW" 
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Overwatch_cover_art.jpg/220px-Overwatch_cover_art.jpg"  
                 roundsPlayed={userStats.overwatch.roundsPlayed} 
                 accuracy={userStats.overwatch.accuracy} 
                 correctGuesses={userStats.overwatch.correctGuesses}
@@ -144,7 +142,6 @@ const Profile = () => {
             {userStats.csgo ? (
               <GameStatBox 
                 src="https://static.displate.com/270x380/displate/2023-06-12/6e217abc7f5bb5d0dc56e68752193a11_5c51574f5f2f216f9ef25a0d08fa6400.jpg" 
-                game="CS2" 
                 roundsPlayed={userStats.csgo.roundsPlayed} 
                 accuracy={userStats.csgo.accuracy} 
                 correctGuesses={userStats.csgo.correctGuesses}
@@ -155,6 +152,18 @@ const Profile = () => {
             )}
           </div>
         </div>
+      </div>
+      <div class="top-right">
+        <div className="toggle-container">
+          <div className={`toggle-button one ${!isToggled ? 'active' : ''}`} onClick={() => setIsToggled(false)}>Match History</div>
+          <div className={`toggle-button two ${isToggled ? 'active' : ''}`} onClick={() => setIsToggled(true)}>Wins</div>
+        </div>
+        {!isToggled ? (
+
+            <p>Match History</p>
+            ) : 
+            <p>hello1</p>
+            }
       </div>
     </>
   );
