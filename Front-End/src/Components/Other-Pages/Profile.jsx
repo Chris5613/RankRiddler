@@ -78,8 +78,6 @@ const Profile = () => {
     );
   }
 
-  console.log(profileData)
-
   return (
     <>
       <button
