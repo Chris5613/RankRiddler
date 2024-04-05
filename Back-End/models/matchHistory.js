@@ -13,6 +13,7 @@ const matchHistory = new mongoose.Schema({
     type: Number,
     unique: true
   },
+  createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("match", matchHistory);
