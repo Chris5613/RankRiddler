@@ -11,7 +11,6 @@ import League from './Components/Game-pages/League';
 import Csgo from './Components/Game-pages/Csgo';
 import Submit from './Components/Other-Pages/Main-Components/Submit';
 import Leaderboard from './Components/Other-Pages/Main-Components/Leaderboard';
-import Howto from './Components/Other-Pages/Main-Components/Howto';
 import Settings from './Components/Other-Pages/Main-Components/Settings';
 import Error from './Components/Error';
 import Apex from './Components/Game-pages/Apex';
