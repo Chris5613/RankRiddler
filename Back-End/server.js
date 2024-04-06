@@ -25,7 +25,11 @@ const io = socketIo(server, {
   },
 });
 
-let playersWaiting = [];
+let valQueue = [];
+let leagueQueue = [];
+let overwatchQueue = [];
+let cs2Queue = [];
+
 let queueResetTimer = null;
 
 const resetQueue = () => {
@@ -48,16 +52,36 @@ const startQueueResetTimer = () => {
 io.on("connection", (socket) => {
   socket.on("playGame", (data) => {
     const playerName = data.name;
-    const isPlayerInQueue = playersWaiting.some(
-      (player) => player.name === playerName
-    );
+    const game = data.game;
+    let isPlayerInQueue;
+
+    switch (game) {
+      case 'valorant':
+        isPlayerInQueue = valQueue.some((player) => player.name === playerName);
+        if (!isPlayerInQueue) valQueue.push({ name: playerName, id: socket.id });
+        break;
+      case 'league':
+        isPlayerInQueue = leagueQueue.some((player) => player.name === playerName);
+        if (!isPlayerInQueue) leagueQueue.push({ name: playerName, id: socket.id });
+        break;
+      case 'overwatch':
+        isPlayerInQueue = overwatchQueue.some((player) => player.name === playerName);
+        if (!isPlayerInQueue) overwatchQueue.push({ name: playerName, id: socket.id });
+        break;
+      default: // Assuming 'cs2' or any other game falls into this default case
+        isPlayerInQueue = cs2Queue.some((player) => player.name === playerName);
+        if (!isPlayerInQueue) cs2Queue.push({ name: playerName, id: socket.id });
+        break;
+    }
 
     if (!isPlayerInQueue) {
-      playersWaiting.push({ name: playerName, id: socket.id });
-
-      console.log(playerName + " has been added to queue");
+      console.log(playerName + " has been added to the " + game + " queue");
       startQueueResetTimer();
+    } else {
+      console.log(playerName + " is already in the " + game + " queue.");
     }
+  });
+
 
     if (playersWaiting.length >= 2) {
       const [player1, player2] = playersWaiting.splice(0, 2);
@@ -65,7 +89,7 @@ io.on("connection", (socket) => {
       io.to(player2.id).emit("matchFound", { opponent: player1.name });
       console.log(player1 + " has been match with " + player2);
     }
-  });
+
 
   socket.on("disconnectPlayer", () => {
     const index = playersWaiting.findIndex((player) => player.id === socket.id);
@@ -74,6 +98,7 @@ io.on("connection", (socket) => {
     }
   });
 });
+
 
 app.use(
   cors({

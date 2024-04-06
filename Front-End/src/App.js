@@ -25,6 +25,7 @@ import Overlay from './Components/Other-Pages/Side-Components/Overlay'
 import Loadingpage from './Components/Multiplayer/Loadingpage';
 import { SocketProvider } from './Components/SocketContext';
 import Gamepage from './Components/Multiplayer/Gamepage';
+import MultiplayerGameSelect from './Components/Multiplayer/MultiplayerGameSelect'
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/profile/:uuid" element={<Profile />} />
           <Route path="/multiplayer/loading" element={<Loadingpage />} />
           <Route path="/multiplayer/valorant" element={<Gamepage />} />
+          <Route path="/multiplayer/gameSelect" element={<MultiplayerGameSelect />} />
         </Routes>
       </BrowserRouter>
     </SocketProvider>
