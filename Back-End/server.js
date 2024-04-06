@@ -25,35 +25,47 @@ const io = socketIo(server, {
   },
 });
 
-let valQueue = [];
-let leagueQueue = [];
-let overwatchQueue = [];
-let cs2Queue = [];
+let valQueue = [], leagueQueue = [], overwatchQueue = [], cs2Queue = [];
+let queueTimers = { val: null, league: null, overwatch: null, cs2: null };
 
-let queueResetTimer = null;
-
-const resetAllQueues = () => {
-  console.log("Resetting all queues due to inactivity or insufficient players.");
-  valQueue = [];
-  leagueQueue = [];
-  overwatchQueue = [];
-  cs2Queue = [];
+const resetQueue = (queueName) => {
+  console.log(`Resetting ${queueName} queue due to inactivity.`);
+  if (queueName === 'val') valQueue = [];
+  else if (queueName === 'league') leagueQueue = [];
+  else if (queueName === 'overwatch') overwatchQueue = [];
+  else if (queueName === 'cs2') cs2Queue = [];
 };
 
-const startQueueResetTimer = () => {
-  if (queueResetTimer !== null) {
-    clearTimeout(queueResetTimer);
+const startQueueResetTimer = (queueName) => {
+  // Clear any existing timer for this queue
+  if (queueTimers[queueName]) {
+    clearTimeout(queueTimers[queueName]);
   }
-  queueResetTimer = setTimeout(resetAllQueues, 60000); // 60 seconds
+  
+  // Set a new timer for the queue
+  queueTimers[queueName] = setTimeout(() => {
+    resetQueue(queueName);
+    queueTimers[queueName] = null; // Clear the timer reference after executing
+  }, 60000); // 60 seconds
 };
 
-const matchPlayers = (queue) => {
+const matchPlayers = (queue, queueName) => {
   while (queue.length >= 2) {
     const player1 = queue.shift();
     const player2 = queue.shift();
-    io.to(player1.id).emit("matchFound", { opponent: player2.name, game: player1.game });
-    io.to(player2.id).emit("matchFound", { opponent: player1.name, game: player2.game });
-    console.log(`${player1.name} has been matched with ${player2.name} in ${player1.game}`);
+    io.to(player1.id).emit("matchFound", { opponent: player2.name, game: queueName });
+    io.to(player2.id).emit("matchFound", { opponent: player1.name, game: queueName });
+    console.log(`${player1.name} has been matched with ${player2.name} in ${queueName}`);
+  }
+  // If players remain in the queue after attempting to match, restart the timer
+  if (queue.length > 0) {
+    startQueueResetTimer(queueName);
+  } else {
+    // Clear the timer if no players are left in the queue
+    if (queueTimers[queueName]) {
+      clearTimeout(queueTimers[queueName]);
+      queueTimers[queueName] = null;
+    }
   }
 };
 
@@ -61,36 +73,40 @@ io.on("connection", (socket) => {
   socket.on("playGame", (data) => {
     const playerName = data.playerName;
     const game = data.game;
-    let isPlayerInQueue;
-    let targetQueue;
+    let targetQueue, queueName;
 
     switch (game) {
       case 'valorant':
         targetQueue = valQueue;
+        queueName = 'val';
         break;
       case 'league':
         targetQueue = leagueQueue;
+        queueName = 'league';
         break;
       case 'overwatch':
         targetQueue = overwatchQueue;
+        queueName = 'overwatch';
         break;
       case 'cs2':
         targetQueue = cs2Queue;
+        queueName = 'cs2';
         break;
       default:
         console.log(`Game ${game} is not supported.`);
         return;
     }
 
-    isPlayerInQueue = targetQueue.some((player) => player.name === playerName);
-
+    const isPlayerInQueue = targetQueue.some(player => player.name === playerName);
     if (!isPlayerInQueue) {
-      targetQueue.push({ name: playerName, id: socket.id, game: game });
-      console.log(playerName + " has been added to the " + game + " queue");
-      startQueueResetTimer();
-      matchPlayers(targetQueue); // Attempt to match players immediately
+      targetQueue.push({ name: playerName, id: socket.id });
+      console.log(`${playerName} has been added to the ${game} queue`);
+      matchPlayers(targetQueue, queueName); // Attempt to match immediately
+      if (targetQueue.length === 1) { // If this is the first player, start the timer
+        startQueueResetTimer(queueName);
+      }
     } else {
-      console.log(playerName + " is already in the " + game + " queue.");
+      console.log(`${playerName} is already in the ${game} queue.`);
     }
   });
 
