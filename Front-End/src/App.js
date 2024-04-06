@@ -6,25 +6,25 @@ import './css/Howtoplay.css';
 import './css/Profile.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Valorant from './Components/Game-pages/Valorant';
-import GameSelect from './Components/Other-Pages/GameSelect';
+import GameSelect from './Components/Other-Pages/Main-Components/GameSelect';
 import League from './Components/Game-pages/League';
 import Csgo from './Components/Game-pages/Csgo';
-import Submit from './Components/Other-Pages/Submit';
-import Leaderboard from './Components/Other-Pages/Leaderboard';
-import Howto from './Components/Other-Pages/Howto';
-import Settings from './Components/Other-Pages/Settings';
+import Submit from './Components/Other-Pages/Main-Components/Submit';
+import Leaderboard from './Components/Other-Pages/Main-Components/Leaderboard';
+import Settings from './Components/Other-Pages/Main-Components/Settings';
 import Error from './Components/Error';
 import Apex from './Components/Game-pages/Apex';
 import Rainbow from './Components/Game-pages/Rainbow';
 import Overwatch from './Components/Game-pages/Overwatch';
 import Fortnite from './Components/Game-pages/Fortnite';
 import Rocket from './Components/Game-pages/Rocket';
-import Profile from './Components/Other-Pages/Profile';
-import Main from './Components/Other-Pages/Main';
-import Overlay from './Components/Other-Pages/Overlay';
+import Profile from './Components/Other-Pages/Main-Components/Profile';
+import Main from './Components/Other-Pages/Main-Components/Main';
+import Overlay from './Components/Other-Pages/Side-Components/Overlay'
 import Loadingpage from './Components/Multiplayer/Loadingpage';
 import { SocketProvider } from './Components/SocketContext';
 import Gamepage from './Components/Multiplayer/Gamepage';
+import MultiplayerGameSelect from './Components/Multiplayer/MultiplayerGameSelect'
 
 function App() {
   return (
@@ -39,7 +39,6 @@ function App() {
           <Route path="/csgo" element={<Csgo />} />
           <Route path="/submit" element={<Submit />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/howto" element={<Howto />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<Error />} />
           <Route path="/apex" element={<Apex />} />
@@ -50,6 +49,7 @@ function App() {
           <Route path="/profile/:uuid" element={<Profile />} />
           <Route path="/multiplayer/loading" element={<Loadingpage />} />
           <Route path="/multiplayer/valorant" element={<Gamepage />} />
+          <Route path="/multiplayer/gameSelect" element={<MultiplayerGameSelect />} />
         </Routes>
       </BrowserRouter>
     </SocketProvider>

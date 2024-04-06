@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import API from '../../api';
+import API from '../../../api';
 
 const MatchHistoryBox = ({ username, toggle }) => {
   const [matchStats, setMatchStats] = useState([]);
   const [userWins, setUserWins] = useState([]);
 
   const gameImageUrls = {
-    valorant: require('../../Assets/Match-History-Icons/tiny_val_logo.png'), 
-    league: require('../../Assets/Match-History-Icons/lol.png'), 
-    overwatch: require('../../Assets/Match-History-Icons/ow.png'), 
-    cs2: require('../../Assets/Match-History-Icons/cs2.png'), 
+    valorant: require('../../../Assets/Match-History-Icons/tiny_val_logo.png'), 
+    league: require('../../../Assets/Match-History-Icons/lol.png'), 
+    overwatch: require('../../../Assets/Match-History-Icons/ow.png'), 
+    cs2: require('../../../Assets/Match-History-Icons/cs2.png'), 
   };
 
   useEffect(() => {

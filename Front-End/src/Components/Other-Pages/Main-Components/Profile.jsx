@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import API from '../../api';
-import Loader from '../Loader/Loader';
-import GameStatBox from './GameStatBox';
-import MatchHistoryBox from './MatchHistoryBox';
+import API from '../../../api';
+import Loader from '../../Loader/Loader';
+import GameStatBox from '../Side-Components/GameStatBox';
+import MatchHistoryBox from '../Side-Components/MatchHistoryBox';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);

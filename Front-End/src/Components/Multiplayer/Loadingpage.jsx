@@ -16,7 +16,7 @@ const Loadingpage = () => {
   const loading = useSelector((state) => state.multiplayer.loading);
   const username = useSelector((state) => state.multiplayer.username);
   const userId = useSelector((state) => state.settings.userId);
-  const [timeLeft, setTimeLeft] = useState(59);
+  const [timeLeft, setTimeLeft] = useState(60);
   const socket = useSocket();
   const navigate = useNavigate();
 
@@ -79,7 +79,7 @@ const Loadingpage = () => {
         icon: 'error',
         title: "Can't find a match.. Returning to menu",
       });
-      navigate('/');
+      navigate('/multiplayer/gameSelect');
     }
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
@@ -97,7 +97,7 @@ const Loadingpage = () => {
     socket.emit('disconnectPlayer');
     dispatch(multiplayerActions.setLoading(true));
     dispatch(multiplayerActions.setOpponent(''));
-    navigate('/');
+    navigate('/multiplayer/gameSelect');
   };
 
   return (
@@ -107,7 +107,7 @@ const Loadingpage = () => {
           <Loader />
           <p>{formatTime(timeLeft)}</p>
           <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
-            <NavLink to="/" className="navlink">
+            <NavLink to="/multiplayer/gameSelect" className="navlink">
               Leave Queue
             </NavLink>
           </button>

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from 'react-redux';
-import { settingsActions } from '../store/SettingsSlice';
-import API from '../../api';
+import { settingsActions } from '../../store/SettingsSlice';
+import API from '../../../api';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 

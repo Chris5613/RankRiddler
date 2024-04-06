@@ -14,11 +14,12 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { apexActions } from '../store/ApexSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import ReportButton from '../Other-Pages/reportButton';
+import ReportButton from '../Other-Pages/Side-Components/reportButton'
+import BackButton from '../Other-Pages/Side-Components/BackButton'
 import API from '../../api';
-import BackButton from '../Other-Pages/BackButton';
 
-const Csgo = () => {
+
+const Fortnite = () => {
   const dispatch = useDispatch();
   const selectedRank = useSelector((state) => state.apex.selectedRank);
   const isButtonDisabled = useSelector((state) => state.apex.isButtonDisabled);
@@ -273,4 +274,4 @@ const Csgo = () => {
   );
 };
 
-export default Csgo;
+export default Fortnite;

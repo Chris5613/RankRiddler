@@ -1,12 +1,12 @@
-import val from '../../Assets/HomePage-Icons/val.png';
-import csgo from '../../Assets/HomePage-Icons/csgo.png';
-import league from '../../Assets/HomePage-Icons/league.png';
-import overwatch from '../../Assets/HomePage-Icons/overwatch.png';
-import valorantImage from '../../Assets/HomePage-Icons/valorantImage.png';
-import leagueImage from '../../Assets/HomePage-Icons/leagueImage.png';
-import csgoImage from '../../Assets/HomePage-Icons/csgoImage.png';
-import ImageLink from './ImageLink';
-import overwatchImage from '../../Assets/HomePage-Icons/overwatchImage.png';
+import val from '../../../Assets/HomePage-Icons/val.png';
+import csgo from '../../../Assets/HomePage-Icons/csgo.png';
+import league from '../../../Assets/HomePage-Icons/league.png';
+import overwatch from '../../../Assets/HomePage-Icons/overwatch.png';
+import valorantImage from '../../../Assets/HomePage-Icons/valorantImage.png';
+import leagueImage from '../../../Assets/HomePage-Icons/leagueImage.png';
+import csgoImage from '../../../Assets/HomePage-Icons/csgoImage.png';
+import ImageLink from '../Side-Components/ImageLink'
+import overwatchImage from '../../../Assets/HomePage-Icons/overwatchImage.png';
 import { useNavigate } from 'react-router-dom';
 // import rocket from '../../Assets/HomePage-Icons/rocket.png';
 // import rocketImage from '../../Assets/HomePage-Icons/rocketImage.png';

@@ -1,4 +1,4 @@
-import API from '../../api';
+import API from '../../../api';
 import Swal from 'sweetalert2';
 
 const ReportButton = (props) => {

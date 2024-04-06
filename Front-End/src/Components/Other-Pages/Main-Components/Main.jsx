@@ -1,18 +1,15 @@
 import { useEffect } from 'react';
-import { useSocket } from '../SocketContext';
-import API from '../../api';
+import API from '../../../api';
 import { NavLink } from 'react-router-dom';
-import '../../css/multi.css';
-import logo from '../../Assets/Nav-Icons/logo.png';
-import SettingWheel from './Settingwheel';
-import {multiplayerActions} from '../store/MultiplayerSlice'
+import '../../../css/multi.css';
+import logo from '../../../Assets/Nav-Icons/logo.png';
+import SettingWheel from '../Side-Components/Settingwheel';
+import {multiplayerActions} from '../../store/MultiplayerSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import SpinningCoin from './SpinningCoin'
+import SpinningCoin from '../Side-Components/SpinningCoin';
 
 const Main = () => {
-  const username = useSelector((state) => state.multiplayer.username);
   const userId = useSelector((state) => state.settings.userId);
-  const socket = useSocket();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,11 +25,6 @@ const Main = () => {
     };
     getOneUser(userId);
   }, [userId,dispatch]);
-
-  const handlePlayClick = () => {
-    const playerName = username;
-    socket.emit('playGame', { name: playerName });
-  };
 
   return (
     <div className="content-container">
@@ -54,8 +46,8 @@ const Main = () => {
             Singleplayer
           </NavLink>
         </button>
-        <NavLink to={`/multiplayer/loading`} className="navlink-btn">
-          <button onClick={handlePlayClick} className="game-btn">
+        <NavLink to={`/multiplayer/gameSelect`} className="navlink-btn">
+          <button className="game-btn">
             Multiplayer
           </button>
         </NavLink>

@@ -14,9 +14,9 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { rocketActions } from '../store/RocketSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import ReportButton from '../Other-Pages/reportButton';
+import ReportButton from '../Other-Pages/Side-Components/reportButton'
+import BackButton from '../Other-Pages/Side-Components/BackButton'
 import API from '../../api';
-import BackButton from '../Other-Pages/BackButton';
 
 const Csgo = () => {
   const dispatch = useDispatch();

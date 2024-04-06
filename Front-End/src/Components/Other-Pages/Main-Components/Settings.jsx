@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { settingsActions } from '../store/SettingsSlice';
-import API from '../../api';
+import { settingsActions } from '../../store/SettingsSlice';
+import API from '../../../api';
 
 const Settings = () => {
   const dispatch = useDispatch();
