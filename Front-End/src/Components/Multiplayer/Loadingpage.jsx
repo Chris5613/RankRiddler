@@ -97,7 +97,7 @@ const Loadingpage = () => {
     socket.emit('disconnectPlayer');
     dispatch(multiplayerActions.setLoading(true));
     dispatch(multiplayerActions.setOpponent(''));
-    navigate('/');
+    navigate('/multiplayer/gameSelect');
   };
 
   return (
@@ -107,7 +107,7 @@ const Loadingpage = () => {
           <Loader />
           <p>{formatTime(timeLeft)}</p>
           <button onClick={handleLeaveQueueClick} className="leave-queue-btn">
-            <NavLink to="/" className="navlink">
+            <NavLink to="/multiplayer/gameSelect" className="navlink">
               Leave Queue
             </NavLink>
           </button>

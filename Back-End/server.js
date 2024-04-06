@@ -32,73 +32,85 @@ let cs2Queue = [];
 
 let queueResetTimer = null;
 
-const resetQueue = () => {
-  console.log("Resetting queue due to insufficient players.");
-  playersWaiting = [];
+const resetAllQueues = () => {
+  console.log("Resetting all queues due to inactivity or insufficient players.");
+  valQueue = [];
+  leagueQueue = [];
+  overwatchQueue = [];
+  cs2Queue = [];
 };
 
 const startQueueResetTimer = () => {
   if (queueResetTimer !== null) {
     clearTimeout(queueResetTimer);
   }
-  queueResetTimer = setTimeout(() => {
-    if (playersWaiting.length < 2) {
-      resetQueue();
-    }
-    queueResetTimer = null;
-  }, 60000);
+  queueResetTimer = setTimeout(resetAllQueues, 60000); // 60 seconds
+};
+
+const matchPlayers = (queue) => {
+  while (queue.length >= 2) {
+    const player1 = queue.shift();
+    const player2 = queue.shift();
+    io.to(player1.id).emit("matchFound", { opponent: player2.name, game: player1.game });
+    io.to(player2.id).emit("matchFound", { opponent: player1.name, game: player2.game });
+    console.log(`${player1.name} has been matched with ${player2.name} in ${player1.game}`);
+  }
 };
 
 io.on("connection", (socket) => {
   socket.on("playGame", (data) => {
-    const playerName = data.name;
+    const playerName = data.playerName;
     const game = data.game;
     let isPlayerInQueue;
+    let targetQueue;
 
     switch (game) {
       case 'valorant':
-        isPlayerInQueue = valQueue.some((player) => player.name === playerName);
-        if (!isPlayerInQueue) valQueue.push({ name: playerName, id: socket.id });
+        targetQueue = valQueue;
         break;
       case 'league':
-        isPlayerInQueue = leagueQueue.some((player) => player.name === playerName);
-        if (!isPlayerInQueue) leagueQueue.push({ name: playerName, id: socket.id });
+        targetQueue = leagueQueue;
         break;
       case 'overwatch':
-        isPlayerInQueue = overwatchQueue.some((player) => player.name === playerName);
-        if (!isPlayerInQueue) overwatchQueue.push({ name: playerName, id: socket.id });
+        targetQueue = overwatchQueue;
         break;
-      default: // Assuming 'cs2' or any other game falls into this default case
-        isPlayerInQueue = cs2Queue.some((player) => player.name === playerName);
-        if (!isPlayerInQueue) cs2Queue.push({ name: playerName, id: socket.id });
+      case 'cs2':
+        targetQueue = cs2Queue;
         break;
+      default:
+        console.log(`Game ${game} is not supported.`);
+        return;
     }
 
+    isPlayerInQueue = targetQueue.some((player) => player.name === playerName);
+
     if (!isPlayerInQueue) {
+      targetQueue.push({ name: playerName, id: socket.id, game: game });
       console.log(playerName + " has been added to the " + game + " queue");
       startQueueResetTimer();
+      matchPlayers(targetQueue); // Attempt to match players immediately
     } else {
       console.log(playerName + " is already in the " + game + " queue.");
     }
   });
 
-
-    if (playersWaiting.length >= 2) {
-      const [player1, player2] = playersWaiting.splice(0, 2);
-      io.to(player1.id).emit("matchFound", { opponent: player2.name });
-      io.to(player2.id).emit("matchFound", { opponent: player1.name });
-      console.log(player1 + " has been match with " + player2);
-    }
-
-
   socket.on("disconnectPlayer", () => {
-    const index = playersWaiting.findIndex((player) => player.id === socket.id);
-    if (index !== -1) {
-      playersWaiting.splice(index, 1);
-    }
+    // Function to remove a player from a queue
+    const removeFromQueue = (queue) => {
+      const index = queue.findIndex((player) => player.id === socket.id);
+      if (index !== -1) {
+        queue.splice(index, 1);
+        console.log(`Player removed from queue.`);
+      }
+    };
+
+    // Check all queues for the disconnecting player
+    removeFromQueue(valQueue);
+    removeFromQueue(leagueQueue);
+    removeFromQueue(overwatchQueue);
+    removeFromQueue(cs2Queue);
   });
 });
-
 
 app.use(
   cors({

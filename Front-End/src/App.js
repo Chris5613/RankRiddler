@@ -40,7 +40,6 @@ function App() {
           <Route path="/csgo" element={<Csgo />} />
           <Route path="/submit" element={<Submit />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/howto" element={<Howto />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<Error />} />
           <Route path="/apex" element={<Apex />} />

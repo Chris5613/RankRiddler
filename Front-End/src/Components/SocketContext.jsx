@@ -10,7 +10,8 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     // Creating a socket instance with the environment variable
-    const newSocket = io(process.env.REACT_APP_SOCKET_URL);
+    // const newSocket = io(process.env.REACT_APP_SOCKET_URL);
+    const newSocket = io('http://localhost:3001');
     setSocket(newSocket);
 
     return () => newSocket.close();
