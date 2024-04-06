@@ -16,10 +16,10 @@ import Cookies from 'js-cookie';
 import RankImage from './RankImage';
 import { useSelector, useDispatch } from 'react-redux';
 import { leagueActions } from '../store/LeagueSlice';
-import ReportButton from '../Other-Pages/reportButton';
+import ReportButton from '../Other-Pages/Side-Components/reportButton'
+import BackButton from '../Other-Pages/Side-Components/BackButton'
 import API from '../../api';
-import BackButton from '../Other-Pages/BackButton';
-import VoteBarChart from '../Other-Pages/VoteBarChart';
+import VoteBarChart from '../Other-Pages/Side-Components/VoteBarChart';
 
 const League = () => {
   const dispatch = useDispatch();

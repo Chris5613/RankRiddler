@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { useSocket } from '../SocketContext';
-import API from '../../api';
+import { useSocket } from '../../SocketContext';
+import API from '../../../api';
 import { NavLink } from 'react-router-dom';
-import '../../css/multi.css';
-import logo from '../../Assets/Nav-Icons/logo.png';
-import SettingWheel from './Settingwheel';
-import {multiplayerActions} from '../store/MultiplayerSlice'
+import '../../../css/multi.css';
+import logo from '../../../Assets/Nav-Icons/logo.png';
+import SettingWheel from '../Side-Components/Settingwheel';
+import {multiplayerActions} from '../../store/MultiplayerSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import SpinningCoin from './SpinningCoin'
+import SpinningCoin from '../Side-Components/SpinningCoin';
 
 const Main = () => {
   const username = useSelector((state) => state.multiplayer.username);

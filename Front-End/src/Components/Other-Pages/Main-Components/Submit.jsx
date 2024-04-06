@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { submitActions } from '../store/SubmitSlice';
-import API from '../../api';
+import { submitActions } from '../../store/SubmitSlice';
+import API from '../../../api';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 

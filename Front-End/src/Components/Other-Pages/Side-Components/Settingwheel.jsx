@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Settings from './Settings';
+import Settings from '../Main-Components/Settings';
 
 const SettingWheel = () => {
   const [showModal, setShowModal] = useState(false);

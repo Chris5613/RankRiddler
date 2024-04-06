@@ -14,10 +14,10 @@ import VideoPlayer from '../Youtube';
 import RankImage from './RankImage';
 import { overwatchActions } from '../store/OverwatchSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import ReportButton from '../Other-Pages/reportButton';
+import ReportButton from '../Other-Pages/Side-Components/reportButton'
+import BackButton from '../Other-Pages/Side-Components/BackButton'
 import API from '../../api';
-import BackButton from '../Other-Pages/BackButton';
-import VoteBarChart from '../Other-Pages/VoteBarChart';
+import VoteBarChart from '../Other-Pages/Side-Components/VoteBarChart';
 
 const Overwatch = () => {
   const dispatch = useDispatch();
