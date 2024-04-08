@@ -28,9 +28,9 @@ const io = socketIo(server, {
 class GameQueue {
   constructor(gameName) {
     this.gameName = gameName;
-    this.queue = []; // Array to maintain the order of players
-    this.playerMap = new Map(); // Map for quick access to player data
-    this.queueTimer = null; // Timer for resetting the queue due to inactivity
+    this.queue = []; 
+    this.playerMap = new Map(); 
+    this.queueTimer = null; 
   }
 
   addPlayer(player) {
@@ -52,6 +52,7 @@ class GameQueue {
     const player = this.playerMap.get(playerId);
     this.queue = this.queue.filter(p => p.id !== playerId);
     this.playerMap.delete(playerId);
+
     console.log(`${player.name} has been removed from the ${this.gameName} queue.`);
     if (this.queue.length > 0) {
       this.startQueueResetTimer();
@@ -89,7 +90,7 @@ class GameQueue {
     clearTimeout(this.queueTimer);
     this.queueTimer = setTimeout(() => {
       this.reset();
-    }, 60000); // Reset the queue after 60 seconds of inactivity
+    }, 60000); 
   }
 
   stopQueueResetTimer() {
@@ -97,7 +98,6 @@ class GameQueue {
   }
 }
 
-// Initialize queues for each game
 let queues = {
   valorant: new GameQueue('valorant'),
   league: new GameQueue('league'),
@@ -119,13 +119,27 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("disconnectPlayer", () => {
+  socket.on("disconnectPlayerQueue", () => {
     Object.keys(queues).forEach(gameName => {
       if (queues[gameName].removePlayer(socket.id)) {
         queues[gameName].matchPlayers(); 
       }
     });
   });
+
+  // socket.on("playerDisconnection", () => {
+  //   console.log(`Player ${socket.id} has left the game.`);
+    
+  //   // Retrieve the game or queue the player is part of
+  //   const gameDetails = findGameByPlayerId(socket.id); // Implement this function based on your application logic
+    
+  //   if (gameDetails) {
+  //     // Determine and declare the winner
+  //     const winnerId = determineWinner(gameDetails, socket.id); // Adjust implementation as needed
+  //     io.to(winnerId).emit("gameOver", { winner: true });
+      
+  //   }
+  // });
 });
 
 

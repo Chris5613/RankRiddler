@@ -62,7 +62,7 @@ const Loadingpage = () => {
 
   useEffect(() => {
     if (timeLeft <= 0) {
-      socket.emit('disconnectPlayer');
+      socket.emit('disconnectPlayerQueue');
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -94,11 +94,16 @@ const Loadingpage = () => {
   };
 
   const handleLeaveQueueClick = () => {
-    socket.emit('disconnectPlayer');
+    socket.emit('disconnectPlayerQueue');
     dispatch(multiplayerActions.setLoading(true));
     dispatch(multiplayerActions.setOpponent(''));
     navigate('/multiplayer/gameSelect');
   };
+
+  window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
+    socket.emit('disconnectPlayerQueue')
+  });
 
   return (
     <div>
